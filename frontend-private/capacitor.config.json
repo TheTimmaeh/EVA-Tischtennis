@@ -1,0 +1,16 @@
+{
+  "appId": "com.tischtennis.app",
+  "appName": "Tischtennis",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/web",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "android": {
+    "path": "dist/android"
+  },
+  "cordova": {}
+}
