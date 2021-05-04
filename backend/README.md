@@ -7,5 +7,5 @@ npm i
 
 ### Run server for development
 ```
-npm run
+npm start
 ```
