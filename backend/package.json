@@ -2,7 +2,9 @@
   "name": "eva-tischtennis-backend",
   "version": "0.1.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "main": "src/server.js",
   "dependencies": {
     "dotenv": "^8.2.0",
