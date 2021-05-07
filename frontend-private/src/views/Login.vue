@@ -33,7 +33,7 @@ export default {
           message.value = 'Login erfolgreich.'
           store.dispatch('updateUser', res.data.user)
 
-          router.push({ path: '/socket' })
+          router.push({ path: '/' })
         }
       }).catch((err) => {
         message.value = err
