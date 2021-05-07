@@ -19,6 +19,7 @@
     "@capacitor/android": "^3.0.0-rc.1",
     "@capacitor/cli": "^3.0.0-rc.1",
     "@capacitor/core": "^3.0.0-rc.1",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "socket.io-client": "^4.0.1",

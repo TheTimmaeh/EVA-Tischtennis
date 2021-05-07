@@ -1,6 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/store'
 import Home from '../views/Home.vue'
 import Socket from '../views/Socket.vue'
+import PublicSocket from '../views/PublicSocket.vue'
+
+const Login = () => import('../views/Login.vue')
+const Logout = () => import('../views/Logout.vue')
+const Profile = () => import('../views/Profile.vue')
 
 const routes = [
   {
@@ -9,15 +15,43 @@ const routes = [
     component: Home,
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+  },
+  {
     path: '/socket',
     name: 'Socket',
     component: Socket,
   },
+  {
+    path: '/publicsocket',
+    name: 'PublicSocket',
+    component: PublicSocket,
+  },
 ]
+
+const publicPages = ['/', '/login', '/publicsocket']
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  if(!publicPages.includes(to.path) && !(store.state && store.state.user && store.state.user.token)) return next('/login')
+
+  next()
 })
 
 export default router

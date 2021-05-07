@@ -1,6 +1,6 @@
 <template>
   <div class="socket">
-    <h1>Socket Status: {{ statusses[status] }}</h1>
+    <h1>Public Socket Status: {{ statusses[status] }}</h1>
   </div>
 </template>
 
