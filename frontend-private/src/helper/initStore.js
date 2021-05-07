@@ -5,7 +5,7 @@ export default () => {
   let token = localStorage.getItem('evat')
 
   if(token){
-    axios().post('/authenticate').then((res) => {
+    axios().post('/auth/validate').then((res) => {
       if(!res.data){
         console.error('Unknown error', res.data)
       } else if(!res.data.success){

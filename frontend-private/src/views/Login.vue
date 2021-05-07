@@ -24,7 +24,7 @@ export default {
     let password = ref()
 
     let login = () => {
-      axios().post('/login', { username: username.value, password: password.value }).then((res) => {
+      axios().post('/auth', { username: username.value, password: password.value }).then((res) => {
         if(!res.data){
           message.value = 'Unknown Error.'
         } else if(!res.data.success){
