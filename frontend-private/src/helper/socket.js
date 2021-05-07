@@ -1,10 +1,11 @@
-import io from 'socket.io-client'
-import authHeader from './authHeader'
+import { inject } from 'vue'
 
 export default () => {
-  const socket = io('localhost:3000', {
-    extraHeaders: authHeader()
-  })
+  const socket = {
+    connected: inject('socketConnected'),
+    emit: inject('socketEmit'),
+    on: inject('socketOn'),
+  }
 
   return socket
 }
