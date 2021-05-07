@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import { computed, inject } from 'vue'
+  import { computed } from 'vue'
   import { useStore } from 'vuex'
   import { useSocket } from '@/helper'
 

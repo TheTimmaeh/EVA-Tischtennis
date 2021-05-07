@@ -12,12 +12,12 @@
 </template>
 
 <script>
-  import { ref, computed, watch, provide, onMounted } from 'vue'
+  import { ref, computed, watch, provide } from 'vue'
   import { useStore } from 'vuex'
   import { io } from '@/helper'
 
   export default {
-    setup(props, { attrs, slots, emit }){
+    setup(){
       const store = useStore()
 
       let loggedIn = computed(() => !!store.state.user && !!store.state.user.username)
@@ -26,7 +26,6 @@
       let socket = {}
 
       provide('socketConnected', connected)
-      provide('socketDisconnected', !connected)
       provide('socketEmit', (...args) => { socket.emit(...args) })
       provide('socketOn', (...args) => { socket.on(...args) })
 
@@ -34,34 +33,32 @@
         socket = io()
 
         socket.on('reconnect', () => {
-          console.log('Reconnected')
+          console.log('WS: Reconnected.')
           connected.value = true
         })
 
         socket.on('connect', () => {
-          console.log('Connected')
+          console.log('WS: Connected.')
           connected.value = true
         })
 
         socket.on('disconnect', () => {
-          console.log('Disconnected')
+          console.log('WS: Disconnected.')
           connected.value = false
         })
 
         socket.on('message', (data) => {
-          console.log('Message', data)
+          console.log('WS: Message.', data)
         })
       }
 
-      //onMounted(initIO)
-
       watch(loggedIn, () => {
         if(loggedIn.value){
-          console.log('Logged in.')
+          console.log('User: Logged in.')
           initIO()
           socket.connect()
         } else {
-          console.log('Logged out.')
+          console.log('User: Logged out.')
           socket.disconnect()
         }
       })
@@ -69,7 +66,6 @@
       return {
         loggedIn,
         connected,
-        socket,
       }
     }
   }
@@ -92,7 +88,7 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $color-highlight;
     }
   }
 }
