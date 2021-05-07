@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
 import Home from '../views/Home.vue'
-import Socket from '../views/Socket.vue'
-import PublicSocket from '../views/PublicSocket.vue'
 
 const Login = () => import('../views/Login.vue')
 const Logout = () => import('../views/Logout.vue')
@@ -28,16 +26,6 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
-  },
-  {
-    path: '/socket',
-    name: 'Socket',
-    component: Socket,
-  },
-  {
-    path: '/publicsocket',
-    name: 'PublicSocket',
-    component: PublicSocket,
   },
 ]
 
