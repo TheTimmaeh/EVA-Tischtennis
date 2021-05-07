@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { generateToken, authenticateToken, authenticateSocket } = require('./jwt')
 
 // Webserver
 const express = require('express')
@@ -14,55 +13,26 @@ app.use(morgan('tiny'))
 const cors = require('cors')
 app.use(cors())
 
-// SocketIO
+// Parse JSON Body
+app.use(express.json())
+
+// Routes
+const routes = require('./routes')
+app.use('/', routes)
+
+
+// Socket.io
 const io = require('socket.io')(http, {
   cors: {
     origin: '*',
   },
 })
+const onConnection = require('./socket')
+const { authenticateSocket } = require('./helpers/jwt')
+io.use(authenticateSocket).on('connection', onConnection)
 
-// Users
-const users = require('./users')
 
-app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.json({ success: true })
-})
-
-app.post('/login', (req, res) => {
-  let { username, password } = req.body
-
-  let user = users.find((u) => u.username === username && u.password === password)
-
-  if(!user) res.json({ success: false, message: 'User not found.' })
-  else {
-    let token = generateToken({ username: user.username, isAdmin: user.isAdmin })
-    res.json({ success: true, user: { username: user.username, isAdmin: user.isAdmin, token }})
-  }
-})
-
-app.post('/authenticate', authenticateToken, (req, res) => {
-  if(req.user) res.json({ success: true, user: req.user })
-  else res.json({ success: false, message: 'Could not validate token.' })
-})
-
-app.get('/test', authenticateToken, (req, res) => {
-  res.json({ user: req.user, body: req.body })
-})
-
-io.use(authenticateSocket).on('connection', (socket) => {
-  console.log('A user connected')
-
-  socket.on('disconnect', () => {
-    console.log('A user disconnected')
-  })
-
-  socket.on('ping', (data) => {
-    socket.emit('pong', `Hello ${socket.id}`, data)
-  })
-})
-
+// Start webserver
 http.listen(3000, () => {
   console.log('listening on *:3000')
 })

@@ -10,8 +10,8 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.TOKEN_SECRET, (err, payload) => {
     if(err){
-      console.error(err)
-      return res.sendStatus(403)
+      console.error('authenticateToken', err)
+      return res.status(403).json({ success: false, error: err.name })
     }
 
     req.user = payload
@@ -28,7 +28,7 @@ const authenticateSocket = (socket, next) => {
 
   jwt.verify(token, process.env.TOKEN_SECRET, (err, payload) => {
     if(err){
-      console.error(err)
+      console.error('authenticateSocket', err)
       return next(new Error('Authentication Error: Could not verify token.'))
     }
 
