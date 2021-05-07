@@ -57,6 +57,10 @@ io.use(authenticateSocket).on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('A user disconnected')
   })
+
+  socket.on('ping', (data) => {
+    socket.emit('pong', `Hello ${socket.id}`, data)
+  })
 })
 
 http.listen(3000, () => {
