@@ -1,0 +1,65 @@
+version: "3"
+
+volumes: 
+    master_data:
+    slave_1_data:  
+    slave_2_data:  
+    haproxy_config:
+
+services:
+    master: 
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        labels:
+         - traefik.enable=true
+        volumes: 
+            - master_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: example    
+            
+    slave_1: 
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        volumes: 
+            - slave_1_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: example    
+
+    slave_2: 
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        volumes: 
+            - slave_2_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: example   
+
+   #   haproxy:
+    #    image: hypriot/rpi-haproxy
+     #   volumes:
+      #   - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+       # ports:
+        # - "3308:3306"
+         #- "3307:3307"
+         #- "8080:8080" 
+         
+    traefik:
+        image: "traefik:v2.4"
+        command:
+          #- "--log.level=DEBUG"
+         - "--api.insecure=true"
+         - "--providers.docker=true"
+         - "--providers.docker.exposedbydefault=false"
+         - "--entrypoints.mysql.address=:3306"
+         - "--entrypoints.mysql_ro.address=:3307"
+         - "--providers.file.filename=/etc/traefik/dynamic.yml"
+        ports:
+         - "3306:3306"
+         - "3307:3307"
+         - "8080:8080"
+        volumes:
+         - "//var/run/docker.sock:/var/run/docker.sock"
+         - ./traefik.yml:/etc/traefik/dynamic.yml
+
