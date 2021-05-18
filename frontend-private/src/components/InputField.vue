@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :placeholder="placeholder" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+    <input :type="type" :placeholder="placeholder" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
   </div>
 </template>
 
@@ -8,6 +8,10 @@
   export default {
     name: 'InputField',
     props: {
+      type: {
+        type: String,
+        default: 'text',
+      },
       placeholder: {
         type: String,
         default: '',
@@ -31,10 +35,10 @@
 <style lang="scss" scoped>
   input {
     border: 1px solid $color-info;
-    padding: 7 9,5px;
+    padding: 4px 10px;
     border-radius: 5px;
     width: 450px;
-    height:38px;
+    height: 38px;
 
     &:focus {
       outline: none !important;

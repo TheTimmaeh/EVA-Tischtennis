@@ -7,7 +7,9 @@
     <VButton class="button" level="warning">Button mit Level <strong>warning</strong></VButton>
     <br /><br />
     <h2>Inputs</h2>
-    <InputField placeholder="Platzhaltertext..." v-model="forminput" /> Eingabe: {{ forminput }}
+    <InputField placeholder="Text Input" v-model="forminput" /> Eingabe: {{ forminput }}
+    <InputField type="password" placeholder="Password Input" />
+    <InputField type="number" placeholder="Number Input" />
   </div>
 </template>
 
