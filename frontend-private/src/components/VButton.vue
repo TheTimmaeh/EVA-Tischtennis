@@ -1,5 +1,5 @@
 <template>
-  <button :class="{ warning: level === 'warning', danger: level === 'danger' }" @click="$emit('action')"><slot /></button>
+  <button :class="[ props.level ]" @click="$emit('action')"><slot>Submit</slot></button>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
     props: {
       level: {
         type: String,
-        default: 'none',
+        validator: (v) => ['warning', 'danger'].includes(v),
       },
     },
     emits: {
@@ -16,7 +16,7 @@
     },
     setup(props){
       return {
-        ...props,
+        props,
       }
     }
   }
