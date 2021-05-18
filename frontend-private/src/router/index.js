@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
 import Home from '../views/Home.vue'
+import Components from '../views/Components.vue'
 
 const Login = () => import('../views/Login.vue')
 const Logout = () => import('../views/Logout.vue')
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/components',
+    name: 'Components',
+    component: Components,
   },
   {
     path: '/login',
@@ -29,7 +35,7 @@ const routes = [
   },
 ]
 
-const publicPages = ['/', '/login', '/publicsocket']
+const publicPages = ['/', '/components', '/login', '/publicsocket']
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

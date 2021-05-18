@@ -1,6 +1,7 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
+    <router-link to="/components">Components</router-link> |
     <template v-if="loggedIn">
       <router-link to="/profile">Profil</router-link> |
       <router-link to="/logout">Logout</router-link>
