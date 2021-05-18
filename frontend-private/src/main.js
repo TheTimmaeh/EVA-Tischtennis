@@ -2,8 +2,17 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { initStore } from '@/helper'
+import { initStore, authHeader } from '@/helper'
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App)
+
+  // Vuex
+  .use(store)
+
+  // Vue Router
+  .use(router)
+
+  // Mount it
+  .mount('#app')
 
 initStore()
