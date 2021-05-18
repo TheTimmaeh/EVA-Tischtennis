@@ -1,29 +1,53 @@
 <template>
-  <div>
-    <button class="VButton danger">Test
-    </button>
-  </div>
+  <button :class="{ warning: level === 'warning', danger: level === 'danger' }" @click="$emit('action')"><slot /></button>
 </template>
 
+<script>
+  export default {
+    name: 'VButton',
+    props: {
+      level: {
+        type: String,
+        default: 'none',
+      },
+    },
+    emits: {
+      action: null,
+    },
+    setup(props){
+      return {
+        ...props,
+      }
+    }
+  }
+</script>
+
 <style lang="scss" scoped>
-.VButton{
-  background-color: $color-primary; 
-  border: none;
-  color: white;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  border-radius: 5px;
+  button {
+    background-color: $color-primary;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
 
-  &.warning{
-    background-color: $color-warning;
-    color: $color-dark-text;
-  }
+    &:hover, &:focus {
+      outline: none !important;
+      border-color: $color-info;
+      box-shadow: 0 0 10px $color-info;
+    }
 
-  &.danger{
-    background-color: $color-danger;
+    &.warning {
+      background-color: $color-warning;
+      color: $color-dark-text;
+    }
+
+    &.danger {
+      background-color: $color-danger;
+    }
   }
-}
 </style>
