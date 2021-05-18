@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="message" v-if="message">{{ message }}</div>
-    <label for="username">Username:</label> <InputField id="username" type="text" v-model="username" /><br />
-    <label for="password">Password:</label> <InputField type="password" v-model="password" /><br />
+    <label for="username">Username:</label> <InputField label="username" type="text" v-model="username" /><br />
+    <label for="password">Password:</label> <InputField label="password" type="password" v-model="password" /><br />
     <VButton @action="login()">Login</VButton>
   </div>
 </template>

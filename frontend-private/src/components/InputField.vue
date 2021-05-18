@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :type="type" :placeholder="placeholder" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+    <input :type="type" :placeholder="placeholder" :value="modelValue" :id="label" @input="$emit('update:modelValue', $event.target.value)" />
   </div>
 </template>
 
@@ -19,7 +19,11 @@
       modelValue: {
         type: String,
         default: '',
-      }
+      },
+      label: {
+        type: String,
+        default: '',
+      },
     },
     emits: {
       'update:modelValue': null,
