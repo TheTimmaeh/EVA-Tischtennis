@@ -15,6 +15,8 @@ export default () => {
       }
     }).catch((err) => {
       console.error(err)
+
+      if(err.response.data && !err.response.data.success) localStorage.removeItem('evat')
     })
   }
 }
