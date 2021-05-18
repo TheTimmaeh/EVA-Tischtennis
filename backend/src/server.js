@@ -1,5 +1,10 @@
 require('dotenv').config()
 
+// Database
+const knex = require('knex')
+const schemas = require('./schemas')
+//schemas()
+
 // Webserver
 const express = require('express')
 const app = express()
