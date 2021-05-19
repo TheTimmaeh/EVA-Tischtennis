@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const generateToken = (payload) => jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
+const generateToken = (payload) => jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '12h' })
 
 const authenticateToken = (req, res, next) => {
   let header = req.headers['authorization'] || ''
@@ -31,6 +31,8 @@ const authenticateSocket = (socket, next) => {
       console.error('authenticateSocket', err)
       return next(new Error('Authentication Error: Could not verify token.'))
     }
+
+    socket.user = payload
 
     next()
   })
