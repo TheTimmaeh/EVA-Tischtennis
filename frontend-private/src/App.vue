@@ -29,6 +29,12 @@
       provide('socketConnected', connected)
       provide('socketEmit', (...args) => { socket.emit(...args) })
       provide('socketOn', (...args) => { socket.on(...args) })
+      provide('socketOnce', (...args) => { socket.once(...args) })
+      provide('socketOff', (...args) => { socket.off(...args) })
+      provide('socketRemoveAll', (...args) => { socket.removeAllListeners(...args) })
+      provide('socketOnAny', (...args) => { socket.onAny(...args) })
+      provide('socketPrependAny', (...args) => { socket.prependAny(...args) })
+      provide('socketOffAny', (...args) => { socket.offAny(...args) })
 
       const initIO = () => {
         socket = io()

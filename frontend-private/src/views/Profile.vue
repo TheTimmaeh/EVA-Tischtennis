@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import { computed } from 'vue'
+  import { computed, onUnmounted } from 'vue'
   import { useStore } from 'vuex'
   import { useSocket } from '@/helper'
 
@@ -32,9 +32,13 @@
         console.log(...data)
       })
 
-      let test = () => {
+      const test = () => {
         socket.emit('ping', { ts: new Date() })
       }
+
+      onUnmounted(() => {
+        socket.off('pong')
+      })
 
       return {
         username: computed(() => store.state.user.username),
