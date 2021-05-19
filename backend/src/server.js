@@ -1,40 +1,13 @@
 require('dotenv').config()
 
 // Database
-const knex = require('knex')
-const schemas = require('./schemas')
-//schemas()
+const db = require('./db')
 
 // Webserver
-const express = require('express')
-const app = express()
-const http = require('http').Server(app)
+const { app, http } = require('./webserver')(db)
 
-// Logging
-const morgan = require('morgan')
-app.use(morgan('tiny'))
-
-// Cors
-const cors = require('cors')
-app.use(cors())
-
-// Parse JSON Body
-app.use(express.json())
-
-// Routes
-const routes = require('./routes')
-app.use('/', routes)
-
-
-// Socket.io
-const io = require('socket.io')(http, {
-  cors: {
-    origin: '*',
-  },
-})
-const onConnection = require('./socket')
-const { authenticateSocket } = require('./helpers/jwt')
-io.use(authenticateSocket).on('connection', onConnection)
+// Websocket
+const io = require('./websocket')(db, http)
 
 
 // Start webserver
