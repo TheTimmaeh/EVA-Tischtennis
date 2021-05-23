@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import { axios } from '@/helper'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { axios } from '@/helper'
 import InputField from '@/components/InputField'
 import VButton from '@/components/VButton'
 
@@ -39,7 +39,7 @@ export default {
           message.value = 'Login erfolgreich.'
           store.dispatch('updateUser', res.data.user)
 
-          router.push({ path: '/' })
+          setTimeout(() => router.push({ path: '/' }), 3000)
         }
       }).catch((err) => {
         message.value = err
