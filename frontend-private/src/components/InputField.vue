@@ -1,8 +1,10 @@
 <template>
-  <input :class="[ props.level ]" :type="props.type" :placeholder="props.placeholder" :value="props.modelValue" :id="props.label" @input="$emit('update:modelValue', $event.target.value)" />
+  <input :class="[ props.level, { error } ]" :type="props.type" :placeholder="props.placeholder" :value="props.modelValue" :id="props.label" @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
 <script>
+  import { ref } from 'vue'
+
   export default {
     name: 'InputField',
     props: {
@@ -26,13 +28,20 @@
         type: String,
         validator: (v) => ['', 'warning', 'danger'].includes(v),
       },
+      error: {
+        type: [Boolean, String],
+        default: false,
+      },
     },
     emits: {
       'update:modelValue': null,
     },
     setup(props){
+      const error = ref(props.error === 'true' ? true : props.error)
+
       return {
         props,
+        error,
       }
     }
   }
@@ -44,19 +53,13 @@
     padding: 12px 10px;
     border-radius: 5px;
     width: 450px;
-    // height: 38px;
+    transition: box-shadow .1s;
 
     &:focus {
       outline: none !important;
-      border-color: $color-info;
-      box-shadow: 0 0 10px $color-info;
+      border-color: $color-highlight;
+      box-shadow: 0 0 10px $color-highlight-light;
     }
-
-    // &:focus {
-    //   outline: none !important;
-    //   border-color: $color-highlight;
-    //   box-shadow: 0 0 10px $color-highlight-light;
-    // }
 
     &.warning:focus {
       outline: none !important;
@@ -64,7 +67,8 @@
       box-shadow: 0 0 10px $color-warning;
     }
 
-    &.danger:focus {
+    &.danger:focus,
+    &.error {
       outline: none !important;
       border-color: $color-danger;
       box-shadow: 0 0 10px $color-danger;
