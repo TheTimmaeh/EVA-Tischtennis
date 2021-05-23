@@ -3,6 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/components">Components</router-link> |
     <template v-if="loggedIn">
+      <router-link to="/associations">Vereine</router-link> |
+      <router-link to="/associations/create">Verein anlegen</router-link> |
       <router-link to="/profile">Profil</router-link> |
       <router-link to="/logout">Logout</router-link>
     </template>
@@ -79,6 +81,12 @@
 </script>
 
 <style lang="scss">
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

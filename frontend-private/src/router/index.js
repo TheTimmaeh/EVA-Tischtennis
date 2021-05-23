@@ -3,6 +3,10 @@ import store from '@/store'
 import Home from '../views/Home.vue'
 import Components from '../views/Components.vue'
 
+// Associations
+const Associations = () => import('../views/Associations/Index.vue')
+const CreateAssociation = () => import('../views/Associations/Create.vue')
+
 const Login = () => import('../views/Login.vue')
 const Logout = () => import('../views/Logout.vue')
 const Profile = () => import('../views/Profile.vue')
@@ -17,6 +21,16 @@ const routes = [
     path: '/components',
     name: 'Components',
     component: Components,
+  },
+  {
+    path: '/associations',
+    name: 'Associations',
+    component: Associations,
+  },
+  {
+    path: '/associations/create',
+    name: 'CreateAssociation',
+    component: CreateAssociation,
   },
   {
     path: '/login',
