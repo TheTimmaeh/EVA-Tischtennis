@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
-const users = require('../../helpers/users')
 
 router.get('/', authenticateToken, (req, res) => {
   res.json({ user: req.user, body: req.body })
