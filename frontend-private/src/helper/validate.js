@@ -1,7 +1,16 @@
 const types = {
+  year: {
+    regex: /^[12]\d{3}$/,
+  },
   zipcode: {
-    // type: String,
     regex: /^[1-9]\d{4}$/,
+  },
+  streetnumber: {
+    regex: /^[1-9]\d{0,3}( *\- *\d+)? *[a-z]?$/,
+  },
+  phone: {
+    // type: String,
+    // regex: /^[1-9]\d{4}$/,
   },
   mail: {
     // type: String,
@@ -13,18 +22,18 @@ const types = {
   },
 }
 
-const validate = ({ definitions, elements, formdata }) => {
+const validate = ({ defs, refs, vals }) => {
   let errors = 0
 
-  const formError = (element, message) => {
+  const formError = (ref, message) => {
     console.error(`VALIDATE | ${message}`)
-    element.error = true
+    ref.error = true
     errors++
   }
 
-  Object.entries(definitions).forEach(([key, def]) => {
-    const element = elements[`e_${key}`].value
-    const value = formdata[key].value
+  Object.entries(defs).forEach(([key, def]) => {
+    const ref = refs[key].value
+    const val = vals[key].value
 
     let definition = Object.assign({}, def)
 
@@ -37,28 +46,28 @@ const validate = ({ definitions, elements, formdata }) => {
     }
 
     // Required
-    if(definition.required === true && (value === null || value.length === 0)){
-      formError(element, `${key} is required.`)
+    if(definition.required === true && (val === null || val.length === 0)){
+      formError(ref, `${key} is required.`)
 
     // Type
-    // } else if(definition.type && typeof definition.type === 'function' && typeof value !== typeof definition.type()){
-    //   formError(element, `${key} doesn't match type.`)
+    // } else if(definition.type && typeof definition.type === 'function' && typeof val !== typeof definition.type()){
+    //   formError(ref, `${key} doesn't match type.`)
 
     // Regular Expression
-    } else if(definition.regex && !definition.regex.test(value)){
-      formError(element, `${key} doesn't match regular expression.`)
+    } else if(definition.regex && !definition.regex.test(val)){
+      formError(ref, `${key} doesn't match regular expression.`)
 
     // Min Length
-    } else if(definition.min && value.length < definition.min){
-      formError(element, `${key} doesn't match minimum length.`)
+    } else if(definition.min && val.length < definition.min){
+      formError(ref, `${key} doesn't match minimum length.`)
 
     // Max Length
-    } else if(definition.max && value.length > definition.max){
-      formError(element, `${key} doesn't match maximum length.`)
+    } else if(definition.max && val.length > definition.max){
+      formError(ref, `${key} doesn't match maximum length.`)
 
     // Reset to no error
-    } else if(element.error){
-      element.error = false
+    } else if(ref.error){
+      ref.error = false
     }
   })
 

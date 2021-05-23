@@ -1,5 +1,15 @@
 <template>
-  <input :class="[ props.level, { error } ]" :type="props.type" :placeholder="props.placeholder" :value="props.modelValue" :id="props.label" @input="$emit('update:modelValue', $event.target.value)" />
+  <input :class="[ props.level, { error } ]"
+    :type="props.type"
+    :placeholder="props.placeholder"
+    :min="props.min"
+    :max="props.max"
+    :step="props.step"
+    :minlength="props.minlength"
+    :maxlength="props.maxlength"
+    :value="props.modelValue"
+    :id="props.label"
+    @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
 <script>
@@ -12,17 +22,12 @@
         type: String,
         default: 'text',
       },
-      placeholder: {
-        type: String,
-        default: '',
-      },
       modelValue: {
         type: String,
         default: '',
       },
       label: {
         type: String,
-        default: '',
       },
       level: {
         type: String,
@@ -31,6 +36,24 @@
       error: {
         type: [Boolean, String],
         default: false,
+      },
+      placeholder: {
+        type: String,
+      },
+      min: {
+        type: [String, Number],
+      },
+      max: {
+        type: [String, Number],
+      },
+      step: {
+        type: [String, Number],
+      },
+      minlength: {
+        type: [String, Number],
+      },
+      maxlength: {
+        type: [String, Number],
       },
     },
     emits: {
