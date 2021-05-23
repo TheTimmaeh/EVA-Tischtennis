@@ -1,8 +1,8 @@
 const router = require('express').Router()
 
 module.exports = (db) => {
-  const authRoutes = require('./auth')(db)
-  router.use('/auth', authRoutes)
+  router.use('/auth', require('./auth')(db))
+  router.use('/associations', require('./associations')(db))
 
   // Test Routes
   router.all('/*success', (req, res) => {
