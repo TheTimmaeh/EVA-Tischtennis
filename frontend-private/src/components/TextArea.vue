@@ -38,8 +38,12 @@
 
       function adjustHeight(){
         if(!autoresize.value) return
+        let originalHeight = parseInt(textarea.value.style.height.replace(/\D/g, '')) || 0
         textarea.value.style.height = '1px'
-        textarea.value.style.height = `${textarea.value.scrollHeight-24}px`
+        textarea.value.style.minHeight = '1px'
+        let scrollHeight = textarea.value.scrollHeight
+        textarea.value.style.minHeight = `${scrollHeight}px`
+        textarea.value.style.height = `${(scrollHeight > originalHeight ? scrollHeight : originalHeight)}px`
       }
 
       onMounted(adjustHeight)
@@ -58,6 +62,8 @@
   textarea {
     width: 450px;
     height: 100px;
+    line-height: 15px;
+    min-height: 15px;
     border: 1px solid $color-info;
     padding: 12px 10px;
     border-radius: 5px;
