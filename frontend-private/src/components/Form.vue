@@ -22,7 +22,19 @@
           v-model="vals[row.name].value"
         /></template>
         <template v-if="row.field === 'h2'"><h2>{{ row.text }}</h2></template>
-
+        <template v-if="row.field === 'seasonSelect'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><SeasonSelect 
+          :label="`l_${row.name}`"
+          :ref="refs[row.name]"
+          v-model="vals[row.name].value">
+          </SeasonSelect>
+        </template>
+        <template v-if="row.field === 'isDirector'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><CheckBox 
+          :label="`l_${row.name}`"
+          v-model="vals[row.name].value">
+          </CheckBox>
+        </template>
       </div>
     </template>
     <br />
@@ -36,6 +48,8 @@
   import VButton from '@/components/VButton'
   import InputField from '@/components/InputField'
   import TextArea from '@/components/TextArea'
+  import SeasonSelect from '@/components/SeasonSelect'
+   import CheckBox from '@/components/CheckBox'
 
   export default {
     name: 'Form',
@@ -43,6 +57,8 @@
       VButton,
       InputField,
       TextArea,
+      SeasonSelect,
+      CheckBox
     },
     props: {
       rows: {
