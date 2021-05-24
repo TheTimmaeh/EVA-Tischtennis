@@ -31,6 +31,9 @@ const CreateCompetition= () => import('../views/Competitions/Create.vue')
 const AssociationTeams = () => import('../views/AssociationTeams/Index.vue')
 const CreateAssociationTeam= () => import('../views/AssociationTeams/Create.vue')
 
+// Match                             
+const Match = () => import('../views/Match/Match.vue')
+
 const Login = () => import('../views/Login.vue')
 const Logout = () => import('../views/Logout.vue')
 const Profile = () => import('../views/Profile.vue')
@@ -115,6 +118,11 @@ const routes = [
     path: '/associationTeams/create',
     name: 'CreateAssociationTeam',
     component: CreateAssociationTeam,
+  },
+  {
+    path: '/match',
+    name: 'Match',
+    component: Match,
   },
   {
     path: '/login',

@@ -17,8 +17,10 @@
       <router-link to="/competitions/create">Turnier anlegen</router-link> |
       <router-link to="/associationTeams">Vereinsmannschaften</router-link> |
       <router-link to="/associationTeams/create">Vereinsmannschaft anlegen</router-link> |
+      <router-link to="/match">Aktuelles Match</router-link> |
       <router-link to="/profile">Profil</router-link> |
       <router-link to="/logout">Logout</router-link>
+      
     </template>
     <router-link to="/login" v-else>Login</router-link> |
     Socket: {{ connected ? 'Connected' : 'Disconnected' }}
