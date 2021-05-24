@@ -17,7 +17,8 @@
     <label for="textarea1">Textarea 1:</label><TextArea label="textarea1" placeholder="Textarea Input" v-model="input2" /><br />
     Eingabe: <pre>{{ input2 }}</pre><br />
     <label for="textarea2">Textarea 2:</label><TextArea label="textarea2" level="warning" :modelValue="beispieltext" /><br />
-    <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" />
+    <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" /><br />
+    <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect"></SeasonSelect><br />
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import { ref } from 'vue'
 import VButton from '@/components/VButton'
 import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
+import SeasonSelect from '@/components/SeasonSelect'
 
 export default {
   name: 'Components',
@@ -33,6 +35,7 @@ export default {
     VButton,
     InputField,
     TextArea,
+    SeasonSelect,
   },
   setup(){
     let clicked = ref(0)
