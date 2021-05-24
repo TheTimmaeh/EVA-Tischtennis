@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <select class="" placeholder="Hinweis....">
-      <option v-for="option in options" :key="option.key" :value="option.value">{{ option.text }}</option>
+  <div  >
+    <select class="" placeholder="Hinweis...." >
+      <option  v-for="option in options" :key="option.key" :value="option.value">{{ option.text }}</option>
     </select>
   </div>
 </template>
@@ -24,7 +24,7 @@
 <style lang="scss" scoped>
 select{
 	width: 450px;
-	height: 25px;
+	height: 40px;
 	border: 1px solid $color-info;
 	padding: 7 9,5px;
   border-radius: 5px;
