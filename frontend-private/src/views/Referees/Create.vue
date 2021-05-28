@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Schiedsrichter wurde angelegt.'
-            console.log(res.data)
             setTimeout(() => router.push({ path: '/referees' }), 3000)
           }
         }).catch((err) => {
@@ -47,20 +46,20 @@
         invalid,
         message,
         rows: [
-          { name: 'refereee', text: 'Schiedsrichter', field: 'h2' },
+          { name: 'referee', text: 'Schiedsrichter', field: 'h2' },
           { name: 'name', text: 'Vorname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'year', text: 'Geburtstag:', field: 'input', type: 'text', validate: { type: validate.types.date, required: true }  },
-          
-          { name: 'anschrift', text: 'Anschrift', field: 'h2' },
+          { name: 'year', text: 'Geburtstag:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true }  },
+
+          { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'country', text: 'Land:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-        
-          { name: 'konkakt', text: 'Kontakt', field: 'h2' },
+
+          { name: 'contact', text: 'Kontakt', field: 'h2' },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
         ],

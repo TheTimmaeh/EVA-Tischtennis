@@ -1,6 +1,6 @@
 <template>
   <div class="associationTeams">
-    Liste der Vereinsamnnschaften
+    Liste der Vereinsmannschaften
   </div>
 </template>
 

@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Saison wurde angelegt.'
-            console.log(res.data)
             setTimeout(() => router.push({ path: '/seasons' }), 3000)
           }
         }).catch((err) => {
@@ -48,7 +47,7 @@
         message,
         rows: [
           { name: 'year', text: 'Jahr der Saison:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear(), validate: { type: validate.types.year, required: true } },
-          { name: 'summerOrWinter', text: 'Saison:', field: 'seasonSelect' }, 
+          { name: 'season', text: 'Saison:', field: 'seasonSelect', validate: { min: 2, max: 2, required: true } },
         ],
       }
     },

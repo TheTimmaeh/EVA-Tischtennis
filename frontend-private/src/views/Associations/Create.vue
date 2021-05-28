@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Verein wurde angelegt.'
-
             setTimeout(() => router.push({ path: '/associations' }), 3000)
           }
         }).catch((err) => {
@@ -51,14 +50,16 @@
           { name: 'year', text: 'Gründungsjahr:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear(), validate: { type: validate.types.year, required: true } },
           { name: 'location', text: 'Vereinsort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'description', text: 'Beschreibung:', field: 'textarea', validate: { max: 2000 } },
-          { name: 'anschrift', text: 'Anschrift', field: 'h2' },
+
+          { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein Select einbinden, dass die Bundesländer anbietet
           { name: 'country', text: 'Land:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein Select einbinden, dass die Länder anbietet
-          { name: 'kontakt', text: 'Kontakt', field: 'h2' },
+
+          { name: 'contact', text: 'Kontakt', field: 'h2' },
           { name: 'board', text: 'Vorstand:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },

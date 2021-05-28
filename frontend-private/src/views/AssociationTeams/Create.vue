@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Vereinsmannschaft wurde angelegt.'
-            console.log(res.data)
             setTimeout(() => router.push({ path: '/associationsTeams' }), 3000)
           }
         }).catch((err) => {

@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Vereinsmitglied wurde angelegt.'
-            console.log(res.data)
             setTimeout(() => router.push({ path: '/members' }), 3000)
           }
         }).catch((err) => {
@@ -50,21 +49,21 @@
           { name: 'member', text: 'Mitglied', field: 'h2' },
           { name: 'name', text: 'Vorname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'year', text: 'Geburtsdatum:', field: 'input', type: 'text', validate: { type: validate.types.date, required: true } },
-          { name: 'verein', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
-          { name: 'board', text: 'Vorstand:', field: 'isDirector' }, 
-          { name: 'class', text: 'Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass alle Spielerklassen anbietet, inkl "keine"
+          { name: 'year', text: 'Geburtsdatum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
+          { name: 'association', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
+          { name: 'board', text: 'Vorstand:', field: 'checkbox', returnValue: 'isBoardMember' },
+          { name: 'playerclass', text: 'Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass alle Spielerklassen anbietet, inkl "keine"
           { name: 'team', text: 'Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Das als Dropdown mit den Möglichkeiten einbinden
-          
-          { name: 'adress', text: 'Anschrift', field: 'h2' },
+
+          { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
-          { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, 
+          { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: ersetzen durch DropDown dass die Bundesländer anbietet
           { name: 'country', text: 'Land:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },//TODO: ersetzen durch DropDOWN, dass die Länder anbietet
-        
-          { name: 'konkakt', text: 'Kontakt', field: 'h2' },
+
+          { name: 'contact', text: 'Kontakt', field: 'h2' },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
         ],

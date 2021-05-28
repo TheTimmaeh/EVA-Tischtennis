@@ -30,7 +30,6 @@
             message.value = res.data.message
           } else {
             message.value = 'Spielerklasse wurde angelegt.'
-            console.log(res.data)
             setTimeout(() => router.push({ path: '/playerClasses' }), 3000)
           }
         }).catch((err) => {
@@ -48,7 +47,7 @@
         message,
         rows: [
           { name: 'name', text: 'Name der Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'age', text: 'Mindestalter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.number, required: true } },
+          { name: 'age', text: 'Mindestalter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.age, required: true } },
         ],
       }
     },
