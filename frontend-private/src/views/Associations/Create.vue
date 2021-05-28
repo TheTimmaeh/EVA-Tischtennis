@@ -62,7 +62,7 @@
           { name: 'board', text: 'Vorstand:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
-          { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.uil, required: true } },
+          { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
         ],
       }
     },
