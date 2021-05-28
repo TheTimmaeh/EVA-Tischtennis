@@ -8,7 +8,7 @@
 import { ref } from 'vue'
 
 export default {
-  name: 'PlayerClasses',
+  name: 'assosiationsTeams',
   components: { },
   setup(){
     return { }

@@ -52,7 +52,7 @@
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'year', text: 'Geburtsdatum:', field: 'input', type: 'text', validate: { type: validate.types.date, required: true } },
           { name: 'verein', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
-          { name: 'board', text: 'Vorstand:', field: 'isDirector' }, //TODO: Der Wert wird noch nicht an das Formular übergeben
+          { name: 'board', text: 'Vorstand:', field: 'isDirector' }, 
           { name: 'class', text: 'Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass alle Spielerklassen anbietet, inkl "keine"
           { name: 'team', text: 'Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Das als Dropdown mit den Möglichkeiten einbinden
           

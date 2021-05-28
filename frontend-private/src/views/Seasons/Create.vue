@@ -48,7 +48,7 @@
         message,
         rows: [
           { name: 'year', text: 'Jahr der Saison:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear(), validate: { type: validate.types.year, required: true } },
-          { name: 'summerOrWinter', text: 'Saison:', field: 'seasonSelect' }, // TODO: Der Wert der Season wird bisher noch nciht an das Formular übergeben
+          { name: 'summerOrWinter', text: 'Saison:', field: 'seasonSelect' }, 
         ],
       }
     },

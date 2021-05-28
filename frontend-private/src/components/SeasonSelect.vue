@@ -1,15 +1,18 @@
 <template>
-    <select class="" placeholder="Hinweis...." ref="seasonSelect" >
+    <select class="" placeholder="Hinweis...." ref="seasonSelect" v-model="selected">
       <option v-for="option in options" :key="option.key" :value="option.value">{{ option.text }}</option>
     </select>
-    <!--<Select :options="options"></Select>-->
 
 </template>
 
 <script>
 
-//import Select from '../components/Select'
   export default {
+    data () {
+      return {
+        selected: ''
+      }
+    },
     props: {
       options: 
         [{key:1, value:"wi", text:"Winter"}, {key:2, value:"su", text:"Sommer"} ]
@@ -22,7 +25,7 @@
     setup(props){
       return {
         options: [{key:1, value:"wi", text:"Winter"}, {key:2, value:"su", text:"Sommer"} ],
-       // Select
+       
       }
     },
   }

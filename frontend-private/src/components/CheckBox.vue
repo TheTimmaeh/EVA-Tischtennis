@@ -1,38 +1,23 @@
 <template>
-  <input type="checkbox"  v-model="checkedVals"
-    :value="checkedVal"
+  <input type="checkbox"  
+     id="checkbox" v-model="checked"
     >
 </template>
 
 
 <script>
-
-
 export default {
     name:'CheckBox',
+    data () {
+      return {
+        checked: false,
+      }
+    },
     props: {
       label: {
         type: String,
       },
     },
-    emits: {
-      'update:modelValue': null,
-    },
-    data() {
-      return { checkedVal:Boolean}
-    },
-    methods: {
-      updateVals(e) {
-        let isChecked = e.target.checked
-        let val = e.target.value
-
-        if (isChecked) {
-          this.checkedVal = true
-        } else {
-          this.checkVal = false
-        }
-      }
-    }
   }
 </script>
 
