@@ -1,50 +1,54 @@
 <template>
-    <select class="" placeholder="Hinweis...." ref="seasonSelect" v-model="selected">
-      <option v-for="option in options" :key="option.key" :value="option.value">{{ option.text }}</option>
-    </select>
-
+    <Select :options="props.options" :label="props.label" :error="error" v-model="selectValue" />
 </template>
 
 <script>
+  import { ref, watch } from 'vue'
+  import Select from '@/components/Select'
 
   export default {
-    data () {
-      return {
-        selected: ''
-      }
-    },
+    name: 'SeasonSelect',
     props: {
-      options: 
-        [{key:1, value:"wi", text:"Winter"}, {key:2, value:"su", text:"Sommer"} ]
-      ,
+      options: {
+        type: Array,
+        default: [
+          { value: '', text: '' },
+          { value: 'wi', text: 'Winter' },
+          { value: 'su', text: 'Sommer' },
+        ],
+      },
       label: {
         type: String,
         default: '',
       },
+      modelValue: {
+        type: String,
+        default: '',
+      },
+      error: {
+        type: [Boolean, String],
+        default: false,
+      },
     },
-    setup(props){
+    components: {
+      Select,
+    },
+    emits: {
+      'update:modelValue': null,
+    },
+    setup(props, { emit }){
+      const error = ref(props.error === 'true' ? true : props.error)
+      const selectValue = ref('')
+
+      watch(selectValue, () => {
+        emit('update:modelValue', selectValue.value)
+      })
+
       return {
-        options: [{key:1, value:"wi", text:"Winter"}, {key:2, value:"su", text:"Sommer"} ],
-       
+        error,
+        selectValue,
+        props,
       }
     },
   }
 </script>
-
-<style lang="scss" scoped>
-select{
-	width: 450px;
-	height: 40px;
-	border: 1px solid $color-info;
-	padding: 7 9,5px;
-  border-radius: 5px;
-}
-select:focus{
-    outline: none !important;
-    border-color: $color-info;
-    box-shadow: 0 0 10px $color-info;
-}
-div{
-  padding: 15px;
-}
-</style>
