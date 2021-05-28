@@ -23,15 +23,16 @@
         /></template>
         <template v-if="row.field === 'h2'"><h2>{{ row.text }}</h2></template>
         <template v-if="row.field === 'seasonSelect'">
-          <label :for="`l_${row.name}`">{{ row.text }}</label><SeasonSelect 
+          <label :for="`l_${row.name}`">{{ row.text }}</label><SeasonSelect
           :label="`l_${row.name}`"
           :ref="refs[row.name]"
           v-model="vals[row.name].value">
           </SeasonSelect>
         </template>
-        <template v-if="row.field === 'isDirector'">
-          <label :for="`l_${row.name}`">{{ row.text }}</label><CheckBox 
+        <template v-if="row.field === 'checkbox'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><CheckBox
           :label="`l_${row.name}`"
+          :returnValue="row.returnValue"
           v-model="vals[row.name].value">
           </CheckBox>
         </template>
@@ -49,7 +50,7 @@
   import InputField from '@/components/InputField'
   import TextArea from '@/components/TextArea'
   import SeasonSelect from '@/components/SeasonSelect'
-   import CheckBox from '@/components/CheckBox'
+  import CheckBox from '@/components/CheckBox'
 
   export default {
     name: 'Form',
@@ -58,7 +59,7 @@
       InputField,
       TextArea,
       SeasonSelect,
-      CheckBox
+      CheckBox,
     },
     props: {
       rows: {
@@ -77,7 +78,12 @@
       props.rows.forEach((r, i) => {
         if(r.field === 'h2') return
         refs[r.name] = ref(null)
-        vals[r.name] = ref('')
+
+        if(r.field === 'checkbox'){
+          vals[r.name] = ref(r.value === true ? r.returnValue : null)
+        } else {
+          vals[r.name] = ref(r.value || '')
+        }
       })
 
       const onSubmit = () => {
