@@ -18,11 +18,6 @@ module.exports = (db) => {
     res.json({})
   })
 
-  // Get (all playerClasses)
-  router.get('/:playerClasses', async (req, res) => {
-    res.json({})
-  })
-
   // Update
   router.post('/:playerClass', authenticateToken, async (req, res) => {
     res.json({})

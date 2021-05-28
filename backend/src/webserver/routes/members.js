@@ -18,11 +18,6 @@ module.exports = (db) => {
     res.json({})
   })
 
-  // Get (list of members)
-  router.get('/:members', async (req, res) => {
-    res.json({})
-  })
-
   // Update
   router.post('/:member', authenticateToken, async (req, res) => {
     res.json({})

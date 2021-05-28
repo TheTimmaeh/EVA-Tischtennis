@@ -18,11 +18,6 @@ module.exports = (db) => {
     res.json({})
   })
 
-  // Get (list of referees)
-  router.get('/:referees', async (req, res) => {
-    res.json({})
-  })
-
   // Update
   router.post('/:referee', authenticateToken, async (req, res) => {
     res.json({})

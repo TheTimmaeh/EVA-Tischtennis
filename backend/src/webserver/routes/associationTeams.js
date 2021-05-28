@@ -18,11 +18,6 @@ module.exports = (db) => {
     res.json({})
   })
 
- // Get (all associationTeams)
-   router.get('/:associationTeams', async (req, res) => {
-    res.json({})
-  })
-
   // Update
   router.post('/:associationTeam', authenticateToken, async (req, res) => {
     res.json({})

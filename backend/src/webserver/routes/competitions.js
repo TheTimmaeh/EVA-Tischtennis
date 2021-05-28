@@ -18,11 +18,6 @@ module.exports = (db) => {
     res.json({})
   })
 
-  // Get (list of competitions)
-  router.get('/:competitions', async (req, res) => {
-    res.json({})
-  })
-
   // Update
   router.post('/:competition', authenticateToken, async (req, res) => {
     res.json({})
