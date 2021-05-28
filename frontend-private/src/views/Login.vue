@@ -1,9 +1,7 @@
 <template>
   <div class="home">
     <div class="message" v-if="message">{{ message }}</div>
-    <label for="username">Username:</label> <InputField label="username" type="text" v-model="username" /><br />
-    <label for="password">Password:</label> <InputField label="password" type="password" v-model="password" /><br />
-    <Button @action="login()">Login</Button>
+    <Form :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
   </div>
 </template>
 
@@ -12,25 +10,22 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { axios } from '@/helper'
-import InputField from '@/components/InputField'
-import Button from '@/components/Button'
+import Form from '@/components/Form'
 
 export default {
   name: 'Login',
   components: {
-    InputField,
-    Button,
+    Form,
   },
   setup(){
     const store = useStore()
     const router = useRouter()
+    const message = ref()
 
-    let message = ref()
-    let username = ref()
-    let password = ref()
+    const submit = (data) => {
+      message.value = ''
 
-    let login = () => {
-      axios().post('/auth', { username: username.value, password: password.value }).then((res) => {
+      axios().post('/auth', data).then((res) => {
         if(!res.data){
           message.value = 'Unknown Error.'
         } else if(!res.data.success){
@@ -39,18 +34,25 @@ export default {
           message.value = 'Login erfolgreich.'
           store.dispatch('updateUser', res.data.user)
 
-          setTimeout(() => router.push({ path: '/' }), 3000)
+          router.push({ path: '/' })
         }
       }).catch((err) => {
         message.value = err
       })
     }
 
+    const invalid = () => {
+      message.value = 'Bitte überprüfen Sie Ihre Eingabe.'
+    }
+
     return {
+      submit,
+      invalid,
       message,
-      username,
-      password,
-      login,
+      rows: [
+        { name: 'username', text: 'Username:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
+        { name: 'password', text: 'Passwort:', field: 'input', type: 'password', validate: { min: 3, max: 255, required: true } },
+      ],
     }
   }
 }

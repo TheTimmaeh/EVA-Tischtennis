@@ -20,7 +20,6 @@
       <router-link to="/match">Aktuelles Match</router-link> |
       <router-link to="/profile">Profil</router-link> |
       <router-link to="/logout">Logout</router-link>
-      
     </template>
     <router-link to="/login" v-else>Login</router-link> |
     Socket: {{ connected ? 'Connected' : 'Disconnected' }}
