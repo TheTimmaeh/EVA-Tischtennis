@@ -1,40 +1,65 @@
 <template>
-  <div  >
-    <select class="" placeholder="Hinweis...." >
-      <option  v-for="option in options" :key="option.key" :value="option.value">{{ option.text }}</option>
+    <select :class="{ error }" :id="props.label" @input="$emit('update:modelValue', $event.target.value)">
+      <option v-for="option in props.options" :key="option.value" :value="option.value" :selected="option.value === props.modelValue">{{ option.text }}</option>
     </select>
-  </div>
 </template>
 
 <script>
+  import { ref } from 'vue'
+
   export default {
+    name: 'Select',
     props: {
       options: {
-        required: true,
+        type: Array,
+        default: [ ],
+      },
+      label: {
+        type: String,
+        default: '',
+      },
+      modelValue: {
+        type: String,
+        default: '',
+      },
+      error: {
+        type: [Boolean, String],
+        default: false,
       },
     },
+    emits: {
+      'update:modelValue': null,
+    },
     setup(props){
+      const error = ref(props.error === 'true' ? true : props.error)
+
       return {
-        options: props.options,
+        props,
+        error,
       }
     },
   }
 </script>
 
 <style lang="scss" scoped>
-select{
-	width: 450px;
-	height: 40px;
-	border: 1px solid $color-info;
-	padding: 7 9,5px;
-  border-radius: 5px;
-}
-select:focus{
-    outline: none !important;
-    border-color: $color-info;
-    box-shadow: 0 0 10px $color-info;
-}
-div{
-  padding: 15px;
-}
+  select {
+    border: 1px solid $color-info;
+    padding: 12px 8px;
+    border-radius: 5px;
+    width: 450px;
+    transition: box-shadow .1s;
+    height: 41px;
+
+    &:focus {
+      outline: none !important;
+      border-color: $color-info;
+      box-shadow: 0 0 10px $color-info;
+    }
+
+    &.error {
+      outline: none !important;
+      border-color: $color-danger;
+      box-shadow: 0 0 10px $color-danger;
+    }
+  }
 </style>
