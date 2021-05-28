@@ -39,14 +39,14 @@
       </div>
     </template>
     <br />
-    <div class="row"><VButton class="button" /></div>
+    <div class="row"><Button class="button" /></div>
   </form>
 </template>
 
 <script>
   import { ref } from 'vue'
   import { validate } from '@/helper'
-  import VButton from '@/components/VButton'
+  import Button from '@/components/Button'
   import InputField from '@/components/InputField'
   import TextArea from '@/components/TextArea'
   import SeasonSelect from '@/components/SeasonSelect'
@@ -55,7 +55,7 @@
   export default {
     name: 'Form',
     components: {
-      VButton,
+      Button,
       InputField,
       TextArea,
       SeasonSelect,

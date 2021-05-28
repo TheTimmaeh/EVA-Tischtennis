@@ -25,8 +25,8 @@
                     LBV
                 </td>
                 <td>
-                    <VButton>
-                    </VButton>
+                    <Button>
+                    </Button>
                 </td>
             </tr>
         </div>
@@ -36,11 +36,11 @@
 
 <script>
 
-import VButton from './VButton.vue';
+import Button from './Button.vue';
 
 export default {
   name: 'Home',
-  components:{VButton},
+  components:{Button},
   setup(){
     return { }
   }

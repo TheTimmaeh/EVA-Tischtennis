@@ -1,11 +1,11 @@
 <template>
   <div class="components">
     <h2>Buttons</h2>
-    <VButton class="button">Einfacher Button</VButton>
-    <VButton class="button" @action="clicked++">Einfacher Button mit Action ({{ clicked }}x geklickt)</VButton>
-    <VButton class="button" level="danger">Button mit Level <strong>danger</strong></VButton>
-    <VButton class="button" level="warning">Button mit Level <strong>warning</strong></VButton>
-    <VButton class="button"></VButton>
+    <Button class="button">Einfacher Button</Button>
+    <Button class="button" @action="clicked++">Einfacher Button mit Action ({{ clicked }}x geklickt)</Button>
+    <Button class="button" level="danger">Button mit Level <strong>danger</strong></Button>
+    <Button class="button" level="warning">Button mit Level <strong>warning</strong></Button>
+    <Button class="button"></Button>
     <br /><br />
     <h2>Inputs</h2>
     <label for="input1">Input 1:</label><InputField label="input1" placeholder="Text Input" v-model="input1" /><br />
@@ -24,7 +24,7 @@
 
 <script>
 import { ref } from 'vue'
-import VButton from '@/components/VButton'
+import Button from '@/components/Button'
 import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
 import SeasonSelect from '@/components/SeasonSelect'
@@ -32,7 +32,7 @@ import SeasonSelect from '@/components/SeasonSelect'
 export default {
   name: 'Components',
   components: {
-    VButton,
+    Button,
     InputField,
     TextArea,
     SeasonSelect,

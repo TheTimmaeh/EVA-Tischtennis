@@ -9,19 +9,19 @@
       <div class="body">Tim ist der Beste Tennisspieler aller Zeiten und er wohnt in bla bla. Das ist ein Geheimnis.
       </div>
       <div class="footer">
-        <VButton>
-        </VButton>
+        <Button>
+        </Button>
       </div>
   </div>
 </template>
 
 <script>
 
-import VButton from "./VButton";
+import Button from "./Button";
 
 export default {
   name: 'Home',
-  components:{VButton},
+  components:{Button},
   setup(){
     return { }
   }

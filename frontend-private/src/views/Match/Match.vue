@@ -5,15 +5,15 @@
             <h2>Spieler 1</h2>
             <p>Spielerklasse - Verein </p>
             <p>Punktestand {{ score1 }}</p>
-            <VButton class="button" level="danger">Disqualifizieren </VButton>
-            <VButton class="button" level="warning">Verwarnen </VButton> <br>
+            <Button class="button" level="danger">Disqualifizieren </Button>
+            <Button class="button" level="warning">Verwarnen </Button> <br>
 
-            <VButton class="button" >Weiße Karte </VButton>
-            <VButton class="button" >Gelbe Karte </VButton>
-            <VButton class="button" >Rote Karte </VButton><br>
+            <Button class="button" >Weiße Karte </Button>
+            <Button class="button" >Gelbe Karte </Button>
+            <Button class="button" >Rote Karte </Button><br>
 
-            <VButton class="button" @action="score1++">Punkt hinzufügen </VButton>
-            <VButton class="button" @action="score1--">Punkt abziehen </VButton>
+            <Button class="button" @action="score1++">Punkt hinzufügen </Button>
+            <Button class="button" @action="score1--">Punkt abziehen </Button>
         </div>
     </div>
 
@@ -22,22 +22,22 @@
             <h2>Spieler 2</h2>
             <p>Spielerklasse - Verein</p>
             <p>Punktestand {{ score2 }}</p>
-            <VButton class="button" level="danger">Disqualifizieren </VButton>
-            <VButton class="button" level="warning">Verwarnen </VButton> <br>
+            <Button class="button" level="danger">Disqualifizieren </Button>
+            <Button class="button" level="warning">Verwarnen </Button> <br>
 
-            <VButton class="button" >Weiße Karte </VButton>
-            <VButton class="button" >Gelbe Karte </VButton>
-            <VButton class="button" >Rote Karte </VButton><br>
+            <Button class="button" >Weiße Karte </Button>
+            <Button class="button" >Gelbe Karte </Button>
+            <Button class="button" >Rote Karte </Button><br>
 
-            <VButton class="button" @action="score2++">Punkt hinzufügen </VButton>
-            <VButton class="button" @action="score2--">Punkt abziehen </VButton>
+            <Button class="button" @action="score2++">Punkt hinzufügen </Button>
+            <Button class="button" @action="score2--">Punkt abziehen </Button>
 
       
         </div>
     </div>
     <div class="submit"> 
-        <VButton class="button" >Spiel starten </VButton>
-        <VButton class="button" >Erebnis Speichern und Spiel beenden </VButton>
+        <Button class="button" >Spiel starten </Button>
+        <Button class="button" >Erebnis Speichern und Spiel beenden </Button>
     </div>
 </div>
 </template>
@@ -45,12 +45,12 @@
 <script>
 
 import { ref } from 'vue'
-import VButton from '@/components/VButton'
+import Button from '@/components/Button'
 
 export default {
   name: 'match',
   components: {
-    VButton,
+    Button,
   },
   setup(){
     let score1 = ref(0);

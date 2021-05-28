@@ -3,7 +3,7 @@
     <div class="message" v-if="message">{{ message }}</div>
     <label for="username">Username:</label> <InputField label="username" type="text" v-model="username" /><br />
     <label for="password">Password:</label> <InputField label="password" type="password" v-model="password" /><br />
-    <VButton @action="login()">Login</VButton>
+    <Button @action="login()">Login</Button>
   </div>
 </template>
 
@@ -13,13 +13,13 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { axios } from '@/helper'
 import InputField from '@/components/InputField'
-import VButton from '@/components/VButton'
+import Button from '@/components/Button'
 
 export default {
   name: 'Login',
   components: {
     InputField,
-    VButton,
+    Button,
   },
   setup(){
     const store = useStore()
