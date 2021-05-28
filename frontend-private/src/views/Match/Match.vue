@@ -8,6 +8,10 @@
             <VButton class="button" level="danger">Disqualifizieren </VButton>
             <VButton class="button" level="warning">Verwarnen </VButton> <br>
 
+            <VButton class="button" >Weiße Karte </VButton>
+            <VButton class="button" >Gelbe Karte </VButton>
+            <VButton class="button" >Rote Karte </VButton><br>
+
             <VButton class="button" @action="score1++">Punkt hinzufügen </VButton>
             <VButton class="button" @action="score1--">Punkt abziehen </VButton>
         </div>
@@ -21,6 +25,10 @@
             <VButton class="button" level="danger">Disqualifizieren </VButton>
             <VButton class="button" level="warning">Verwarnen </VButton> <br>
 
+            <VButton class="button" >Weiße Karte </VButton>
+            <VButton class="button" >Gelbe Karte </VButton>
+            <VButton class="button" >Rote Karte </VButton><br>
+
             <VButton class="button" @action="score2++">Punkt hinzufügen </VButton>
             <VButton class="button" @action="score2--">Punkt abziehen </VButton>
 
@@ -28,6 +36,7 @@
         </div>
     </div>
     <div class="submit"> 
+        <VButton class="button" >Spiel starten </VButton>
         <VButton class="button" >Erebnis Speichern und Spiel beenden </VButton>
     </div>
 </div>
