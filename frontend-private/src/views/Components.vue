@@ -19,6 +19,9 @@
     <label for="textarea2">Textarea 2:</label><TextArea label="textarea2" level="warning" v-model="beispieltext" /><br />
     <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" /><br />
     <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect"></SeasonSelect><br />
+    <PlayerCard></PlayerCard><br />
+    <AssociationCard></AssociationCard><br />
+    <Table></Table><br />
   </div>
 </template>
 
@@ -28,6 +31,9 @@ import Button from '@/components/Button'
 import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
 import SeasonSelect from '@/components/SeasonSelect'
+import PlayerCard from '@/components/PlayerCard'
+import AssociationCard from '@/components/AssociationCard'
+import Table from '@/components/Table'
 
 export default {
   name: 'Components',
@@ -36,6 +42,9 @@ export default {
     InputField,
     TextArea,
     SeasonSelect,
+    PlayerCard,
+    AssociationCard,
+    Table,
   },
   setup(){
     let clicked = ref(0)
