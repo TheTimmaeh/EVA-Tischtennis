@@ -2,15 +2,13 @@
   <div class="card ">
       <div class="header">
         <div class="primary-title">
-          <div class="title">Spielername</div>
-          <div class="subhead">Mannschaft</div>
+          <div class="title">{{playerName}}</div>
+          <div class="subhead">{{associationName}}</div>
         </div>
       </div>
-      <div class="body">Tim ist der Beste Tennisspieler aller Zeiten und er wohnt in bla bla. Das ist ein Geheimnis.
-      </div>
+      <div class="body">{{description}}</div>
       <div class="footer">
-        <Button>
-        </Button>
+        <Button>Bearbeiten</Button>
       </div>
   </div>
 </template>
@@ -18,13 +16,22 @@
 <script>
 
 import Button from "./Button";
+import { ref } from 'vue'
 
 export default {
-  name: 'Home',
+  name: 'PlayerCard',
   components:{Button},
   setup(){
-    return { }
-  }
+    let playerName = ref('Spielername konnte nicht geladen werden')
+    let associationName = ref('Vereinsname konnte nicht geladen werden')
+    let description = ref('Es tut uns leid aber der Beschreibungstext des Spielers konnte nicht geladen werden.')
+
+    return {
+      playerName,
+      associationName,
+      description,
+    }
+  },
 }
 </script>
 
@@ -40,14 +47,17 @@ export default {
   font-size: 14px;
   border-radius: 4px;
   height:200px;
-  width:400px;;
+  width:800px;;
+  border: 2px;
   border-color: $color-info;
   border-style: solid;
+  border-radius: 5px; 
   margin: 8px;
   overflow: hidden;
   position: relative;
   border-collapse: collapse;
-  border-radius: 5px; 
+  
+  
 
   &:hover{
       box-shadow: 0 4px 4px 0 $color-info;
