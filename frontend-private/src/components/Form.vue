@@ -29,6 +29,13 @@
           v-model="vals[row.name].value">
           </SeasonSelect>
         </template>
+        <template v-if="row.field === 'countySelectSelect'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><CountrySelect
+          :label="`l_${row.name}`"
+          :ref="refs[row.name]"
+          v-model="vals[row.name].value">
+          </CountrySelect>
+        </template>
         <template v-if="row.field === 'checkbox'">
           <label :for="`l_${row.name}`">{{ row.text }}</label><CheckBox
           :label="`l_${row.name}`"
@@ -50,6 +57,7 @@
   import InputField from '@/components/InputField'
   import TextArea from '@/components/TextArea'
   import SeasonSelect from '@/components/SeasonSelect'
+  import CountrySelect from '@/components/CountrySelect'
   import CheckBox from '@/components/CheckBox'
 
   export default {
@@ -59,6 +67,7 @@
       InputField,
       TextArea,
       SeasonSelect,
+      CountrySelect,
       CheckBox,
     },
     props: {
