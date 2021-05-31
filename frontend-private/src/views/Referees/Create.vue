@@ -49,7 +49,7 @@
           { name: 'referee', text: 'Schiedsrichter', field: 'h2' },
           { name: 'name', text: 'Vorname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'year', text: 'Geburtstag:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true }  },
+          { name: 'birthday', text: 'Geburtstag:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true }  },
 
           { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
