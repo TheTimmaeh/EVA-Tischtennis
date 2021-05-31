@@ -48,7 +48,8 @@
         rows: [
           { name: 'competition', text: 'Turnier', field: 'h2' },
           { name: 'name', text: 'Name:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'date', text: 'Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
+          { name: 'startdate', text: 'Start-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
+          { name: 'enddate', text: 'End-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'class', text: 'Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           //TODO: Hier noch ein Dropdown einbinden, das die angelegten Seasons zeigt, sodass ein Turnier der Saison zugeorndet wird. Oder wollen wir die zuorndung automatisch anhand des Datums vornehmen?
 
