@@ -1,5 +1,5 @@
 <template>
-  <div class="table-card">
+  <div class="tableCard">
       <table class="table">
         <div class="header">
             <tr>
@@ -39,7 +39,7 @@
 import Button from './Button.vue';
 
 export default {
-  name: 'Home',
+  name: 'Table',
   components:{Button},
   setup(){
     return { }
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-card{
+.tableCard{
   background-color: white; 
   border: bold;
   color: $color-dark-text;
@@ -60,12 +60,14 @@ export default {
   border-radius: 4px;
   height:200px;
   width:400px;
+  width:800px;;
+  border: 2px;
   border-color: $color-info;
   border-style: solid;
+  border-radius: 5px; 
   margin: 8px;
   overflow: hidden;
   position: relative;
-  border-radius: 5px; 
 
   &.warning{
     background-color: $color-warning;
