@@ -56,8 +56,8 @@
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein Select einbinden, dass die Bundesländer anbietet
-          { name: 'country', text: 'Land:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein Select einbinden, dass die Länder anbietet
+          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, 
+          { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } }, 
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },
           { name: 'board', text: 'Vorstand:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
