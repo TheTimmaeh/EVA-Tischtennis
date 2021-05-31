@@ -29,7 +29,7 @@
           v-model="vals[row.name].value">
           </SeasonSelect>
         </template>
-        <template v-if="row.field === 'countySelect'">
+        <template v-if="row.field === 'countrySelect'">
           <label :for="`l_${row.name}`">{{ row.text }}</label><CountrySelect
           :label="`l_${row.name}`"
           :ref="refs[row.name]"
