@@ -1,15 +1,21 @@
 <template>
   <div class="competitions">
-    Liste der Turniere
+    <router-link to="/competitions/create">
+      <Button id="myButton" >Turnier anlegen</Button> <br>
+    </router-link>
+    <div class="list">Liste der Turniere</div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Button from '../../components/Button'
 
 export default {
   name: 'Competitions',
-  components: { },
+  components: { 
+    Button, 
+  },
   setup(){
     return { }
   },
@@ -17,4 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list{
+  padding: 20px;
+}
 </style>

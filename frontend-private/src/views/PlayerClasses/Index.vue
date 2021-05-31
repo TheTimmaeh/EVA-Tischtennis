@@ -1,15 +1,21 @@
 <template>
   <div class="playerClasses">
-    Liste der Spielerklassen
+    <router-link to="/playerClasses/create">
+      <Button id="myButton" >Spielerklass anlegen</Button> <br>
+    </router-link>
+    <div class="list">Liste der Spielerklassen</div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Button from '../../components/Button'
 
 export default {
   name: 'PlayerClasses',
-  components: { },
+  components: { 
+    Button, 
+  },
   setup(){
     return { }
   },
@@ -17,4 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list{
+  padding: 20px;
+}
 </style>

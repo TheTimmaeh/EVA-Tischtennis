@@ -1,15 +1,21 @@
 <template>
   <div class="referees">
-    Liste aller Schiedsrichter 
+    <router-link to="/referees/create">
+      <Button id="myButton" >Schiedsrichter anlegen</Button> <br>
+    </router-link>
+    <div class="list">Liste aller Schiedsrichter</div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Button from '../../components/Button'
 
 export default {
   name: 'Referees',
-  components: { },
+  components: { 
+    Button, 
+  },
   setup(){
     return { }
   },
@@ -17,4 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list{
+  padding: 20px;
+}
 </style>

@@ -1,15 +1,21 @@
 <template>
   <div class="associations">
-    Liste aller Vereine
+    <router-link to="/associations/create">
+      <Button id="myButton" >Verein anlegen</Button> <br>
+    </router-link>
+    <div class="list">Liste aller Vereine</div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Button from '../../components/Button'
 
 export default {
   name: 'Associations',
-  components: { },
+  components: { 
+    Button, 
+  },
   setup(){
     return { }
   },
@@ -17,4 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list{
+  padding: 20px;
+}
 </style>
