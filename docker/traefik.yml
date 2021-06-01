@@ -3,12 +3,9 @@ tcp:
     master-eva:
       loadBalancer:
         servers:
-          - address: "master:3306"
-    slave-eva:
-      loadBalancer:
-        servers:
-          - address: "slave_1:3306"
-          - address: "slave_2:3306"
+          - address: "master_1:3306"
+          - address: "master_2:3306"
+          - address: "master_3:3306"
 
   routers:
     master-eva:
@@ -17,10 +14,5 @@ tcp:
         - "mysql"
       rule: "HostSNI(`*`)"
       service: "master-eva"
-    slave-eva:
-      # won't listen to entry point web
-      entryPoints:
-        - "mysql_ro"
-      rule: "HostSNI(`*`)"
-      service: "slave-eva"
+
 
