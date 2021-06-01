@@ -38,13 +38,13 @@ module.exports = (db) => {
 
 
 async function getAllAssociations(req, res){
-  let referees = (await db.select().from('associations')) 
-  res.json({referees})
+  let associations = (await db.select().from('associations')) 
+  res.json({associations})
 }
 
 async function getAssociation(req, res){
-  let referee = (await db.select().from('associations').where('name', req.name)) 
-  res.json({referee})
+  let association = (await db.select().from('associations').where('name', req.name)) 
+  res.json({association})
 }
 
 async function createAssociation(req, res){
@@ -53,13 +53,12 @@ async function createAssociation(req, res){
                               {year: req.year},
                               {location:req.location},
                               {description:req.description},
-                              {address:req.address},{street:req.street},
+                              {street:req.street},
                               {streetnumber:req.streetnumber},
                               {zipcode:req.zipcode},
                               {city:req.city},
                               {state:req.state},
                               {country:req.country},
-                              {contact:req.contact},
                               {board:req.board},
                               {phone:req.phone},
                               {mail:req.mail},
@@ -73,13 +72,12 @@ async function updateAssociation(req, res){
                                                       {year: req.year},
                                                       {location:req.location},
                                                       {description:req.description},
-                                                      {address:req.address},{street:req.street},
+                                                      {street:req.street},
                                                       {streetnumber:req.streetnumber},
                                                       {zipcode:req.zipcode},
                                                       {city:req.city},
                                                       {state:req.state},
                                                       {country:req.country},
-                                                      {contact:req.contact},
                                                       {board:req.board},
                                                       {phone:req.phone},
                                                       {mail:req.mail},
