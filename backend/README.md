@@ -17,6 +17,12 @@ Before running, make sure to migrate to the latest version using:
 npm run migrate:latest
 ```
 
+Create a new migration using:
+
+```
+npx knex migrate:make [migration_name] --knexfile src/db/knexfile.js
+```
+
 You can also fill the database with test data (this will erase all existing data!) using:
 
 ```
