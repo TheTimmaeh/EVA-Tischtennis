@@ -118,6 +118,15 @@
 </script>
 
 <style lang="scss" scoped>
+  form {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  div {
+    width: fit-content;
+  }
+
   label {
     display: inline-block;
     width: 150px;
