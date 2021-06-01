@@ -49,6 +49,7 @@
           { name: 'member', text: 'Mitglied', field: 'h2' },
           { name: 'name', text: 'Vorname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
+          { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'birthday', text: 'Geburtsdatum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'association', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
           { name: 'board', text: 'Vorstand:', field: 'checkbox', returnValue: 'isBoardMember' },
