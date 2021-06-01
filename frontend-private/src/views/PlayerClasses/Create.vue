@@ -48,6 +48,7 @@
         rows: [
           { name: 'name', text: 'Name der Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'age', text: 'Mindestalter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.age, required: true } },
+           { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: { min: 2, max: 2, required: true } },
         ],
       }
     },
