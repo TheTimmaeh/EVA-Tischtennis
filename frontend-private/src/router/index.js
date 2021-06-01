@@ -15,6 +15,10 @@ const CreateSeason = () => import('../views/Seasons/Create.vue')
 const Members = () => import('../views/Members/Index.vue')
 const CreateMember = () => import('../views/Members/Create.vue')
 
+// Persons
+const Persons = () => import('../views/Persons/Index.vue')
+const CreatePerson = () => import('../views/Persons/Create.vue')
+
 // Referees
 const Referees = () => import('../views/Referees/Index.vue')
 const CreateReferee = () => import('../views/Referees/Create.vue')
@@ -78,6 +82,16 @@ const routes = [
     path: '/members/create',
     name: 'CreateMember',
     component: CreateMember,
+  },
+  {
+    path: '/persons',
+    name: 'Persons',
+    component: Persons,
+  },
+  {
+    path: '/persons/create',
+    name: 'CreatePerson',
+    component: CreatePerson,
   },
   {
     path: '/referees',

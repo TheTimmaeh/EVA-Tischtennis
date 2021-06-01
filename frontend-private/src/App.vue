@@ -9,6 +9,8 @@
       <router-link to="/seasons/create">Saison anlegen</router-link> |
       <router-link to="/members">Vereinsmitglieder</router-link> |
       <router-link to="/members/create">Vereinsmitglied anlegen</router-link> |
+       <router-link to="/persons">Vereinsmitglieder</router-link> |
+      <router-link to="/persons/create">Vereinsmitglied anlegen</router-link> |
       <router-link to="/referees">Schiedsrichter</router-link> |
       <router-link to="/referees/create">Schiedsrichter anlegen</router-link> |
       <router-link to="/playerClasses">Spielerklassen</router-link> |
