@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+
 import Button from '../../components/Button'
 
 export default {
