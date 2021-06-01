@@ -52,10 +52,7 @@
           { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: {  required: true } },
           { name: 'birthday', text: 'Geburtsdatum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'association', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
-          { name: 'board', text: 'Vorstand:', field: 'checkbox', returnValue: 'isBoardMember' },
-          { name: 'playerclass', text: 'Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass alle Spielerklassen anbietet, inkl "keine"
-          { name: 'team', text: 'Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Das als Dropdown mit den Möglichkeiten einbinden
-
+          
           { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
