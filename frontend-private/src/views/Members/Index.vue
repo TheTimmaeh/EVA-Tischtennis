@@ -1,9 +1,9 @@
 <template>
   <div class="members">
     <router-link to="/members/create">
-      <Button id="myButton" >Vereinsitglied anlegen</Button> <br>
+      <Button id="myButton" >Vereinsmitglied anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste aller Vereinsitglieder</div>
+    <div class="list">Liste aller Vereinsmitglieder</div>
   </div>
 </template>
 
