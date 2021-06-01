@@ -49,7 +49,7 @@
           { name: 'nameAssociationClass', text: 'Name der Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'season', text: 'Saison:', field: 'seasonSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'year', text: 'Jahr der Saison:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear(), validate: { type: validate.types.year, required: true } },
-          { name: 'gender', text: 'Geschlecht der Mitglieder:', field: 'genderSelect', validate: { min: 2, max: 2, required: true } },
+          { name: 'gender', text: 'Geschlecht der Mitglieder:', field: 'genderSelect', validate: { required: true } },
           { name: 'nameAssociation', text: 'Name des Vereins:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Das später noch als DropDown umsetzen, welches die unterschiedlichen beriets existierenden Vereine anbietet, oder die Möglichkeit eine Vereinsmannschaft anzulegen nur über den Verein selbst anbieten, das müssen wir zunächst noch entscheiden, letzteres finde ich sinnvoller
         ],
       }
