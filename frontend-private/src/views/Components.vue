@@ -22,6 +22,7 @@
     <PlayerCard></PlayerCard><br />
     <AssociationCard></AssociationCard><br />
     <Table></Table><br />
+    <SeasonCard></SeasonCard><br />
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
 import SeasonSelect from '@/components/SeasonSelect'
 import PlayerCard from '@/components/PlayerCard'
+import SeasonCard from '@/components/SeasonCard'
 import AssociationCard from '@/components/AssociationCard'
 import Table from '@/components/Table'
 
@@ -43,6 +45,7 @@ export default {
     TextArea,
     SeasonSelect,
     PlayerCard,
+    SeasonCard,
     AssociationCard,
     Table,
   },
