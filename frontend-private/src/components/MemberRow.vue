@@ -15,7 +15,7 @@
                     </Button>
                 </td>
             </tr>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -51,10 +51,12 @@ td{
     padding: 8px 12px;
     width: 30em;
 }
+
 tr{
     padding: 8px 12px;
     text-align: inherit;
 }
+
 .row{
     border: 1px solid $color-mono-light;
     border-width: 0 0 1px;

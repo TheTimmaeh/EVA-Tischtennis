@@ -20,6 +20,7 @@
     <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" /><br />
     <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect"></SeasonSelect><br />
     <PlayerCard></PlayerCard><br />
+    <PlayerClassCard></PlayerClassCard><br />
     <AssociationCard></AssociationCard><br />
     <MemberTable></MemberTable><br />
     <SeasonCard></SeasonCard><br />
@@ -33,6 +34,7 @@ import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
 import SeasonSelect from '@/components/SeasonSelect'
 import PlayerCard from '@/components/PlayerCard'
+import PlayerClassCard from '@/components/PlayerClassCard'
 import SeasonCard from '@/components/SeasonCard'
 import AssociationCard from '@/components/AssociationCard'
 import MemberTable from '@/components/MemberTable'
@@ -45,6 +47,7 @@ export default {
     TextArea,
     SeasonSelect,
     PlayerCard,
+    PlayerClassCard,
     SeasonCard,
     AssociationCard,
     MemberTable,
