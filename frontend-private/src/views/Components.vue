@@ -21,7 +21,7 @@
     <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect"></SeasonSelect><br />
     <PlayerCard></PlayerCard><br />
     <AssociationCard></AssociationCard><br />
-    <Table></Table><br />
+    <MemberTable></MemberTable><br />
     <SeasonCard></SeasonCard><br />
   </div>
 </template>
@@ -35,7 +35,7 @@ import SeasonSelect from '@/components/SeasonSelect'
 import PlayerCard from '@/components/PlayerCard'
 import SeasonCard from '@/components/SeasonCard'
 import AssociationCard from '@/components/AssociationCard'
-import Table from '@/components/Table'
+import MemberTable from '@/components/MemberTable'
 
 export default {
   name: 'Components',
@@ -47,7 +47,7 @@ export default {
     PlayerCard,
     SeasonCard,
     AssociationCard,
-    Table,
+    MemberTable,
   },
   setup(){
     let clicked = ref(0)

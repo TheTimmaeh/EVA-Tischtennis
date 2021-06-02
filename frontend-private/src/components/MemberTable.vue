@@ -13,23 +13,7 @@
                 </th>
             </tr>
         </div>
-        <div class="row">
-            <tr>
-                <td>
-                    Tim
-                </td>
-                <td>
-                    Elbert
-                </td>
-                <td>
-                    LBV
-                </td>
-                <td>
-                    <Button>
-                    </Button>
-                </td>
-            </tr>
-        </div>
+        <MemberRow></MemberRow>
       </table>
   </div>
 </template>
@@ -37,10 +21,11 @@
 <script>
 
 import Button from './Button.vue';
+import MemberRow from './MemberRow';
 
 export default {
-  name: 'Table',
-  components:{Button},
+  name: 'MemberTable',
+  components:{Button, MemberRow},
   setup(){
     return { }
   }
@@ -96,21 +81,8 @@ th{
     vertical-align: top;
     width: 30em;
 }
-td{
-    text-align: inherit;
-    display: table-cell;
-    padding: 8px 12px;
-    width: 30em;
-}
-tr{
-    padding: 8px 12px;
-    text-align: inherit;
-}
+
 .header{
-    border: 1px solid $color-mono-light;
-    border-width: 0 0 1px;
-}
-.row{
     border: 1px solid $color-mono-light;
     border-width: 0 0 1px;
 }
