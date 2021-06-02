@@ -7,16 +7,16 @@ module.exports = (db) => {
   router.get('/', getAllPersons)
 
   // Create
-  router.post('/', createPerson)
+  router.post('/', authenticateToken, createPerson)
 
   // Get (one person)
   router.get('/:person', getPerson)
 
   // Update
-  router.post('/:person', updatePerson)
+  router.post('/:person', authenticateToken, updatePerson)
 
   // Delete
-  router.delete('/:person', deletePerson)
+  router.delete('/:person', authenticateToken, deletePerson)
 
   return router
 }

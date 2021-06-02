@@ -7,16 +7,16 @@ module.exports = (db) => {
   router.get('/', getAllReferees)
 
   // Create
-  router.post('/', createReferee)
+  router.post('/', authenticateToken, createReferee)
 
   // Get (one referee)
   router.get('/:referee', getReferee)
 
   // Update
-  router.post('/:referee', updateReferee)
+  router.post('/:referee', authenticateToken, updateReferee)
 
   // Delete
-  router.delete('/:referee', deleteReferee)
+  router.delete('/:referee', authenticateToken, deleteReferee)
 
   return router
 }

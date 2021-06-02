@@ -7,7 +7,7 @@ module.exports = (db) => {
   router.get('/', getAllSeasons)
 
   // Create
-  router.post('/', createSeason)
+  router.post('/', authenticateToken, createSeason)
 
   // Get (one saison) -> Ich glaube das brauchen wir gar nicht
   router.get('/:season', async (req, res) => {

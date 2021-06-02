@@ -7,16 +7,16 @@ module.exports = (db) => {
   router.get('/', getAllAssociationTeams)
 
   // Create
-  router.post('/', authenticateToken, createAssociationTeam)
+  router.post('/', authenticateToken, authenticateToken, createAssociationTeam)
 
   // Get (one associationTeam)
   router.get('/:associationTeam', getAssociationTeam)
 
   // Update
-  router.post('/:associationTeam', updateAssociationTeam)
+  router.post('/:associationTeam', authenticateToken, updateAssociationTeam)
 
   // Delete
-  router.delete('/:associationTeam', deleteAssociationTeam)
+  router.delete('/:associationTeam', authenticateToken, deleteAssociationTeam)
 
   return router
 }
