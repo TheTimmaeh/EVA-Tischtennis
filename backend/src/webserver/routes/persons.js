@@ -54,7 +54,7 @@ async function createPerson(req, res){
 }
 
 async function updatePerson(req, res){
-  db('persons').where('name', req.name).update([
+  db('persons').where('id', req.id).update([
                                                   {name: req.name}, 
                                                   {surname: req.surname},
                                                   {location:req.location},

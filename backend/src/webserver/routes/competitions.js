@@ -24,25 +24,55 @@ module.exports = (_db) => {
 }
 
 async function getAllCompetitions(req, res){
-  // let competitions = (await db.select().from('competitions'))
-  //
-  // res.json({competitions})
-
-  res.json({})
+  let competitions = (await db.select().from('competitions'))
+  res.json({competitions})
 }
 
 async function getCompetition(req, res){
-  res.json({})
+  let competition = (await db.select().from('competitions').where('id', req.id)) 
+  res.json({competition})
 }
 
 async function createCompetition(req, res){
-  res.json({})
+  db('competitions').insert([
+    {name: req.name}, 
+    {startdate: req.startdate},
+    {enddate:req.enddate},
+    {class:req.class},
+    {street:req.street},
+    {streetnumber:req.streetnumber},
+    {zipcode:req.zipcode},
+    {city:req.city},
+    {state:req.state},
+    {country:req.country},
+    {phone:req.phone},
+    {mail:req.mail},
+    {website:req.website},
+])
+res.json({})
 }
 
 async function updateCompetition(req, res){
-  res.json({})
+  db('competitions').where('id', req.id).update([
+    {name: req.name}, 
+    {startdate: req.startdate},
+    {enddate:req.enddate},
+    {class:req.class},
+    {street:req.street},
+    {streetnumber:req.streetnumber},
+    {zipcode:req.zipcode},
+    {city:req.city},
+    {state:req.state},
+    {country:req.country},
+    {phone:req.phone},
+    {mail:req.mail},
+    {website:req.website},
+  ])
+res.json({})
 }
 
 async function deleteCompetition(req, res){
+  await db('competitions').where('id', req.id).del()
   res.json({})
 }
+

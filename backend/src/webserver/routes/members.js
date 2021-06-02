@@ -54,7 +54,7 @@ async function createMember(req, res){
 }
 
 async function updateMember(req, res){
-  db('members').where('name', req.name).update([
+  db('members').where('id', req.id).update([
                                                 {name: req.name}, 
                                                 {surname: req.surname},
                                                 {gender:req.gender},
