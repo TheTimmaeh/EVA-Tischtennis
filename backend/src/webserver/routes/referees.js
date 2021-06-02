@@ -4,34 +4,19 @@ const { generateToken, authenticateToken } = require('../../helpers/jwt')
 module.exports = (db) => {
 
   // Index
-  router.get('/', async (req, res) => {
-    let referees = getAllReferees(req, res)
-    res.json({referees})
-  })
+  router.get('/', getAllReferees)
 
   // Create
-  router.post('/', authenticateToken, async (req, res) => {
-    createReferee(req, res)
-    res.json({})
-  })
+  router.post('/', createReferee)
 
   // Get (one referee)
-  router.get('/:referee', async (req, res) => {
-    let referee =getReferee(req, res)
-    res.json({referee})
-  })
+  router.get('/:referee', getReferee)
 
   // Update
-  router.post('/:referee', authenticateToken, async (req, res) => {
-    updateReferee(req, res)
-    res.json({})
-  })
+  router.post('/:referee', updateReferee)
 
   // Delete
-  router.delete('/:referee', authenticateToken, async (req, res) => {
-    deleteReferee(req, res)
-    res.json({})
-  })
+  router.delete('/:referee', deleteReferee)
 
   return router
 }

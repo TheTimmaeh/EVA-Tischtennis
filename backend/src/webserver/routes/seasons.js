@@ -4,16 +4,10 @@ const { generateToken, authenticateToken } = require('../../helpers/jwt')
 module.exports = (db) => {
 
   // Index
-  router.get('/', async (req, res) => {
-    let seasons = getAllSeasons(req, res)
-    res.json({seasons})
-  })
+  router.get('/', getAllSeasons)
 
   // Create
-  router.post('/', authenticateToken, async (req, res) => {
-    createSeason(req, res)
-    res.json({})
-  })
+  router.post('/', createSeason)
 
   // Get (one saison) -> Ich glaube das brauchen wir gar nicht
   router.get('/:season', async (req, res) => {
@@ -35,8 +29,8 @@ module.exports = (db) => {
 
 
 async function getAllSeasons(req, res){
-  let referees = (await db.select().from('season')) 
-  res.json({referees})
+  let seasons = (await db.select().from('season')) 
+  res.json({seasons})
 }
 
 async function createSeason(req, res){

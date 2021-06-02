@@ -4,34 +4,19 @@ const { generateToken, authenticateToken } = require('../../helpers/jwt')
 module.exports = (db) => {
 
   // Index
-  router.get('/', async (req, res) => {
-    let persons = getAllPersons(req, res)
-    res.json({persons})
-  })
+  router.get('/', getAllPersons)
 
   // Create
-  router.post('/', authenticateToken, async (req, res) => {
-    createPerson(req, res)
-    res.json({})
-  })
+  router.post('/', createPerson)
 
   // Get (one person)
-  router.get('/:person', async (req, res) => {
-    let person = getPerson(req, res)
-    res.json({person})
-  })
+  router.get('/:person', getPerson)
 
   // Update
-  router.post('/:person', authenticateToken, async (req, res) => {
-    updatePerson(req, res)
-    res.json({})
-  })
+  router.post('/:person', updatePerson)
 
   // Delete
-  router.delete('/:person', authenticateToken, async (req, res) => {
-    deletePerson(req, res)
-    res.json({})
-  })
+  router.delete('/:person', deletePerson)
 
   return router
 }

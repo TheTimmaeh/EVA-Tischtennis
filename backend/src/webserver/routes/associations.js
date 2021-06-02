@@ -4,34 +4,19 @@ const { generateToken, authenticateToken } = require('../../helpers/jwt')
 module.exports = (db) => {
 
   // Index
-  router.get('/', async (req, res) => {
-    let Associations = getAllAssociations(req, res)
-    res.json({Associations})
-  })
+  router.get('/', getAllAssociations)
 
   // Create
-  router.post('/', authenticateToken, async (req, res) => {
-    createAssociation(req, res)
-    res.json({})
-  })
+  router.post('/', createAssociation)
 
   // Get (one association)
-  router.get('/:association', async (req, res) => {
-    let association = getAssociation(req, res)
-    res.json({association})
-  })
+  router.get('/:association', getAssociation)
 
   // Update
-  router.post('/:association', authenticateToken, async (req, res) => {
-    updateAssociation(req, res)
-    res.json({})
-  })
+  router.post('/:association', updateAssociation)
 
   // Delete
-  router.delete('/:association', authenticateToken, async (req, res) => {
-    deleteAssociation(req, res)
-    res.json({})
-  })
+  router.delete('/:association', deleteAssociation)
 
   return router
 }
