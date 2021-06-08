@@ -22,30 +22,32 @@ module.exports = (db) => {
 }
 
 async function getPlayerClasses(req, res){
-  let playerClasses = (await db.select().from('playerClasses')) 
+  let playerClasses = (await db.select().from('playerClasses'))
   res.json({playerClasses})
 }
 
 async function getPlayerClass(req, res){
-  let playerClass = (await db.select().from('playerClasses').where('id', req.id)) 
+  let playerClass = (await db.select().from('playerClasses').where('id', req.id))
   res.json({playerClass})
 }
 
 async function createPlayerClass(req, res){
   db('playerClasses').insert([
-                              {name: req.name}, 
-                              {age: req.age},
-                              {gender:req.gender},
-                          ])
+    { name: req.name },
+    { age: req.age },
+    { gender: req.gender },
+  ])
+
   res.json({})
 }
 
 async function updatePlayerClass(req, res){
   db('playerClasses').where('id', req.id).update([
-                                                  {name: req.name}, 
-                                                  {age: req.age},
-                                                  {gender:req.gender},
-                                                ])
+    { name: req.name },
+    { age: req.age },
+    { gender: req.gender },
+  ])
+  
   res.json({})
 }
 

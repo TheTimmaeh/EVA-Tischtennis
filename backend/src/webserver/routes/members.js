@@ -22,56 +22,58 @@ module.exports = (db) => {
 }
 
 async function getAllMembers(req, res){
-  let members = (await db.select().from('members')) 
+  let members = (await db.select().from('members'))
   res.json({members})
 }
 
 async function getMember(req, res){
-  let member = (await db.select().from('members').where('id', req.id)) 
+  let member = (await db.select().from('members').where('id', req.id))
   res.json({member})
 }
 
 async function createMember(req, res){
   db('members').insert([
-                              {name: req.name}, 
-                              {surname: req.surname},
-                              {gender:req.gender},
-                              {birthday:req.birthday},
-                              {association:req.association},
-                              {board:req.board},
-                              {playerclass:req.playerclass},
-                              {team:req.team},
-                              {street:req.street},
-                              {streetnumber:req.streetnumber},
-                              {zipcode:req.zipcode},
-                              {city:req.city},
-                              {state:req.state},
-                              {country:req.country},
-                              {phone:req.phone},
-                              {mail:req.mail},
-                          ])
+    { name: req.name },
+    { surname: req.surname },
+    { gender: req.gender },
+    { birthday: req.birthday },
+    { association: req.association },
+    { board: req.board },
+    { playerclass: req.playerclass },
+    { team: req.team },
+    { street: req.street },
+    { streetnumber: req.streetnumber },
+    { zipcode: req.zipcode },
+    { city: req.city },
+    { state: req.state },
+    { country: req.country },
+    { phone: req.phone },
+    { mail: req.mail },
+  ])
+
   res.json({})
 }
 
 async function updateMember(req, res){
   db('members').where('id', req.id).update([
-                                                {name: req.name}, 
-                                                {surname: req.surname},
-                                                {gender:req.gender},
-                                                {birthday:req.birthday},
-                                                {association:req.association},
-                                                {board:req.board},
-                                                {playerclass:req.playerclass},
-                                                {team:req.team},
-                                                {street:req.street},
-                                                {streetnumber:req.streetnumber},
-                                                {zipcode:req.zipcode},
-                                                {city:req.city},
-                                                {state:req.state},
-                                                {country:req.country},
-                                                {phone:req.phone},
-                                                {mail:req.mail},
-                                              ])
+    { name: req.name },
+    { surname: req.surname },
+    { gender: req.gender },
+    { birthday: req.birthday },
+    { association: req.association },
+    { board: req.board },
+    { playerclass: req.playerclass },
+    { team: req.team },
+    { street: req.street },
+    { streetnumber: req.streetnumber },
+    { zipcode: req.zipcode },
+    { city: req.city },
+    { state: req.state },
+    { country: req.country },
+    { phone: req.phone },
+    { mail: req.mail },
+  ])
+  
   res.json({})
 }
 

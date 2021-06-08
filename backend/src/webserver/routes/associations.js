@@ -23,55 +23,57 @@ module.exports = (db) => {
 
 
 async function getAllAssociations(req, res){
-  let associations = (await db.select().from('associations')) 
+  let associations = (await db.select().from('associations'))
   res.json({associations})
 }
 
 async function getAssociation(req, res){
-  let association = (await db.select().from('associations').where('name', req.name)) 
+  let association = (await db.select().from('associations').where('name', req.name))
   res.json({association})
 }
 
 async function createAssociation(req, res){
   db('associations').insert([
-                              {name: req.name}, 
-                              {year: req.year},
-                              {location:req.location},
-                              {description:req.description},
-                              {street:req.street},
-                              {streetnumber:req.streetnumber},
-                              {zipcode:req.zipcode},
-                              {city:req.city},
-                              {state:req.state},
-                              {country:req.country},
-                              {board:req.board},
-                              {phone:req.phone},
-                              {mail:req.mail},
-                              {website:req.website},
-                            ])
+    { name: req.name },
+    { year: req.year },
+    { location: req.location },
+    { description: req.description },
+    { street: req.street },
+    { streetnumber: req.streetnumber },
+    { zipcode: req.zipcode },
+    { city: req.city },
+    { state: req.state },
+    { country: req.country },
+    { board: req.board },
+    { phone: req.phone },
+    { mail: req.mail },
+    { website: req.website },
+  ])
+
   res.json({})
 }
 
 async function updateAssociation(req, res){
   db('associations').where('name', req.name).update([
-                                                      {year: req.year},
-                                                      {location:req.location},
-                                                      {description:req.description},
-                                                      {street:req.street},
-                                                      {streetnumber:req.streetnumber},
-                                                      {zipcode:req.zipcode},
-                                                      {city:req.city},
-                                                      {state:req.state},
-                                                      {country:req.country},
-                                                      {board:req.board},
-                                                      {phone:req.phone},
-                                                      {mail:req.mail},
-                                                      {website:req.website},
-                                                    ])
+    { year: req.year },
+    { location: req.location },
+    { description: req.description },
+    { street: req.street },
+    { streetnumber: req.streetnumber },
+    { zipcode: req.zipcode },
+    { city: req.city },
+    { state: req.state },
+    { country: req.country },
+    { board: req.board },
+    { phone: req.phone },
+    { mail: req.mail },
+    { website: req.website },
+  ])
+
   res.json({})
 }
 
 async function deleteAssociation(req, res){
-  await db('associations').where('name', req).del()
+  await db('associations').where('name', req.name).del()
   res.json({})
 }

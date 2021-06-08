@@ -23,34 +23,36 @@ module.exports = (db) => {
 
 
 async function getAllAssociationTeams(req, res){
-  let associationTeams = (await db.select().from('associationTeams')) 
+  let associationTeams = (await db.select().from('associationTeams'))
   res.json({associationTeams})
 }
 
 async function getAssociationTeam(req, res){
-  let associationTeam = (await db.select().from('associationTeams').where('id', req.id)) 
+  let associationTeam = (await db.select().from('associationTeams').where('id', req.id))
   res.json({associationTeam})
 }
 
 async function createAssociationTeam(req, res){
   db('associationTeams').insert([
-                              {nameAssociationClass: req.nameAssociationClass}, 
-                              {season: req.season},
-                              {year:req.year},
-                              {gender:req.gender},
-                              {nameAssociation:req.nameAssociation},
-                          ])
+    { nameAssociationClass: req.nameAssociationClass },
+    { season: req.season },
+    { year: req.year },
+    { gender: req.gender },
+    { nameAssociation: req.nameAssociation },
+  ])
+  
   res.json({})
 }
 
 async function updateAssociationTeam(req, res){
   db('associationTeams').where('id', req.id).update([
-                                                  {nameAssociationClass: req.nameAssociationClass}, 
-                                                  {season: req.season},
-                                                  {year:req.year},
-                                                  {gender:req.gender},
-                                                  {nameAssociation:req.nameAssociation},
-                                                ])
+    { nameAssociationClass: req.nameAssociationClass },
+    { season: req.season },
+    { year: req.year },
+    { gender: req.gender },
+    { nameAssociation: req.nameAssociation },
+  ])
+
   res.json({})
 }
 

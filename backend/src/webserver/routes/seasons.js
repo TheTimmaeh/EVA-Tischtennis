@@ -9,36 +9,38 @@ module.exports = (db) => {
   // Create
   router.post('/', authenticateToken, createSeason)
 
-  // Get (one saison) -> Ich glaube das brauchen wir gar nicht
-  router.get('/:season', async (req, res) => {
-    res.json({})
-  })
-
-  // Update -> Ich glaube das brauchen wir auch nicht
-  router.post('/:season', authenticateToken, async (req, res) => {
-    res.json({})
-  })
+  // // Get (one saison) -> Ich glaube das brauchen wir gar nicht
+  // router.get('/:season', async (req, res) => {
+  //   res.json({})
+  // })
+  //
+  // // Update -> Ich glaube das brauchen wir auch nicht
+  // router.post('/:season', authenticateToken, async (req, res) => {
+  //   res.json({})
+  // })
 
   // Delete
-  router.delete('/:season', authenticateToken, async (req, res) => {
-    res.json({})
-  })
+  router.delete('/:season', authenticateToken, deleteSeason)
 
   return router
 }
 
 
 async function getAllSeasons(req, res){
-  let seasons = (await db.select().from('season')) 
+  let seasons = (await db.select().from('season'))
   res.json({seasons})
 }
 
 async function createSeason(req, res){
-  db('season').insert([{year: req.year}, {season: req.season},])
+  db('season').insert([
+    { year: req.year },
+    { season: req.season },
+  ])
+
   res.json({})
 }
 
 async function deleteSeason(req, res){
-  await db('season').where([{'year': req.year}, {'season': req.season} ]).del()
+  await db('season').where({ year: req.year, season: req.season }).del()
   res.json({})
 }
