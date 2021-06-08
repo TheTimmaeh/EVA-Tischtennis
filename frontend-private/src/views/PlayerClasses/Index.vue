@@ -1,7 +1,7 @@
 <template>
   <div class="playerClasses">
     <router-link to="/playerClasses/create">
-      <Button id="myButton" >Spielerklass anlegen</Button> <br>
+      <Button id="myButton" >Spielerklasse anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Spielerklassen</div>
   </div>
@@ -13,8 +13,8 @@ import Button from '../../components/Button'
 
 export default {
   name: 'PlayerClasses',
-  components: { 
-    Button, 
+  components: {
+    Button,
   },
   setup(){
     return { }

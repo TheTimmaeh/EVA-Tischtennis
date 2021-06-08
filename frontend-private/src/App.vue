@@ -5,21 +5,16 @@
       <router-link to="/components">Components</router-link> |
       <template v-if="loggedIn">
         <router-link to="/associations">Vereine</router-link> |
-        <router-link to="/associations/create">Verein anlegen</router-link> |
-        <router-link to="/seasons">Saisonübersicht</router-link> |
-        <router-link to="/seasons/create">Saison anlegen</router-link> |
-        <router-link to="/members">Vereinsmitglieder</router-link> |
-        <router-link to="/members/create">Vereinsmitglied anlegen</router-link> |
-         <router-link to="/persons">Vereinsmitglieder</router-link> |
-        <router-link to="/persons/create">Vereinsmitglied anlegen</router-link> |
+        <router-link to="/seasons">Saisons</router-link> |
+        <router-link to="/persons">Personen</router-link> |
         <router-link to="/referees">Schiedsrichter</router-link> |
-        <router-link to="/referees/create">Schiedsrichter anlegen</router-link> |
         <router-link to="/playerClasses">Spielerklassen</router-link> |
-        <router-link to="/playerClasses/create">Spielerklasse anlegen</router-link> |
-        <router-link to="/competitions">Turniere</router-link> |
-        <router-link to="/competitions/create">Turnier anlegen</router-link> |
+
+        <!-- sind verschachtelt, kommen noch weg -->
+        <router-link to="/members">Vereinsmitglieder</router-link> |
         <router-link to="/associationTeams">Vereinsmannschaften</router-link> |
-        <router-link to="/associationTeams/create">Vereinsmannschaft anlegen</router-link> |
+
+        <router-link to="/competitions">Turniere</router-link> |
         <router-link to="/match">Aktuelles Match</router-link> |
         <router-link to="/profile">Profil</router-link> |
         <router-link to="/logout">Logout</router-link>
