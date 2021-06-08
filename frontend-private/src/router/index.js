@@ -4,6 +4,10 @@ import Home from '../views/Home.vue'
 import Components from '../views/Components.vue'
 
 // Associations
+const Users = () => import('../views/Users/Index.vue')
+const CreateUser = () => import('../views/Users/Create.vue')
+
+// Associations
 const Associations = () => import('../views/Associations/Index.vue')
 const CreateAssociation = () => import('../views/Associations/Create.vue')
 
@@ -31,11 +35,11 @@ const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
 const Competitions = () => import('../views/Competitions/Index.vue')
 const CreateCompetition= () => import('../views/Competitions/Create.vue')
 
-// AssociationTeams                             
+// AssociationTeams
 const AssociationTeams = () => import('../views/AssociationTeams/Index.vue')
 const CreateAssociationTeam= () => import('../views/AssociationTeams/Create.vue')
 
-// Match                             
+// Match
 const Match = () => import('../views/Match/Match.vue')
 
 const Login = () => import('../views/Login.vue')
@@ -52,6 +56,16 @@ const routes = [
     path: '/components',
     name: 'Components',
     component: Components,
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users,
+  },
+  {
+    path: '/users/create',
+    name: 'CreateUser',
+    component: CreateUser,
   },
   {
     path: '/associations',
