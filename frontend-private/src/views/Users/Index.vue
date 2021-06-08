@@ -3,7 +3,7 @@
     <router-link to="/users/create">
       <Button>User anlegen</Button>
     </router-link><br />
-    <MemberTable :key="forceRender" :members="users"></MemberTable>
+    <MemberTable :members="users"></MemberTable>
   </div>
 </template>
 
@@ -20,7 +20,6 @@ export default {
     MemberTable,
   },
   setup(){
-    const forceRender = ref(0)
     const users = ref([])
 
     axios().get('/users').then((res) => res.data).then((res) => {
@@ -33,14 +32,11 @@ export default {
       users.value = res.data.map((user) => {
         return { id: user.id, name: `User #${user.id}`, surname: user.username, association: user.isAdmin ? 'Admin' : 'Schiri' }
       })
-
-      forceRender.value++
     }).catch((err) => {
       console.error(err)
     })
 
     return {
-      forceRender,
       users,
     }
   },

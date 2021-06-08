@@ -1,5 +1,5 @@
 <template>
-  <Card>
+  <Card v-if="members.length > 0">
     <table>
       <colgroup>
         <col class="thirty" />
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+  import { computed } from 'vue'
   import Card from './Card.vue'
   import Button from './Button.vue'
   import MemberRow from './MemberRow'
@@ -39,8 +40,10 @@
       },
     },
     setup(props){
+      const members = computed(() => props.members)
+
       return {
-        members: props.members,
+        members,
       }
     },
   }
@@ -54,20 +57,19 @@
     border-spacing: 0;
   }
 
+  thead {
+    border: 1px solid $color-mono-light;
+    border-width: 0 0 1px;
+  }
+
   th {
     text-align: inherit;
     padding: 8px 12px;
     vertical-align: top;
-    // width: 30em;
   }
 
   td:last-child {
     border-bottom: 0px solid $color-mono-light;
-  }
-
-  thead {
-    border: 1px solid $color-mono-light;
-    border-width: 0 0 1px;
   }
 
   .thirty {
