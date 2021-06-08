@@ -22,12 +22,12 @@ module.exports = (db) => {
 }
 
 async function getAllReferees(req, res){
-  let referees = (await db.select('username').from('users').where({ isAdmin: false })
+  let referees = (await db.select('username').from('users').where({ isAdmin: false }))
   res.json({referees})
 }
 
 async function getReferee(req, res){
-  let referee = (await db.select('username').from('users').where({ username: req.username })
+  let referee = (await db.select('username').from('users').where({ username: req.username }))
   res.json({referee})
 }
 
