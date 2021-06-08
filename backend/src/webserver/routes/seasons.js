@@ -1,7 +1,10 @@
 const router = require('express').Router()
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
+let db
 
-module.exports = (db) => {
+module.exports = (_db) => {
+
+  db = _db
 
   // Index
   router.get('/', getAllSeasons)
@@ -32,15 +35,15 @@ async function getAllSeasons(req, res){
 }
 
 async function createSeason(req, res){
-  db('season').insert([
-    { year: req.year },
-    { season: req.season },
-  ])
+  db('season').insert({
+    year: req.year,
+    season: req.season,
+  })
 
   res.json({})
 }
 
 async function deleteSeason(req, res){
-  await db('season').where({ year: req.year, season: req.season }).del()
+  await db('season').where({ year: req.year, season: req.params.season }).del()
   res.json({})
 }

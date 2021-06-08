@@ -1,7 +1,10 @@
 const router = require('express').Router()
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
+let db
 
-module.exports = (db) => {
+module.exports = (_db) => {
+
+  db = _db
 
   // Index
   router.get('/', getAllReferees)
@@ -27,29 +30,29 @@ async function getAllReferees(req, res){
 }
 
 async function getReferee(req, res){
-  let referee = (await db.select('username').from('users').where({ username: req.username }))
+  let referee = (await db.select('username').from('users').where({ username: req.params.referee }))
   res.json({referee})
 }
 
 async function createReferee(req, res){
-  db('users').insert([
-    { username: req.username },
-    { password: req.password },
-    { isAdmin: false },
-  ])
+  db('users').insert({
+    username: req.username,
+    password: req.password,
+    isAdmin: false,
+  })
 
   res.json({})
 }
 
 async function updateReferee(req, res){
-  db('users').where('username', req.username).update([
-    { password: req.password }
-  ])
+  db('users').where({ username: req.params.referee }).update({
+    password: req.password
+  })
 
   res.json({})
 }
 
 async function deleteReferee(req, res){
-  await db('users').where({ username: req.username }).del()
+  await db('users').where({ username: req.params.referee }).del()
   res.json({})
 }

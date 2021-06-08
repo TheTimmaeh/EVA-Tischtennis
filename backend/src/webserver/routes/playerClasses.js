@@ -1,7 +1,10 @@
 const router = require('express').Router()
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
+let db
 
-module.exports = (db) => {
+module.exports = (_db) => {
+
+  db = _db
 
   // Index
   router.get('/', getPlayerClasses)
@@ -27,31 +30,31 @@ async function getPlayerClasses(req, res){
 }
 
 async function getPlayerClass(req, res){
-  let playerClass = (await db.select().from('playerClasses').where('id', req.id))
+  let playerClass = (await db.select().from('playerClasses').where({ id: req.params.playerClass }))
   res.json({playerClass})
 }
 
 async function createPlayerClass(req, res){
-  db('playerClasses').insert([
-    { name: req.name },
-    { age: req.age },
-    { gender: req.gender },
-  ])
+  db('playerClasses').insert({
+    name: req.name,
+    age: req.age,
+    gender: req.gender,
+  })
 
   res.json({})
 }
 
 async function updatePlayerClass(req, res){
-  db('playerClasses').where('id', req.id).update([
-    { name: req.name },
-    { age: req.age },
-    { gender: req.gender },
-  ])
-  
+  db('playerClasses').where({ id: req.params.playerClass }).update({
+    name: req.name,
+    age: req.age,
+    gender: req.gender,
+  })
+
   res.json({})
 }
 
 async function deletePlayerClass(req, res){
-  await db('playerClasses').where('id', req.id).del()
+  await db('playerClasses').where({ id: req.params.playerClass }).del()
   res.json({})
 }

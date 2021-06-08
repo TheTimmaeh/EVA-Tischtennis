@@ -1,7 +1,10 @@
 const router = require('express').Router()
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
+let db
 
-module.exports = (db) => {
+module.exports = (_db) => {
+
+  db = _db
 
   // Index
   router.get('/', getAllMembers)
@@ -27,57 +30,57 @@ async function getAllMembers(req, res){
 }
 
 async function getMember(req, res){
-  let member = (await db.select().from('members').where('id', req.id))
+  let member = (await db.select().from('members').where({ id: req.params.member }))
   res.json({member})
 }
 
 async function createMember(req, res){
-  db('members').insert([
-    { name: req.name },
-    { surname: req.surname },
-    { gender: req.gender },
-    { birthday: req.birthday },
-    { association: req.association },
-    { board: req.board },
-    { playerclass: req.playerclass },
-    { team: req.team },
-    { street: req.street },
-    { streetnumber: req.streetnumber },
-    { zipcode: req.zipcode },
-    { city: req.city },
-    { state: req.state },
-    { country: req.country },
-    { phone: req.phone },
-    { mail: req.mail },
-  ])
+  db('members').insert({
+    name: req.name,
+    surname: req.surname,
+    gender: req.gender,
+    birthday: req.birthday,
+    association: req.association,
+    board: req.board,
+    playerclass: req.playerclass,
+    team: req.team,
+    street: req.street,
+    streetnumber: req.streetnumber,
+    zipcode: req.zipcode,
+    city: req.city,
+    state: req.state,
+    country: req.country,
+    phone: req.phone,
+    mail: req.mail,
+  })
 
   res.json({})
 }
 
 async function updateMember(req, res){
-  db('members').where('id', req.id).update([
-    { name: req.name },
-    { surname: req.surname },
-    { gender: req.gender },
-    { birthday: req.birthday },
-    { association: req.association },
-    { board: req.board },
-    { playerclass: req.playerclass },
-    { team: req.team },
-    { street: req.street },
-    { streetnumber: req.streetnumber },
-    { zipcode: req.zipcode },
-    { city: req.city },
-    { state: req.state },
-    { country: req.country },
-    { phone: req.phone },
-    { mail: req.mail },
-  ])
-  
+  db('members').where({ id: req.params.member }).update({
+    name: req.name,
+    surname: req.surname,
+    gender: req.gender,
+    birthday: req.birthday,
+    association: req.association,
+    board: req.board,
+    playerclass: req.playerclass,
+    team: req.team,
+    street: req.street,
+    streetnumber: req.streetnumber,
+    zipcode: req.zipcode,
+    city: req.city,
+    state: req.state,
+    country: req.country,
+    phone: req.phone,
+    mail: req.mail,
+  })
+
   res.json({})
 }
 
 async function deleteMember(req, res){
-  await db('members').where('id', req.id).del()
+  await db('members').where({ id: req.params.member }).del()
   res.json({})
 }
