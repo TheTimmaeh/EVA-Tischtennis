@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 module.exports = (db) => {
   router.use('/auth', require('./auth')(db))
+  router.use('/users', require('./users')(db))
   router.use('/associations', require('./associations')(db))
   router.use('/associationTeams', require('./associationTeams')(db))
   router.use('/competitions', require('./competitions')(db))
