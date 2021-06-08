@@ -3,27 +3,33 @@
     <router-link to="/members/create">
       <Button id="myButton" >Vereinsmitglied anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste aller Vereinsmitglieder</div>
+    <MemberTable :members="members"></MemberTable>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import Button from '../../components/Button'
+import Button from '@/components/Button'
+import MemberTable from '@/components/MemberTable'
 
 export default {
   name: 'Members',
-  components: { 
-    Button, 
+  components: {
+    Button,
+    MemberTable,
   },
   setup(){
-    return { }
+    return {
+      members: [
+        { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },
+        { id: 2, name: 'Tina', surname: 'Hänsel', association: 'Mannschaft 2' },
+        { id: 3, name: 'Daniel', surname: 'Wallner', association: 'Mannschaft 3' },
+      ]
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+
 </style>

@@ -1,4 +1,4 @@
-<template>   
+<template>
     <div class="row">
             <tr>
                 <td>
@@ -15,7 +15,7 @@
                     </Button>
                 </td>
             </tr>
-     </div> 
+     </div>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .card{
-  background-color: white; 
+  background-color: white;
   border: bold;
   color: $color-dark-text;
   padding: 10px 25px;
@@ -52,18 +52,18 @@ export default {
   font-size: 14px;
   border-radius: 4px;
   height: 65px;
-  width:800px;;
+  width: 100%;
   border: 2px;
   border-color: $color-info;
   border-style: solid;
-  border-radius: 5px; 
+  border-radius: 5px;
   margin: 8px;
   overflow: hidden;
   position: relative;
   border-collapse: collapse;
   text-align: inherit;
-  
-  
+
+
 
   &:hover{
       box-shadow: 0 4px 4px 0 $color-info;
@@ -80,7 +80,7 @@ export default {
     min-height: 40px;
     padding: 16px;
     position: relative;
-    
+
 }
 .header .primary-title{
   bottom: auto;
@@ -130,21 +130,30 @@ tr{
     text-align: inherit;
 }
 .row{
-    height: 65px;
-    width:800px;;
-    border: 2px;
-    border: bold;
-    border-color: $color-info;
-    border-style: solid;
-    border-radius: 5px; 
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    padding: 5px 15px;
-  
+  background-color: white;
+  color: $color-dark-text;
+  padding: 10px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  border: 2px solid $color-info;
+  border-radius: 5px;
+  margin: 8px;
+  overflow: hidden;
+  position: relative;
 
-    &:hover{
-      box-shadow: 0 4px 4px 0 $color-info;
+  &.warning {
+    background-color: $color-warning;
+    color: $color-dark-text;
+  }
+
+  &.danger {
+    background-color: $color-danger;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 $color-info;
   }
 }
 </style>

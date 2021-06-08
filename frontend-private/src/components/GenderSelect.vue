@@ -10,12 +10,12 @@
     name: 'GenderSelect',
     props: {
       options: {
-        type: Array, 
+        type: Array,
         default: [
           { value: '', text: '' },
-          { value: 'women', text: 'Weiblich' },
-          { value: 'man', text: 'Männlich' },
-          { value: 'diverse', text: 'Divers' },
+          { value: 'female', text: 'Weiblich' },
+          { value: 'male', text: 'Männlich' },
+          { value: 'nonbinary', text: 'Divers' },
         ],
       },
       label: {

@@ -1,68 +1,61 @@
 <template>
-    <div class="row">
-            <tr>
-                <td>
-                    {{name}}
-                </td>
-                <td>
-                    {{surname}}
-                </td>
-                <td>
-                    {{association}}
-                </td>
-                <td>
-                    <Button>
-                    </Button>
-                </td>
-            </tr>
-    </div>
+  <tr :class="{ isLast }">
+    <td>{{name}}</td>
+    <td>{{surname}}</td>
+    <td>{{association}}</td>
+    <td>
+      <Button>Bearbeiten</Button>
+    </td>
+  </tr>
 </template>
 
 <script>
+  import { ref } from 'vue'
+  import Button from './Button'
 
-import Button from "./Button";
-import { ref } from 'vue'
-
-export default {
-  name: 'MemberRow',
-  components:{Button},
-  setup(){
-    let name = ref('Vorname')
-    let surname = ref('Nachname')
-    let association = ref('Mannschaft')
-    return {
-      name,
-      surname,
-      association
-    }
-  },
-}
+  export default {
+    name: 'MemberRow',
+    components: {
+      Button,
+    },
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+      isLast: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    setup(props){
+      return {
+        ...props.data,
+        isLast: props.isLast,
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>
-
-Button{
-    margin: 10px 20px;
-}
-
-td{
+  td {
     text-align: inherit;
     display: table-cell;
     padding: 8px 12px;
-    width: 30em;
-}
+    vertical-align: top;
+  }
 
-tr{
+  tr {
     padding: 8px 12px;
     text-align: inherit;
-}
+    border-bottom: 1px solid $color-mono-light;
 
-.row{
-    border: 1px solid $color-mono-light;
-    border-width: 0 0 1px;
+    &.isLast {
+      border-bottom: 0;
+    }
 
-    &:hover{
+    &:hover {
       box-shadow: 0 4px 4px 0 $color-info;
+    }
   }
-}
 </style>

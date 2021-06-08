@@ -18,57 +18,60 @@
 </template>
 
 <script>
+  import { ref } from 'vue'
+  import Button from '@/components/Button'
 
-import Button from "./Button";
-import { ref } from 'vue'
+  export default {
+    name: 'AssosciationCard',
+    components: {
+      Button,
+    },
+    setup(){
+      let associationName = ref('Beispielverein')
+      let countryName = ref('BeispielOrt')
+      let numberassociationClasses = ref('0')
+      let numberMembers = ref('0')
 
-export default {
-  name: 'AssosciationCard',
-  components:{Button},
-  setup(){
-    let associationName = ref('Beispielverein')
-    let countryName = ref('BeispielOrt')
-    let numberassociationClasses = ref('0')
-    let numberMembers = ref('0')
-
-    return {
-      associationName,
-      countryName,
-      numberassociationClasses,
-      numberMembers,
-    }
-  },
-}
-
+      return {
+        associationName,
+        countryName,
+        numberassociationClasses,
+        numberMembers,
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>
-.associationCard{
-  background-color: white; 
-  border: bold;
+.associationCard {
+  background-color: white;
   color: $color-dark-text;
   padding: 10px 25px;
   text-align: left;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   font-size: 14px;
-  border-radius: 4px;
-  height:200px;
-  width:800px;;
-  border: 2px;
-  border-color: $color-info;
-  border-style: solid;
-  border-radius: 5px; 
+  border: 2px solid $color-info;
+  border-radius: 5px;
   margin: 8px;
   overflow: hidden;
   position: relative;
-  border-collapse: collapse;
-  
 
-  &:hover{
-      box-shadow: 0 4px 4px 0 $color-info;
+  &.warning {
+    background-color: $color-warning;
+    color: $color-dark-text;
+  }
+
+  &.danger {
+    background-color: $color-danger;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 $color-info;
   }
 }
+
+
 .header{
     font-size: 18px;
     text-align: left;
@@ -115,15 +118,15 @@ export default {
     border-width: 0 0 1px;
 }
 .country{
-    display:inline-block; 
+    display:inline-block;
     padding: 10px 20px;
 }
 .assocoiationClasses{
     display:inline-block;
-    padding: 10px 20px; 
+    padding: 10px 20px;
 }
 .members{
-    display:inline-block; 
+    display:inline-block;
     padding: 10px 20px;
 }
 .footer{

@@ -32,32 +32,33 @@ export default {
 
 <style lang="scss" scoped>
 .card{
-  background-color: white; 
-  border: bold;
+  background-color: white;
   color: $color-dark-text;
   padding: 10px 25px;
   text-align: left;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   font-size: 14px;
-  border-radius: 4px;
-  height: 65px;
-  width:800px;;
-  border: 2px;
-  border-color: $color-info;
-  border-style: solid;
-  border-radius: 5px; 
+  border: 2px solid $color-info;
+  border-radius: 5px;
   margin: 8px;
   overflow: hidden;
   position: relative;
-  border-collapse: collapse;
-  
-  
 
-  &:hover{
-      box-shadow: 0 4px 4px 0 $color-info;
+  &.warning {
+    background-color: $color-warning;
+    color: $color-dark-text;
+  }
+
+  &.danger {
+    background-color: $color-danger;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 $color-info;
   }
 }
+
 .header{
     font-size: 18px;
     text-align: left;

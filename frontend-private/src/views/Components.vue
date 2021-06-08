@@ -22,7 +22,7 @@
     <PlayerCard></PlayerCard><br />
     <PlayerClassCard></PlayerClassCard><br />
     <AssociationCard></AssociationCard><br />
-    <MemberTable></MemberTable><br />
+    <MemberTable :members="members"></MemberTable><br />
     <SeasonCard></SeasonCard><br />
   </div>
 </template>
@@ -65,6 +65,10 @@ export default {
 ist
 ein
 Beispieltext`,
+      members: [
+        { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },
+        { id: 2, name: 'Tina', surname: 'Hänsel', association: 'Mannschaft 2' },
+      ]
     }
   },
 }
