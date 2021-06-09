@@ -1,30 +1,33 @@
 <template>
-  <div class="associationCard ">
+  <Card>
       <div class="header">
         <div class="primary-title">
           <div class="title">{{associationName}}</div>
         </div>
       </div>
       <div class="body">
-        <div class="country">Ort: {{countryName}}</div>
-        <div class="assocoiationClasses">Spielerklassen: {{numberassociationClasses}}</div>
-        <div class="members">Mitglieder: {{numberMembers}}</div>
+        <tr>
+          <td>Ort: {{countryName}}</td>
+          <td>Spielerklassen: {{numberassociationClasses}}</td>
+          <td>Mitglieder: {{numberMembers}}</td>
+          <td class='min'>
+            <Button>Bearbeiten</Button>
+          </td>
+        </tr>
       </div>
-      <div class="footer">
-        <Button>Bearbeiten
-        </Button>
-      </div>
-  </div>
+  </Card>
 </template>
 
 <script>
   import { ref } from 'vue'
   import Button from '@/components/Button'
+  import Card from './Card.vue'
 
   export default {
     name: 'AssosciationCard',
     components: {
       Button,
+      Card,
     },
     setup(){
       let associationName = ref('Beispielverein')
@@ -43,34 +46,6 @@
 </script>
 
 <style lang="scss" scoped>
-.associationCard {
-  background-color: white;
-  color: $color-dark-text;
-  padding: 10px 25px;
-  text-align: left;
-  text-decoration: none;
-  display: block;
-  font-size: 14px;
-  border: 2px solid $color-info;
-  border-radius: 5px;
-  margin: 8px;
-  overflow: hidden;
-  position: relative;
-
-  &.warning {
-    background-color: $color-warning;
-    color: $color-dark-text;
-  }
-
-  &.danger {
-    background-color: $color-danger;
-  }
-
-  &:hover {
-    box-shadow: 0 4px 4px 0 $color-info;
-  }
-}
-
 
 .header{
     font-size: 18px;
@@ -102,10 +77,6 @@
   font-size: 14px;
   font-weight:bold;
 }
-.title + .subhead {
-  margin-top: 7px;
-  color: $color-light-text;
-}
 .body{
     color:$color-light-text;
     padding: 16px;
@@ -114,31 +85,18 @@
     font-size: 14px;
     width:100%;
     line-height: 1.5;
-    border: 1px solid $color-mono-light;
     border-width: 0 0 1px;
 }
-.country{
-    display:inline-block;
-    padding: 10px 20px;
+td{
+    text-align: inherit;
+    display: table-cell;
+    width: 30em;
 }
-.assocoiationClasses{
-    display:inline-block;
-    padding: 10px 20px;
+tr{
+    text-align: inherit;
 }
-.members{
-    display:inline-block;
-    padding: 10px 20px;
-}
-.footer{
-    color:$color-light-text;
-    padding: 9px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    width:100%;
-    min-height: 52px;
-    position: relative;
-    z-index: 1
+.min {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>
