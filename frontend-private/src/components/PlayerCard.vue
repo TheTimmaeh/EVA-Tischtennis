@@ -1,26 +1,37 @@
 <template>
-  <div class="card ">
+  <Card>
       <div class="header">
         <div class="primary-title">
-          <div class="title">{{playerName}}</div>
-          <div class="subhead">{{associationName}}</div>
+          <div class="title">
+            <tr>
+              <td>Spieler: {{playerName}}</td>
+              <td>Verein: {{associationName}}</td>
+            </tr>
+          </div>
         </div>
       </div>
-      <div class="body">{{description}}</div>
-      <div class="footer">
-        <Button>Bearbeiten</Button>
+      <div class="body">
+        <tr>
+          <td>{{description}}</td>
+          <td class='min'><Button>Bearbeiten</Button></td>
+        </tr>
       </div>
-  </div>
+      
+  </Card>
 </template>
 
 <script>
 
 import Button from "./Button";
+import Card from './Card.vue'
 import { ref } from 'vue'
 
 export default {
   name: 'PlayerCard',
-  components:{Button},
+  components:{
+    Button,
+    Card,
+    },
   setup(){
     let playerName = ref('Spielername konnte nicht geladen werden')
     let associationName = ref('Vereinsname konnte nicht geladen werden')
@@ -36,33 +47,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card{
-  background-color: white;
-  color: $color-dark-text;
-  padding: 10px 25px;
-  text-align: left;
-  text-decoration: none;
-  display: block;
-  font-size: 14px;
-  border: 2px solid $color-info;
-  border-radius: 5px;
-  margin: 8px;
-  overflow: hidden;
-  position: relative;
-
-  &.warning {
-    background-color: $color-warning;
-    color: $color-dark-text;
-  }
-
-  &.danger {
-    background-color: $color-danger;
-  }
-
-  &:hover {
-    box-shadow: 0 4px 4px 0 $color-info;
-  }
-}
 .header{
     font-size: 18px;
     text-align: left;
@@ -92,10 +76,7 @@ export default {
 .title {
   font-size: 14px;
   font-weight:bold;
-}
-.title + .subhead {
-  margin-top: 7px;
-  color: $color-light-text;
+  padding: 10px 25px;
 }
 .body{
     color:$color-light-text;
@@ -106,19 +87,15 @@ export default {
     font-size: 14px;
     width:100%;
     line-height: 1.5;
-    border: 1px solid $color-mono-light;
     border-width: 0 0 1px;
 }
-.footer{
-    color:$color-light-text;
-    padding: 9px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    width:100%;
-    min-height: 52px;
-    position: relative;
-    z-index: 1
+td{
+    text-align: inherit;
+    display: table-cell;
+    width: 30em;
+}
+.min {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>
