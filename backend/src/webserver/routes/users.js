@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const bcrypt = require('bcrypt')
 const { generateToken, authenticateToken } = require('../../helpers/jwt')
 let db
 
@@ -38,17 +39,19 @@ async function getUser(req, res){
 async function createUser(req, res){
   let result
 
+  let password = await bcrypt.hash(req.body.password, 10)
+
   try {
     result = await db('users').insert({
       username: req.body.username,
-      password: req.body.password,
+      password,
       isAdmin: req.body.isAdmin === true || req.body.isAdmin === 'true',
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
       res.json({ success: false, message: `Es existiert bereits ein User ${req.body.username}.` })
     } else {
-      res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (1)' })
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
       console.error({ ...err })
     }
 
@@ -67,17 +70,19 @@ async function createUser(req, res){
 async function updateUser(req, res){
   let result
 
+  let password = await bcrypt.hash(req.body.password, 10)
+
   try {
     result = await db('users').where({ id: req.params.user }).update({
       username: req.body.username,
-      password: req.body.password,
+      password,
       isAdmin: req.body.isAdmin === true || req.body.isAdmin === 'true',
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
       res.json({ success: false, message: `Es existiert bereits ein User ${req.body.username}.` })
     } else {
-      res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (3)' })
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
       console.error({ ...err })
     }
 
@@ -99,7 +104,7 @@ async function deleteUser(req, res){
   try {
     result = await db('users').where({ id: req.params.user }).del()
   } catch(err){
-    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (5)' })
+    res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
     console.error({ ...err })
 
     return
