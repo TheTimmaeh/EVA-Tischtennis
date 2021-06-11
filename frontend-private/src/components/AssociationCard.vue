@@ -36,7 +36,7 @@
         required: true,
       },
     },
-    setup(){
+    setup(props){
 
       return {
         ...props.data,
