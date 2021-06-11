@@ -1,6 +1,15 @@
 const router = require('express').Router()
 
 module.exports = (db) => {
+  // Test Routes
+  router.all('/*success', (req, res) => {
+    res.json({ success: true, method: req.method, path: req.path, data: req.body })
+  })
+
+  router.all('/*error', (req, res) => {
+    res.json({ success: false, message: 'An error has occured.', method: req.method, path: req.path, data: req.body })
+  })
+
   router.use('/auth', require('./auth')(db))
   router.use('/users', require('./users')(db))
   router.use('/associations', require('./associations')(db))
@@ -10,15 +19,6 @@ module.exports = (db) => {
   router.use('/playerClasses', require('./playerClasses')(db))
   router.use('/referees', require('./referees')(db))
   router.use('/seasons', require('./seasons')(db))
-
-  // Test Routes
-  router.all('/*success', (req, res) => {
-    res.json({ success: true, method: req.method, path: req.path, data: req.body })
-  })
-
-  router.all('/*error', (req, res) => {
-    res.json({ success: false, message: 'An error has occured.', method: req.method, path: req.path, data: req.body })
-  })
 
   return router
 }

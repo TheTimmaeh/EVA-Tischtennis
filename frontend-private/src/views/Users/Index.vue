@@ -9,7 +9,7 @@
 
 <script>
 import { ref } from 'vue'
-import { axios } from '@/helper'
+import { api, axios } from '@/helper'
 import Button from '@/components/Button'
 import MemberTable from '@/components/MemberTable'
 
@@ -22,8 +22,7 @@ export default {
   setup(){
     const users = ref([])
 
-    axios().get('/users').then((res) => res.data).then((res) => {
-
+    api('/users').then((res) => res.data).then((res) => {
       if(!res.success){
         console.error('Fehler...', data)
         return
@@ -32,9 +31,20 @@ export default {
       users.value = res.data.map((user) => {
         return { id: user.id, name: `User #${user.id}`, surname: user.username, association: user.isAdmin ? 'Admin' : 'Schiri' }
       })
-    }).catch((err) => {
-      console.error(err)
     })
+
+    // axios().get('/users').then((res) => res.data).then((res) => {
+    //   if(!res.success){
+    //     console.error('Fehler...', data)
+    //     return
+    //   }
+    //
+    //   users.value = res.data.map((user) => {
+    //     return { id: user.id, name: `User #${user.id}`, surname: user.username, association: user.isAdmin ? 'Admin' : 'Schiri' }
+    //   })
+    // }).catch((err) => {
+    //   console.error(err)
+    // })
 
     return {
       users,
@@ -44,7 +54,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .list {
-    padding: 20px;
-  }
 </style>
