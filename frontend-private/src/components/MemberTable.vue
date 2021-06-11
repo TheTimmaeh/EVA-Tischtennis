@@ -22,8 +22,8 @@
 
 <script>
   import { computed } from 'vue'
-  import Card from './Card.vue'
-  import Button from './Button.vue'
+  import Card from '@/components/Card'
+  import Button from '@/components/Button'
   import MemberRow from './MemberRow'
 
   export default {

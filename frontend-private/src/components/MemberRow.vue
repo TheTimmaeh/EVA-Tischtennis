@@ -11,7 +11,7 @@
 
 <script>
   import { ref } from 'vue'
-  import Button from './Button'
+  import Button from '@/components/Button'
 
   export default {
     name: 'MemberRow',

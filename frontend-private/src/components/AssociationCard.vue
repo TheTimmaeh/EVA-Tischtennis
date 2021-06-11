@@ -10,7 +10,7 @@
           <td>Ort: {{countryName}}</td>
           <td>Spielerklassen: {{numberassociationClasses}}</td>
           <td>Mitglieder: {{numberMembers}}</td>
-          <td class='min'>
+          <td class="min">
             <Button>Bearbeiten</Button>
           </td>
         </tr>
@@ -19,9 +19,10 @@
 </template>
 
 <script>
+  import { computed } from 'vue'
   import { ref } from 'vue'
   import Button from '@/components/Button'
-  import Card from './Card.vue'
+  import Card from '@/components/Card'
 
   export default {
     name: 'AssosciationCard',
@@ -29,17 +30,16 @@
       Button,
       Card,
     },
+     props: {
+       data: {
+        type: Object,
+        required: true,
+      },
+    },
     setup(){
-      let associationName = ref('Beispielverein')
-      let countryName = ref('BeispielOrt')
-      let numberassociationClasses = ref('0')
-      let numberMembers = ref('0')
 
       return {
-        associationName,
-        countryName,
-        numberassociationClasses,
-        numberMembers,
+        ...props.data,
       }
     },
   }

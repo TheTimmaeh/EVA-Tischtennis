@@ -13,7 +13,7 @@
       <div class="body">
         <tr>
           <td>{{description}}</td>
-          <td class='min'><Button>Bearbeiten</Button></td>
+          <td class="min"><Button>Bearbeiten</Button></td>
         </tr>
       </div>
       
@@ -22,8 +22,8 @@
 
 <script>
 
-import Button from "./Button";
-import Card from './Card.vue'
+import Button from '@/components/Button'
+import Card from '@/components/Card'
 import { ref } from 'vue'
 
 export default {
