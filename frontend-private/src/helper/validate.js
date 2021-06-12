@@ -79,7 +79,7 @@ const validate = ({ defs, refs, vals }) => {
     }
   })
 
-  return true
+  // return true
 
   return !errors
 }
