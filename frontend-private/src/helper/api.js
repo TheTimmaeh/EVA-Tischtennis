@@ -30,7 +30,10 @@ const parseRequests = (requests) => {
         url: r.path || r.url,
       }
 
-      if(r.data instanceof Object) request.data = r.data
+      if(r.data instanceof Object){
+        if(request.method.toUpperCase() === 'POST') request.data = r.data
+        else if(request.method.toUpperCase() === 'GET') request.params = r.data
+      }
 
       return request
     }
