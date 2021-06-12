@@ -27,8 +27,14 @@ module.exports = (_db) => {
 
 
 async function getAllUsers(req, res){
-  let data = (await db.select(['id', 'username', 'isAdmin']).from('users'))
-  res.json({ success: true, data })
+  try {
+    let data = await db.qb({ select: ['id', 'username', 'isAdmin'], from: 'users', ...req.query })
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
 }
 
 async function getUser(req, res){
