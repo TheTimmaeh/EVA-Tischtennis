@@ -13,6 +13,10 @@
     <label for="input2">Input 2:</label><InputField type="password" label="input2" placeholder="Password Input" level="warning" /><br />
     <label for="input3">Input 3:</label><InputField type="number" label="input3" placeholder="Number Input" level="danger" /><br />
     <br /><br />
+    <h2>Search</h2>
+    <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/users" displayPath="username" lookupRow="username" v-model="search1" displayValue="Test" /><br />
+    Auswahl: <pre>{{ search1 }}</pre><br />
+    <br /><br />
     <h2>TextArea</h2>
     <label for="textarea1">Textarea 1:</label><TextArea label="textarea1" placeholder="Textarea Input" v-model="input2" /><br />
     Eingabe: <pre>{{ input2 }}</pre><br />
@@ -32,6 +36,7 @@ import { ref } from 'vue'
 import { setTitle } from '@/helper'
 import Button from '@/components/Button'
 import InputField from '@/components/InputField'
+import SearchField from '@/components/SearchField'
 import TextArea from '@/components/TextArea'
 import SeasonSelect from '@/components/SeasonSelect'
 import PlayerCard from '@/components/PlayerCard'
@@ -45,6 +50,7 @@ export default {
   components: {
     Button,
     InputField,
+    SearchField,
     TextArea,
     SeasonSelect,
     PlayerCard,
@@ -58,11 +64,13 @@ export default {
     let clicked = ref(0)
     let input1 = ref('')
     let input2 = ref('')
+    let search1 = ref('')
 
     return {
       clicked,
       input1,
       input2,
+      search1,
       beispieltext: `Dies
 ist
 ein

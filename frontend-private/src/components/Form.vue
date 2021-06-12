@@ -15,6 +15,20 @@
           :ref="refs[row.name]"
           v-model="vals[row.name].value"
         /></template>
+        <template v-if="row.field === 'search'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><SearchField
+          :label="`l_${row.name}`"
+          :placeholder="row.placeholder"
+          :apiPath="row.apiPath"
+          :displayPath="row.displayPath"
+          :returnPath="row.returnPath"
+          :lookupRow="row.lookupRow"
+          :limit="row.limit"
+          :delay="row.delay"
+          :displayValue="row.displayValue"
+          :ref="refs[row.name]"
+          v-model="vals[row.name].value"
+        /></template>
         <template v-if="row.field === 'textarea'">
           <label :for="`l_${row.name}`">{{ row.text }}</label><TextArea
           :label="`l_${row.name}`"
@@ -62,6 +76,7 @@
   import { validate } from '@/helper'
   import Button from '@/components/Button'
   import InputField from '@/components/InputField'
+  import SearchField from '@/components/SearchField'
   import TextArea from '@/components/TextArea'
   import SeasonSelect from '@/components/SeasonSelect'
   import CountrySelect from '@/components/CountrySelect'
@@ -73,6 +88,7 @@
     components: {
       Button,
       InputField,
+      SearchField,
       TextArea,
       SeasonSelect,
       CountrySelect,
