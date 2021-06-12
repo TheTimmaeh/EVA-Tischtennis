@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, validate } from '@/helper'
+  import { axios, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -17,6 +17,7 @@
       Form,
     },
     setup(){
+      setTitle('Person anlegen')
       const router = useRouter()
       const message = ref('')
 
@@ -52,14 +53,14 @@
           { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: {  required: true } },
           { name: 'birthday', text: 'Geburtsdatum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'association', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
-          
+
           { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, 
-          { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } }, 
+          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
+          { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } },
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },

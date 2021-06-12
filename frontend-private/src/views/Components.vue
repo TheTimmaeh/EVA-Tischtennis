@@ -29,6 +29,7 @@
 
 <script>
 import { ref } from 'vue'
+import { setTitle } from '@/helper'
 import Button from '@/components/Button'
 import InputField from '@/components/InputField'
 import TextArea from '@/components/TextArea'
@@ -53,6 +54,7 @@ export default {
     MemberTable,
   },
   setup(){
+    setTitle('Components')
     let clicked = ref(0)
     let input1 = ref('')
     let input2 = ref('')

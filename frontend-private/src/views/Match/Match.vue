@@ -32,10 +32,10 @@
             <Button class="button" @action="score2++">Punkt hinzufügen </Button>
             <Button class="button" @action="score2--">Punkt abziehen </Button>
 
-      
+
         </div>
     </div>
-    <div class="submit"> 
+    <div class="submit">
         <Button class="button" >Spiel starten </Button>
         <Button class="button" >Erebnis Speichern und Spiel beenden </Button>
     </div>
@@ -43,8 +43,8 @@
 </template>
 
 <script>
-
 import { ref } from 'vue'
+import { setTitle } from '@/helper'
 import Button from '@/components/Button'
 
 export default {
@@ -53,6 +53,7 @@ export default {
     Button,
   },
   setup(){
+    setTitle('Aktuelles Match')
     let score1 = ref(0);
     let score2 = ref(0);
 

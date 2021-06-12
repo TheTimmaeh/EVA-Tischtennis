@@ -11,15 +11,15 @@
 
 <script>
 import { computed } from 'vue'
-import { axios } from '@/helper'
+import { axios, setTitle } from '@/helper'
 import { ref } from 'vue'
-import Button from '../../components/Button'
-import AssociationCard from '../../components/AssociationCard'
+import Button from '@/components/Button'
+import AssociationCard from '@/components/AssociationCard'
 
 export default {
   name: 'Associations',
-  components: { 
-    Button, 
+  components: {
+    Button,
     AssociationCard,
   },
    props: {
@@ -28,6 +28,7 @@ export default {
       },
     },
   setup(props){
+    setTitle('Verein')
     const associations = computed(() => props.associations)
 
     axios().get('/associations').then((res) => res.data).then((res) => {
@@ -38,7 +39,7 @@ export default {
       }
 
       associations.value = res.data
-      
+
     }).catch((err) => {
       console.error(err)
     })

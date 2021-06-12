@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, validate } from '@/helper'
+  import { axios, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -17,6 +17,7 @@
       Form,
     },
     setup(){
+      setTitle('Season anlegen')
       const router = useRouter()
       const message = ref('')
 

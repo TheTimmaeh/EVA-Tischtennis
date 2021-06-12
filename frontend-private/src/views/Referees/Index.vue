@@ -8,15 +8,17 @@
 </template>
 
 <script>
-
-import Button from '../../components/Button'
+import { setTitle } from '@/helper'
+import Button from '@/components/Button'
 
 export default {
   name: 'Referees',
-  components: { 
-    Button, 
+  components: {
+    Button,
   },
   setup(){
+    setTitle('Schiedsrichter')
+
     return { }
   },
 }

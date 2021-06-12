@@ -8,15 +8,17 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import Button from '../../components/Button'
+import { setTitle } from '@/helper'
+import Button from '@/components/Button'
 
 export default {
   name: 'Saisons',
-  components: { 
-    Button, 
+  components: {
+    Button,
   },
   setup(){
+    setTitle('Saisons')
+
     return { }
   },
 }

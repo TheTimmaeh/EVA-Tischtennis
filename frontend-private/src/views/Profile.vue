@@ -21,10 +21,11 @@
 <script>
   import { computed, onUnmounted } from 'vue'
   import { useStore } from 'vuex'
-  import { useSocket } from '@/helper'
+  import { setTitle, useSocket } from '@/helper'
 
   export default {
     setup(){
+      setTitle('Profil')
       const store = useStore()
       const socket = useSocket()
 

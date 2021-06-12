@@ -9,7 +9,7 @@
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { axios } from '@/helper'
+import { axios, setTitle } from '@/helper'
 import Form from '@/components/Form'
 
 export default {
@@ -18,6 +18,7 @@ export default {
     Form,
   },
   setup(){
+    setTitle('Login')
     const store = useStore()
     const router = useRouter()
     const message = ref()

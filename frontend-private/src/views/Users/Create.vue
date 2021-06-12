@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, validate } from '@/helper'
+  import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -17,13 +17,15 @@
       Form,
     },
     setup(){
+      setTitle('User anlegen')
+
       const router = useRouter()
       const message = ref('')
 
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/users', data).then((res) => {
+        api({ method: 'POST', path: '/users', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){

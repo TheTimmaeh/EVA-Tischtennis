@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { setTitle } from '@/helper'
 import Button from '@/components/Button'
 import MemberTable from '@/components/MemberTable'
 
@@ -19,6 +19,8 @@ export default {
     MemberTable,
   },
   setup(){
+    setTitle('Vereinsmitglieder')
+
     return {
       members: [
         { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },

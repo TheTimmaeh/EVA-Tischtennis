@@ -5,9 +5,12 @@
 </template>
 
 <script>
+import { setTitle } from '@/helper'
+
 export default {
   name: 'Home',
   setup(){
+    setTitle('Home')
     return { }
   },
 }
