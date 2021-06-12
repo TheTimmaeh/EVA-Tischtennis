@@ -3,7 +3,7 @@ exports.up = (knex) => {
     users.increments('id')
     users.string('username', 255).unique().notNullable()
     users.string('password', 255).notNullable()
-    users.boolean('isAdmin').defaultTo(false)
+    users.boolean('isAdmin').notNullable().defaultTo(false)
     users.timestamps(true, true)
     console.info('DB | Migration: init | Table users created.')
   }).createTable('sessions', (sessions) => {
