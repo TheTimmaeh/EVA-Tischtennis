@@ -37,15 +37,21 @@ services:
             "--loose-group-replication-single-primary-mode=OFF",
             "--default-authentication-plugin=mysql_native_password",
             "--loose-group-replication-enforce-update-everywhere-checks=ON"]
-        restart: always
+        restart: unless-stopped
         labels:
          - traefik.enable=true
+        #command: --init-file /data/application/init.sql
         volumes:
             - master_1_data:/var/lib/mysql
+            #- ./init.sql:/data/application/init.sql
+            #- ./init.sql:/script/init.sql
 
         environment:
             MYSQL_ROOT_PASSWORD: example
             MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: eva_tischtennis
+            MYSQL_USER: knex
+            MYSQL_PASSWORD: eva_tischtennis
       #  networks:
        #     default:
        #     repl:
@@ -73,7 +79,7 @@ services:
     #         "--loose-group-replication-single-primary-mode=OFF",
     #         "--default-authentication-plugin=mysql_native_password",
     #         "--loose-group-replication-enforce-update-everywhere-checks=ON"]
-    #     restart: always
+    #     restart: unless-stopped
     #     volumes:
     #         - master_2_data:/var/lib/mysql
     #
@@ -107,7 +113,7 @@ services:
     #         "--loose-group-replication-single-primary-mode=OFF",
     #         "--default-authentication-plugin=mysql_native_password",
     #         "--loose-group-replication-enforce-update-everywhere-checks=ON"]
-    #     restart: always
+    #     restart: unless-stopped
     #     volumes:
     #         - master_3_data:/var/lib/mysql
     #
@@ -132,6 +138,7 @@ services:
         ports:
          - "3306:3306"
          - "8080:8080"
+        restart: unless-stopped
         volumes:
          - "//var/run/docker.sock:/var/run/docker.sock"
          - ./traefik.yml:/etc/traefik/dynamic.yml
