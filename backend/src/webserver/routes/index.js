@@ -14,12 +14,9 @@ module.exports = (db) => {
   router.use('/users', require('./users')(db))
   router.use('/associations', require('./associations')(db))
   router.use('/persons', require('./persons')(db))
-  // router.use('/associationTeams', require('./associationTeams')(db))
-  // router.use('/competitions', require('./competitions')(db))
-  // router.use('/members', require('./members')(db))
-  // router.use('/playerClasses', require('./playerClasses')(db))
-  // router.use('/referees', require('./referees')(db))
   // router.use('/seasons', require('./seasons')(db))
+  // router.use('/competitions', require('./competitions')(db))
+  // router.use('/playerClasses', require('./playerClasses')(db))
 
   return router
 }
