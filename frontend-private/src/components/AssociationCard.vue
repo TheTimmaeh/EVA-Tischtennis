@@ -1,21 +1,23 @@
 <template>
-  <Card>
-      <div class="header">
-        <div class="primary-title">
-          <div class="title">{{associationName}}</div>
+  <router-link :to="`/associations/${id}`">
+    <Card>
+        <div class="header">
+          <div class="primary-title">
+            <div class="title">{{ name }}</div>
+          </div>
         </div>
-      </div>
-      <div class="body">
-        <tr>
-          <td>Ort: {{countryName}}</td>
-          <td>Spielerklassen: {{numberassociationClasses}}</td>
-          <td>Mitglieder: {{numberMembers}}</td>
-          <td class="min">
-            <Button>Bearbeiten</Button>
-          </td>
-        </tr>
-      </div>
-  </Card>
+        <div class="body">
+          <tr>
+            <td>Ort: {{ location }}</td>
+            <td><router-link :to="`/associations/${id}/playerClasses`">Spielerklassen: {{ playerClasses }}</router-link></td>
+            <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
+            <td class="min">
+              <Button>Bearbeiten</Button>
+            </td>
+          </tr>
+        </div>
+    </Card>
+  </router-link>
 </template>
 
 <script>
@@ -37,7 +39,6 @@
       },
     },
     setup(props){
-
       return {
         ...props.data,
       }
