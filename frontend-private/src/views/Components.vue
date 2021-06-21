@@ -14,7 +14,7 @@
     <label for="input3">Input 3:</label><InputField type="number" label="input3" placeholder="Number Input" level="danger" /><br />
     <br /><br />
     <h2>Search</h2>
-    <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/users" displayPath="username" lookupRow="username" v-model="search1" displayValue="Test" /><br />
+    <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/persons" displayFormat="{{ id }} - {{ name }} {{ surname }}" :lookupRow="['name', 'surname']" returnPath="id" v-model="search1" displayValue="Test" /><br />
     Auswahl: <pre>{{ search1 }}</pre><br />
     <br /><br />
     <h2>TextArea</h2>

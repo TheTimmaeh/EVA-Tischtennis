@@ -2,7 +2,7 @@
   <div class="wrapper">
     <ul v-if="hasResult && isFocused">
       <li v-if="entries.length < 1">Nichts gefunden</li>
-      <li v-for="(entry, index) of entries" :key="index" @click="setValue(entry)">{{ parsePath(entry, props.displayPath) }}</li>
+      <li v-for="(entry, index) of entries" :key="index" @click="setValue(entry)">{{ formatEntry(entry) }}</li>
     </ul>
     <div class="input">
       <InputField
@@ -35,7 +35,7 @@
         type: String,
         required: true,
       },
-      displayPath: {
+      displayFormat: {
         type: String,
         required: true,
       },
@@ -44,7 +44,7 @@
         default: '',
       },
       lookupRow: {
-        type: String,
+        type: [String, Array],
         required: true,
       },
       limit: {
@@ -92,15 +92,30 @@
         return path.split('.').reduce((o, i) => o[i], data)
       }
 
+      const formatEntry = (entry) => {
+        let value = props.displayFormat
+        let pattern = /{{(.+?)}}/g
+
+        let match
+
+        while((match = pattern.exec(props.displayFormat)) !== null){
+          value = value.replace(match[0], entry[match[1].trim()] || '')
+        }
+
+        return value
+      }
+
       const setValue = (data) => {
-        inputValue.value = parsePath(data, props.displayPath)
+        let value = formatEntry(data)
+
+        inputValue.value = value
         hasResult.value = false
 
         emit('update:modelValue', parsePath(data, props.returnPath))
       }
 
       const doSearch = async (input) => {
-        let result = (await api({ path: props.apiPath, data: { filter: [ props.lookupRow, 'like', `%${input}%` ], order: props.lookupRow, limit: props.limit}}))?.data
+        let result = (await api({ path: props.apiPath, data: { filter: { lookupRow: props.lookupRow, type: 'like', query: input }, order: props.lookupRow, limit: props.limit }}))?.data
 
         if(result.success){
           entries.value = result.data
@@ -142,6 +157,7 @@
         entries,
         inputValue,
         parsePath,
+        formatEntry,
       }
     }
   }

@@ -61,7 +61,7 @@
           { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } },
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },
-          { name: 'board', text: 'Vorstand:', field: 'search', apiPath: '/persons', displayPath: 'name', lookupRow: 'name', returnPath: 'id', validate: { required: true } },
+          { name: 'board', text: 'Vorstand:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }} {{ surname }}', lookupRow: ['name', 'surname'], returnPath: 'id', validate: { required: true } },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
           { name: 'url', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
