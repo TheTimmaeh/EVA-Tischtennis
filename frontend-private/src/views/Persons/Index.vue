@@ -33,8 +33,6 @@ export default {
       persons.value = res.data.map((person) => {
         return { person: person.id, name: person.name, surname: person.surname, association: 'None' }
       })
-
-      console.log(persons)
     })
 
     return {
