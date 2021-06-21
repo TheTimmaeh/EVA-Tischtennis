@@ -20,7 +20,7 @@
           :label="`l_${row.name}`"
           :placeholder="row.placeholder"
           :apiPath="row.apiPath"
-          :displayPath="row.displayPath"
+          :displayFormat="row.displayFormat"
           :returnPath="row.returnPath"
           :lookupRow="row.lookupRow"
           :limit="row.limit"

@@ -11,13 +11,20 @@ const CreateUser = () => import('../views/Users/Create.vue')
 const Associations = () => import('../views/Associations/Index.vue')
 const CreateAssociation = () => import('../views/Associations/Create.vue')
 
+// AssociationProfile
+const AssociationProfile = () => import('../views/Associations/Profile.vue')
+
+// AssociationMembers
+const AssociationMembers = () => import('../views/Associations/Members/Index.vue')
+const CreateAssociationMember = () => import('../views/Associations/Members/Create.vue')
+
+// AssociationTeams
+const AssociationTeams = () => import('../views/Associations/Teams/Index.vue')
+const CreateAssociationTeam = () => import('../views/Associations/Teams/Create.vue')
+
 // Saisons
 const Seasons = () => import('../views/Seasons/Index.vue')
 const CreateSeason = () => import('../views/Seasons/Create.vue')
-
-// Members
-const Members = () => import('../views/Members/Index.vue')
-const CreateMember = () => import('../views/Members/Create.vue')
 
 // Persons
 const Persons = () => import('../views/Persons/Index.vue')
@@ -33,11 +40,8 @@ const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
 
 // Competitions
 const Competitions = () => import('../views/Competitions/Index.vue')
-const CreateCompetition= () => import('../views/Competitions/Create.vue')
+const CreateCompetition = () => import('../views/Competitions/Create.vue')
 
-// AssociationTeams
-const AssociationTeams = () => import('../views/AssociationTeams/Index.vue')
-const CreateAssociationTeam= () => import('../views/AssociationTeams/Create.vue')
 
 // Match
 const Match = () => import('../views/Match/Match.vue')
@@ -78,6 +82,21 @@ const routes = [
     component: CreateAssociation,
   },
   {
+    path: '/associations/:id',
+    name: 'Association',
+    component: AssociationProfile,
+    children: [
+      {
+        path: 'members',
+        component: AssociationMembers,
+      },
+      {
+        path: 'teams',
+        component: AssociationTeams,
+      },
+    ]
+  },
+  {
     path: '/seasons',
     name: 'Seasons',
     component: Seasons,
@@ -86,16 +105,6 @@ const routes = [
     path: '/seasons/create',
     name: 'CreateSeason',
     component: CreateSeason,
-  },
-  {
-    path: '/members',
-    name: 'Members',
-    component: Members,
-  },
-  {
-    path: '/members/create',
-    name: 'CreateMember',
-    component: CreateMember,
   },
   {
     path: '/persons',
