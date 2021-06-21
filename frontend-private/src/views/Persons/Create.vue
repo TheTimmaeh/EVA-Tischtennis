@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, setTitle, validate } from '@/helper'
+  import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -24,7 +24,7 @@
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/persons', data).then((res) => {
+        api({ method: 'POST', path: '/persons', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
@@ -58,7 +58,7 @@
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 2, max: 2, required: true } },
+          { name: 'state', text: 'Bundesland:', field: 'stateSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } },
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },
