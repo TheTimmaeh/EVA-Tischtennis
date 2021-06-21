@@ -3,23 +3,43 @@
     <router-link to="/persons/create">
       <Button id="myButton" >Person anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste aller Personen</div>
+    <MemberTable :members="persons"></MemberTable>
   </div>
 </template>
 
 <script>
-import { setTitle } from '@/helper'
+import { ref } from 'vue'
+import { api, setTitle } from '@/helper'
 import Button from '@/components/Button'
+import MemberTable from '@/components/MemberTable'
 
 export default {
   name: 'Persons',
   components: {
     Button,
+    MemberTable,
   },
   setup(){
     setTitle('Personen')
 
-    return { }
+    const persons = ref([])
+
+    api('/persons').then((res) => res.data).then((res) => {
+      if(!res.success){
+        console.error('Fehler...', res)
+        return
+      }
+
+      persons.value = res.data.map((person) => {
+        return { person: person.id, name: person.name, surname: person.surname, association: 'None' }
+      })
+
+      console.log(persons)
+    })
+
+    return {
+      persons,
+    }
   },
 }
 </script>

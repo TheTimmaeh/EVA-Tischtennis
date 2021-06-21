@@ -13,9 +13,9 @@
         type: Array,
         default: [
           { value: '', text: '' },
-          { value: 'female', text: 'Weiblich' },
-          { value: 'male', text: 'Männlich' },
-          { value: 'nonbinary', text: 'Divers' },
+          { value: 'f', text: 'Weiblich' },
+          { value: 'm', text: 'Männlich' },
+          { value: 'd', text: 'Divers' },
         ],
       },
       label: {
