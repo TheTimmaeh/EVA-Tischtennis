@@ -8,7 +8,7 @@ module.exports = (_db) => {
   const { generateToken, authenticateToken, optionalAuthenticateToken } = require('../../helpers/jwt')(db)
 
   // Index
-  router.get('/',optionalAuthenticateToken, getAllAssociations)
+  router.get('/', optionalAuthenticateToken, getAllAssociations)
 
   // Create
   router.post('/', authenticateToken, createAssociation)
@@ -53,20 +53,20 @@ async function createAssociation(req, res){
 
   try {
     result = await db('associations').insert({
-      name: req.name,
-      year: req.year,
-      location: req.location,
-      description: req.description,
-      street: req.street,
-      streetnumber: req.streetnumber,
-      zipcode: req.zipcode,
-      city: req.city,
-      state: req.state,
-      country: req.country,
-      board: req.board,
-      phone: req.phone,
-      mail: req.mail,
-      website: req.website,
+      name: req.body.name,
+      year: req.body.year,
+      location: req.body.location,
+      description: req.body.description,
+      street: req.body.street,
+      streetnumber: req.body.streetnumber,
+      zipcode: req.body.zipcode,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      board: req.body.board,
+      phone: req.body.phone,
+      mail: req.body.mail,
+      url: req.body.url,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
@@ -93,19 +93,19 @@ async function updateAssociation(req, res){
 
   try {
     result = await db('associations').where({ id: req.params.association }).update({
-      year: req.year,
-      location: req.location,
-      description: req.description,
-      street: req.street,
-      streetnumber: req.streetnumber,
-      zipcode: req.zipcode,
-      city: req.city,
-      state: req.state,
-      country: req.country,
-      board: req.board,
-      phone: req.phone,
-      mail: req.mail,
-      website: req.website,
+      year: req.body.year,
+      location: req.body.location,
+      description: req.body.description,
+      street: req.body.street,
+      streetnumber: req.body.streetnumber,
+      zipcode: req.body.zipcode,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      board: req.body.board,
+      phone: req.body.phone,
+      mail: req.body.mail,
+      url: req.body.url,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){

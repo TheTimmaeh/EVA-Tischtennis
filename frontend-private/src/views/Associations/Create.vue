@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, setTitle, validate } from '@/helper'
+  import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -24,7 +24,7 @@
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/associations/create/success', data).then((res) => {
+        api({ method: 'POST', path: '/associations', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
@@ -57,14 +57,14 @@
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 2, max: 2, required: true } },
+          { name: 'state', text: 'Bundesland:', field: 'stateSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } },
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },
-          { name: 'board', text: 'Vorstand:', field: 'search', apiPath: '/users', displayPath: 'username', lookupRow: 'username', validate: { required: true } },
+          { name: 'board', text: 'Vorstand:', field: 'search', apiPath: '/persons', displayPath: 'name', lookupRow: 'name', returnPath: 'id', validate: { required: true } },
           { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
-          { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
+          { name: 'url', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
         ],
       }
     },
