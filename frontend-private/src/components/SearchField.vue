@@ -156,7 +156,6 @@
         setFocus,
         entries,
         inputValue,
-        parsePath,
         formatEntry,
       }
     }
