@@ -1,11 +1,15 @@
 <template>
   <Card>
     <tr>
-      <td>Spieler: {{season}}</td>
-      <td>Verein: {{year}}</td>
+      <td>Saison: {{season}}</td>
+      <td>Jahr: {{year}}</td>
+      <td>Titel: {{title}}</td>
       <td class="min">
         <Button>Bearbeiten</Button>
       </td>
+    </tr>
+    <tr>
+      <td>Beschreibung: {{description}}</td>
     </tr>
   </Card>
 </template>
@@ -22,13 +26,16 @@ export default {
     Button,
     Card,
     },
-  setup(){
-    let season = ref('Saison konnte nicht geladen werden')
-    let year = ref('Jahr konnte nicht geladen werden')
+  props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+    },
+  setup(props){
 
     return {
-      season,
-      year,
+      ...props.data,
     }
   },
 }
