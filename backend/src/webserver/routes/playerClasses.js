@@ -32,7 +32,7 @@ const select = {
 
 async function getPlayerClasses(req, res){
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'playerClasses', ...req.query })
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'classes', ...req.query })
 
     res.json({ success: true, data })
   } catch(err){
@@ -42,7 +42,7 @@ async function getPlayerClasses(req, res){
 }
 
 async function getPlayerClass(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('playerClasses').where({ id: req.params.playerClass }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('classes').where({ id: req.params.playerClass }))
   res.json({ success: true, data })
 }
 
@@ -50,9 +50,10 @@ async function createPlayerClass(req, res){
   let result
 
   try {
-    result = await db('playerClasses').insert({
+    result = await db('classes').insert({
       name: req.body.name,
-      age: req.body.age,
+      age_from: req.body.age_from,
+      age_to: req.body.age_to,
       gender: req.body.gender,
     })
   } catch(err){
@@ -67,18 +68,18 @@ async function createPlayerClass(req, res){
   }
 
   if(!!result?.[0]){
-    let data = await db('playerClasses').where({ id: result[0] }).first()
-
-    res.json({ success: true, message: 'Spielerklasse wurde angelegt.', data })
+    let data = await db('classes').where({ id: result[0] }).first()
+    res.json({ success: true, message: 'Spielerklasse wurde angelegt.', data }) 
   } else {
     res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (2)' })
   }
 }
 
 async function updatePlayerClass(req, res){
-  db('playerClasses').where({ id: req.params.playerClass }).update({
+  db('classes').where({ id: req.params.playerClass }).update({
     name: req.name,
-    age: req.age,
+    age_from: req.body.age_from,
+    age_to: req.body.age_to,
     gender: req.gender,
   })
 
@@ -89,9 +90,10 @@ async function updatePlayerClass(req, res){
   let result
 
   try {
-    result = await db('playerClasses').where({ id: req.params.person }).update({
+    result = await db('classes').where({ id: req.params.person }).update({
       name: req.body.name,
-      age: req.body.age,
+      age_from: req.body.age_from,
+      age_to: req.body.age_to,
       gender: req.body.gender,
     })
   } catch(err){
@@ -106,7 +108,7 @@ async function updatePlayerClass(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('playerClasses').where({ id: req.params.playerClass }))
+    let data = (await db.first(select.admin).from('classes').where({ id: req.params.playerClass }))
 
     res.json({ success: true, message: 'Spielerklasse wurde aktualisiert.', data })
   } else {
@@ -115,6 +117,6 @@ async function updatePlayerClass(req, res){
 }
 
 async function deletePlayerClass(req, res){
-  await db('playerClasses').where({ id: req.params.playerClass }).del()
+  await db('classes').where({ id: req.params.playerClass }).del()
   res.json({})
 }

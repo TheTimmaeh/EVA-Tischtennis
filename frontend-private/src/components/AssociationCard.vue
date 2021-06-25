@@ -9,7 +9,7 @@
         <div class="body">
           <tr>
             <td>Ort: {{ location }}</td>
-            <td><router-link :to="`/associations/${id}/playerClasses`">Spielerklassen: {{ playerClasses }}</router-link></td>
+            <td><router-link :to="`/associations/${id}/playerClasses`">Mannschaften: {{ playerClasses?.length }}</router-link></td>
             <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
             <td class="min">
               <Button>Bearbeiten</Button>
