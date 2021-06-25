@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, setTitle, validate } from '@/helper'
+  import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -24,14 +24,14 @@
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/persons/create/success', data).then((res) => {
+        api({ method: 'POST', path: '/persons', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
             message.value = 'Person wurde angelegt.'
-            setTimeout(() => router.push({ path: '/members' }), 3000)
+            setTimeout(() => router.push({ path: '/persons' }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -50,16 +50,15 @@
           { name: 'member', text: 'Person', field: 'h2' },
           { name: 'name', text: 'Vorname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'surname', text: 'Nachname:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: {  required: true } },
+          { name: 'gender', text: 'Geschlecht:', field: 'genderSelect' },
           { name: 'birthday', text: 'Geburtsdatum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
-          { name: 'association', text: 'Verein:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } }, //TODO: Hier ein DropDown einbinden, dass die angelegten Vereine anbietet. Dann muss allerdings immer zuerst der Verein angelegt werden und dann das Mitglied. Wollen wir das?
 
           { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
           { name: 'zipcode', text: 'PLZ:', field: 'input', type: 'text', validate: { type: validate.types.zipcode, required: true } },
           { name: 'city', text: 'Ort:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'state', text: 'Bundesland:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
+          { name: 'state', text: 'Bundesland:', field: 'stateSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'country', text: 'Land:', field: 'countrySelect', validate: { min: 2, max: 2, required: true } },
 
           { name: 'contact', text: 'Kontakt', field: 'h2' },

@@ -4,15 +4,14 @@
       <Button id="myButton" >Verein anlegen</Button> <br>
     </router-link>
     <div class="list">
-      <AssociationCard  v-for="(association, index) in associations" :key="association.id" :data="association"></AssociationCard>
+      <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association"></AssociationCard>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { axios, setTitle } from '@/helper'
 import { ref } from 'vue'
+import { api, setTitle } from '@/helper'
 import Button from '@/components/Button'
 import AssociationCard from '@/components/AssociationCard'
 
@@ -22,31 +21,24 @@ export default {
     Button,
     AssociationCard,
   },
-   props: {
-      associations: {
-        type: Array,
-      },
-    },
-  setup(props){
-    setTitle('Verein')
-    const associations = computed(() => props.associations)
+  setup(){
+    setTitle('Vereine')
 
-    axios().get('/associations').then((res) => res.data).then((res) => {
+    const associations = ref([])
+
+    api('/associations').then((res) => res.data).then((res) => {
 
       if(!res.success){
-        console.error('Fehler...', data)
+        console.error('Fehler...', res)
         return
       }
 
       associations.value = res.data
-
-    }).catch((err) => {
-      console.error(err)
     })
 
     return {
-        associations,
-     }
+      associations,
+    }
   },
 }
 </script>

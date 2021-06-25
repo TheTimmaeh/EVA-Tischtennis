@@ -4,22 +4,41 @@
       <Button id="myButton" >Saison anlegen</Button> <br>
     </router-link>
     <div class="list">Liste zur Saisonübersicht</div>
-  </div>
+    <SeasonCard  v-for="season in seasons" :key="season.id" :data="season" />
+  </div> 
 </template>
 
 <script>
-import { setTitle } from '@/helper'
+import { ref } from 'vue'
+import { api, setTitle } from '@/helper'
 import Button from '@/components/Button'
+import SeasonCard from '@/components/SeasonCard'
 
 export default {
   name: 'Saisons',
   components: {
     Button,
+    SeasonCard,
   },
   setup(){
     setTitle('Saisons')
 
-    return { }
+    const seasons = ref([])
+
+    api('/seasons').then((res) => res.data).then((res) => {
+      if(!res.success){
+        console.error('Fehler...', res)
+        return
+      }
+
+      seasons.value = res.data.map((season) => {
+        return { season: season.id, title: season.title, season: season.seasons,  year: season.year, description: season.description}
+      })
+    })
+
+    return {
+      seasons,
+    }
   },
 }
 </script>

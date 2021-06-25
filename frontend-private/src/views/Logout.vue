@@ -4,7 +4,7 @@
 <script>
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { setTitle } from '@/helper'
+import { api, setTitle } from '@/helper'
 
 export default {
   name: 'Logout',
@@ -13,8 +13,16 @@ export default {
     const store = useStore()
     const router = useRouter()
 
-    store.dispatch('resetUser')
-    router.push({ path: '/' })
+    api({ method: 'POST', path: '/auth/logout' }).then((res) => {
+      if(!res.data){
+        console.error(res)
+      } else {
+        store.dispatch('resetUser')
+        router.push({ path: '/' })
+      }
+    }).catch((err) => {
+      console.error(err)
+    })   
 
     return {}
   }

@@ -7,15 +7,28 @@
   import Select from '@/components/Select'
 
   export default {
-    name: 'GenderSelect',
+    name: 'StateSelect',
     props: {
       options: {
-        type: Array,
+        type: Array, // DE states
         default: [
           { value: '', text: '' },
-          { value: 'f', text: 'Weiblich' },
-          { value: 'm', text: 'Männlich' },
-          { value: 'd', text: 'Divers' },
+          { value: 'BW', text: 'Baden-Württemberg' },
+          { value: 'BY', text: 'Bayern' },
+          { value: 'BE', text: 'Berlin' },
+          { value: 'BB', text: 'Brandenburg' },
+          { value: 'HB', text: 'Bremen' },
+          { value: 'HH', text: 'Hamburg' },
+          { value: 'HE', text: 'Hessen' },
+          { value: 'MV', text: 'Mecklenburg-Vorpommern' },
+          { value: 'NI', text: 'Niedersachsen' },
+          { value: 'NW', text: 'Nordrhein-Westfalen' },
+          { value: 'RP', text: 'Rheinland-Pfalz' },
+          { value: 'SL', text: 'Saarland' },
+          { value: 'SN', text: 'Sachsen' },
+          { value: 'ST', text: 'Sachsen-Anhalt' },
+          { value: 'SH', text: 'Schleswig-Holstein' },
+          { value: 'TH', text: 'Thüringen' },
         ],
       },
       label: {

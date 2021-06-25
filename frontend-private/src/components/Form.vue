@@ -20,7 +20,7 @@
           :label="`l_${row.name}`"
           :placeholder="row.placeholder"
           :apiPath="row.apiPath"
-          :displayPath="row.displayPath"
+          :displayFormat="row.displayFormat"
           :returnPath="row.returnPath"
           :lookupRow="row.lookupRow"
           :limit="row.limit"
@@ -49,6 +49,13 @@
           :ref="refs[row.name]"
           v-model="vals[row.name].value">
           </CountrySelect>
+        </template>
+        <template v-if="row.field === 'stateSelect'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><StateSelect
+          :label="`l_${row.name}`"
+          :ref="refs[row.name]"
+          v-model="vals[row.name].value">
+          </StateSelect>
         </template>
         <template v-if="row.field === 'genderSelect'">
           <label :for="`l_${row.name}`">{{ row.text }}</label><GenderSelect
@@ -80,6 +87,7 @@
   import TextArea from '@/components/TextArea'
   import SeasonSelect from '@/components/SeasonSelect'
   import CountrySelect from '@/components/CountrySelect'
+  import StateSelect from '@/components/StateSelect'
   import GenderSelect from '@/components/GenderSelect'
   import CheckBox from '@/components/CheckBox'
 
@@ -92,6 +100,7 @@
       TextArea,
       SeasonSelect,
       CountrySelect,
+      StateSelect,
       GenderSelect,
       CheckBox,
     },

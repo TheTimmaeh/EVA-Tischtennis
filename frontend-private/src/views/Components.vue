@@ -14,7 +14,7 @@
     <label for="input3">Input 3:</label><InputField type="number" label="input3" placeholder="Number Input" level="danger" /><br />
     <br /><br />
     <h2>Search</h2>
-    <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/users" displayPath="username" lookupRow="username" v-model="search1" displayValue="Test" /><br />
+    <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/persons" displayFormat="{{ id }} - {{ name }} {{ surname }}" :lookupRow="['name', 'surname']" returnPath="id" v-model="search1" displayValue="Test" /><br />
     Auswahl: <pre>{{ search1 }}</pre><br />
     <br /><br />
     <h2>TextArea</h2>
@@ -28,6 +28,7 @@
     <AssociationCard></AssociationCard><br />
     <MemberTable :members="members"></MemberTable><br />
     <SeasonCard></SeasonCard><br />
+    <Table :content="content" :titles="titles"></Table><br />
   </div>
 </template>
 
@@ -44,6 +45,7 @@ import PlayerClassCard from '@/components/PlayerClassCard'
 import SeasonCard from '@/components/SeasonCard'
 import AssociationCard from '@/components/AssociationCard'
 import MemberTable from '@/components/MemberTable'
+import Table from '@/components/Table'
 
 export default {
   name: 'Components',
@@ -58,6 +60,7 @@ export default {
     SeasonCard,
     AssociationCard,
     MemberTable,
+    Table,
   },
   setup(){
     setTitle('Components')
@@ -78,7 +81,16 @@ Beispieltext`,
       members: [
         { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },
         { id: 2, name: 'Tina', surname: 'Hänsel', association: 'Mannschaft 2' },
-      ]
+      ],
+      titles: [
+        { id: 1, text: 'Name' },
+        { id: 2, text: 'Nachname'},
+      ],
+      content: [
+        { id: 1, content: ['Tim', 'Elbert'] },
+        { id: 2, content: ['Tina', 'Hänsel'] },
+      ],
+
     }
   },
 }

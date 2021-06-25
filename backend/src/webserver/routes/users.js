@@ -1,11 +1,12 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const { generateToken, authenticateToken } = require('../../helpers/jwt')
 let db
 
 module.exports = (_db) => {
 
   db = _db
+
+  const { generateToken, authenticateToken } = require('../../helpers/jwt')(db)
 
   // Index
   router.get('/', getAllUsers)

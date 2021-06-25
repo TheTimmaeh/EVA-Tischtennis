@@ -1,18 +1,20 @@
 const router = require('express').Router()
-const { generateToken, authenticateToken } = require('../../helpers/jwt')
 let db
 
 module.exports = (_db) => {
+
   db = _db
 
+  const { generateToken, authenticateToken, optionalAuthenticateToken } = require('../../helpers/jwt')(db)
+
   // Index
-  router.get('/', getAllCompetitions)
+  router.get('/', optionalAuthenticateToken, getAllCompetitions)
 
   // Get (one competition)
   router.get('/:competition', getCompetition)
 
   // Create
-  router.post('/', authenticateToken, createCompetition)
+  router.post('/', optionalAuthenticateToken,  createCompetition)
 
   // Update
   router.post('/:competition', authenticateToken, updateCompetition)
@@ -23,54 +25,103 @@ module.exports = (_db) => {
   return router
 }
 
+const select = {
+  admin: ['*'],
+  guest: ['*'],
+}
+
 async function getAllCompetitions(req, res){
-  let competitions = (await db.select().from('competitions'))
-  res.json({competitions})
+  try {
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'competitions', ...req.query })
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
 }
 
 async function getCompetition(req, res){
-  let competition = (await db.select().from('competitions').where({ id: req.params.competition }))
-  res.json({competition})
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('competitions').where({ id: req.params.competition }))
+  res.json({ success: true, data })
 }
 
 async function createCompetition(req, res){
-  db('competitions').insert({
-    name: req.name,
-    startdate: req.startdate,
-    enddate: req.enddate,
-    playerclass: req.playerclass,
-    street: req.street,
-    streetnumber: req.streetnumber,
-    zipcode: req.zipcode,
-    city: req.city,
-    state: req.state,
-    country: req.country,
-    phone: req.phone,
-    mail: req.mail,
-    website: req.website,
-  })
+  let result
 
-  res.json({})
+  try {
+    result = await db('competitions').insert({
+      name: req.body.name,
+      startdate: req.body.startdate,
+      enddate: req.body.enddate,
+      playerclass: req.body.playerclass,
+      street: req.body.street,
+      streetnumber: req.body.streetnumber,
+      zipcode: req.body.zipcode,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      phone: req.body.phone,
+      mail: req.body.mail,
+      website: req.body.website,
+    })
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits ein Turnier ${req.body.name} ${req.body.startdate}.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+
+    return
+  }
+
+  if(!!result?.[0]){
+    let data = await db('competitions').where({ id: result[0] }).first()
+
+    res.json({ success: true, message: 'Turnier wurde angelegt.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (2)' })
+  }
 }
 
 async function updateCompetition(req, res){
-  db('competitions').where({ id: req.params.competition }).update({
-    name: req.name,
-    startdate: req.startdate,
-    enddate: req.enddate,
-    playerclass: req.playerclass,
-    street: req.street,
-    streetnumber: req.streetnumber,
-    zipcode: req.zipcode,
-    city: req.city,
-    state: req.state,
-    country: req.country,
-    phone: req.phone,
-    mail: req.mail,
-    website: req.website,
-  })
+  let result
 
-  res.json({})
+  try {
+    result = await db('competitions').where({ id: req.params.person }).update({
+      name: req.body.name,
+      startdate: req.body.startdate,
+      enddate: req.body.enddate,
+      playerclass: req.body.playerclass,
+      street: req.body.street,
+      streetnumber: req.body.streetnumber,
+      zipcode: req.body.zipcode,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      phone: req.body.phone,
+      mail: req.body.mail,
+      website: req.body.website,
+    })
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits ein Turnier ${req.body.name} ${req.body.startdate}.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+
+    return
+  }
+
+  if(result === 1){
+    let data = (await db.first(select.admin).from('competitions').where({ id: req.params.competition }))
+
+    res.json({ success: true, message: 'Turnierdaten wurden aktualisiert.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (4)' })
+  }
 }
 
 async function deleteCompetition(req, res){
