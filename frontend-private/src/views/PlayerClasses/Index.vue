@@ -3,22 +3,43 @@
     <router-link to="/playerClasses/create">
       <Button id="myButton" >Spielerklasse anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste der Spielerklassen</div>
+    <div class="list">Liste der Spielerklassen</div> 
+    <PlayerClassCard v-for="playerClass in playerClasses" :key="playerClass.id" :playerClass="playerClass"  ></PlayerClassCard>
   </div>
 </template>
 
 <script>
-import { setTitle } from '@/helper'
+import { ref } from 'vue'
+import { api, setTitle } from '@/helper'
 import Button from '@/components/Button'
+import PlayerClassCard from '@/components/PlayerClassCard'
 
 export default {
   name: 'PlayerClasses',
   components: {
     Button,
+    PlayerClassCard,
   },
   setup(){
     setTitle('Spielerklassen')
-    return { }
+
+    const playerClasses = ref([])
+
+    api('/playerClasses').then((res) => res.data).then((res) => {
+      if(!res.success){
+        console.error('Fehler...', res)
+        return
+      }
+
+      playerClasses.value = res.data.map((playerClass) => {
+        return { playerClass: playerClass.id, name: playerClass.name, age_from: playerClass.age_from, age_to: playerClass.age_to, gender: playerClass.gender }
+      })
+    })
+
+
+    return { 
+      playerClasses
+    }
   },
 }
 </script>

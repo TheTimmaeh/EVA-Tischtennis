@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, setTitle, validate } from '@/helper'
+ import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -24,7 +24,7 @@
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/playerClasses/create/success', data).then((res) => {
+       api({ method: 'POST', path: '/playerClasses', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
@@ -48,8 +48,9 @@
         message,
         rows: [
           { name: 'name', text: 'Name der Spielerklasse:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
-          { name: 'age', text: 'Mindestalter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.age, required: true } },
-           { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: {  required: true } },
+          { name: 'age_from', text: 'Mindestalter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.age, required: true } },
+          { name: 'age_to', text: 'Maximales Alter:', field: 'input', type: 'number', min: 6, max: 100, validate: { type: validate.types.age, required: true } },
+          { name: 'gender', text: 'Geschlecht:', field: 'genderSelect', validate: {  required: true } },
         ],
       }
     },

@@ -1,9 +1,10 @@
 <template>
     <Card>
       <tr>
-        <td>{{name}}</td>
-        <td>{{age}}</td>
-        <td>{{gender}}</td>
+        <td>Name: {{name}}</td>
+        <td>Von: {{age_from}} Jahren</td>
+        <td>Bis: {{age_to}} Jahren</td>
+        <td>Geschlecht: {{gender}}</td>
         <td class="min">
           <Button>Bearbeiten</Button>
         </td>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-
+import { computed } from 'vue'
 import Button from '@/components/Button'
 import Card from '@/components/Card'
 import { ref } from 'vue'
@@ -23,17 +24,19 @@ export default {
     Button,
     Card,
     },
-  setup(){
-    let name = ref('Spielerklassenname')
-    let age = ref('Alter')
-    let gender = ref('Geschlecht')
+    props: {
+      playerClass: {
+        type: Object,
+        required: true,
+      },
+    },
+    setup(props){
+      const playerClass = computed(() => props.playerClass)
 
-    return {
-      name,
-      age,
-      gender
-    }
-  },
+      return {
+        ...props.playerClass,
+      }
+    },
 }
 </script>
 
