@@ -15,6 +15,9 @@
     <tr>
       <td>Kontakt: Telefonnummer: {{telefon}}, Mail-Adresse: {{mail}}, Website {{webiste}}</td>
     </tr>
+    <tr v-for="team in teams" :key="team.id">
+      <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
+    </tr>
   </Card>
 </template>
 
