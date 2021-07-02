@@ -103,6 +103,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: $color-fade-grey;
 }
 
 #nav {
@@ -120,6 +121,8 @@
 
 #page {
   width: 960px;
+  height: 100vh;
   margin: 0 auto;
+  background-color: $color-fade-grey;
 }
 </style>
