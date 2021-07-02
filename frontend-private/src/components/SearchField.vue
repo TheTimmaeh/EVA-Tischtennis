@@ -185,6 +185,7 @@
     width: 100%;
     background-color: white;
     overflow: hidden;
+    z-index: 3;
 
     li {
       list-style-type: none;
