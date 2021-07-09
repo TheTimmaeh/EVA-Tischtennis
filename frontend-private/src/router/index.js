@@ -25,6 +25,7 @@ const CreateAssociationTeam = () => import('../views/Associations/Teams/Create.v
 // Saisons
 const Seasons = () => import('../views/Seasons/Index.vue')
 const CreateSeason = () => import('../views/Seasons/Create.vue')
+const UpdateSeason = () => import('../views/Seasons/Update.vue')
 
 // Persons
 const Persons = () => import('../views/Persons/Index.vue')
@@ -105,6 +106,11 @@ const routes = [
     path: '/seasons/create',
     name: 'CreateSeason',
     component: CreateSeason,
+  },
+  {
+    path: '/seasons/:id/create',
+    name: 'UpdateSeason',
+    component: UpdateSeason,
   },
   {
     path: '/persons',

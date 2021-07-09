@@ -8,7 +8,7 @@
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { axios, setTitle, validate } from '@/helper'
+  import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
   export default {
@@ -24,14 +24,14 @@
       const submit = (data) => {
         message.value = ''
 
-        axios().post('/associationTeams/create/success', data).then((res) => {
+        api({ method: 'POST', path: '/assosiationTeams', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
             message.value = 'Vereinsmannschaft wurde angelegt.'
-            setTimeout(() => router.push({ path: '/associationsTeams' }), 3000)
+            setTimeout(() => router.push({ path: '/assosiationTeams' }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -53,11 +53,11 @@
           { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           
           { name: 'member', text: 'Mannschaftsaufstellung', field: 'h2' },
-          { name: 'playerClass', text: 'Spieler 1:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'playerClass', text: 'Spieler 2:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'playerClass', text: 'Spieler 3:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'playerClass', text: 'Spieler 4:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'playerClass', text: 'Spieler 4:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player1', text: 'Spieler 1:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player2', text: 'Spieler 2:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player3', text: 'Spieler 3:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player4', text: 'Spieler 4:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player5', text: 'Spieler 5:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
         ],
       }
     },

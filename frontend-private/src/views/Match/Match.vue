@@ -88,7 +88,7 @@ export default {
 /* right side */
 .right {
   right: 0;
-  background-color: $color-fade-grey;
+  background-color: $color-background;
 }
 
 /*  content centered horizontally and vertically */

@@ -103,14 +103,17 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: $color-fade-grey;
+  margin: 10px;
 }
 
 #nav {
   padding: 30px;
+  background-color: white;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: $color-light-text;
 
     &.router-link-exact-active {
       color: $color-highlight;
@@ -120,6 +123,10 @@
 
 #page {
   width: 960px;
+  min-height: 100vh;
+  height: 100%;
+  padding: 10px;
   margin: 0 auto;
+  background-color: $color-fade-grey;
 }
 </style>

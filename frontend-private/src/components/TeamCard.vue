@@ -1,30 +1,28 @@
 <template>
   <Card>
     <tr>
+      <td>Mannschaftsname: {{nameAssociationClass}}</td>
       <td>Saison: {{season}}</td>
-      <td>Jahr: {{year}}</td>
-      <td>Titel: {{title}}</td>
+      <td>Spielerklasse: {{playerClass}}</td>
       <td class="min">
-        <router-link :to="`/season/${data.id}/update`">
-          <Button id="myButton" >Bearbeiten</Button> <br>
-        </router-link><br/>
-       
+        <Button>Bearbeiten</Button>
       </td>
     </tr>
     <tr>
       <td>Beschreibung: {{description}}</td>
     </tr>
+    <Table :content="content" :titles="titles"></Table><br />
   </Card>
 </template>
 
 <script>
-
+ 
 import Button from '@/components/Button'
 import Card from '@/components/Card'
 import { ref } from 'vue'
 
 export default {
-  name: 'SeasonCard',
+  name: 'TeamCard',
   components:{
     Button,
     Card,
@@ -34,6 +32,20 @@ export default {
         type: Object,
         required: true,
       },
+      titles: [
+        { id: 1, text: 'Spieler 1' },
+        { id: 2, text: 'Spieler 2'},
+        { id: 2, text: 'Spieler 3'},
+        { id: 2, text: 'Spieler 4'},
+        { id: 2, text: 'Spieler 5'},
+      ],
+      content: [
+        { id: 1, content: [player1] },
+        { id: 2, content: [player2] },
+        { id: 3, content: [player3] },
+        { id: 4, content: [player4] },
+        { id: 5, content: [player5] },
+      ],
     },
   setup(props){
 

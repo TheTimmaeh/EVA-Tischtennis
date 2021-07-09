@@ -32,7 +32,7 @@ export default {
       }
 
       seasons.value = res.data.map((season) => {
-        return { season: season.id, title: season.title, season: season.seasons,  year: season.year, description: season.description}
+        return { id: season.id, title: season.title, season: season.seasons,  year: season.year, description: season.description}
       })
     })
 
