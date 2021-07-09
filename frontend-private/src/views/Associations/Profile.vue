@@ -1,20 +1,22 @@
 <template>
   <div class="association">
-    Das sind die Vereinsstammdaten
+    Das sind die Vereinsstammdaten.
   </div>
 </template>
 
 <script>
 import { api, setTitle } from '@/helper'
+import { useRoute } from 'vue-router'
 import Button from '@/components/Button'
 
 export default {
-  name: 'Associations',
+  name: 'AssociationsProfile',
   components: {
     Button,
   },
   setup(){
-    setTitle('Verein')
+    const route = useRoute()
+    setTitle(`Verein ${route.params.associationId}`)
 
     return {
       Button,

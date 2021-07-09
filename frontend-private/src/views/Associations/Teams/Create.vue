@@ -7,7 +7,7 @@
 
 <script>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute } from 'vue-router'
   import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
@@ -17,8 +17,9 @@
       Form,
     },
     setup(){
-      setTitle('Vereinsmannschaft anlegen')
       const router = useRouter()
+      const route = useRoute()
+      setTitle(`Vereinsmannschaft anlegen | Verein ${route.params.associationId}`)
       const message = ref('')
 
       const submit = (data) => {
@@ -51,7 +52,7 @@
           { name: 'nameAssociationClass', text: 'Name der Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'season', text: 'Saison:', field: 'search', apiPath: '/seasons', displayFormat: '{{ title }}', lookupRow: ['title'], returnPath: 'id', validate: { required: true } },
           { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          
+
           { name: 'member', text: 'Mannschaftsaufstellung', field: 'h2' },
           { name: 'player1', text: 'Spieler 1:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           { name: 'player2', text: 'Spieler 2:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },

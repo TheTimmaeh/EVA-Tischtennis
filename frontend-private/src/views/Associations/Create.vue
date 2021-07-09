@@ -12,7 +12,7 @@
   import Form from '@/components/Form'
 
   export default {
-    name: 'CreateAssociation',
+    name: 'AssociationsCreate',
     components: {
       Form,
     },
