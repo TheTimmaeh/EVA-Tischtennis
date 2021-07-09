@@ -27,4 +27,5 @@ You can also fill the database with test data (this will erase all existing data
 
 ```
 npm run seed
+npx knex seed:run --specific=[seed_filename].js --knexfile src/db/knexfile.js
 ```
