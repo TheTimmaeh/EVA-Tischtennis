@@ -23,7 +23,7 @@ export default {
   setup(){
     setTitle('Tuniere')
 
-    const Competitions = ref([])
+    const competitions = ref([])
 
     api('/competitions').then((res) => res.data).then((res) => {
       if(!res.success){
@@ -31,13 +31,13 @@ export default {
         return
       }
 
-      competitions.value = res.data.map((competition) => {
-        return { competition: playerClass.id, name: competition.name, startdate: competition.startdate, enddate: competition.enddate, class: competition.class, street: competition.street, streetnumber: competition.streetnumber, zipcode: competition.zipcode, city: competition.city, state: competition.state, county: competition.country, phone: competition.phone, mail: competition.mail, webiste: competition.website }
-      })
+      competitions.value = res.data
     })
 
 
-    return { }
+    return { 
+      competitions,
+    }
   },
 }
 </script>
