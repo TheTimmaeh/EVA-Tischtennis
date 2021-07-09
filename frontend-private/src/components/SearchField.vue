@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div :class="[ 'wrapper', { isFocused }]">
     <ul v-if="hasResult && isFocused">
       <li v-if="entries.length < 1">Nichts gefunden</li>
       <li v-for="(entry, index) of entries" :key="index" @click="setValue(entry)">{{ formatEntry(entry) }}</li>
@@ -11,6 +11,7 @@
         :level="props.level"
         :label="props.label"
         :placeholder="props.placeholder"
+        autocomplete="off"
         :value="inputValue"
         @input="debounce($event.target.value)"
         @focusin="setFocus(true)"
@@ -174,6 +175,11 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
+  }
+
+  .isFocused .input {
+    z-index: 3;
   }
 
   ul {
@@ -185,6 +191,7 @@
     width: 100%;
     background-color: white;
     overflow: hidden;
+    z-index: 2;
 
     li {
       list-style-type: none;

@@ -16,6 +16,8 @@
     <h2>Search</h2>
     <label for="search1">Search 1:</label><SearchField label="search1" placeholder="Search Input" apiPath="/persons" displayFormat="{{ id }} - {{ name }} {{ surname }}" :lookupRow="['name', 'surname']" returnPath="id" v-model="search1" displayValue="Test" /><br />
     Auswahl: <pre>{{ search1 }}</pre><br />
+    <label for="search2">Search 2:</label><SearchField label="search2" placeholder="Search Input 2" apiPath="/persons" displayFormat="{{ id }} - {{ name }} {{ surname }}" :lookupRow="['name', 'surname']" returnPath="id" v-model="search1" displayValue="Test" /><br />
+    Auswahl: <pre>{{ search1 }}</pre><br />
     <br /><br />
     <h2>TextArea</h2>
     <label for="textarea1">Textarea 1:</label><TextArea label="textarea1" placeholder="Textarea Input" v-model="input2" /><br />

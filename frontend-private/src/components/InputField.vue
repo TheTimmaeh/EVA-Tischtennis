@@ -2,6 +2,7 @@
   <input :class="[ props.level, { error } ]"
     :type="props.type"
     :placeholder="props.placeholder"
+    :autocomplete="props.autocomplete"
     :min="props.min"
     :max="props.max"
     :step="props.step"
@@ -38,6 +39,9 @@
         default: false,
       },
       placeholder: {
+        type: String,
+      },
+      autocomplete: {
         type: String,
       },
       min: {
