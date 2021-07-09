@@ -25,19 +25,30 @@ module.exports = (_db) => {
   return router
 }
 
+const select = {
+  admin: ['*'],
+  guest: ['*'],
+}
+
 
 async function getAllAssociationTeams(req, res){
-  let associationTeams = (await db.select().from('associationTeams'))
-  res.json({associationTeams})
+  try {
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', ...req.query })
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
 }
 
 async function getAssociationTeam(req, res){
-  let associationTeam = (await db.select().from('associationTeams').where({ id: req.params.associationTeam }))
-  res.json({associationTeam})
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('association_teams').where({ id: req.params.associationTeam }))
+  res.json({ success: true, data })
 }
 
 async function createAssociationTeam(req, res){
-  db('associationTeams').insert({
+  db('association_teams').insert({
     nameAssociationClass: req.nameAssociationClass,
     season: req.season,
     year: req.year,
@@ -49,7 +60,7 @@ async function createAssociationTeam(req, res){
 }
 
 async function updateAssociationTeam(req, res){
-  db('associationTeams').where({ id: req.params.associationTeam }).update({
+  db('association_teams').where({ id: req.params.associationTeam }).update({
     nameAssociationClass: req.nameAssociationClass,
     season: req.season,
     year: req.year,
@@ -61,6 +72,6 @@ async function updateAssociationTeam(req, res){
 }
 
 async function deleteAssociationTeam(req, res){
-  await db('associationTeams').where({ id: req.params.associationTeam }).del()
+  await db('association_teams').where({ id: req.params.associationTeam }).del()
   res.json({})
 }
