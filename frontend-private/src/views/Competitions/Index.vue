@@ -4,7 +4,7 @@
       <Button id="myButton" >Turnier anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Turniere</div>
-    <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition"  ></CompetitionCard>
+    <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition"></CompetitionCard>
   </div>
 </template>
 

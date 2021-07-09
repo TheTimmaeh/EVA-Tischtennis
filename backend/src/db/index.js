@@ -15,7 +15,7 @@ db.qb = (data) => {
 
         if(typeof filter.lookupRow === 'string') filter.lookupRow = [filter.lookupRow]
 
-        let queries = filter.query.split(/[^a-z\u00C0-\u017F]+/i).filter((q) => q.length > 1)
+        let queries = filter.query.split(/[^a-z\u00C0-\u017F]+/i).filter((q) => q.length > 0)
         let count = 0
 
         filter.lookupRow.forEach((r) => {

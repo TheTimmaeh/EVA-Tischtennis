@@ -15,7 +15,7 @@ module.exports = (db) => {
   router.use('/associations', require('./associations')(db))
   router.use('/persons', require('./persons')(db))
   router.use('/seasons', require('./seasons')(db))
-  // router.use('/competitions', require('./competitions')(db))
+  router.use('/competitions', require('./competitions')(db))
   router.use('/playerClasses', require('./playerClasses')(db))
 
   return router

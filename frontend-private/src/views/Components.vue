@@ -29,7 +29,7 @@
     <PlayerClassCard></PlayerClassCard><br />
     <AssociationCard></AssociationCard><br />
     <MemberTable :members="members"></MemberTable><br />
-    <SeasonCard></SeasonCard><br />
+    <!-- <SeasonCard></SeasonCard><br /> -->
     <Table :content="content" :titles="titles"></Table><br />
   </div>
 </template>

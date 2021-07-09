@@ -108,7 +108,7 @@ const routes = [
     component: CreateSeason,
   },
   {
-    path: '/seasons/:id/create',
+    path: '/seasons/:id/update',
     name: 'UpdateSeason',
     component: UpdateSeason,
   },

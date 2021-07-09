@@ -14,10 +14,10 @@ module.exports = (_db) => {
   router.post('/', authenticateToken, createSeason)
 
   // Get (one saison)
-  router.get('/:saison', optionalAuthenticateToken, getSeason)
+  router.get('/:season', optionalAuthenticateToken, getSeason)
 
   // Update
-  router.post('/:saison', authenticateToken, updateSeason)
+  router.post('/:season', authenticateToken, updateSeason)
 
   // Delete
   router.delete('/:season', authenticateToken, deleteSeason)
@@ -53,7 +53,7 @@ async function createSeason(req, res){
   try {
     result = await db('seasons').insert({
       year: req.body.year,
-      seasons: req.body.season,
+      season: req.body.season,
       title: req.body.title,
       description: req.body.description,
     })
@@ -83,7 +83,7 @@ async function updateSeason(req, res){
   try {
     result = await db('seasons').where({ id: req.params.season }).update({
       year: req.body.year,
-      seasons: req.body.season,
+      season: req.body.season,
       title: req.body.title,
       description: req.body.description,
     })

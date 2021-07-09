@@ -52,18 +52,9 @@ async function createCompetition(req, res){
   try {
     result = await db('competitions').insert({
       name: req.body.name,
-      startdate: req.body.startdate,
-      enddate: req.body.enddate,
-      playerclass: req.body.playerclass,
-      street: req.body.street,
-      streetnumber: req.body.streetnumber,
-      zipcode: req.body.zipcode,
-      city: req.body.city,
-      state: req.body.state,
-      country: req.body.country,
-      phone: req.body.phone,
-      mail: req.body.mail,
-      website: req.body.website,
+      description: req.body.description,
+      player_class: req.body.playerclass,
+      season: req.body.season,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
@@ -94,15 +85,6 @@ async function updateCompetition(req, res){
       startdate: req.body.startdate,
       enddate: req.body.enddate,
       playerclass: req.body.playerclass,
-      street: req.body.street,
-      streetnumber: req.body.streetnumber,
-      zipcode: req.body.zipcode,
-      city: req.body.city,
-      state: req.body.state,
-      country: req.body.country,
-      phone: req.body.phone,
-      mail: req.body.mail,
-      website: req.body.website,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){

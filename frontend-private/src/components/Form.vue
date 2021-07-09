@@ -125,8 +125,10 @@
         if(r.field === 'checkbox'){
           vals[r.name] = ref(r.value === true ? r.returnValue : null)
         } else {
-          vals[r.name] = ref(r.value || '')
+          vals[r.name] = ref('' + r.value || '')
         }
+
+        // TODO: Value an Select übergeben
       })
 
       const onSubmit = () => {

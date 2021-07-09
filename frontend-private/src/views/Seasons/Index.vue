@@ -5,7 +5,7 @@
     </router-link>
     <div class="list">Liste zur Saisonübersicht</div>
     <SeasonCard  v-for="season in seasons" :key="season.id" :data="season" />
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -31,9 +31,7 @@ export default {
         return
       }
 
-      seasons.value = res.data.map((season) => {
-        return { id: season.id, title: season.title, season: season.seasons,  year: season.year, description: season.description}
-      })
+      seasons.value = res.data
     })
 
     return {
