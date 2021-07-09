@@ -1,6 +1,11 @@
 <template>
   <div class="association">
-    Das sind die Vereinsstammdaten
+    <router-link :to="`/associations/${$route.params.associationId}/members`">Mitglieder</router-link>
+    <router-link :to="`/associations/${$route.params.associationId}/teams`">Mannschaften</router-link>
+
+    {{ $route.params.associationId }}<br /><br />
+
+    <router-view></router-view>
   </div>
 </template>
 

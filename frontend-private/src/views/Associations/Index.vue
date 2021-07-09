@@ -1,7 +1,7 @@
 <template>
   <div class="associations">
     <router-link to="/associations/create">
-      <Button id="myButton" >Verein anlegen</Button> <br>
+      <Button id="myButton">Verein anlegen</Button> <br>
     </router-link>
     <div class="list">
       <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association"></AssociationCard>

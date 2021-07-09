@@ -1,6 +1,7 @@
 <template>
   <div class="members">
-    <router-link to="/members/create">
+    Ich bin immernoch im Verein {{ $route.params.associationId }}
+    <router-link :to="`/associatons/${$route.params.associationId}/teams/${$route.params.team}/members/create`">
       <Button id="myButton" >Vereinsmitglied anlegen</Button> <br>
     </router-link>
     <MemberTable :members="members"></MemberTable>

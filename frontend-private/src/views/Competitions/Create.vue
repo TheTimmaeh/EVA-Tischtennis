@@ -24,7 +24,7 @@
       const submit = (data) => {
         message.value = ''
         console.log(data)
-        api({ method: 'POST', path: '/competitions/create', data }).then((res) => {
+        api({ method: 'POST', path: '/competitions', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
@@ -54,7 +54,7 @@
           // { name: 'enddate', text: 'End-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           { name: 'description', text: 'Beschreibung:', field: 'textarea', validate: { max: 2000 } },
-     
+
           //{ name: 'address', text: 'Anschrift', field: 'h2' },
           //{ name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           //{ name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
@@ -67,7 +67,7 @@
           // { name: 'phone', text: 'Telefon:', field: 'input', type: 'tel', validate: { type: validate.types.phone, required: true } },
           // { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
           // { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
-        
+
         ],
       }
     },

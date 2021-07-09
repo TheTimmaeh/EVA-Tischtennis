@@ -12,6 +12,7 @@ const Associations = () => import('../views/Associations/Index.vue')
 const CreateAssociation = () => import('../views/Associations/Create.vue')
 
 // AssociationProfile
+const AssociationGet = () => import('../views/Associations/Get.vue')
 const AssociationProfile = () => import('../views/Associations/Profile.vue')
 
 // AssociationMembers
@@ -83,10 +84,14 @@ const routes = [
     component: CreateAssociation,
   },
   {
-    path: '/associations/:id',
+    path: '/associations/:associationId',
     name: 'Association',
-    component: AssociationProfile,
+    component: AssociationGet,
     children: [
+      {
+        path: '',
+        component: AssociationProfile,
+      },
       {
         path: 'members',
         component: AssociationMembers,
@@ -108,7 +113,7 @@ const routes = [
     component: CreateSeason,
   },
   {
-    path: '/seasons/:id/update',
+    path: '/seasons/:seasonId/update',
     name: 'UpdateSeason',
     component: UpdateSeason,
   },

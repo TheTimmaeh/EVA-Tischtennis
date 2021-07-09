@@ -22,7 +22,7 @@
       const route = useRoute()
       const rows = ref()
 
-      api(`/seasons/${route.params.id}`).then((res) => res.data).then((res) => {
+      api(`/seasons/${route.params.associationId}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
@@ -41,7 +41,7 @@
       const submit = (data) => {
         message.value = ''
 
-        api({ method: 'POST', path: `/seasons/${route.params.id}`, data }).then((res) => {
+        api({ method: 'POST', path: `/seasons/${route.params.associationId}`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){

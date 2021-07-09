@@ -1,7 +1,7 @@
 <template>
   <div class="competitions">
     <router-link to="/competitions/create">
-      <Button id="myButton" >Turnier anlegen</Button> <br>
+      <Button id="myButton">Turnier anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Turniere</div>
     <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition"></CompetitionCard>
@@ -35,7 +35,7 @@ export default {
     })
 
 
-    return { 
+    return {
       competitions,
     }
   },
