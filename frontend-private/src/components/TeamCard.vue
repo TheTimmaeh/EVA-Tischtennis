@@ -1,52 +1,54 @@
 <template>
   <Card>
-    <tr>
-      <td>Mannschaftsname: {{nameAssociationClass}}</td>
-      <td>Saison: {{season}}</td>
-      <td>Spielerklasse: {{playerClass}}</td>
-      <td class="min">
-        <Button>Bearbeiten</Button>
-      </td>
-    </tr>
-    <tr>
-      <td>Beschreibung: {{description}}</td>
-    </tr>
+    <table>
+      <tr>
+        <td>Mannschaftsname: {{ name }}</td>
+        <td>Saison: {{ season }}</td>
+        <td>Spielerklasse: {{ playerClass }}</td>
+        <td class="min">
+          <Button>Bearbeiten</Button>
+        </td>
+      </tr>
+      <tr>
+        <td>Beschreibung: {{ description }}</td>
+      </tr>
+    </table>
     <Table :content="content" :titles="titles"></Table><br />
   </Card>
 </template>
 
 <script>
- 
+
 import Button from '@/components/Button'
 import Card from '@/components/Card'
 import { ref } from 'vue'
 
 export default {
   name: 'TeamCard',
-  components:{
+  components: {
     Button,
     Card,
-    },
+  },
   props: {
-      data: {
-        type: Object,
-        required: true,
-      },
-      titles: [
-        { id: 1, text: 'Spieler 1' },
-        { id: 2, text: 'Spieler 2'},
-        { id: 2, text: 'Spieler 3'},
-        { id: 2, text: 'Spieler 4'},
-        { id: 2, text: 'Spieler 5'},
-      ],
-      content: [
-        { id: 1, content: [player1] },
-        { id: 2, content: [player2] },
-        { id: 3, content: [player3] },
-        { id: 4, content: [player4] },
-        { id: 5, content: [player5] },
-      ],
+    data: {
+      type: Object,
+      required: true,
     },
+    titles: {
+      type: Array,
+      default: [
+        { id: 1, text: 'Spieler 1' },
+        { id: 2, text: 'Spieler 2' },
+        { id: 3, text: 'Spieler 3' },
+        { id: 4, text: 'Spieler 4' },
+        { id: 5, text: 'Spieler 5' },
+      ]
+    },
+    content: {
+      type: Array,
+      default: []
+    },
+  },
   setup(props){
 
     return {
