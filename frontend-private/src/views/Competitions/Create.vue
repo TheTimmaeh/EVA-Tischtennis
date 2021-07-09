@@ -49,10 +49,9 @@
         rows: [
           { name: 'competition', text: 'Turnier', field: 'h2' },
           { name: 'name', text: 'Name:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
+          { name: 'season', text: 'Saison:', field: 'search', apiPath: '/seasons', displayFormat: '{{ title }}', lookupRow: ['title'], returnPath: 'id', validate: { required: true } },
           { name: 'startdate', text: 'Start-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'enddate', text: 'End-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
-          { name: 'season', text: 'Saison:', field: 'search', apiPath: '/seasons', displayFormat: '{{ title }}', lookupRow: ['title'], returnPath: 'id', validate: { required: true } },
-          // ToDo: ggf muss da was in der db angepasst werden wenn wir hier die saison dazu tun
           { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           
           { name: 'address', text: 'Anschrift', field: 'h2' },
@@ -68,9 +67,13 @@
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
           { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
         
-          { name: 'teams', text: 'Teilnehmende Teams', field: 'h2' },
-          { name: 'team1', text: 'Team 1:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'team2', text: 'Team 2:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'assosiationnumber', text: 'Teilnehmende Vereine', field: 'h2' },
+          { name: 'associationnumber', text: 'Anzahl der teilnehmenden Vereine:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
+          
+          // in Match auslagern
+          //{ name: 'teams', text: 'Teilnehmende Teams', field: 'h2' },
+          //{ name: 'team1', text: 'Team 1:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          //{ name: 'team2', text: 'Team 2:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           // TODO: Die beiden Searchfelder funktionieren noch nicht. Der apiPath ist sicher falsch
         ],
       }
