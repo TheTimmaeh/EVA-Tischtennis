@@ -57,7 +57,7 @@
           { name: 'player2', text: 'Spieler 2:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           { name: 'player3', text: 'Spieler 3:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
           { name: 'player4', text: 'Spieler 4:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'player5', text: 'Spieler 4:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'player5', text: 'Spieler 5:', field: 'search', apiPath: '/members', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
         ],
       }
     },
