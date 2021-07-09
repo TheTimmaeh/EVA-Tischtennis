@@ -53,7 +53,8 @@
           { name: 'startdate', text: 'Start-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'enddate', text: 'End-Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
           { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          
+          { name: 'description', text: 'Beschreibung:', field: 'textarea', validate: { max: 2000 } },
+     
           { name: 'address', text: 'Anschrift', field: 'h2' },
           { name: 'street', text: 'Straße:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'streetnumber', text: 'Hausnummer:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
@@ -67,14 +68,6 @@
           { name: 'mail', text: 'E-Mail:', field: 'input', type: 'email', validate: { type: validate.types.mail, required: true } },
           { name: 'website', text: 'Website:', field: 'input', type: 'url', validate: { type: validate.types.url, required: true } },
         
-          { name: 'assosiationnumber', text: 'Teilnehmende Vereine', field: 'h2' },
-          { name: 'associationnumber', text: 'Anzahl der teilnehmenden Vereine:', field: 'input', type: 'text', validate: { type: validate.types.streetnumber, required: true } },
-          
-          // in Match auslagern
-          //{ name: 'teams', text: 'Teilnehmende Teams', field: 'h2' },
-          //{ name: 'team1', text: 'Team 1:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          //{ name: 'team2', text: 'Team 2:', field: 'search', apiPath: '/associationTeams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          // TODO: Die beiden Searchfelder funktionieren noch nicht. Der apiPath ist sicher falsch
         ],
       }
     },
