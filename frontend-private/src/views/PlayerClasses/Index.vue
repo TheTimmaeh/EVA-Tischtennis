@@ -32,7 +32,7 @@ export default {
       }
 
       playerClasses.value = res.data.map((playerClass) => {
-        return { playerClass: playerClass.id, name: playerClass.name, age_from: playerClass.age_from, age_to: playerClass.age_to, gender: playerClass.gender }
+        return { id: playerClass.id, name: playerClass.name, age_from: playerClass.age_from, age_to: playerClass.age_to, gender: playerClass.gender }
       })
     })
 

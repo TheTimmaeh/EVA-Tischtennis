@@ -75,22 +75,13 @@ async function createPlayerClass(req, res){
   }
 }
 
-async function updatePlayerClass(req, res){
-  db('classes').where({ id: req.params.playerClass }).update({
-    name: req.name,
-    age_from: req.body.age_from,
-    age_to: req.body.age_to,
-    gender: req.gender,
-  })
 
-  res.json({})
-}
 
 async function updatePlayerClass(req, res){
   let result
 
   try {
-    result = await db('classes').where({ id: req.params.person }).update({
+    result = await db('classes').where({ id: req.params.playerClass}).update({//hier war person, ich hab id draus gemacht
       name: req.body.name,
       age_from: req.body.age_from,
       age_to: req.body.age_to,

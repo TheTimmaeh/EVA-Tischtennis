@@ -68,6 +68,7 @@
           <label :for="`l_${row.name}`">{{ row.text }}</label><CheckBox
           :label="`l_${row.name}`"
           :returnValue="row.returnValue"
+          :checked ="row.checked"
           v-model="vals[row.name].value">
           </CheckBox>
         </template>

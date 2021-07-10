@@ -6,7 +6,9 @@
         <td>Bis: {{age_to}} Jahren</td>
         <td>Geschlecht: {{gender}}</td>
         <td class="min">
-          <Button>Bearbeiten</Button>
+          <router-link :to="`/playerClasses/${id}/update`">
+          <Button id="myButton" >Bearbeiten</Button> <br>
+        </router-link><br/>
         </td>
       </tr>
      </Card>
