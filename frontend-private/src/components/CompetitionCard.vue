@@ -2,22 +2,22 @@
   <Card>
     <tr>
       <td>Name: {{name}}</td>
-      <td>Start-Datum: {{startdate}}</td>
-      <td>End-Datum: {{enddate}}</td>
-      <td>Spielerklasse: {{class}}</td>
+      <!-- <td>Start-Datum: {{startdate}}</td>
+      <td>End-Datum: {{enddate}}</td> -->
+      <td>Spielerklasse: {{player_class}}</td>
       <td class="min">
         <Button>Bearbeiten</Button>
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td>Anschrift: {{street}} {{streetnumber}}, {{zipcode}} {{city}}, {{starte}}, {{country}}</td>
     </tr>
     <tr>
       <td>Kontakt: Telefonnummer: {{telefon}}, Mail-Adresse: {{mail}}, Website {{webiste}}</td>
-    </tr>
-    <tr v-for="team in teams" :key="team.id">
+    </tr> 
+   <tr v-for="team in teams" :key="team.id">
       <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
-    </tr>
+    </tr> -->
   </Card>
 </template>
 

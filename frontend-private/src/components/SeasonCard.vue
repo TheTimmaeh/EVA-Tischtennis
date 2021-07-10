@@ -5,7 +5,7 @@
       <td>Jahr: {{year}}</td>
       <td>Titel: {{title}}</td>
       <td class="min">
-        <router-link :to="`/seasons/${data.id}/update`">
+        <router-link :to="`/season/${id}/update`">
           <Button id="myButton" >Bearbeiten</Button> <br>
         </router-link><br/>
 
