@@ -3,7 +3,7 @@
     <router-link to="/users/create">
       <Button>User anlegen</Button>
     </router-link><br />
-    <MemberTable :members="users"></MemberTable>
+    <MemberTable :members="users" path="users"></MemberTable>
   </div>
 </template>
 
