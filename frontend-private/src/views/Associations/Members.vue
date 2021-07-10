@@ -1,24 +1,23 @@
 <template>
   <div class="association">
-    Verein {{ $route.params.associationId }}
-
-    <router-link :to="`/associations/${$route.params.associationId}/teams`"><Button>Mannschaften</Button></router-link>
-
-    <br /><br />
-
-    <router-view></router-view>
+    Liste der Vereinsmitglieder
   </div>
 </template>
 
 <script>
+import { api, setTitle } from '@/helper'
+import { useRoute } from 'vue-router'
 import Button from '@/components/Button'
 
 export default {
-  name: 'AssociationsGet',
+  name: 'AssociationsMembers',
   components: {
     Button,
   },
   setup(){
+    const route = useRoute()
+    setTitle(`Vereinsmitglieder | Verein ${route.params.associationId}`)
+
     return {
       Button,
     }

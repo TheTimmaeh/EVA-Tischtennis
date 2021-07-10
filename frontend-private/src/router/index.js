@@ -8,21 +8,18 @@ const Users = () => import('../views/Users/Index.vue')
 const CreateUser = () => import('../views/Users/Create.vue')
 const UpdateUser = () => import('../views/Users/Update.vue')
 
-// Associations
-const Associations = () => import('../views/Associations/Index.vue')
-const CreateAssociation = () => import('../views/Associations/Create.vue')
-
-// AssociationProfile
-const AssociationGet = () => import('../views/Associations/Get.vue')
-const AssociationProfile = () => import('../views/Associations/Profile.vue')
-
-// AssociationMembers
-const AssociationMembers = () => import('../views/Associations/Members/Index.vue')
-const CreateAssociationMember = () => import('../views/Associations/Members/Create.vue')
-
-// AssociationTeams
-const AssociationTeams = () => import('../views/Associations/Teams/Index.vue')
-const CreateAssociationTeam = () => import('../views/Associations/Teams/Create.vue')
+const Associations = {
+  Index: () => import('../views/Associations/Index.vue'),
+  Get: () => import('../views/Associations/Get.vue'),
+  Create: () => import('../views/Associations/Create.vue'),
+  Profile: () => import('../views/Associations/Profile.vue'),
+  Members: () => import('../views/Associations/Members.vue'),
+  Teams: {
+    Index: () => import('../views/Associations/Teams/Index.vue'),
+    Get: () => import('../views/Associations/Teams/Get.vue'),
+    Create: () => import('../views/Associations/Teams/Create.vue'),
+  },
+}
 
 // Saisons
 const Seasons = () => import('../views/Seasons/Index.vue')
@@ -84,29 +81,37 @@ const routes = [
   {
     path: '/associations',
     name: 'Associations',
-    component: Associations,
+    component: Associations.Index,
   },
   {
     path: '/associations/create',
     name: 'CreateAssociation',
-    component: CreateAssociation,
+    component: Associations.Create,
   },
   {
     path: '/associations/:associationId',
     name: 'Association',
-    component: AssociationGet,
+    component: Associations.Get,
     children: [
       {
         path: '',
-        component: AssociationProfile,
+        component: Associations.Profile,
       },
       {
         path: 'members',
-        component: AssociationMembers,
+        component: Associations.Members,
       },
       {
         path: 'teams',
-        component: AssociationTeams,
+        component: Associations.Teams.Index,
+      },
+      {
+        path: 'teams/create',
+        component: Associations.Teams.Create,
+      },
+      {
+        path: 'teams/:teamId',
+        component: Associations.Teams.Get,
       },
     ]
   },
@@ -174,16 +179,6 @@ const routes = [
     path: '/competitions/create',
     name: 'CreateCompetiton',
     component: CreateCompetition,
-  },
-  {
-    path: '/associationTeams',
-    name: 'AssociationTeams',
-    component: AssociationTeams,
-  },
-  {
-    path: '/associationTeams/create',
-    name: 'CreateAssociationTeam',
-    component: CreateAssociationTeam,
   },
   {
     path: '/match',

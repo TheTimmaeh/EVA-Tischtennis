@@ -4,24 +4,26 @@
       <Button id="myButton">Vereinsmannschaft anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Vereinsmannschaften</div>
-     <TeamCard  v-for="team in teams" :key="team.id" :data="team" />
+     <TeamCard v-for="team in teams" :key="team.id" :data="team" />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { api, setTitle } from '@/helper'
 import Button from '@/components/Button'
 import TeamCard from '@/components/TeamCard'
 
 export default {
-  name: 'assosiationsTeams',
+  name: 'AssosiationsTeams',
   components: {
     Button,
     TeamCard,
   },
   setup(){
-    setTitle('Vereinsmannschaften')
+    const route = useRoute()
+    setTitle(`Vereinsmannschaften | Verein ${route.params.associationId}`)
 
     const teams = ref([])
 
@@ -31,13 +33,11 @@ export default {
         return
       }
 
-      teams.value = res.data.map((team) => {
-        return { team: team.id, name: team.nameAssociationClass, season: team.seasons, playerClass: team.playerClass }
-      })
+      teams.value = res.data
     })
 
     return {
-      seasons,
+      teams,
     }
   },
 }
