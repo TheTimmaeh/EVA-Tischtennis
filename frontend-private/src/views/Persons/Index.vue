@@ -3,7 +3,7 @@
     <router-link to="/persons/create">
       <Button id="myButton" >Person anlegen</Button> <br>
     </router-link>
-    <MemberTable :members="persons"></MemberTable>
+    <MemberTable :members="persons" path="persons"></MemberTable>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
       }
 
       persons.value = res.data.map((person) => {
-        return { person: person.id, name: person.name, surname: person.surname, association: 'None' }
+        return { id: person.id, name: person.name, surname: person.surname, association: 'None' }
       })
     })
 

@@ -15,7 +15,7 @@
           <th>Bearbeiten</th>
         </tr>
       </thead>
-      <MemberRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" />
+      <MemberRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path"/>
     </table>
   </Card>
 </template>
@@ -38,12 +38,17 @@
         type: Array,
         required: true,
       },
+      path:{
+        type: String,
+        required: true, 
+      }
     },
     setup(props){
       const members = computed(() => props.members)
 
       return {
         members,
+        path: props.path,
       }
     },
   }

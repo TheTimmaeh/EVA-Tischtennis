@@ -6,6 +6,7 @@ import Components from '../views/Components.vue'
 // Associations
 const Users = () => import('../views/Users/Index.vue')
 const CreateUser = () => import('../views/Users/Create.vue')
+const UpdateUser = () => import('../views/Users/Update.vue')
 
 // Associations
 const Associations = () => import('../views/Associations/Index.vue')
@@ -31,6 +32,7 @@ const UpdateSeason = () => import('../views/Seasons/Update.vue')
 // Persons
 const Persons = () => import('../views/Persons/Index.vue')
 const CreatePerson = () => import('../views/Persons/Create.vue')
+const UpdatePerson = () => import('../views/Persons/Update.vue')
 
 // Referees
 const Referees = () => import('../views/Referees/Index.vue')
@@ -39,6 +41,7 @@ const CreateReferee = () => import('../views/Referees/Create.vue')
 // PlayerClasses
 const PlayerClasses = () => import('../views/PlayerClasses/Index.vue')
 const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
+const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
 
 // Competitions
 const Competitions = () => import('../views/Competitions/Index.vue')
@@ -72,6 +75,11 @@ const routes = [
     path: '/users/create',
     name: 'CreateUser',
     component: CreateUser,
+  },
+  {
+    path: '/users/:userId/update',
+    name: 'UpdateUser',
+    component: UpdateUser,
   },
   {
     path: '/associations',
@@ -128,6 +136,11 @@ const routes = [
     component: CreatePerson,
   },
   {
+    path: '/persons/:personId/update',
+    name: 'UpdatePerson',
+    component: UpdatePerson,
+  },
+  {
     path: '/referees',
     name: 'Referees',
     component: Referees,
@@ -146,6 +159,11 @@ const routes = [
     path: '/playerClasses/create',
     name: 'CreatePlayerClass',
     component: CreatePlayerClass,
+  },
+  {
+    path: '/playerClasses/:playerClassId/update',
+    name: 'UpdatePlayerClasses',
+    component: UpdatePlayerClass,
   },
   {
     path: '/competitions',

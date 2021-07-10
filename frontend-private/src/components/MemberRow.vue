@@ -4,7 +4,9 @@
     <td>{{surname}}</td>
     <td>{{association}}</td>
     <td>
-      <Button>Bearbeiten</Button>
+      <router-link :to="`/${path}/${id}/update`">
+          <Button id="myButton" >Bearbeiten</Button> <br>
+      </router-link><br/>
     </td>
   </tr>
 </template>
@@ -27,11 +29,16 @@
         type: Boolean,
         default: false,
       },
+      path:{
+        type: String,
+        required: true, 
+      }
     },
     setup(props){
       return {
         ...props.data,
         isLast: props.isLast,
+        path: props.path,
       }
     },
   }
