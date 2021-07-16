@@ -1,7 +1,7 @@
 <template>
   <div class="associationTeams">
-    <router-link to="/associationTeams/create">
-      <Button id="myButton">Vereinsmannschaft anlegen</Button> <br>
+    <router-link :to="`/associations/${$route.params.associationId}/teams/create`">
+      <Button>Vereinsmannschaft anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Vereinsmannschaften</div>
      <TeamCard v-for="team in teams" :key="team.id" :data="team" />
