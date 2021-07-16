@@ -12,6 +12,7 @@ const Associations = {
   Index: () => import('../views/Associations/Index.vue'),
   Get: () => import('../views/Associations/Get.vue'),
   Create: () => import('../views/Associations/Create.vue'),
+  Update: () => import('../views/Associations/Update.vue'),
   Profile: () => import('../views/Associations/Profile.vue'),
   Members: () => import('../views/Associations/Members.vue'),
   Teams: {
@@ -19,6 +20,7 @@ const Associations = {
     Get: () => import('../views/Associations/Teams/Get.vue'),
     Create: () => import('../views/Associations/Teams/Create.vue'),
     Update:() => import('../views/Associations/Teams/Update.vue'),
+    LineUp:() => import('../views/Associations/Teams/LineUp.vue'),
   },
 }
 
@@ -91,6 +93,11 @@ const routes = [
     component: Associations.Create,
   },
   {
+    path: '/associations/:associationId/update',
+    name: 'UpdateAssociation',
+    component: Associations.Update,
+  },
+  {
     path: '/associations/:associationId',
     name: 'Association',
     component: Associations.Get,
@@ -118,6 +125,10 @@ const routes = [
       {
         path: 'teams/:teamId/update',
         component: Associations.Teams.Update,
+      },
+      {
+        path: 'teams/:teamId/lineup',
+        component: Associations.Teams.LineUp,
       },
     ]
   },

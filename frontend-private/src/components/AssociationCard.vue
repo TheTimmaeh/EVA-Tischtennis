@@ -11,9 +11,9 @@
             <td>Ort: {{ location }}</td>
             <td><router-link :to="`/associations/${id}/playerClasses`">Mannschaften: {{ playerClasses?.length }}</router-link></td>
             <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
-            <td class="min">
-              <Button>Bearbeiten</Button>
-            </td>
+            <router-link :to="`/associations/${id}/update`">
+              <Button>Bearbeiten</Button> <br>
+            </router-link><br/>
           </tr>
         </div>
     </Card>
