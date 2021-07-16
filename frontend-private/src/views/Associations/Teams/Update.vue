@@ -12,25 +12,26 @@
   import Form from '@/components/Form'
 
   export default {
-    name: 'UpdateUser',
+    name: 'UpdateAssociationTeam',
     components: {
       Form,
     },
     setup(){
-      setTitle('User aktualisieren')
+      setTitle('Mannschaft aktualisieren')
       const router = useRouter()
       const route = useRoute()
       const rows = ref()
 
-      api(`/users/${route.params.userId}`).then((res) => res.data).then((res) => {
+      api(`/associationTeams/${route.params.teamId}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
         }
         rows.value = [
-          { name: 'member', text: 'User', field: 'h2' },
-          { name: 'username', text: 'Username:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true }, value: res.data.username },
-          { name: 'isAdmin', text: 'Ist Admin?:', field: 'checkbox', returnValue: 'true',  checked: res.data.isAdmin },
+          { name: 'member', text: 'Mannschaft', field: 'h2' },
+          { name: 'nameAssociationClass', text: 'Name der Vereinsmannschaft:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } , value: res.data.name},
+          { name: 'season', text: 'Saison:', field: 'search', apiPath: '/seasons', displayFormat: '{{ title }}', lookupRow: ['title'], returnPath: 'id', validate: { required: true }, value: res.data.season },
+          { name: 'playerClass', text: 'Spielerklasse:', field: 'search', apiPath: '/playerClasses', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.playerClass },
         ]
       })
 
@@ -39,14 +40,14 @@
       const submit = (data) => {
         message.value = ''
 
-        api({ method: 'POST', path: `/users/${route.params.userId}`, data }).then((res) => {
+        api({ method: 'POST', path: `/associationTeams/${route.params.teamId}`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
-            message.value = 'User wurde aktualisiert.'
-            setTimeout(() => router.push({ path: '/users/' }), 3000)
+            message.value = 'Mannschaft wurde aktualisiert.'
+            setTimeout(() => router.push({ path: '/associationTeams/' }), 3000)
           }
         }).catch((err) => {
           message.value = err

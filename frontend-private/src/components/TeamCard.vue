@@ -6,11 +6,18 @@
         <td>Saison: {{ season }}</td>
         <td>Spielerklasse: {{ playerClass }}</td>
         <td class="min">
-          <Button>Bearbeiten</Button>
+          <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/update`">
+          <Button>Bearbeiten</Button> <br>
+          </router-link><br/>
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Beschreibung: {{ description }}</td>
+      </tr> -->
+      <tr>
+        <td class="min">
+          <Button>Mannschaftsaufstellung einsehen</Button>
+        </td>
       </tr>
     </table>
     <Table :content="content" :titles="titles"></Table><br />

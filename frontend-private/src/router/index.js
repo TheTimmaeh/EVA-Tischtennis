@@ -18,6 +18,7 @@ const Associations = {
     Index: () => import('../views/Associations/Teams/Index.vue'),
     Get: () => import('../views/Associations/Teams/Get.vue'),
     Create: () => import('../views/Associations/Teams/Create.vue'),
+    Update:() => import('../views/Associations/Teams/Update.vue'),
   },
 }
 
@@ -113,6 +114,10 @@ const routes = [
       {
         path: 'teams/:teamId',
         component: Associations.Teams.Get,
+      },
+      {
+        path: 'teams/:teamId/update',
+        component: Associations.Teams.Update,
       },
     ]
   },
