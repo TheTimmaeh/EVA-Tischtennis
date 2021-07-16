@@ -6,7 +6,9 @@
       <td>End-Datum: {{enddate}}</td> -->
       <td>Spielerklasse: {{player_class}}</td>
       <td class="min">
-        <Button>Bearbeiten</Button>
+        <router-link :to="`/Competitions/${id}/update`">
+          <Button>Bearbeiten</Button> <br>
+      </router-link><br/>
       </td>
     </tr>
     <!-- <tr>

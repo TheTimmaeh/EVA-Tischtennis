@@ -43,6 +43,7 @@ const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
 // Competitions
 const Competitions = () => import('../views/Competitions/Index.vue')
 const CreateCompetition = () => import('../views/Competitions/Create.vue')
+const UpdateCompetition = () => import('../views/Competitions/Update.vue')
 
 
 // Match
@@ -179,6 +180,11 @@ const routes = [
     path: '/competitions/create',
     name: 'CreateCompetiton',
     component: CreateCompetition,
+  },
+  {
+    path: '/competitions/:competitionId/update',
+    name: 'UpdateCompetition',
+    component: UpdateCompetition,
   },
   {
     path: '/match',
