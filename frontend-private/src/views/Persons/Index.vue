@@ -1,7 +1,7 @@
 <template>
   <div class="persons">
     <router-link to="/persons/create">
-      <Button id="myButton" >Person anlegen</Button> <br>
+      <Button>Person anlegen</Button> <br>
     </router-link>
     <MemberTable :members="persons" path="persons"></MemberTable>
   </div>

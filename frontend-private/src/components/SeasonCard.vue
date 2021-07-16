@@ -6,7 +6,7 @@
       <td>Titel: {{title}}</td>
       <td class="min">
         <router-link :to="`/season/${id}/update`">
-          <Button id="myButton" >Bearbeiten</Button> <br>
+          <Button>Bearbeiten</Button> <br>
         </router-link><br/>
 
       </td>

@@ -1,7 +1,7 @@
 <template>
   <div class="referees">
     <router-link to="/referees/create">
-      <Button id="myButton" >Schiedsrichter anlegen</Button> <br>
+      <Button>Schiedsrichter anlegen</Button> <br>
     </router-link>
     <div class="list">Liste aller Schiedsrichter</div>
   </div>

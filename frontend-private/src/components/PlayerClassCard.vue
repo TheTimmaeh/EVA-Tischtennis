@@ -7,7 +7,7 @@
         <td>Geschlecht: {{gender}}</td>
         <td class="min">
           <router-link :to="`/playerClasses/${id}/update`">
-          <Button id="myButton" >Bearbeiten</Button> <br>
+          <Button>Bearbeiten</Button> <br>
         </router-link><br/>
         </td>
       </tr>

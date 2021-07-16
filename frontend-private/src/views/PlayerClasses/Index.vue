@@ -1,7 +1,7 @@
 <template>
   <div class="playerClasses">
     <router-link to="/playerClasses/create">
-      <Button id="myButton" >Spielerklasse anlegen</Button> <br>
+      <Button>Spielerklasse anlegen</Button> <br>
     </router-link>
     <div class="list">Liste der Spielerklassen</div> 
     <PlayerClassCard v-for="playerClass in playerClasses" :key="playerClass.id" :playerClass="playerClass"  ></PlayerClassCard>

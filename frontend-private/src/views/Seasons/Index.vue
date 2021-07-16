@@ -1,7 +1,7 @@
 <template>
   <div class="saisons">
     <router-link to="/seasons/create">
-      <Button id="myButton" >Saison anlegen</Button> <br>
+      <Button>Saison anlegen</Button> <br>
     </router-link>
     <div class="list">Liste zur Saisonübersicht</div>
     <SeasonCard  v-for="season in seasons" :key="season.id" :data="season" />

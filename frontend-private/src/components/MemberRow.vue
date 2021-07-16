@@ -5,7 +5,7 @@
     <td>{{association}}</td>
     <td>
       <router-link :to="`/${path}/${id}/update`">
-          <Button id="myButton" >Bearbeiten</Button> <br>
+          <Button>Bearbeiten</Button> <br>
       </router-link><br/>
     </td>
   </tr>
