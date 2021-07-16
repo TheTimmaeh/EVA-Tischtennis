@@ -49,11 +49,11 @@ async function getAssociationTeam(req, res){
 
 async function createAssociationTeam(req, res){
   db('association_teams').insert({
-    nameAssociationClass: req.nameAssociationClass,
+    name: req.nameAssociationClass,
     season: req.season,
     year: req.year,
-    gender: req.gender,
-    nameAssociation: req.nameAssociation,
+    playerClass: req.playerClass,
+    association: req.associationId,
   })
 
   res.json({})
@@ -61,11 +61,11 @@ async function createAssociationTeam(req, res){
 
 async function updateAssociationTeam(req, res){
   db('association_teams').where({ id: req.params.associationTeam }).update({
-    nameAssociationClass: req.nameAssociationClass,
+    name: req.nameAssociationClass,
     season: req.season,
     year: req.year,
-    gender: req.gender,
-    nameAssociation: req.nameAssociation,
+    playerClass: req.playerClass,
+    association: req.associationId,
   })
 
   res.json({})
