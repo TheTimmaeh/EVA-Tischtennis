@@ -16,7 +16,19 @@
       </tr> -->
       <tr>
         <td class="min">
-          <Button>Mannschaftsaufstellung einsehen</Button>
+          <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/lineup`">
+          <Button>Mannschaftsaufstellung einsehen</Button> <br>
+          </router-link><br/>
+        </td>
+        <td class="min">
+          <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/lineupcreate`">
+          <Button>Mannschaftsaufstellung einpflegen</Button> <br>
+          </router-link><br/>
+        </td>
+        <td class="min">
+          <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/lineupupdate`">
+          <Button>Mannschaftsaufstellung ändern</Button> <br>
+          </router-link><br/>
         </td>
       </tr>
     </table>

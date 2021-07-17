@@ -21,6 +21,8 @@ const Associations = {
     Create: () => import('../views/Associations/Teams/Create.vue'),
     Update:() => import('../views/Associations/Teams/Update.vue'),
     LineUp:() => import('../views/Associations/Teams/LineUp.vue'),
+    LineUpCreate:() => import('../views/Associations/Teams/LineUpCreate.vue'),
+    LineUpUpdate:() => import('../views/Associations/Teams/LineUpUpdate.vue'),
   },
 }
 
@@ -47,7 +49,6 @@ const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
 const Competitions = () => import('../views/Competitions/Index.vue')
 const CreateCompetition = () => import('../views/Competitions/Create.vue')
 const UpdateCompetition = () => import('../views/Competitions/Update.vue')
-
 
 // Match
 const Match = () => import('../views/Match/Match.vue')
@@ -129,6 +130,14 @@ const routes = [
       {
         path: 'teams/:teamId/lineup',
         component: Associations.Teams.LineUp,
+      },
+      {
+        path: 'teams/:teamId/lineupcreate',
+        component: Associations.Teams.LineUpCreate,
+      },
+      {
+        path: 'teams/:teamId/lineupupdate',
+        component: Associations.Teams.LineUpUpdate,
       },
     ]
   },

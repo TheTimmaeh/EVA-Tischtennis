@@ -11,6 +11,13 @@
       </router-link><br/>
       </td>
     </tr>
+    <tr>
+      <td>
+       <router-link :to="`/competitions/${id}/encounters/create`">
+          <Button>Begegnungen anlegen</Button> <br>
+       </router-link><br/>
+      </td>
+    </tr>
     <!-- <tr>
       <td>Anschrift: {{street}} {{streetnumber}}, {{zipcode}} {{city}}, {{starte}}, {{country}}</td>
     </tr>
