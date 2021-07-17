@@ -3,7 +3,7 @@
     Verein {{ $route.params.associationId }}
 
     <router-link :to="`/associations/${$route.params.associationId}/teams`"><Button>Mannschaften</Button></router-link>
-
+    
     <br /><br />
 
     <router-view></router-view>
