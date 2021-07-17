@@ -72,6 +72,13 @@
           v-model="vals[row.name].value">
           </CheckBox>
         </template>
+        <template v-if="row.field === 'gameStageSelect'">
+          <label :for="`l_${row.name}`">{{ row.text }}</label><GameStageSelect
+          :label="`l_${row.name}`"
+          :ref="refs[row.name]"
+          v-model="vals[row.name].value">
+          </GameStageSelect>
+        </template>
       </div>
     </template>
     <br />
@@ -90,6 +97,7 @@
   import CountrySelect from '@/components/CountrySelect'
   import StateSelect from '@/components/StateSelect'
   import GenderSelect from '@/components/GenderSelect'
+  import GameStageSelect from '@/components/GameStageSelect'
   import CheckBox from '@/components/CheckBox'
 
   export default {
@@ -103,6 +111,7 @@
       CountrySelect,
       StateSelect,
       GenderSelect,
+      GameStageSelect,
       CheckBox,
     },
     props: {
