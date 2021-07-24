@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const router = require('express').Router({ mergeParams: true })
 let db
 
 module.exports = (_db) => {
@@ -14,13 +14,13 @@ module.exports = (_db) => {
   router.post('/', authenticateToken, authenticateToken, createAssociationTeam)
 
   // Get (one associationTeam)
-  router.get('/:associationTeam', getAssociationTeam)
+  router.get('/:associationTeamId', getAssociationTeam)
 
   // Update
-  router.post('/:associationTeam', authenticateToken, updateAssociationTeam)
+  router.post('/:associationTeamId', authenticateToken, updateAssociationTeam)
 
   // Delete
-  router.delete('/:associationTeam', authenticateToken, deleteAssociationTeam)
+  router.delete('/:associationTeamId', authenticateToken, deleteAssociationTeam)
 
   return router
 }
@@ -43,33 +43,68 @@ async function getAllAssociationTeams(req, res){
 }
 
 async function getAssociationTeam(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('association_teams').where({ id: req.params.associationTeam }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('association_teams').where({ id: req.params.associationTeamId }))
   res.json({ success: true, data })
 }
 
 async function createAssociationTeam(req, res){
-  db('association_teams').insert({
-    name: req.nameAssociationClass,
-    season: req.season,
-    playerClass: req.playerClass,
-    association: req.associationId,
-  })
+  try {
+    result = await db('association_teams').insert({
+      name: req.body.nameAssociationClass,
+      season: req.body.season,
+      playerClass: req.body.playerClass,
+      association: req.params.associationId,
+    })
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits eine Vereinsmannschaft für diesen Verein/Saison/Spielerklasse.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
 
-  res.json({})
+    return
+  }
+
+  if(!!result?.[0]){
+    let data = await db('association_teams').where({ id: result[0] }).first()
+
+    res.json({ success: true, message: 'Vereinsmannschaft wurde angelegt.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (2)' })
+  }
 }
 
 async function updateAssociationTeam(req, res){
-  db('association_teams').where({ id: req.params.associationTeam }).update({
-    name: req.nameAssociationClass,
-    season: req.season,
-    playerClass: req.playerClass,
-    association: req.associationId,
-  })
+  let result
 
-  res.json({})
+  try {
+    result = await db('association_teams').where({ id: req.params.associationTeamId }).update({
+      name: req.body.nameAssociationClass,
+      season: req.body.season,
+      playerClass: req.body.playerClass,
+    })
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits eine Vereinsmannschaft für diesen Verein/Saison/Spielerklasse.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+
+    return
+  }
+
+  if(result === 1){
+    let data = (await db.first(select.admin).from('association_teams').where({ id: req.params.associationTeamId }))
+
+    res.json({ success: true, message: 'Vereinsmanschaftsdaten wurden aktualisiert.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (4)' })
+  }
 }
 
 async function deleteAssociationTeam(req, res){
-  await db('association_teams').where({ id: req.params.associationTeam }).del()
+  await db('association_teams').where({ id: req.params.associationTeamId }).del()
   res.json({})
 }
