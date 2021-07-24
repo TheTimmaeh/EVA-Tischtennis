@@ -63,6 +63,7 @@ const Competitions = {
   Get: () => import('../views/Competitions/Get.vue'),
   Create: () => import('../views/Competitions/Create.vue'),
   Update: () => import('../views/Competitions/Update.vue'),
+  Profile: () => import('../views/Competitions/Profile.vue'),
   Encounters: {
     Index: () => import('../views/Competitions/Encounters/Index.vue'),
     Create: () => import('../views/Competitions/Encounters/Create.vue'),
@@ -225,7 +226,7 @@ const routes = [
   {
     path: '/competitions',
     name: 'Competitons',
-    component: Competitions,
+    component: Competitions.Index,
   },
   {
     path: '/competitions/create',
@@ -237,50 +238,27 @@ const routes = [
     name: 'UpdateCompetition',
     component: Competitions.Update,
   },
-  // {
-  //   path: '/encounters',
-  //   name: 'Encounters',
-  //   component: Encounters,
-  // },
-  // {
-  //   path: '/encounters/create',
-  //   name: 'CreateEncounters',
-  //   component: CreateEncounters,
-  // },
-  // {
-  //   path: '/encounters/:encountersId/update',
-  //   name: 'UpdateEncounters',
-  //   component: UpdateEncounters,
-  // },
   {
     path: '/competitions/:competitionId',
     name: 'Competition',
     component: Competitions.Get,
     children: [
       {
-        path: '/competitions/:competitionId/encounters',
+        path: '',
+        component: Competitions.Profile,
+      },
+      {
+        path: 'encounters',
         component: Competitions.Encounters.Index,
       },
       {
-        path: '/competitions/:competitionId/encounters/create',
+        path: 'encounters/create',
         component: Competitions.Encounters.Create,
       },
       {
-        path: '/competitions/:competitionId/encounters/:encountersId/update',
+        path: 'encounters/:encountersId/update',
         component: Competitions.Encounters.Update,
       },
-      // {
-      //   path: '/encounters',
-      //   component: Competitions.Encounters.Index,
-      // },
-      // {
-      //   path: '/encounters/create',
-      //   component: Competitions.Encounters.Create,
-      // },
-      // {
-      //   path: '/encounters/:encountersId/update',
-      //   component: Competitions.Encounters.Update,
-      // },
     ]
   },
   {
