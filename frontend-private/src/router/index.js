@@ -3,11 +3,12 @@ import store from '@/store'
 import Home from '../views/Home.vue'
 import Components from '../views/Components.vue'
 
-// Associations
+// Users
 const Users = () => import('../views/Users/Index.vue')
 const CreateUser = () => import('../views/Users/Create.vue')
 const UpdateUser = () => import('../views/Users/Update.vue')
 
+//Associations
 const Associations = {
   Index: () => import('../views/Associations/Index.vue'),
   Get: () => import('../views/Associations/Get.vue'),
@@ -45,14 +46,33 @@ const PlayerClasses = () => import('../views/PlayerClasses/Index.vue')
 const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
 const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
 
-// Competitions
-const Competitions = () => import('../views/Competitions/Index.vue')
-const CreateCompetition = () => import('../views/Competitions/Create.vue')
-const UpdateCompetition = () => import('../views/Competitions/Update.vue')
+// // Competitions
+// const Competitions = () => import('../views/Competitions/Index.vue')
+// const CreateCompetition = () => import('../views/Competitions/Create.vue')
+// const UpdateCompetition = () => import('../views/Competitions/Update.vue')
+
+// // Encounters
+// const Encounters = () => import('../views/Competitions/Encounters/Index.vue')
+// const CreateEncounters = () => import('../views/Competitions/Encounters/Create.vue')
+// const UpdateEncounters = () => import('../views/Competitions/Encounters/Update.vue')
+
+
+const Competitions = {
+  Index: () => import('../views/Competitions/Index.vue'),
+  Get: () => import('../views/Competitions/Get.vue'),
+  Create: () => import('../views/Competitions/Create.vue'),
+  Update: () => import('../views/Competitions/Update.vue'),
+  Encounters: {
+    Index: () => import('../views/Competitions/Encounters/Index.vue'),
+    Create: () => import('../views/Competitions/Encounters/Create.vue'),
+    Update:() => import('../views/Competitions/Encounters/Update.vue'),
+  },
+}
 
 // Match
 const Match = () => import('../views/Match/Match.vue')
 
+//Login and Logout
 const Login = () => import('../views/Login.vue')
 const Logout = () => import('../views/Logout.vue')
 const Profile = () => import('../views/Profile.vue')
@@ -204,12 +224,58 @@ const routes = [
   {
     path: '/competitions/create',
     name: 'CreateCompetiton',
-    component: CreateCompetition,
+    component: Competitions.Create,
   },
   {
     path: '/competitions/:competitionId/update',
     name: 'UpdateCompetition',
-    component: UpdateCompetition,
+    component: Competitions.Update,
+  },
+  // {
+  //   path: '/encounters',
+  //   name: 'Encounters',
+  //   component: Encounters,
+  // },
+  // {
+  //   path: '/encounters/create',
+  //   name: 'CreateEncounters',
+  //   component: CreateEncounters,
+  // },
+  // {
+  //   path: '/encounters/:encountersId/update',
+  //   name: 'UpdateEncounters',
+  //   component: UpdateEncounters,
+  // },
+  {
+    path: '/competitions/:competitionId',
+    name: 'Competition',
+    component: Competitions.Get,
+    children: [
+      {
+        path: '/competitions/:competitionId/encounters',
+        component: Competitions.Encounters.Index,
+      },
+      {
+        path: '/competitions/:competitionId/encounters/create',
+        component: Competitions.Encounters.Create,
+      },
+      {
+        path: '/competitions/:competitionId/encounters/:encountersId/update',
+        component: Competitions.Encounters.Update,
+      },
+      // {
+      //   path: '/encounters',
+      //   component: Competitions.Encounters.Index,
+      // },
+      // {
+      //   path: '/encounters/create',
+      //   component: Competitions.Encounters.Create,
+      // },
+      // {
+      //   path: '/encounters/:encountersId/update',
+      //   component: Competitions.Encounters.Update,
+      // },
+    ]
   },
   {
     path: '/match',
