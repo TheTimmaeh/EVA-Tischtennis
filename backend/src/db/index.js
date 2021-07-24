@@ -42,7 +42,7 @@ db.qb = (data) => {
   if(data.whereIn){
     Object.keys(data.whereIn).forEach((column) => {
       if(++whereCount == 1) query = query.whereIn(column, data.whereIn[column])
-      else                  query = query.andWhereIn(column, data.whereIn[column])
+      else                  query = query.andWhere(column, 'in', data.whereIn[column])
     })
   }
   if(data.order) query = query.orderBy(data.order)
