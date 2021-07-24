@@ -17,7 +17,7 @@ export default {
   setup(){
     setTitle('Begegnungen')
 
-    const competitions = ref([])
+    const encounters = ref([])
 
     api('/encounters').then((res) => res.data).then((res) => {
       if(!res.success){
@@ -27,7 +27,6 @@ export default {
 
       encounters.value = res.data
     })
-
 
     return {
       encounters,

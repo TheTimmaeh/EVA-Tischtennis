@@ -6,7 +6,7 @@
       <td>End-Datum: {{enddate}}</td> -->
       <td>Spielerklasse: {{player_class}}</td>
       <td class="min">
-        <router-link :to="`/Competitions/${id}/update`">
+        <router-link :to="`/competitions/${id}/update`">
           <Button>Bearbeiten</Button> <br>
       </router-link><br/>
       </td>
@@ -18,7 +18,7 @@
        </router-link><br/>
       </td>
       <td>
-       <router-link :to="`/competitions/${id}/encounters/index`">
+       <router-link :to="`/competitions/${id}/encounters`">
           <Button>Begegnungen anzeigen</Button> <br>
        </router-link><br/>
       </td>
@@ -28,7 +28,7 @@
     </tr>
     <tr>
       <td>Kontakt: Telefonnummer: {{telefon}}, Mail-Adresse: {{mail}}, Website {{webiste}}</td>
-    </tr> 
+    </tr>
    <tr v-for="team in teams" :key="team.id">
       <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
     </tr> -->

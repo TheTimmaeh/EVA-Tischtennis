@@ -7,7 +7,7 @@
 
 <script>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute } from 'vue-router'
   import { api, setTitle, validate } from '@/helper'
   import Form from '@/components/Form'
 
@@ -19,6 +19,7 @@
     setup(){
       setTitle('Begegnung anlegen')
       const router = useRouter()
+      const route = useRoute()
       const message = ref('')
 
       const submit = (data) => {
@@ -48,10 +49,10 @@
         message,
         rows: [
           { name: 'encounter', text: 'Begegnung', field: 'h2' },
-          { name: 'home', text: 'Heimmannschaft:', field: 'search', apiPath: '/association_teams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'guest', text: 'Gastmannschaft:', field: 'search', apiPath: '/association_teams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'home', text: 'Heimmannschaft:', field: 'search', apiPath: `/competitions/${route.params.competitionId}/association_teams`, displayFormat: '{{ name }} - {{ association_name }}', lookupRow: ['name', 'location'], returnPath: 'id', validate: { required: true } },
+          { name: 'guest', text: 'Gastmannschaft:', field: 'search', apiPath: `/competitions/${route.params.competitionId}/association_teams`, displayFormat: '{{ name }} - {{ association_name }}', lookupRow: ['name', 'location'], returnPath: 'id', validate: { required: true } },
           { name: 'date', text: 'Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
-          { name: 'gamestage', text: 'Spielstude:', field: 'gamestageSelect', validate: { min: 2, max: 2, required: true } }, 
+          { name: 'gamestage', text: 'Spielstude:', field: 'gamestageSelect', validate: { min: 2, max: 2, required: true } },
         ],
       }
     },

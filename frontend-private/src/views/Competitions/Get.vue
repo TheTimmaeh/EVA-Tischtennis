@@ -2,8 +2,10 @@
   <div class="competition">
     Turnier {{ $route.params.competitionId }}
 
-    <router-link :to="`/associations/${$route.params.competitionId}/encounters`"><Button>Begegnungen</Button></router-link>
-    
+    <router-link :to="`/competitions/${$route.params.competitionId}/encounters`">
+      <Button>Begegnungen</Button>
+    </router-link>
+
     <br /><br />
 
     <router-view></router-view>

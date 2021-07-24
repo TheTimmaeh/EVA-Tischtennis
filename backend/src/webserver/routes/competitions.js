@@ -11,16 +11,19 @@ module.exports = (_db) => {
   router.get('/', optionalAuthenticateToken, getAllCompetitions)
 
   // Get (one competition)
-  router.get('/:competition', getCompetition)
+  router.get('/:competitionId', getCompetition)
 
   // Create
   router.post('/', optionalAuthenticateToken,  createCompetition)
 
   // Update
-  router.post('/:competition', authenticateToken, updateCompetition)
+  router.post('/:competitionId', authenticateToken, updateCompetition)
 
   // Delete
-  router.delete('/:competition', authenticateToken, deleteCompetition)
+  router.delete('/:competitionId', authenticateToken, deleteCompetition)
+
+  // AssociationTeam Search
+  router.get('/:competitionId/association_teams', authenticateToken, getAssociationTeams)
 
   return router
 }
@@ -42,7 +45,7 @@ async function getAllCompetitions(req, res){
 }
 
 async function getCompetition(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('competitions').where({ id: req.params.competition }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('competitions').where({ id: req.params.competitionId }))
   res.json({ success: true, data })
 }
 
@@ -100,7 +103,7 @@ async function updateCompetition(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('competitions').where({ id: req.params.competition }))
+    let data = (await db.first(select.admin).from('competitions').where({ id: req.params.competitionId }))
 
     res.json({ success: true, message: 'Turnierdaten wurden aktualisiert.', data })
   } else {
@@ -109,6 +112,24 @@ async function updateCompetition(req, res){
 }
 
 async function deleteCompetition(req, res){
-  await db('competitions').where({ id: req.params.competition }).del()
+  await db('competitions').where({ id: req.params.competitionId }).del()
   res.json({})
+}
+
+async function getAssociationTeams(req, res){
+  try {
+    let competition = await db.qb({ first: ['season', 'player_class'], from: 'competitions', were: { id: req.params.competitionId }})
+
+    let associations = await db.qb({ select: ['id', 'name'], from: 'associations', ...req.query })
+    let associationIds = associations.map((a) => a.id)
+
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', where: { season: competition.season, playerClass: competition.player_class }, whereIn: { association: associationIds }})
+
+    data = data.map((d) => Object.assign(d, { association_name: associations.find((a) => a.id == d.association).name}))
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
 }
