@@ -25,7 +25,7 @@
       const submit = (data) => {
         message.value = ''
 
-        api({ method: 'POST', path: `/associationTeams/${route.params.associationId}`, data }).then((res) => {
+        api({ method: 'POST', path: `/associations/${route.params.associationId}/teams`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){

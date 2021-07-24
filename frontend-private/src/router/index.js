@@ -31,6 +31,7 @@ const Associations = {
 const Seasons = () => import('../views/Seasons/Index.vue')
 const CreateSeason = () => import('../views/Seasons/Create.vue')
 const UpdateSeason = () => import('../views/Seasons/Update.vue')
+const DeleteSeason = () => import('../views/Seasons/Delete.vue')
 
 // Persons
 const Persons = () => import('../views/Persons/Index.vue')
@@ -148,15 +149,15 @@ const routes = [
         component: Associations.Teams.Update,
       },
       {
-        path: 'teams/:teamId/lineup',
+        path: 'teams/:teamId/members',
         component: Associations.Teams.LineUp,
       },
       {
-        path: 'teams/:teamId/lineupcreate',
+        path: 'teams/:teamId/members/create',
         component: Associations.Teams.LineUpCreate,
       },
       {
-        path: 'teams/:teamId/lineupupdate',
+        path: 'teams/:teamId/members/update',
         component: Associations.Teams.LineUpUpdate,
       },
     ]
@@ -175,6 +176,11 @@ const routes = [
     path: '/seasons/:seasonId/update',
     name: 'UpdateSeason',
     component: UpdateSeason,
+  },
+  {
+    path: '/seasons/:seasonId/delete',
+    name: 'DeleteSeason',
+    component: DeleteSeason,
   },
   {
     path: '/persons',

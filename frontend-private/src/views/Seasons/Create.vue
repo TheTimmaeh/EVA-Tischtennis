@@ -47,7 +47,7 @@
         invalid,
         message,
         rows: [
-          { name: 'year', text: 'Jahr der Saison:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear(), validate: { type: validate.types.year, required: true } },
+          { name: 'year', text: 'Jahr der Saison:', field: 'input', type: 'number', min: 1874, max: new Date().getFullYear() + 10, validate: { type: validate.types.year, required: true } },
           { name: 'season', text: 'Saison:', field: 'seasonSelect', validate: { min: 2, max: 2, required: true } },
           { name: 'title', text: 'Titel:', field: 'input', type: 'text', validate: { min: 3, max: 255, required: true } },
           { name: 'description', text: 'Beschreibung:', field: 'textarea', validate: { max: 2000 } },

@@ -14,13 +14,13 @@ module.exports = (_db) => {
   router.post('/', authenticateToken, createSeason)
 
   // Get (one saison)
-  router.get('/:season', optionalAuthenticateToken, getSeason)
+  router.get('/:seasonId', optionalAuthenticateToken, getSeason)
 
   // Update
-  router.post('/:season', authenticateToken, updateSeason)
+  router.post('/:seasonId', authenticateToken, updateSeason)
 
   // Delete
-  router.delete('/:season', authenticateToken, deleteSeason)
+  router.delete('/:seasonId', authenticateToken, deleteSeason)
 
   return router
 }
@@ -43,7 +43,7 @@ async function getAllSeasons(req, res){
 }
 
 async function getSeason(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('seasons').where({ id: req.params.season }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('seasons').where({ id: req.params.seasonId }))
   res.json({ success: true, data })
 }
 
@@ -81,7 +81,7 @@ async function updateSeason(req, res){
   let result
 
   try {
-    result = await db('seasons').where({ id: req.params.season }).update({
+    result = await db('seasons').where({ id: req.params.seasonId }).update({
       year: req.body.year,
       season: req.body.season,
       title: req.body.title,
@@ -99,7 +99,7 @@ async function updateSeason(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('seasons').where({ id: req.params.season }))
+    let data = (await db.first(select.admin).from('seasons').where({ id: req.params.seasonId }))
 
     res.json({ success: true, message: 'Die Daten der Saison wurden aktualisiert.', data })
   } else {
@@ -108,6 +108,16 @@ async function updateSeason(req, res){
 }
 
 async function deleteSeason(req, res){
-  await db('seasons').where({ year: req.year, season: req.params.season }).del()
-  res.json({})
+  let result
+
+  try {
+    result = await db('seasons').where({ id: req.params.seasonId }).del()
+  } catch(err){
+    res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+    console.error({ ...err })
+
+    return
+  }
+
+  res.json({ success: true, message: 'Die Daten der Saison wurden gelöscht.' })
 }

@@ -4,7 +4,10 @@ const db = knex(require('./knexfile')[process.env.NODE_ENV])
 db.qb = (data) => {
   let query = db
 
+  let whereCount = 0
+
   if(data.select) query = query.select(data.select)
+  if(data.distinct) query = query.select(data.distinct)
   if(data.first) query = query.first(data.first)
   if(data.from) query = query.from(data.from)
   if(data.filter){
@@ -16,18 +19,31 @@ db.qb = (data) => {
         if(typeof filter.lookupRow === 'string') filter.lookupRow = [filter.lookupRow]
 
         let queries = filter.query.split(/[^a-z\u00C0-\u017F]+/i).filter((q) => q.length > 0)
-        let count = 0
 
-        filter.lookupRow.forEach((r) => {
-          queries.forEach((q) => {
-            if(++count == 1) query.where(r, 'like', `%${q}%`)
-            else             query.orWhere(r, 'like', `%${q}%`)
+        if(queries.length > 0){
+          query.where((subquery) => {
+            filter.lookupRow.forEach((r) => {
+              queries.forEach((q) => {
+                if(++whereCount == 1) subquery.where(r, 'like', `%${q}%`)
+                else                  subquery.orWhere(r, 'like', `%${q}%`)
+              })
+            })
           })
-        })
+        }
       } else if(filter.type == 'exact'){
         // Do exact search
       }
     }
+  }
+  if(data.where){
+    if(++whereCount == 1) query = query.where(data.where)
+    else                  query = query.andWhere(data.where)
+  }
+  if(data.whereIn){
+    Object.keys(data.whereIn).forEach((column) => {
+      if(++whereCount == 1) query = query.whereIn(column, data.whereIn[column])
+      else                  query = query.andWhereIn(column, data.whereIn[column])
+    })
   }
   if(data.order) query = query.orderBy(data.order)
   if(data.limit) query = query.limit(data.limit)
