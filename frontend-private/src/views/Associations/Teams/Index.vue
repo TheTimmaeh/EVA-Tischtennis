@@ -27,7 +27,7 @@ export default {
 
     const teams = ref([])
 
-    api('/associationTeams').then((res) => res.data).then((res) => {
+    api(`/associations/${route.params.associationId}/teams`).then((res) => res.data).then((res) => {
       if(!res.success){
         console.error('Fehler...', res)
         return

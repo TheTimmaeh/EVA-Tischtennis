@@ -8,22 +8,19 @@ module.exports = (_db) => {
   const { generateToken, authenticateToken } = require('../../helpers/jwt')(db)
 
   // Index
-  router.get('/', getAllAssociationTeams)
+  router.get('/', getAllAssociationTeamMembers)
 
   // Create
-  router.post('/', authenticateToken, authenticateToken, createAssociationTeam)
+  router.post('/', authenticateToken, authenticateToken, createAssociationTeamMember)
 
   // Get (one associationTeam)
-  router.get('/:associationTeamId', getAssociationTeam)
+  router.get('/:associationTeamMemberId', getAssociationTeamMember)
 
   // Update
-  router.post('/:associationTeamId', authenticateToken, updateAssociationTeam)
+  router.post('/:associationTeamMemberId', authenticateToken, updateAssociationTeamMember)
 
   // Delete
-  router.delete('/:associationTeamId', authenticateToken, deleteAssociationTeam)
-
-  // AssociationTeamMembers
-  router.use('/:associationTeamId/members', require('./associationTeamMembers')(db))
+  router.delete('/:associationTeamMemberId', authenticateToken, deleteAssociationTeamMember)
 
   return router
 }
@@ -34,9 +31,15 @@ const select = {
 }
 
 
-async function getAllAssociationTeams(req, res){
+async function getAllAssociationTeamMembers(req, res){
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', ...req.query })
+
+    // For das aktuelle Team: team = req.params.associationTeamId
+    // For den aktuellen Verein: komplizierter!
+
+    req.query.where = Object.assign({ team: req.params.associationTeamId }, req.query.where)
+
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'team_members', ...req.query })
 
     res.json({ success: true, data })
   } catch(err){
@@ -45,14 +48,14 @@ async function getAllAssociationTeams(req, res){
   }
 }
 
-async function getAssociationTeam(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('association_teams').where({ id: req.params.associationTeamId }))
+async function getAssociationTeamMember(req, res){
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('team_members').where({ id: req.params.associationTeamMemberId }))
   res.json({ success: true, data })
 }
 
-async function createAssociationTeam(req, res){
+async function createAssociationTeamMember(req, res){
   try {
-    result = await db('association_teams').insert({
+    result = await db('team_members').insert({
       name: req.body.nameAssociationClass,
       season: req.body.season,
       playerClass: req.body.playerClass,
@@ -70,27 +73,7 @@ async function createAssociationTeam(req, res){
   }
 
   if(!!result?.[0]){
-    let data = await db('association_teams').where({ id: result[0] }).first()
-
-    try {
-      result = await db('team_members').insert([
-        { team: data.id, position: 'E1' },
-        { team: data.id, position: 'E2' },
-        { team: data.id, position: 'E3' },
-        { team: data.id, position: 'D1' },
-        { team: data.id, position: 'D2' },
-      ])
-    } catch(err){
-      if(err.code === 'ER_DUP_ENTRY'){
-        res.json({ success: false, message: `Es existieren bereits Team Mitglieder für die Team ID ${data.id}.` })
-      } else {
-        res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
-        console.error({ ...err })
-      }
-
-      return
-    }
-
+    let data = await db('team_members').where({ id: result[0] }).first()
 
     res.json({ success: true, message: 'Vereinsmannschaft wurde angelegt.', data })
   } else {
@@ -98,11 +81,11 @@ async function createAssociationTeam(req, res){
   }
 }
 
-async function updateAssociationTeam(req, res){
+async function updateAssociationTeamMember(req, res){
   let result
 
   try {
-    result = await db('association_teams').where({ id: req.params.associationTeamId }).update({
+    result = await db('team_members').where({ id: req.params.associationTeamMemberId }).update({
       name: req.body.nameAssociationClass,
       season: req.body.season,
       playerClass: req.body.playerClass,
@@ -119,7 +102,7 @@ async function updateAssociationTeam(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('association_teams').where({ id: req.params.associationTeamId }))
+    let data = (await db.first(select.admin).from('team_members').where({ id: req.params.associationTeamMemberId }))
 
     res.json({ success: true, message: 'Vereinsmanschaftsdaten wurden aktualisiert.', data })
   } else {
@@ -127,7 +110,7 @@ async function updateAssociationTeam(req, res){
   }
 }
 
-async function deleteAssociationTeam(req, res){
-  await db('association_teams').where({ id: req.params.associationTeamId }).del()
+async function deleteAssociationTeamMember(req, res){
+  await db('team_members').where({ id: req.params.associationTeamMemberId }).del()
   res.json({})
 }

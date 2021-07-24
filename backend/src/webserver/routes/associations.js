@@ -22,6 +22,9 @@ module.exports = (_db) => {
   // Delete
   router.delete('/:associationId', authenticateToken, deleteAssociation)
 
+  // Members
+  router.get('/:associationId/members', optionalAuthenticateToken, getAssociationMembers)
+
   // AssociationTeams
   router.use('/:associationId/teams', require('./associationTeams')(db))
 
@@ -31,6 +34,11 @@ module.exports = (_db) => {
 const select = {
   admin: ['*'],
   guest: ['*'],
+}
+
+const memberSelect = {
+  admin: ['*'],
+  guest: ['id', 'name', 'surname'],
 }
 
 
@@ -134,4 +142,25 @@ async function updateAssociation(req, res){
 async function deleteAssociation(req, res){
   await db('associations').where({ name: req.params.associationId }).del()
   res.json({})
+}
+
+async function getAssociationMembers(req, res){
+  try {
+    let teams = await db.qb({ select: ['id', 'name'], from: 'association_teams', where: { association: req.params.associationId } })
+    let teamIds = teams.map((t) => t.id)
+
+    let members = await db.qb({ distinct: ['member', 'team', 'position'], from: 'team_members', whereIn: { team: teamIds } })
+    let memberIds = members.map((m) => m.member)
+
+    let data = await db.qb({ select: (req.user?.isAdmin ? memberSelect.admin : memberSelect.guest), from: 'persons', whereIn: { id: memberIds }, ...req.query })
+
+    data = data.map((person) => Object.assign(person, { teams: members.filter((m) => m.member == person.id).map((m) => {
+      return { id: m.team, team: teams.find((t) => t.id == m.team).name, position: m.position }
+    })}))
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
 }
