@@ -259,6 +259,10 @@ const routes = [
         path: 'encounters/:encountersId/update',
         component: Competitions.Encounters.Update,
       },
+      {
+        path: 'teams',
+        component: Competitions.Teams.Index,
+      },
     ]
   },
   {
