@@ -25,7 +25,7 @@
       const submit = (data) => {
         message.value = ''
         console.log(data)
-        api({ method: 'POST', path: `/encounters/${route.params.competitionId}`, data }).then((res) => {
+        api({ method: 'POST', path: `/competitions/${route.params.competitionId}/encounters/create`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
@@ -50,9 +50,9 @@
         rows: [
           { name: 'encounter', text: 'Begegnung', field: 'h2' },
           { name: 'home', text: 'Heimmannschaft:', field: 'search', apiPath: `/competitions/${route.params.competitionId}/association_teams`, displayFormat: '{{ name }} - {{ association_name }}', lookupRow: ['name', 'location'], returnPath: 'id', validate: { required: true } },
-          { name: 'guest', text: 'Gastmannschaft:', field: 'search', apiPath: `/competitions/${route.params.competitionId}/association_teams`, displayFormat: '{{ name }} - {{ association_name }}', lookupRow: ['name', 'location'], returnPath: 'id', validate: { required: true } },
+          { name: 'visitor', text: 'Gastmannschaft:', field: 'search', apiPath: `/competitions/${route.params.competitionId}/association_teams`, displayFormat: '{{ name }} - {{ association_name }}', lookupRow: ['name', 'location'], returnPath: 'id', validate: { required: true } },
           { name: 'date', text: 'Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } },
-          { name: 'gamestage', text: 'Spielstude:', field: 'gamestageSelect', validate: { min: 2, max: 2, required: true } },
+          { name: 'gamestage', text: 'Gamestage:', field: 'gameStageSelect', validate: { min: 1, max: 2, required: true } },
         ],
       }
     },
