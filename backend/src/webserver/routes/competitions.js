@@ -25,7 +25,15 @@ module.exports = (_db) => {
   // AssociationTeam Search
   router.get('/:competitionId/association_teams', authenticateToken, getAssociationTeams)
 
+  // Encounters Create
+  router.post('/:competitionId/encounters/create', authenticateToken, createEncounters)
+
+  // Encounters Create
+  router.get('/:competitionId/encounters', authenticateToken, getAllEncounters)
   return router
+
+  // Encounters Update
+  router.post('/:competitionId/encounters/create', authenticateToken, updateEncounters)
 }
 
 const select = {
@@ -131,5 +139,81 @@ async function getAssociationTeams(req, res){
   } catch(err){
     console.error(err.message)
     res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
+}
+
+
+async function createEncounters(req, res){
+  let result
+
+  try {
+    result = await db('encounters').insert({
+      competition: req.params.competitionId,
+      game_stage: req.body.gamestage,
+      home: req.body.home,
+      visitor: req.body.visitor,
+      datetime: req.body.date,
+    })
+    console.log(result)
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits eine Begegnung zwischen ${req.body.home} ${req.body.visitor}.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+    console.error(err)
+
+    return
+  }
+
+  if(!!result?.[0]){
+    let data = await db('competitions').where({ id: result[0] }).first()
+
+    res.json({ success: true, message: 'Turnier wurde angelegt.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (2)' })
+  }
+}
+
+async function getAllEncounters(req, res){
+  try {
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', ...req.query })
+
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
+}
+
+async function updateEncounters(req, res){
+  let result
+
+  try {
+    result = await db('encounters').where({ id: req.params.encontersId }).update({
+      competition: req.params.competitionId,
+      game_stage: req.body.gamestage,
+      home: req.body.home,
+      visitor: req.body.visitor,
+      datetime: req.body.date,
+    })
+  } catch(err){
+    if(err.code === 'ER_DUP_ENTRY'){
+      res.json({ success: false, message: `Es existiert bereits eine solche Begegnung.` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+
+    return
+  }
+
+  if(result === 1){
+    let data = (await db.first(select.admin).from('encounters').where({ id: req.params.encontersId }))
+
+    res.json({ success: true, message: 'Begegnungsdaten wurden aktualisiert.', data })
+  } else {
+    res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (4)' })
   }
 }
