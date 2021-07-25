@@ -36,6 +36,9 @@ export default {
       teams.value = res.data
     })
 
+  
+
+
     return {
       teams,
     }

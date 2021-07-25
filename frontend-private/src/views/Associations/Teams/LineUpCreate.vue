@@ -49,11 +49,11 @@
         message,
         rows: [
           { name: 'member', text: 'Mannschaftsaufstellung', field: 'h2' },
-          { name: 'position1', text: 'Spieler 1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'position1', text: 'Spieler 2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'position1', text: 'Spieler 3:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'position1', text: 'Spieler 4:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
-          { name: 'position1', text: 'Spieler 5:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'E1', text: 'Spieler 1 - Position E1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'E2', text: 'Spieler 2 - Position E2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'E3', text: 'Spieler 3 - Position E3:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'DD1', text: 'Spieler 4 - Position DD1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
+          { name: 'DD2', text: 'Spieler 5 - Position DD2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true } },
         ],
       }
     },
