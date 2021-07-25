@@ -10,78 +10,45 @@ module.exports = (_db) => {
   // Index
   router.get('/', getAllMembers)
 
-  // Create
-  router.post('/', authenticateToken, createMember)
+  // // Create
+  // router.post('/', authenticateToken, createMember)
 
-  // Get (one member)
-  router.get('/:member', getMember)
+  // // Get (one member)
+  // router.get('/:member', getMember)
 
-  // Update
-  router.post('/:member', authenticateToken, updateMember)
+  // // Update
+  // router.post('/:member', authenticateToken, updateMember)
 
-  // Delete
-  router.delete('/:member', authenticateToken, deleteMember)
+  // // Delete
+  // router.delete('/:member', authenticateToken, deleteMember)
 
   return router
 }
 
 async function getAllMembers(req, res){
-  let members = (await db.select().from('members'))
-  res.json({members})
-}
+  //funktioniert noch nicht
+  // man hat die id der association
+  //hole alle accociationTeamsIDs wo association gleich der id
+  // hole alle teamMember wo teamid in den geholten
 
-async function getMember(req, res){
-  let member = (await db.select().from('members').where({ id: req.params.member }))
-  res.json({member})
-}
+  try {
+    let teams = await db.qb({ select: ['id', 'name'], from: 'association_teams', where: { association: req.params.associationId } })
+    let teamIds = teams.map((t) => t.id)
 
-async function createMember(req, res){
-  db('members').insert({
-    name: req.name,
-    surname: req.surname,
-    gender: req.gender,
-    birthday: req.birthday,
-    association: req.association,
-    board: req.board,
-    playerclass: req.playerclass,
-    team: req.team,
-    street: req.street,
-    streetnumber: req.streetnumber,
-    zipcode: req.zipcode,
-    city: req.city,
-    state: req.state,
-    country: req.country,
-    phone: req.phone,
-    mail: req.mail,
-  })
+    let members = await db.qb({ distinct: ['member', 'team', 'position'], from: 'team_members', whereIn: { team: teamIds } })
+    let memberIds = members.map((m) => m.member)
 
-  res.json({})
-}
+    let data = await db.qb({ select: (req.user?.isAdmin ? memberSelect.admin : memberSelect.guest), from: 'persons', whereIn: { id: memberIds }, ...req.query })
 
-async function updateMember(req, res){
-  db('members').where({ id: req.params.member }).update({
-    name: req.name,
-    surname: req.surname,
-    gender: req.gender,
-    birthday: req.birthday,
-    association: req.association,
-    board: req.board,
-    playerclass: req.playerclass,
-    team: req.team,
-    street: req.street,
-    streetnumber: req.streetnumber,
-    zipcode: req.zipcode,
-    city: req.city,
-    state: req.state,
-    country: req.country,
-    phone: req.phone,
-    mail: req.mail,
-  })
+    data = data.map((person) => Object.assign(person, { teams: members.filter((m) => m.member == person.id).map((m) => {
+      return { id: m.team, team: teams.find((t) => t.id == m.team).name, position: m.position }
+    })}))
+    console.log(data)
 
-  res.json({})
-}
-
-async function deleteMember(req, res){
-  await db('members').where({ id: req.params.member }).del()
-  res.json({})
+    res.json({ success: true, data })
+  } catch(err){
+    console.error(err.message)
+    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
+  }
+  
 }
