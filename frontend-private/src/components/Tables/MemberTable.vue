@@ -11,7 +11,7 @@
         <tr>
           <th>Vorname</th>
           <th>Nachname</th>
-          <th>Mannschaft</th>
+          <th>Anzahl der Mannschaften</th>
           <th>Bearbeiten</th>
         </tr>
       </thead>

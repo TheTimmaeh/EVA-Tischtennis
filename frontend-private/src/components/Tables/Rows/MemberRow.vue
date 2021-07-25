@@ -2,7 +2,7 @@
   <tr :class="{ isLast }">
     <td>{{name}}</td>
     <td>{{surname}}</td>
-    <td>{{association}}</td>
+    <td>{{teams.length}}</td>
     <td>
       <router-link :to="`/${path}/${id}/update`">
           <Button>Bearbeiten</Button> <br>
