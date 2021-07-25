@@ -29,7 +29,6 @@
     <PlayerCard></PlayerCard><br />
     <PlayerClassCard></PlayerClassCard><br />
     <AssociationCard></AssociationCard><br />
-    <MemberTable :members="members"></MemberTable><br />
     <!-- <SeasonCard></SeasonCard><br /> -->
     <Table :content="content" :titles="titles"></Table><br />
   </div>
@@ -47,7 +46,6 @@ import PlayerCard from '@/components/Cards/PlayerCard'
 import PlayerClassCard from '@/components/Cards/PlayerClassCard'
 import SeasonCard from '@/components/Cards/SeasonCard'
 import AssociationCard from '@/components/Cards/AssociationCard'
-import MemberTable from '@/components/Tables/MemberTable'
 import Table from '@/components/Tables/Table'
 
 export default {
@@ -62,7 +60,6 @@ export default {
     PlayerClassCard,
     SeasonCard,
     AssociationCard,
-    MemberTable,
     Table,
   },
   setup(){
