@@ -47,17 +47,7 @@ const PlayerClasses = () => import('../views/PlayerClasses/Index.vue')
 const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
 const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
 
-// // Competitions
-// const Competitions = () => import('../views/Competitions/Index.vue')
-// const CreateCompetition = () => import('../views/Competitions/Create.vue')
-// const UpdateCompetition = () => import('../views/Competitions/Update.vue')
-
-// // Encounters
-// const Encounters = () => import('../views/Competitions/Encounters/Index.vue')
-// const CreateEncounters = () => import('../views/Competitions/Encounters/Create.vue')
-// const UpdateEncounters = () => import('../views/Competitions/Encounters/Update.vue')
-
-
+// Competitions
 const Competitions = {
   Index: () => import('../views/Competitions/Index.vue'),
   Get: () => import('../views/Competitions/Get.vue'),
@@ -67,8 +57,9 @@ const Competitions = {
   Encounters: {
     Index: () => import('../views/Competitions/Encounters/Index.vue'),
     Create: () => import('../views/Competitions/Encounters/Create.vue'),
-    Update:() => import('../views/Competitions/Encounters/Update.vue'),
+    Update: () => import('../views/Competitions/Encounters/Update.vue'),
   },
+  Teams: () => import('../views/Competitions/Teams.vue'),
 }
 
 // Match
@@ -261,7 +252,7 @@ const routes = [
       },
       {
         path: 'teams',
-        component: Competitions.Teams.Index,
+        component: Competitions.Teams,
       },
     ]
   },
