@@ -22,18 +22,19 @@
       const route = useRoute()
       const rows = ref()
 
-      api(`/encounters/${route.params.encounterId}`).then((res) => res.data).then((res) => {
+      api(`/competitions/${route.params.competitionId}/encounters`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
         }
+        console.log(res.data)
 
         rows.value = [
           { name: 'encounter', text: 'Begegnung', field: 'h2' },
           { name: 'home', text: 'Heimmannschaft:', field: 'search', apiPath: '/association_teams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.home },
           { name: 'guest', text: 'Gastmannschaft:', field: 'search', apiPath: '/association_teams', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.visitor },
           { name: 'date', text: 'Datum:', field: 'input', type: 'date', validate: { type: validate.types.date, required: true } , value:res.data.datetime},
-          { name: 'gamestage', text: 'Spielstude:', field: 'gamestageSelect', validate: { min: 2, max: 2, required: true }, value:res.data.game_stage }, 
+          { name: 'gamestage', text: 'Spielstude:', field: 'gamestageSelect', validate: { min: 1, max: 2, required: true }, value:res.data.game_stage }, 
       ]
       })
 
@@ -42,7 +43,7 @@
       const submit = (data) => {
         message.value = ''
 
-        api({ method: 'POST', path: `/encounters/${route.params.encounterId}`, data }).then((res) => {
+        api({ method: 'POST', path: `/competitions/${route.params.competitionId}/encounters/update`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
