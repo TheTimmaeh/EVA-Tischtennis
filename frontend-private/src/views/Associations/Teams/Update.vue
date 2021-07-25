@@ -22,7 +22,7 @@
       const route = useRoute()
       const rows = ref()
 
-      api(`/associationTeams/${route.params.teamId}`).then((res) => res.data).then((res) => {
+      api(`/associations/${route.params.associationId}/teams/${route.params.teamId}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
