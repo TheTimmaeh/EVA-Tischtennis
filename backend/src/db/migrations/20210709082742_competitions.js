@@ -11,30 +11,30 @@ exports.up = (knex) => {
     competitions.increments('id')
     competitions.string('name', 50).notNullable()
     competitions.string('description', 255)
-    competitions.integer('player_class').unsigned().references('classes.id')
-    competitions.integer('season').unsigned().references('seasons.id')
+    competitions.integer('player_class').notNullable().unsigned().references('classes.id')
+    competitions.integer('season').notNullable().unsigned().references('seasons.id')
     competitions.timestamps(true, true)
     console.info('DB | Migration: competitions | Table competitions created.')
 
   // Verein gegen Verein
   }).createTable('encounters', (encounters) => {
     encounters.increments('id')
-    encounters.integer('competition').unsigned().references('competitions.id')
-    encounters.integer('game_stage').unsigned().references('game_stages.id')
-    encounters.integer('home').unsigned().references('association_teams.id')
-    encounters.integer('visitor').unsigned().references('association_teams.id')
-    encounters.datetime('datetime')
+    encounters.integer('competition').notNullable().unsigned().references('competitions.id')
+    encounters.integer('game_stage').notNullable().unsigned().references('game_stages.id')
+    encounters.integer('home').notNullable().unsigned().references('association_teams.id')
+    encounters.integer('visitor').notNullable().unsigned().references('association_teams.id')
+    encounters.datetime('datetime').notNullable()
     encounters.timestamps(true, true)
     console.info('DB | Migration: competitions | Table encounters created.')
 
   // Spieler gegen Spieler
   }).createTable('matches', (matches) => {
     matches.increments('id')
-    matches.integer('encounter').unsigned().references('encounters.id')
-    matches.integer('home_player').unsigned().references('team_members.id')
-    matches.integer('visitor_player').unsigned().references('team_members.id')
-    matches.integer('referee').unsigned().references('users.id')
-    matches.integer('sets')
+    matches.integer('encounter').notNullable().unsigned().references('encounters.id')
+    matches.integer('home_player').notNullable().unsigned().references('team_members.id')
+    matches.integer('visitor_player').notNullable().unsigned().references('team_members.id')
+    matches.integer('referee').notNullable().unsigned().references('users.id')
+    matches.integer('sets').notNullable()
     matches.integer('home_score')
     matches.integer('visitor_score')
     matches.timestamps(true, true)
@@ -43,7 +43,7 @@ exports.up = (knex) => {
   // Sets
   }).createTable('sets', (sets) => {
     sets.increments('id')
-    sets.integer('match').unsigned().references('matches.id')
+    sets.integer('match').notNullable().unsigned().references('matches.id')
     sets.integer('home_score')
     sets.integer('visitor_score')
     sets.timestamps(true, true)
