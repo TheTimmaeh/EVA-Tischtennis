@@ -31,8 +31,8 @@
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
-            message.value = 'Vereinsmannschaft wurde angelegt.'
-            setTimeout(() => router.push({ path: `/associations/${route.params.associationId}` }), 3000)
+            message.value = `Vereinsmannschaft wurde angelegt.`
+            setTimeout(() => router.push({ path: `/associations/${route.params.associationId}/teams/${res.data.teamId}/members/update` }), 3000)
           }
         }).catch((err) => {
           message.value = err
