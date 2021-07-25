@@ -13,10 +13,10 @@
         type: Array,
         default: [
           { value: '', text: '' },
-          { value: 'fi', text: 'Finale' },
-          { value: 'ha', text: 'Halbfinale' },
-          { value: 'ei', text: 'Achtelfinale' },
-          { value: 'fo', text: 'Vorentscheid' },
+          { value: '1', text: 'Finale' },
+          { value: '2', text: 'Halbfinale' },
+          { value: '3', text: 'Achtelfinale' },
+          { value: '4', text: 'Vorentscheid' },
         ],
       },
       label: {
