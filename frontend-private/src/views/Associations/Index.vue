@@ -12,8 +12,8 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import AssociationCard from '@/components/AssociationCard'
+import Button from '@/components/FormElements/Button'
+import AssociationCard from '@/components/Cards/AssociationCard'
 
 export default {
   name: 'Associations',

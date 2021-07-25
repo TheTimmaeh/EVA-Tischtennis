@@ -4,7 +4,7 @@
 
 <script>
   import { ref, watch } from 'vue'
-  import Select from '@/components/Select'
+  import Select from '@/components/FormElements/Selects/Select'
 
   export default {
     name: 'GameStageSelect',
@@ -40,7 +40,7 @@
     },
     setup(props, { emit }){
       const error = ref(props.error === 'true' ? true : props.error)
-      const selectValue = ref('')
+      const selectValue = ref(props.modelValue || '')
 
       watch(selectValue, () => {
         emit('update:modelValue', selectValue.value)

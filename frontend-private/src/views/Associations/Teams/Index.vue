@@ -12,8 +12,8 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import TeamCard from '@/components/TeamCard'
+import Button from '@/components/FormElements/Button'
+import TeamCard from '@/components/Cards/TeamCard'
 
 export default {
   name: 'AssosiationsTeams',

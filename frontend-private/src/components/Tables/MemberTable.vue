@@ -22,9 +22,9 @@
 
 <script>
   import { computed } from 'vue'
-  import Card from '@/components/Card'
-  import Button from '@/components/Button'
-  import MemberRow from './MemberRow'
+  import Card from '@/components/Cards/Card'
+  import Button from '@/components/FormElements/Button'
+  import MemberRow from '@/components/Tables/Rows/MemberRow'
 
   export default {
     name: 'MemberTable',
@@ -40,7 +40,7 @@
       },
       path:{
         type: String,
-        required: true, 
+        required: true,
       }
     },
     setup(props){

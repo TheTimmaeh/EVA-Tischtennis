@@ -4,17 +4,18 @@
 
 <script>
   import { ref, watch } from 'vue'
-  import Select from '@/components/Select'
+  import Select from '@/components/FormElements/Selects/Select'
 
   export default {
-    name: 'SeasonSelect',
+    name: 'GenderSelect',
     props: {
       options: {
         type: Array,
         default: [
           { value: '', text: '' },
-          { value: 'wi', text: 'Winter' },
-          { value: 'su', text: 'Sommer' },
+          { value: 'f', text: 'Weiblich' },
+          { value: 'm', text: 'Männlich' },
+          { value: 'd', text: 'Divers' },
         ],
       },
       label: {
@@ -38,7 +39,7 @@
     },
     setup(props, { emit }){
       const error = ref(props.error === 'true' ? true : props.error)
-      const selectValue = ref('')
+      const selectValue = ref(props.modelValue || '')
 
       watch(selectValue, () => {
         emit('update:modelValue', selectValue.value)

@@ -1,22 +1,16 @@
 <template>
   <tr :class="{ isLast }">
-    <td>{{name}}</td>
-    <td>{{surname}}</td>
-    <td>{{association}}</td>
-    <td>
-      <router-link :to="`/${path}/${id}/update`">
-          <Button>Bearbeiten</Button> <br>
-      </router-link><br/>
-    </td>
+    <td>{{position}}</td>
+    <td>{{member}}</td>
   </tr>
 </template>
 
 <script>
   import { ref } from 'vue'
-  import Button from '@/components/Button'
+  import Button from '@/components/FormElements/Button'
 
   export default {
-    name: 'MemberRow',
+    name: 'CompetitionerRow',
     components: {
       Button,
     },

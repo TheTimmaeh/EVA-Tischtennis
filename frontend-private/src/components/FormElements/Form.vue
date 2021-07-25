@@ -89,16 +89,16 @@
 <script>
   import { ref } from 'vue'
   import { validate } from '@/helper'
-  import Button from '@/components/Button'
-  import InputField from '@/components/InputField'
-  import SearchField from '@/components/SearchField'
-  import TextArea from '@/components/TextArea'
-  import SeasonSelect from '@/components/SeasonSelect'
-  import CountrySelect from '@/components/CountrySelect'
-  import StateSelect from '@/components/StateSelect'
-  import GenderSelect from '@/components/GenderSelect'
-  import GameStageSelect from '@/components/GameStageSelect'
-  import CheckBox from '@/components/CheckBox'
+  import Button from '@/components/FormElements/Button'
+  import InputField from '@/components/FormElements/InputField'
+  import SearchField from '@/components/FormElements/SearchField'
+  import TextArea from '@/components/FormElements/TextArea'
+  import SeasonSelect from '@/components/FormElements/Selects/SeasonSelect'
+  import CountrySelect from '@/components/FormElements/Selects/CountrySelect'
+  import StateSelect from '@/components/FormElements/Selects/StateSelect'
+  import GenderSelect from '@/components/FormElements/Selects/GenderSelect'
+  import GameStageSelect from '@/components/FormElements/Selects/GameStageSelect'
+  import CheckBox from '@/components/FormElements/CheckBox'
 
   export default {
     name: 'Form',

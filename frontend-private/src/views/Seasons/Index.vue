@@ -11,8 +11,8 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import SeasonCard from '@/components/SeasonCard'
+import Button from '@/components/FormElements/Button'
+import SeasonCard from '@/components/Cards/SeasonCard'
 
 export default {
   name: 'Saisons',

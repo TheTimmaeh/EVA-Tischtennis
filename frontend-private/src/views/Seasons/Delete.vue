@@ -13,7 +13,7 @@
   import { ref } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import { api, setTitle } from '@/helper'
-  import Button from '@/components/Button'
+  import Button from '@/components/FormElements/Button'
 
   export default {
     name: 'DeleteSeason',

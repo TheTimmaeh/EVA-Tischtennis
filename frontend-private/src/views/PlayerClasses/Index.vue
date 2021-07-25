@@ -11,8 +11,8 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import PlayerClassCard from '@/components/PlayerClassCard'
+import Button from '@/components/FormElements/Button'
+import PlayerClassCard from '@/components/Cards/PlayerClassCard'
 
 export default {
   name: 'PlayerClasses',

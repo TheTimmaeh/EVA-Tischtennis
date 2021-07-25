@@ -9,7 +9,7 @@
 
 <script>
   import { ref } from 'vue'
-  import Button from '@/components/Button'
+  import Button from '@/components/FormElements/Button'
 
   export default {
     name: 'MemberRow',

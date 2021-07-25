@@ -11,8 +11,8 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import CompetitionCard from '@/components/CompetitionCard'
+import Button from '@/components/FormElements/Button'
+import CompetitionCard from '@/components/Cards/CompetitionCard'
 
 export default {
   name: 'Competitions',

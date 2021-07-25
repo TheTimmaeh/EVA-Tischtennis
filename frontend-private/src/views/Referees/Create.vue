@@ -9,7 +9,7 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { axios, setTitle, validate } from '@/helper'
-  import Form from '@/components/Form'
+  import Form from '@/components/FormElements/Form'
 
   export default {
     name: 'CreateReferee',

@@ -9,8 +9,8 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import LineUpCard from '@/components/LineUpCard'
+import Button from '@/components/FormElements/Button'
+import LineUpCard from '@/components/Cards/LineUpCard'
 
 export default {
   name: 'Mannschaftsaufstellung',

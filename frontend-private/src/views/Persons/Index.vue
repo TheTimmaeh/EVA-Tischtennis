@@ -10,8 +10,8 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-import Button from '@/components/Button'
-import MemberTable from '@/components/MemberTable'
+import Button from '@/components/FormElements/Button'
+import MemberTable from '@/components/Tables/MemberTable'
 
 export default {
   name: 'Persons',

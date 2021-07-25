@@ -9,7 +9,7 @@
   import { ref } from 'vue'
   import { useRouter, useRoute  } from 'vue-router'
   import { api, setTitle, validate } from '@/helper'
-  import Form from '@/components/Form'
+  import Form from '@/components/FormElements/Form'
 
   export default {
     name: 'UpdateLineUp',

@@ -24,7 +24,7 @@
 <script>
   import { ref, computed } from 'vue'
   import { api } from '@/helper'
-  import InputField from '@/components/InputField'
+  import InputField from '@/components/FormElements/InputField'
 
   export default {
     name: 'SearchField',

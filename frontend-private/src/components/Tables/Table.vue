@@ -1,6 +1,5 @@
-
 <template>
-  <Card v-if="members.length > 0">
+  <Card v-if="content?.length > 0">
     <table>
       <colgroup>
         <col class="thirty" />
@@ -10,46 +9,43 @@
       </colgroup>
       <thead>
         <tr>
-          <th>Stellung</th>
-          <th>Vorname</th>
-          <th>Nachname</th>
-          <th>Bearbeiten</th>
+          <th v-for="title in titles" :key="title.id" > {{title.text}}</th>
         </tr>
       </thead>
-      <CompetitionerRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path"/>
+      <Row v-for="(row, index) in content" :key="row.id" :data="row.content" :isLast="content.length - 1 == index" />
     </table>
   </Card>
 </template>
 
 <script>
   import { computed } from 'vue'
-  import Card from '@/components/Card'
-  import Button from '@/components/Button'
-  import CompetitionerRow from '@/components/CompetitionerRow'
+  import Card from '@/components/Cards/Card'
+  import Button from '@/components/FormElements/Button'
+  import Row from '@/components/Tables/Rows/Row'
 
   export default {
     name: 'MemberTable',
     components: {
       Card,
       Button,
-      CompetitionerRow,
+      Row,
     },
     props: {
-      members: {
+      content: {
         type: Array,
         required: true,
       },
-      path:{
-        type: String,
-        required: true, 
-      }
+      titles: {
+        type: Array,
+        required: true,
+      },
     },
     setup(props){
-      const members = computed(() => props.members)
-
+      const content = computed(() => props.content)
+      const title = computed(() => props.title)
       return {
-        members,
-        path: props.path,
+        content,
+        title,
       }
     },
   }

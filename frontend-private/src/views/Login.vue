@@ -10,7 +10,7 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { axios, setTitle } from '@/helper'
-import Form from '@/components/Form'
+import Form from '@/components/FormElements/Form'
 
 export default {
   name: 'Login',

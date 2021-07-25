@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   export default {
     name: 'Select',
@@ -32,6 +32,10 @@
     },
     setup(props){
       const error = ref(props.error === 'true' ? true : props.error)
+
+      watch(() => props.error, (err) => {
+        error.value = err
+      })
 
       return {
         props,

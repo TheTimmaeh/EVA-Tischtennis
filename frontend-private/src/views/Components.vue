@@ -24,7 +24,8 @@
     Eingabe: <pre>{{ input2 }}</pre><br />
     <label for="textarea2">Textarea 2:</label><TextArea label="textarea2" level="warning" v-model="beispieltext" /><br />
     <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" /><br />
-    <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect"></SeasonSelect><br />
+    <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect" v-model="season"></SeasonSelect><br />
+    Season Wert: {{ season }}<br />
     <PlayerCard></PlayerCard><br />
     <PlayerClassCard></PlayerClassCard><br />
     <AssociationCard></AssociationCard><br />
@@ -37,17 +38,17 @@
 <script>
 import { ref } from 'vue'
 import { setTitle } from '@/helper'
-import Button from '@/components/Button'
-import InputField from '@/components/InputField'
-import SearchField from '@/components/SearchField'
-import TextArea from '@/components/TextArea'
-import SeasonSelect from '@/components/SeasonSelect'
-import PlayerCard from '@/components/PlayerCard'
-import PlayerClassCard from '@/components/PlayerClassCard'
-import SeasonCard from '@/components/SeasonCard'
-import AssociationCard from '@/components/AssociationCard'
-import MemberTable from '@/components/MemberTable'
-import Table from '@/components/Table'
+import Button from '@/components/FormElements/Button'
+import InputField from '@/components/FormElements/InputField'
+import SearchField from '@/components/FormElements/SearchField'
+import TextArea from '@/components/FormElements/TextArea'
+import SeasonSelect from '@/components/FormElements/Selects/SeasonSelect'
+import PlayerCard from '@/components/Cards/PlayerCard'
+import PlayerClassCard from '@/components/Cards/PlayerClassCard'
+import SeasonCard from '@/components/Cards/SeasonCard'
+import AssociationCard from '@/components/Cards/AssociationCard'
+import MemberTable from '@/components/Tables/MemberTable'
+import Table from '@/components/Tables/Table'
 
 export default {
   name: 'Components',
@@ -70,12 +71,14 @@ export default {
     let input1 = ref('')
     let input2 = ref('')
     let search1 = ref('')
+    let season = ref('wi')
 
     return {
       clicked,
       input1,
       input2,
       search1,
+      season,
       beispieltext: `Dies
 ist
 ein

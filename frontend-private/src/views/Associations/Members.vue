@@ -7,7 +7,7 @@
 <script>
 import { api, setTitle } from '@/helper'
 import { useRoute } from 'vue-router'
-import Button from '@/components/Button'
+import Button from '@/components/FormElements/Button'
 
 export default {
   name: 'AssociationsMembers',
