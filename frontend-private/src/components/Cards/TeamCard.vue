@@ -29,10 +29,12 @@
             <Button>Bearbeiten</Button> 
             </router-link>
           </td>
-          
-        </tr>
-          
-          
+          <td class="min">
+            <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/delete`">
+              <Button level="danger">Löschen</Button>
+            </router-link>
+          </td>
+        </tr>  
       </table>
     <!-- </router-link> -->
   </Card>

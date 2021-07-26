@@ -22,6 +22,7 @@ const Associations = {
     Get: () => import('../views/Associations/Teams/Get.vue'),
     Create: () => import('../views/Associations/Teams/Create.vue'),
     Update:() => import('../views/Associations/Teams/Update.vue'),
+    Delete: () => import('../views/Associations/Teams/Delete.vue'),
     LineUp:() => import('../views/Associations/Teams/LineUp.vue'),
     LineUpCreate:() => import('../views/Associations/Teams/LineUpCreate.vue'),
     LineUpUpdate:() => import('../views/Associations/Teams/LineUpUpdate.vue'),
@@ -144,6 +145,10 @@ const routes = [
       {
         path: 'teams/:teamId/update',
         component: Associations.Teams.Update,
+      },
+      {
+        path: 'teams/:teamId/delete',
+        component: Associations.Teams.Delete,
       },
       {
         path: 'teams/:teamId/members',

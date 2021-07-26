@@ -1,9 +1,9 @@
 <template>
   <Card class="delete">
-      <div class="associations">
+      <div class="teams">
     <div class="message" v-if="message">{{ message }}</div>
 
-    Bist du sicher, dass du diesen Verein mit allen zugehörigen Informationen löschen möchtest?
+    Bist du sicher, dass du diese Mannschaft mit allen zugehörigen Informationen löschen möchtest?
 
     <Button level="danger" @click="confirm()">Ja</Button> 
     <Button @click="deny()">Nein</Button>
@@ -30,28 +30,28 @@
       const route = useRoute()
       const message = ref('')
 
-      const association = ref({})
+      const associationTeam = ref({})
 
-      api(`/associations/${route.params.associationId}`).then((res) => res.data).then((res) => {
+      api(`/associations/${route.params.associationId}/teams/${route.params.teamId}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
         }
 
-        association.value = res.data
+        associationTeam.value = res.data
       })
 
       const confirm = () => {
         message.value = ''
 
-        api({ method: 'DELETE', path: `/associations/${route.params.associationId}` }).then((res) => {
+        api({ method: 'DELETE', path: `/associations/${route.params.associationId}/teams/${route.params.teamId}` }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
-            message.value = 'Verein wurde gelöscht.'
-            setTimeout(() => router.push({ path: '/associations' }), 3000)
+            message.value = 'Mannschaft wurde gelöscht.'
+            setTimeout(() => router.push({ path: `/associations/${$route.params.associationId}/teams` }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -59,7 +59,7 @@
       }
 
       const deny = () => {
-        router.push({ path: '/associations' })
+        router.push({ path: `/associations/${$route.params.associationId}/teams` })
       }
 
       return {
@@ -76,7 +76,7 @@
 .delete{
   height: 200px;
 }
-.associations{
+.teams{
   padding: 80px 0;
   height:10px
 }
