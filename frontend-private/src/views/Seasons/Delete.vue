@@ -1,12 +1,14 @@
 <template>
-  <div class="seasons">
+  <Card class="delete">
+      <div class="seasons">
     <div class="message" v-if="message">{{ message }}</div>
 
     Bist du sicher, dass du die Season {{ season.title }} löschen möchtest?
 
-    <Button level="danger" @click="confirm()">Ja</Button>
+    <Button level="danger" @click="confirm()">Ja</Button> 
     <Button @click="deny()">Nein</Button>
-  </div>
+    </div>
+  </Card>
 </template>
 
 <script>
@@ -14,11 +16,13 @@
   import { useRouter, useRoute } from 'vue-router'
   import { api, setTitle } from '@/helper'
   import Button from '@/components/FormElements/Button'
+  import Card from '@/components/Cards/Card'
 
   export default {
     name: 'DeleteSeason',
     components: {
       Button,
+      Card,
     },
     setup(){
       setTitle('Season löschen')
@@ -69,4 +73,11 @@
 </script>
 
 <style lang="scss" scoped>
+.delete{
+  height: 200px;
+}
+.seasons{
+  padding: 80px 0;
+  height:10px
+}
 </style>
