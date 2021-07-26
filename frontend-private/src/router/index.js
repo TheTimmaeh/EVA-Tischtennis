@@ -16,6 +16,7 @@ const Associations = {
   Update: () => import('../views/Associations/Update.vue'),
   Profile: () => import('../views/Associations/Profile.vue'),
   Members: () => import('../views/Associations/Members.vue'),
+  MembersDelete: () =>import('../views/Associations/MemberDelete.vue'),
   Teams: {
     Index: () => import('../views/Associations/Teams/Index.vue'),
     Get: () => import('../views/Associations/Teams/Get.vue'),
@@ -123,6 +124,10 @@ const routes = [
       {
         path: 'members',
         component: Associations.Members,
+      },
+      {
+        path: 'members/delete',
+        component: Associations.MembersDelete,
       },
       {
         path: 'teams',

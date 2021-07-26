@@ -7,6 +7,9 @@
       <router-link :to="`/${path}/${id}/update`">
           <Button>Bearbeiten</Button> <br>
       </router-link><br/>
+      <router-link :to="`/${path}/${id}/delete`">
+          <Button level="danger">Löschen</Button>
+      </router-link>
     </td>
   </tr>
 </template>
