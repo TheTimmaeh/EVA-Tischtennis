@@ -14,6 +14,9 @@
             <router-link :to="`/associations/${id}/update`">
               <Button>Bearbeiten</Button> <br>
             </router-link><br/>
+            <router-link :to="`/associations/${id}/delete`">
+          <Button level="danger">Löschen</Button>
+      </router-link>
           </tr>
         </div>
     </Card>
