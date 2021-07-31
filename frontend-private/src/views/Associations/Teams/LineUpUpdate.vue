@@ -28,13 +28,14 @@
           console.error('Fehler...', res)
           return
         }
+        console.log(res.data)
         rows.value = [
           { name: 'member', text: 'Mannschaftsaufstellung', field: 'h2' },
-          { name: 'E1', text: 'Spieler 1 - E1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.E1 },
-          { name: 'E2', text: 'Spieler 2 -  E2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.E2 },
-          { name: 'E3', text: 'Spieler 3 -  E3:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.E3 },
-          { name: 'DD1', text: 'Spieler 4 -  DD1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.DD1},
-          { name: 'DD2', text: 'Spieler 5 -  DD2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value:res.data.DD2 },
+          { name: 'E1', text: 'Spieler 1 - E1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'E1')?.id },
+          { name: 'E2', text: 'Spieler 2 -  E2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'E2')?.id },
+          { name: 'E3', text: 'Spieler 3 -  E3:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'E3')?.id },
+          { name: 'D1', text: 'Spieler 4 -  D1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'D1')?.id },
+          { name: 'D2', text: 'Spieler 5 -  D2:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }}', lookupRow: ['name'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'D2')?.id },
          ]
       })
 
