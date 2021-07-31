@@ -51,7 +51,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Turnier wurde gelöscht.'
-            setTimeout(() => router.push({ path: `/competitions/${$route.params.competitionId}` }), 3000)
+            setTimeout(() => router.push({ path: `/competitions` }), 3000)
           }
         }).catch((err) => {
           message.value = err
