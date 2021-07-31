@@ -1,7 +1,7 @@
 <template>
   <div class="association">
     Liste der Vereinsmitglieder
-    <MemberTable :members="members"></MemberTable>
+    <MemberTable path="persons" :members="members"></MemberTable>
   </div>
 </template>
 
