@@ -9,6 +9,9 @@
         <router-link :to="`/competitions/${id}/update`">
           <Button>Bearbeiten</Button> <br>
       </router-link><br/>
+      <router-link :to="`/competitions/${id}/delete`">
+              <Button level="danger">Löschen</Button>
+      </router-link>
       </td>
     </tr>
     <tr>

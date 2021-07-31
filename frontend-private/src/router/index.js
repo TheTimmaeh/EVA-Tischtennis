@@ -54,6 +54,7 @@ const Competitions = {
   Index: () => import('../views/Competitions/Index.vue'),
   Get: () => import('../views/Competitions/Get.vue'),
   Create: () => import('../views/Competitions/Create.vue'),
+  Delete: () => import('../views/Competitions/Delete.vue'),
   Update: () => import('../views/Competitions/Update.vue'),
   Profile: () => import('../views/Competitions/Profile.vue'),
   Encounters: {
@@ -233,6 +234,11 @@ const routes = [
     path: '/competitions/create',
     name: 'CreateCompetiton',
     component: Competitions.Create,
+  },
+  {
+    path: '/competitions/:competitionId/delete',
+    name: 'DeleteCompetiton',
+    component: Competitions.Delete,
   },
   {
     path: '/competitions/:competitionId/update',
