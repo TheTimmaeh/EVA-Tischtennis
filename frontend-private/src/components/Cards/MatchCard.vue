@@ -10,7 +10,7 @@
       <td class="min">
         <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
           <Button><Icon type="edit" /></Button>
-        </router-link>
+        </router-link>&nbsp;
         <router-link :to="`/matches/${id}/delete`">
           <Button level="danger"><Icon type="delete" /></Button>
         </router-link>

@@ -1,22 +1,22 @@
 <template>
-  <svg height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <svg height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
     <g>
-      <title>Bearbeiten</title>
+      <title>Ablehnen</title>
       <path
         :fill="secondaryColor"
         :opacity="secondaryOpacity"
-        d="M498 142.08l-56.6 56.55-128-128 56.55-56.55a48 48 0 0 1 67.91 0L498 74.17a48 48 0 0 1 0 67.91z"></path>
+        d="M9.21,356.07a31.46,31.46,0,0,0,0,44.48l22.24,22.24a31.46,31.46,0,0,0,44.48,0L176,322.72,109.28,256ZM342.79,111.45,320.55,89.21a31.46,31.46,0,0,0-44.48,0L176,189.28,242.72,256,342.79,155.93a31.46,31.46,0,0,0,0-44.48Z"></path>
       <path
         :fill="primaryColor"
         :opacity="primaryOpacity"
-        d="M12.85 371.11L.15 485.33a24 24 0 0 0 26.49 26.51l114.14-12.6 278-278-128-128z"></path>
+        d="M342.79,356.07a31.46,31.46,0,0,1,0,44.48l-22.24,22.24a31.46,31.46,0,0,1-44.48,0L9.21,155.93a31.46,31.46,0,0,1,0-44.48L31.45,89.21a31.46,31.46,0,0,1,44.48,0Z"></path>
     </g>
   </svg>
 </template>
 
 <script>
   export default {
-    name: 'EditIcon',
+    name: 'DenyIcon',
     props: {
       primaryColor: {
         type: String,
