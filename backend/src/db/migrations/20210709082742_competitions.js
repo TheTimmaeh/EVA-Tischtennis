@@ -31,8 +31,10 @@ exports.up = (knex) => {
   }).createTable('matches', (matches) => {
     matches.increments('id')
     matches.integer('encounter').notNullable().unsigned().references('encounters.id')
-    matches.integer('home_player').notNullable().unsigned().references('team_members.id')
-    matches.integer('visitor_player').notNullable().unsigned().references('team_members.id')
+    matches.integer('home_player_1').notNullable().unsigned().references('team_members.id')
+    matches.integer('home_player_2').notNullable().unsigned().references('team_members.id')
+    matches.integer('visitor_player_1').notNullable().unsigned().references('team_members.id')
+    matches.integer('visitor_player_2').notNullable().unsigned().references('team_members.id')
     matches.integer('referee').notNullable().unsigned().references('users.id')
     matches.integer('sets').notNullable()
     matches.integer('home_score')

@@ -26,9 +26,9 @@
     <label for="textarea1">Textarea 3:</label><TextArea label="textarea3" level="danger" autoresize="false" /><br />
     <label for="seasonSelect">Saison auswählen:</label><SeasonSelect label="seasonSelect" v-model="season"></SeasonSelect><br />
     Season Wert: {{ season }}<br />
-    <PlayerCard></PlayerCard><br />
+    <!-- <PlayerCard></PlayerCard><br />
     <PlayerClassCard></PlayerClassCard><br />
-    <AssociationCard></AssociationCard><br />
+    <AssociationCard></AssociationCard><br /> -->
     <!-- <SeasonCard></SeasonCard><br /> -->
     <Table :content="content" :titles="titles"></Table><br />
   </div>
