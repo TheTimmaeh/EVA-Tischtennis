@@ -13,7 +13,7 @@
             <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
             <router-link :to="`/associations/${id}/update`">
               <Button>Bearbeiten</Button> 
-            </router-link><br/>
+            </router-link><br/><br/>
             <router-link :to="`/associations/${id}/delete`">
               <Button level="danger">Löschen</Button>
             </router-link>

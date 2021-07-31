@@ -16,11 +16,6 @@
     </tr>
     <tr>
       <td>
-       <router-link :to="`/competitions/${id}/encounters/create`">
-          <Button>Begegnung anlegen</Button> <br>
-       </router-link><br/>
-      </td>
-      <td>
        <router-link :to="`/competitions/${id}/encounters`">
           <Button>Begegnungen anzeigen</Button> <br>
        </router-link><br/>

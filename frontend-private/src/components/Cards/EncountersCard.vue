@@ -9,11 +9,16 @@
         <router-link :to="`encounters/${id}/update`">
           <Button>Bearbeiten</Button> <br>
         </router-link><br/>
+        <router-link :to="`encounters/${id}/delete`">
+          <Button class="danger">Löschen</Button> <br>
+        </router-link><br/>
       </td>
     </tr>
-    <router-link :to="`encounters/${id}/match/create`">
-          <Button>Spiel anlegen</Button> <br>
-        </router-link><br/>
+      <td>
+       <router-link :to="`encounters/${id}/match/index`">
+        <Button>Spiele anzeigen</Button> <br>
+       </router-link><br/>
+      </td>
     <tr>
     </tr>
   </Card>
