@@ -32,7 +32,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Begegnung wurde angelegt.'
-            setTimeout(() => router.push({ path: '/competitions' }), 3000)
+            setTimeout(() => router.push({ path: `/competitions/${route.params.competitionId}/encounters` }), 3000)
           }
         }).catch((err) => {
           message.value = err

@@ -1,7 +1,9 @@
 <template>
   <div class="encounters">
     <div class="list">Liste der Begegnungen</div>
-       
+      <router-link :to="`/competitions/${$route.params.competitionId}/encounters/create`">
+        <Button>Begegnung anlegen</Button> <br>
+      </router-link><br/>  
     <EncountersCard v-for="encounter in encounters" :key="encounter.id" :data="encounter"></EncountersCard>
   </div>
 </template>
