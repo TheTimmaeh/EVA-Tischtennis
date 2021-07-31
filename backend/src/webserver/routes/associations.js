@@ -1,4 +1,4 @@
-const router = require('express').Router({ mergeParams: true})
+const router = require('express').Router({ mergeParams: true })
 let db
 
 module.exports = (_db) => {
