@@ -3,7 +3,7 @@
       <div class="teams">
     <div class="message" v-if="message">{{ message }}</div>
 
-    Bist du sicher, dass du diese Mannschaft mit allen zugehörigen Informationen löschen möchtest?
+    Bist du sicher, dass du dies Mannschaft {{associationTeam.name}} mit allen zugehörigen Informationen löschen möchtest?
 
     <Button level="danger" @click="confirm()">Ja</Button> 
     <Button @click="deny()">Nein</Button>

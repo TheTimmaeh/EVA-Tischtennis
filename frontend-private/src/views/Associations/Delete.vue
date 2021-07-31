@@ -3,7 +3,7 @@
       <div class="associations">
     <div class="message" v-if="message">{{ message }}</div>
 
-    Bist du sicher, dass du diesen Verein mit allen zugehörigen Informationen löschen möchtest?
+    Bist du sicher, dass du den Verein {{association.name}} mit allen zugehörigen Informationen löschen möchtest?
 
     <Button level="danger" @click="confirm()">Ja</Button> 
     <Button @click="deny()">Nein</Button>

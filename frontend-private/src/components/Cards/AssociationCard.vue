@@ -12,11 +12,11 @@
             <td><router-link :to="`/associations/${id}/teams`">Mannschaften: {{ playerClasses?.length }}</router-link></td>
             <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
             <router-link :to="`/associations/${id}/update`">
-              <Button>Bearbeiten</Button> <br>
+              <Button>Bearbeiten</Button> 
             </router-link><br/>
             <router-link :to="`/associations/${id}/delete`">
-          <Button level="danger">Löschen</Button>
-      </router-link>
+              <Button level="danger">Löschen</Button>
+            </router-link>
           </tr>
         </div>
     </Card>
