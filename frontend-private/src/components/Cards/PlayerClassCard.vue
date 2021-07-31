@@ -7,8 +7,11 @@
         <td>Geschlecht: {{gender}}</td>
         <td class="min">
           <router-link :to="`/playerClasses/${id}/update`">
-          <Button>Bearbeiten</Button> <br>
-        </router-link><br/>
+            <Button>Bearbeiten</Button> <br>
+          </router-link><br/>
+          <router-link :to="`/playerClasses/${id}/delete`">
+            <Button level="danger">Löschen</Button>
+          </router-link>
         </td>
       </tr>
      </Card>

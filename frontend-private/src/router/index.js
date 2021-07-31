@@ -48,6 +48,7 @@ const CreateReferee = () => import('../views/Referees/Create.vue')
 const PlayerClasses = () => import('../views/PlayerClasses/Index.vue')
 const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
 const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
+const DeletePlayerClass = () => import('../views/PlayerClasses/Delete.vue')
 
 // Competitions
 const Competitions = {
@@ -219,6 +220,11 @@ const routes = [
     path: '/playerClasses/create',
     name: 'CreatePlayerClass',
     component: CreatePlayerClass,
+  },
+  {
+    path: '/playerClasses/:playerClassId/delete',
+    name: 'DeletePlayerClasses',
+    component: DeletePlayerClass,
   },
   {
     path: '/playerClasses/:playerClassId/update',
