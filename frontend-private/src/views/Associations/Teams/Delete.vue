@@ -51,7 +51,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Mannschaft wurde gelöscht.'
-            setTimeout(() => router.push({ path: `/associations/${$route.params.associationId}/teams` }), 3000)
+            setTimeout(() => router.push({ path: `/associations/${route.params.associationId}/teams` }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -59,7 +59,7 @@
       }
 
       const deny = () => {
-        router.push({ path: `/associations/${$route.params.associationId}/teams` })
+        router.push({ path: `/associations/${route.params.associationId}/teams` })
       }
 
       return {
