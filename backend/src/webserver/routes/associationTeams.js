@@ -134,8 +134,21 @@ async function updateAssociationTeam(req, res){
 }
 
 async function deleteAssociationTeam(req, res){
-  await db('association_teams').where({ id: req.params.associationTeamId }).del()
-  res.json({})
+
+  try {
+    result = await db('association_teams').where({ id: req.params.associationTeamId }).del()
+  } catch(err){
+    if(err.code === 'ER_ROW_IS_REFERENCED_2'){
+      res.json({ success: false, message: `Dieses Team ist in Benutzung und kann daher nicht gelöscht werden!` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+    return
+  }
+
+  res.json({ success: true, message: 'Die Daten des Teams wurden gelöscht.' })
+
 }
 
 
