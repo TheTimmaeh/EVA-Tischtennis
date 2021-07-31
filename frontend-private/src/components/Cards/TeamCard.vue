@@ -9,15 +9,16 @@
         <tr>
           <td>Spielerklasse: {{ data.playerClass }} <br> </td>
         </tr>
+        <tr>
+        <td>
         <table class="lineup">
         <th>Mannschaftsaufstellung</th>
         <tr v-for="(member, index) in teamMembers" :key="member.id"> 
-          <td>Position {{ member.teams[0].position }} : {{ member.name }} {{ member.surname }}</td>
-        </tr>
-        <tr v-if="teamMembers.length<1" > 
-          <td>Bisher wurde die Mannschaftsaufstellung nicht festgelegt.</td>
+          <td v-if="member.id">Position {{ member.position }} : {{ member.name }} {{ member.surname }}</td>
         </tr>
         </table><br>
+        </td>
+        </tr>
         <tr>
           <td >
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/members/update`">
@@ -65,15 +66,12 @@ export default {
     const teamMembers = ref([])
 
     api(`/associations/${route.params.associationId}/teams/${props.data.id}/members`).then((res) => res.data).then((res) => {
-      console.log(res.data)
       if(!res.success){
         console.error('Fehler...', res)
         return
       }
        
-
       teamMembers.value = res.data
-      
     })
 
     return {
