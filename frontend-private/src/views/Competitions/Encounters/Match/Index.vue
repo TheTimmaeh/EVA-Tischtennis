@@ -1,9 +1,6 @@
 <template>
   <div class="matches">
     <div class="list">Liste der Spiele</div>
-        <router-link :to="`create`">
-            <Button>Spiel anlegen</Button> <br>
-        </router-link><br/>
     <MatchCard v-for="match in matches" :key="match.id" :data="match"></MatchCard>
   </div>
 </template>
@@ -23,11 +20,11 @@ export default {
   },
   setup(){
     const route = useRoute()
-    setTitle(`Begegnungen | Spiele der Begegnung ${route.params.encountersId}`)
+    setTitle(`Begegnungen | Spiele der Begegnung ${route.params.encounterId}`)
 
     const matches = ref([])
 
-    api(`/competitions/${route.params.competitionId}/encounters/${route.params.encountersId}/match/index`).then((res) => res.data).then((res) => {
+    api(`/competitions/${route.params.competitionId}/encounters/${route.params.encounterId}/matches`).then((res) => res.data).then((res) => {
       if(!res.success){
         console.error('Fehler...', res)
         return

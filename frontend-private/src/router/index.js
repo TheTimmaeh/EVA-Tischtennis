@@ -65,9 +65,9 @@ const Competitions = {
     Update: () => import('../views/Competitions/Encounters/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Delete.vue'),
   },
-  Match:{
-    Create: () => import('../views/Competitions/Encounters/Match/Create.vue'),
+  Match: {
     Index: () => import('../views/Competitions/Encounters/Match/Index.vue'),
+    Update: () => import('../views/Competitions/Encounters/Match/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Match/Delete.vue'),
   },
   Teams: () => import('../views/Competitions/Teams.vue'),
@@ -281,23 +281,23 @@ const routes = [
         component: Competitions.Encounters.Create,
       },
       {
-        path: 'encounters/:encountersId/delete',
+        path: 'encounters/:encounterId/delete',
         component: Competitions.Encounters.Delete,
       },
       {
-        path: 'encounters/:encountersId/update',
+        path: 'encounters/:encounterId/update',
         component: Competitions.Encounters.Update,
       },
       {
-        path: 'encounters/:encountersId/match/create',
-        component: Competitions.Match.Create,
-      },
-      {
-        path: 'encounters/:encountersId/match/index',
+        path: 'encounters/:encounterId/matches',
         component: Competitions.Match.Index,
       },
       {
-        path: 'encounters/:encountersId/match/delete',
+        path: 'encounters/:encounterId/matches/:matchId/update',
+        component: Competitions.Match.Update,
+      },
+      {
+        path: 'encounters/:encounterId/matches/:matchId/delete',
         component: Competitions.Match.Delete,
       },
       {

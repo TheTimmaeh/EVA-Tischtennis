@@ -32,7 +32,7 @@
 
       const encounter = ref({})
 
-      api(`/competitions/${route.params.competitionId}/encounters/${route.params.encountersId}`).then((res) => res.data).then((res) => {
+      api(`/competitions/${route.params.competitionId}/encounters/${route.params.encounterId}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
@@ -44,7 +44,7 @@
       const confirm = () => {
         message.value = ''
 
-        api({ method: 'DELETE', path: `/competitions/${route.params.competitionId}/encounters/${route.params.encountersId}` }).then((res) => {
+        api({ method: 'DELETE', path: `/competitions/${route.params.competitionId}/encounters/${route.params.encounterId}` }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
