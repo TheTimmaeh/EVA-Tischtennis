@@ -63,7 +63,7 @@
       }
 
       return {
-        season,
+        competition,
         confirm,
         deny,
         message,

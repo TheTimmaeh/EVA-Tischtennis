@@ -63,7 +63,7 @@
       }
 
       return {
-        season,
+        associationTeam,
         confirm,
         deny,
         message,

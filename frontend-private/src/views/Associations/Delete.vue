@@ -63,7 +63,7 @@
       }
 
       return {
-        season,
+        association,
         confirm,
         deny,
         message,
