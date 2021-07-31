@@ -128,7 +128,7 @@
       let refs = {}
       let vals = {}
 
-      props.rows.forEach((r, i) => {
+      props.rows?.forEach((r, i) => {
         if(r.field === 'h2') return
         refs[r.name] = ref(null)
 
