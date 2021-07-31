@@ -14,13 +14,13 @@ module.exports = (_db) => {
   router.post('/', authenticateToken, createPlayerClass)
 
   // Get (one playerClass)
-  router.get('/:playerClass',optionalAuthenticateToken,  getPlayerClass)
+  router.get('/:playerClassId',optionalAuthenticateToken,  getPlayerClass)
 
   // Update
-  router.post('/:playerClass', authenticateToken, updatePlayerClass)
+  router.post('/:playerClassId', authenticateToken, updatePlayerClass)
 
   // Delete
-  router.delete('/:playerClass', authenticateToken, deletePlayerClass)
+  router.delete('/:playerClassId', authenticateToken, deletePlayerClass)
 
   return router
 }
@@ -42,7 +42,7 @@ async function getPlayerClasses(req, res){
 }
 
 async function getPlayerClass(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('classes').where({ id: req.params.playerClass }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('classes').where({ id: req.params.playerClassId }))
   res.json({ success: true, data })
 }
 
@@ -81,7 +81,7 @@ async function updatePlayerClass(req, res){
   let result
 
   try {
-    result = await db('classes').where({ id: req.params.playerClass}).update({//hier war person, ich hab id draus gemacht
+    result = await db('classes').where({ id: req.params.playerClassId }).update({//hier war person, ich hab id draus gemacht
       name: req.body.name,
       age_from: req.body.age_from,
       age_to: req.body.age_to,
@@ -99,7 +99,7 @@ async function updatePlayerClass(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('classes').where({ id: req.params.playerClass }))
+    let data = (await db.first(select.admin).from('classes').where({ id: req.params.playerClassId }))
 
     res.json({ success: true, message: 'Spielerklasse wurde aktualisiert.', data })
   } else {
@@ -108,6 +108,20 @@ async function updatePlayerClass(req, res){
 }
 
 async function deletePlayerClass(req, res){
-  await db('classes').where({ id: req.params.playerClass }).del()
-  res.json({})
+  let result
+
+  try {
+    result = await db('classes').where({ id: req.params.playerClassId }).del()
+  } catch(err){
+    if(err.code === 'ER_ROW_IS_REFERENCED_2'){
+      res.json({ success: false, message: `Diese Spielerklasse ist in Benutzung und kann daher nicht gelöscht werden!` })
+    } else {
+      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
+      console.error({ ...err })
+    }
+
+    return
+  }
+
+  res.json({ success: true, message: 'Die Daten der Spielerklasse wurden gelöscht.' })
 }
