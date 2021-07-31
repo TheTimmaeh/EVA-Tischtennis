@@ -5,6 +5,7 @@
       <router-link to="/components">Components</router-link> |
       <template v-if="loggedIn">
         <router-link to="/users">Users</router-link> |
+        <router-link to="/persons">Personen</router-link> |
         <router-link to="/associations">Vereine</router-link> |
         <router-link to="/seasons">Saisons</router-link> |
         <router-link to="/playerClasses">Spielerklassen</router-link> |
