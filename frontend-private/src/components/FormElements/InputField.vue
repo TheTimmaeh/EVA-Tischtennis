@@ -8,7 +8,7 @@
     :step="props.step"
     :minlength="props.minlength"
     :maxlength="props.maxlength"
-    :value="modelValue"
+    :value="props.modelValue"
     :id="props.label"
     @input="$emit('update:modelValue', $event.target.value)" />
 </template>
@@ -65,9 +65,6 @@
     },
     setup(props){
       const error = ref(props.error === 'true' ? true : props.error)
-      const modelValue = ref('' + props.modelValue)
-
-      if(props.type == 'date') modelValue.value = modelValue.value.substr(0, 10)
 
       watch(() => props.error, (err) => {
         error.value = err
@@ -76,7 +73,6 @@
       return {
         props,
         error,
-        modelValue,
       }
     }
   }
