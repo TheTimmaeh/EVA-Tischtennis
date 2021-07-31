@@ -22,11 +22,8 @@ module.exports = (_db) => {
   // Delete
   router.delete('/:associationTeamId', authenticateToken, deleteAssociationTeam)
 
- // Members
- router.get('/:associationTeamId/members', optionalAuthenticateToken,  getAssociationTeamMembers)
-
-  // MembersUpdate
-  router.post('/:associationTeamId/membersUpdate', optionalAuthenticateToken, updateAssociationTeamMembers)
+  // AssociationTeamMembers
+  router.use('/:associationTeamId/members', require('./associationTeamMembers')(db))
 
   return router
 }
@@ -151,64 +148,3 @@ async function deleteAssociationTeam(req, res){
 
 }
 
-
-async function getAssociationTeamMembers(req, res){
-
-  try {
-
-    let members = await db.qb({ distinct: ['member', 'team', 'position'], from: 'team_members', where: { team: req.params.associationTeamId  } })
-    let memberIds = members.map((m) => m.member)
-
-    let data = await db.qb({ select: (req.user?.isAdmin ? memberSelect.admin : memberSelect.guest), from: 'persons', whereIn: { id: memberIds }, ...req.query })
-
-    data = data.map((person) => Object.assign(person, { teams: members.filter((m) => m.member == person.id)
-    }))
-
-    res.json({ success: true, data })
-  } catch(err){
-    console.error(err.message)
-    res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
-  }
-}
-
-async function updateAssociationTeamMembers(req, res){
-
-  try {
-    console.log(req.body)
-    let E1 = await db('team_members').where({ team: req.params.associationTeamId, position: 'E1' }).update({
-      member: req.body.E1
-    })
-
-    let E2 = await db('team_members').where({ team: req.params.associationTeamId, position: 'E2' }).update({
-      member: req.body.E2
-    })
-
-    let E3 = await db('team_members').where({ team: req.params.associationTeamId, position: 'E3' }).update({
-      member: req.body.E3
-    })
-
-    let E4 = await db('team_members').where({ team: req.params.associationTeamId, position: 'E4' }).update({
-      member: req.body.E4
-    })
-
-    let DD1 = await db('team_members').where({ team: req.params.associationTeamId, position: 'DD1' }).update({
-      member: req.body.DD1
-    })
-
-    let DD2 = await db('team_members').where({ team: req.params.associationTeamId, position: 'DD2' }).update({
-      member: req.body.DD2
-    })
-
-    data={E1, E2, E3, E4, DD1, DD2}
-    res.json({ success: true, data })
-  } catch(err){
-    if(err.code === 'ER_DUP_ENTRY'){
-      res.json({ success: false, message: `Es existiert bereits dieser Eintrag.` })
-    } else {
-      res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
-      console.error({ ...err })
-    }
-
-    return
-  }
-}
