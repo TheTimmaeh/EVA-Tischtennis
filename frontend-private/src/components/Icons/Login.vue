@@ -1,22 +1,22 @@
 <template>
   <svg height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <g>
-      <title>Bearbeiten</title>
+      <title>Login</title>
       <path
         :fill="secondaryColor"
         :opacity="secondaryOpacity"
-        d="M498 142.08l-56.6 56.55-128-128 56.55-56.55a48 48 0 0 1 67.91 0L498 74.17a48 48 0 0 1 0 67.91z"></path>
+        d="M512 160v192a96 96 0 0 1-96 96h-84a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h84a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32h-84a12 12 0 0 1-12-12V76a12 12 0 0 1 12-12h84a96 96 0 0 1 96 96z"></path>
       <path
         :fill="primaryColor"
         :opacity="primaryOpacity"
-        d="M12.85 371.11L.15 485.33a24 24 0 0 0 26.49 26.51l114.14-12.6 278-278-128-128z"></path>
+        d="M369 273L201 441c-15 15-41 4.5-41-17v-96H24a23.94 23.94 0 0 1-24-24v-96a23.94 23.94 0 0 1 24-24h136V88c0-21.5 26-32 41-17l168 168a24.2 24.2 0 0 1 0 34z"></path>
     </g>
   </svg>
 </template>
 
 <script>
   export default {
-    name: 'EditIcon',
+    name: 'LoginIcon',
     props: {
       primaryColor: {
         type: String,

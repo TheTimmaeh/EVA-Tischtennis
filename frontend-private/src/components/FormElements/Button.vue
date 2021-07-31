@@ -1,5 +1,5 @@
 <template>
-  <button :class="[ props.level ]" @click="$emit('action')"><slot>Submit</slot></button>
+  <button :class="[ 'btn', props.level ]" @click="$emit('action')"><slot>Submit</slot></button>
 </template>
 
 <script>
@@ -22,18 +22,24 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  button {
+<style lang="scss">
+  button.btn {
     background-color: $color-primary;
     border: none;
     color: white;
-    padding: 10px 25px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 16px;
+    line-height: 16px;
+    height: 36px;
+    min-width: 36px;
     border-radius: 5px;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover, &:focus {
       outline: none !important;
@@ -48,6 +54,11 @@
 
     &.danger {
       background-color: $color-danger;
+    }
+
+    & > svg {
+      margin: 0 12px 0 4px;
+      transform: scale(1.4);
     }
   }
 </style>
