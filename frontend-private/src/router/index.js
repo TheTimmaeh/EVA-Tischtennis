@@ -14,6 +14,7 @@ const Associations = {
   Get: () => import('../views/Associations/Get.vue'),
   Create: () => import('../views/Associations/Create.vue'),
   Update: () => import('../views/Associations/Update.vue'),
+  Delete: () => import('../views/Associations/Delete.vue'),
   Profile: () => import('../views/Associations/Profile.vue'),
   Members: () => import('../views/Associations/Members.vue'),
   MembersDelete: () =>import('../views/Associations/MemberDelete.vue'),
@@ -62,6 +63,12 @@ const Competitions = {
     Index: () => import('../views/Competitions/Encounters/Index.vue'),
     Create: () => import('../views/Competitions/Encounters/Create.vue'),
     Update: () => import('../views/Competitions/Encounters/Update.vue'),
+    Delete: () => import('../views/Competitions/Encounters/Delete.vue'),
+  },
+  Match:{
+    Create: () => import('../views/Competitions/Encounters/Match/Create.vue'),
+    Index: () => import('../views/Competitions/Encounters/Match/Index.vue'),
+    Delete: () => import('../views/Competitions/Encounters/Match/Delete.vue'),
   },
   Teams: () => import('../views/Competitions/Teams.vue'),
 }
@@ -114,6 +121,11 @@ const routes = [
     path: '/associations/:associationId/update',
     name: 'UpdateAssociation',
     component: Associations.Update,
+  },
+  {
+    path: '/associations/:associationId/delete',
+    name: 'DeleteAssociation',
+    component: Associations.Delete,
   },
   {
     path: '/associations/:associationId',
@@ -269,8 +281,24 @@ const routes = [
         component: Competitions.Encounters.Create,
       },
       {
+        path: 'encounters/:encountersId/delete',
+        component: Competitions.Encounters.Delete,
+      },
+      {
         path: 'encounters/:encountersId/update',
         component: Competitions.Encounters.Update,
+      },
+      {
+        path: 'encounters/:encountersId/match/create',
+        component: Competitions.Match.Create,
+      },
+      {
+        path: 'encounters/:encountersId/match/index',
+        component: Competitions.Match.Index,
+      },
+      {
+        path: 'encounters/:encountersId/match/delete',
+        component: Competitions.Match.Delete,
       },
       {
         path: 'teams',
