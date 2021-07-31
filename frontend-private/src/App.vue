@@ -91,42 +91,47 @@
 </script>
 
 <style lang="scss">
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  *, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  background-color: $color-fade-grey;
-  margin: 10px;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    background-color: $color-fade-grey;
+    margin: 10px;
+  }
 
-#nav {
-  padding: 30px;
-  background-color: white;
+  #nav {
+    padding: 30px;
+    background-color: white;
 
-  a {
-    font-weight: bold;
-    color: $color-light-text;
+    a {
+      font-weight: bold;
+      color: $color-light-text;
 
-    &.router-link-exact-active {
-      color: $color-highlight;
+      &.router-link-exact-active {
+        color: $color-highlight;
+      }
     }
   }
-}
 
-#page {
-  width: 960px;
-  min-height: 100vh;
-  height: 100%;
-  padding: 10px;
-  margin: 0 auto;
-  background-color: $color-fade-grey;
-}
+  #page {
+    width: 960px;
+    min-height: 100vh;
+    height: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: $color-fade-grey;
+  }
+
+  a, a:visited, a:focus {
+    text-decoration: none;
+    color: inherit;
+  }
 </style>
