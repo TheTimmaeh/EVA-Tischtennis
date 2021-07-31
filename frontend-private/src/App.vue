@@ -11,7 +11,7 @@
         <router-link to="/playerClasses">Spielerklassen</router-link> |
 
         <router-link to="/competitions">Turniere</router-link> |
-        <router-link to="/match">Aktuelles Match</router-link> |
+        <!-- <router-link to="/match">Aktuelles Match</router-link> | -->
         <router-link to="/profile">Profil</router-link> |
         <router-link to="/logout">Logout</router-link>
       </template>
