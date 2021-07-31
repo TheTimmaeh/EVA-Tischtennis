@@ -45,6 +45,7 @@
         message.value = ''
 
         api({ method: 'DELETE', path: `/playerClasses/${route.params.playerClassId}` }).then((res) => {
+         
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
