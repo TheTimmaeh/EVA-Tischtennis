@@ -66,7 +66,6 @@ const Competitions = {
     Delete: () => import('../views/Competitions/Encounters/Delete.vue'),
   },
   Match:{
-    Create: () => import('../views/Competitions/Encounters/Match/Create.vue'),
     Index: () => import('../views/Competitions/Encounters/Match/Index.vue'),
     Delete: () => import('../views/Competitions/Encounters/Match/Delete.vue'),
   },
@@ -287,10 +286,6 @@ const routes = [
       {
         path: 'encounters/:encountersId/update',
         component: Competitions.Encounters.Update,
-      },
-      {
-        path: 'encounters/:encountersId/match/create',
-        component: Competitions.Match.Create,
       },
       {
         path: 'encounters/:encountersId/match/index',
