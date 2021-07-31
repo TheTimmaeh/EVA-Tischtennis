@@ -65,16 +65,15 @@ const Competitions = {
     Update: () => import('../views/Competitions/Encounters/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Delete.vue'),
   },
-  Match: {
+  Match: {  
     Index: () => import('../views/Competitions/Encounters/Match/Index.vue'),
     Update: () => import('../views/Competitions/Encounters/Match/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Match/Delete.vue'),
+    Match: () => import('../views/Competitions/Encounters/Match/Match.vue')
   },
   Teams: () => import('../views/Competitions/Teams.vue'),
 }
 
-// Match
-const Match = () => import('../views/Match/Match.vue')
 
 //Login and Logout
 const Login = () => import('../views/Login.vue')
@@ -301,15 +300,14 @@ const routes = [
         component: Competitions.Match.Delete,
       },
       {
+        path: 'encounters/:encounterId/matches/:matchId',
+        component: Competitions.Match.Match,
+      },
+      {
         path: 'teams',
         component: Competitions.Teams,
       },
     ]
-  },
-  {
-    path: '/match',
-    name: 'Match',
-    component: Match,
   },
   {
     path: '/login',
