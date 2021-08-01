@@ -1,33 +1,29 @@
 <template>
   <div class="association">
-    Verein {{ $route.params.associationId }}
-
-    <router-link :to="`/associations/${$route.params.associationId}/teams`"><Button>Mannschaften</Button></router-link>
-    
-    <br /><br />
-
-    <router-view></router-view>
+    <Menu>
+      <router-link :to="`/associations/${$route.params.associationId}`">Verein {{ $route.params.associationId }}</router-link>
+      <router-link :to="`/associations/${$route.params.associationId}/teams`">Mannschaften</router-link>
+      <router-link :to="`/associations/${$route.params.associationId}/members`">Mitglieder</router-link>
+    </Menu>
+    <Page></Page>
   </div>
 </template>
 
 <script>
-import Button from '@/components/FormElements/Button'
+import Page from '@/components/Page'
+import Menu from '@/components/Menu'
 
 export default {
   name: 'AssociationsGet',
   components: {
-    Button,
+    Page,
+    Menu,
   },
   setup(){
-    return {
-      Button,
-    }
+    return { }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
 </style>

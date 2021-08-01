@@ -1,6 +1,5 @@
 <template>
   <div class="association">
-    Liste der Vereinsmitglieder
     <MemberTable path="persons" :members="members"></MemberTable>
   </div>
 </template>
@@ -22,8 +21,6 @@ export default {
     const route = useRoute()
     setTitle(`Vereinsmitglieder | Verein ${route.params.associationId}`)
 
-    
-
     const members = ref([])
 
     api(`/associations/${route.params.associationId}/members`).then((res) => res.data).then((res) => {
@@ -32,7 +29,7 @@ export default {
         console.error('Fehler...', res)
         return
       }
-       
+
 
       members.value = res.data
     })

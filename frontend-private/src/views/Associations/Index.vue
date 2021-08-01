@@ -1,23 +1,27 @@
 <template>
-  <div class="associations">
-    <router-link to="/associations/create">
-      <Button>Verein anlegen</Button> <br>
-    </router-link>
-    <div class="list">
-      <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id"></AssociationCard>
+  <Page>
+    <div class="associations">
+      <router-link to="/associations/create">
+        <Button>Verein anlegen</Button> <br>
+      </router-link>
+      <div class="list">
+        <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id"></AssociationCard>
+      </div>
     </div>
-  </div>
+  </Page>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
+import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
 import AssociationCard from '@/components/Cards/AssociationCard'
 
 export default {
   name: 'Associations',
   components: {
+    Page,
     Button,
     AssociationCard,
   },
@@ -44,7 +48,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .associations {
+    padding-top: 20px;
+  }
+
+  .list {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    &:after {
+      content: "";
+      flex: auto;
+    }
+  }
 </style>
