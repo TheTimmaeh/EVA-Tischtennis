@@ -1,10 +1,10 @@
 <template>
   <div class="playerClasses">
-    <router-link to="/playerClasses/create">
+    <router-link to="/admin/playerClasses/create">
       <Button>Spielerklasse anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste der Spielerklassen</div> 
-    <PlayerClassCard v-for="playerClass in playerClasses" :key="playerClass.id" :playerClass="playerClass"  ></PlayerClassCard>
+    <div class="list">Liste der Spielerklassen</div>
+    <PlayerClassCard v-for="playerClass in playerClasses" :key="playerClass.id" :playerClass="playerClass"></PlayerClassCard>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
     })
 
 
-    return { 
+    return {
       playerClasses
     }
   },

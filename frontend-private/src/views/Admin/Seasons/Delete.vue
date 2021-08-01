@@ -58,7 +58,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Saison wurde gelöscht.'
-            setTimeout(() => router.push({ path: '/seasons' }), 3000)
+            setTimeout(() => router.push({ path: '/admin/seasons' }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -66,7 +66,7 @@
       }
 
       const deny = () => {
-        router.push({ path: '/seasons' })
+        router.push({ path: '/admin/seasons' })
       }
 
       return {

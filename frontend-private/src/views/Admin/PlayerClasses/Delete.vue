@@ -51,14 +51,14 @@
         message.value = ''
 
         api({ method: 'DELETE', path: `/playerClasses/${route.params.playerClassId}` }).then((res) => {
-         
+
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
             message.value = res.data.message
           } else {
             message.value = 'Spielerklasse wurde gelöscht.'
-            setTimeout(() => router.push({ path: `/playerClasses` }), 3000)
+            setTimeout(() => router.push({ path: `/admin/playerClasses` }), 3000)
           }
         }).catch((err) => {
           message.value = err
@@ -66,7 +66,7 @@
       }
 
       const deny = () => {
-        router.push({ path: `/playerClasses` })
+        router.push({ path: `/admin/playerClasses` })
       }
 
       return {

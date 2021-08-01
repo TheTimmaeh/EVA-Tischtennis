@@ -1,22 +1,19 @@
 <template>
   <div>
     <div id="nav">
-      <router-link to="/"><Button><Icon type="tabletennis" /></Button></router-link> |
-      <router-link to="/components">Components</router-link> |
+      <router-link to="/"><span class="icon"><Icon type="tabletennis" primaryColor="#000000" secondaryColor="#000000" scale="2" /></span></router-link>
       <template v-if="loggedIn">
-        <router-link to="/users">Users</router-link> |
-        <router-link to="/persons">Personen</router-link> |
-        <router-link to="/associations">Vereine</router-link> |
-        <router-link to="/seasons">Saisons</router-link> |
-        <router-link to="/playerClasses">Spielerklassen</router-link> |
-
-        <router-link to="/competitions">Turniere</router-link> |
-        <!-- <router-link to="/match">Aktuelles Match</router-link> | -->
-        <router-link to="/profile">Profil</router-link> |
-        <router-link to="/logout"><Button><Icon type="logout" /></Button></router-link>
+        <router-link to="/competitions">Turniere</router-link>
+        <router-link to="/associations">Vereine</router-link>
+        <router-link to="/persons">Personen</router-link>
+        <router-link to="/admin">Admin</router-link>
+        <router-link to="/profile">Profil</router-link>
+        <router-link to="/logout"><span class="icon"><Icon type="logout" primaryColor="#000000" secondaryColor="#000000" scale="2" /></span></router-link>
       </template>
-      <router-link to="/login" v-else><Button><Icon type="login" /></Button></router-link> |
-      Socket: {{ connected ? 'Connected' : 'Disconnected' }}
+      <template v-else>
+        <router-link to="/login"><span class="icon"><Icon type="login" primaryColor="#000000" secondaryColor="#000000" scale="2" /></span></router-link>
+      </template>
+      <!-- Socket: {{ connected ? 'Connected' : 'Disconnected' }} -->
     </div>
     <div id="page">
       <router-view/>
@@ -28,7 +25,7 @@
   import { ref, computed, watch, provide } from 'vue'
   import { useStore } from 'vuex'
   import { io } from '@/helper'
-  
+
   import Button from '@/components/FormElements/Button'
   import Icon from '@/components/Icons/Icon'
 
@@ -111,29 +108,42 @@
     text-align: center;
     color: #2c3e50;
     background-color: $color-fade-grey;
-    margin: 10px;
   }
 
   #nav {
-    padding: 30px;
     background-color: white;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
     a {
+      height: 100px;
+      padding: 0 20px;
+      margin: 0 4px;
+
+      display: inline-flex;
+      align-items: center;
+
       font-weight: bold;
-      color: $color-light-text;
+      color: $color-mono-dark;
+
+      &:hover {
+        background-color: $color-fade-grey;
+      }
 
       &.router-link-exact-active {
         color: $color-highlight;
       }
     }
+
+    .icon {
+      height: 16px;
+    }
   }
 
   #page {
-    width: 960px;
-    min-height: 100vh;
-    height: 100%;
-    padding: 10px;
-    margin: 0 auto;
+    min-height: calc(100vh - 100px);
     background-color: $color-fade-grey;
   }
 

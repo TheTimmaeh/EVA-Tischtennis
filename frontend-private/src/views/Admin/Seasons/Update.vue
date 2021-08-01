@@ -1,7 +1,6 @@
 <template>
   <div class="seasons">
     <div class="message" v-if="message">{{ message }}</div>
-    {{$route.params.associationId}}
     <Form v-if="rows" :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
   </div>
 </template>
@@ -48,7 +47,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Saison wurde aktualisiert.'
-            setTimeout(() => router.push({ path: '/seasons/' }), 3000)
+            setTimeout(() => router.push({ path: '/admin/seasons/' }), 3000)
           }
         }).catch((err) => {
           message.value = err

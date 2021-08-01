@@ -1,12 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
 import Home from '../views/Home.vue'
-import Components from '../views/Components.vue'
 
-// Users
-const Users = () => import('../views/Users/Index.vue')
-const CreateUser = () => import('../views/Users/Create.vue')
-const UpdateUser = () => import('../views/Users/Update.vue')
 
 //Associations
 const Associations = {
@@ -30,27 +25,35 @@ const Associations = {
   },
 }
 
-// Saisons
-const Seasons = () => import('../views/Seasons/Index.vue')
-const CreateSeason = () => import('../views/Seasons/Create.vue')
-const UpdateSeason = () => import('../views/Seasons/Update.vue')
-const DeleteSeason = () => import('../views/Seasons/Delete.vue')
-
 // Persons
 const Persons = () => import('../views/Persons/Index.vue')
 const CreatePerson = () => import('../views/Persons/Create.vue')
 const UpdatePerson = () => import('../views/Persons/Update.vue')
 const ProfilePerson = () => import('../views/Persons/Profile.vue')
 
-// Referees
-const Referees = () => import('../views/Referees/Index.vue')
-const CreateReferee = () => import('../views/Referees/Create.vue')
-
-// PlayerClasses
-const PlayerClasses = () => import('../views/PlayerClasses/Index.vue')
-const CreatePlayerClass = () => import('../views/PlayerClasses/Create.vue')
-const UpdatePlayerClass = () => import('../views/PlayerClasses/Update.vue')
-const DeletePlayerClass = () => import('../views/PlayerClasses/Delete.vue')
+// Admin (Users/Seasons/PlayerClasses)
+const Admin = {
+  Get: () => import('../views/Admin/Get.vue'),
+  Components: () => import('../views/Admin/Components.vue'),
+  Users: {
+    Index: () => import('../views/Admin/Users/Index.vue'),
+    Create: () => import('../views/Admin/Users/Create.vue'),
+    Update: () => import('../views/Admin/Users/Update.vue'),
+    // Delete: () => import('../views/Admin/Users/Delete.vue'),
+  },
+  Seasons: {
+    Index: () => import('../views/Admin/Seasons/Index.vue'),
+    Create: () => import('../views/Admin/Seasons/Create.vue'),
+    Update: () => import('../views/Admin/Seasons/Update.vue'),
+    Delete: () => import('../views/Admin/Seasons/Delete.vue'),
+  },
+  PlayerClasses: {
+    Index: () => import('../views/Admin/PlayerClasses/Index.vue'),
+    Create: () => import('../views/Admin/PlayerClasses/Create.vue'),
+    Update: () => import('../views/Admin/PlayerClasses/Update.vue'),
+    Delete: () => import('../views/Admin/PlayerClasses/Delete.vue'),
+  },
+}
 
 // Competitions
 const Competitions = {
@@ -66,7 +69,7 @@ const Competitions = {
     Update: () => import('../views/Competitions/Encounters/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Delete.vue'),
   },
-  Match: {  
+  Match: {
     Index: () => import('../views/Competitions/Encounters/Match/Index.vue'),
     Update: () => import('../views/Competitions/Encounters/Match/Update.vue'),
     Delete: () => import('../views/Competitions/Encounters/Match/Delete.vue'),
@@ -88,26 +91,6 @@ const routes = [
     component: Home,
   },
   {
-    path: '/components',
-    name: 'Components',
-    component: Components,
-  },
-  {
-    path: '/users',
-    name: 'Users',
-    component: Users,
-  },
-  {
-    path: '/users/create',
-    name: 'CreateUser',
-    component: CreateUser,
-  },
-  {
-    path: '/users/:userId/update',
-    name: 'UpdateUser',
-    component: UpdateUser,
-  },
-  {
     path: '/associations',
     name: 'Associations',
     component: Associations.Index,
@@ -117,16 +100,7 @@ const routes = [
     name: 'CreateAssociation',
     component: Associations.Create,
   },
-  {
-    path: '/associations/:associationId/update',
-    name: 'UpdateAssociation',
-    component: Associations.Update,
-  },
-  {
-    path: '/associations/:associationId/delete',
-    name: 'DeleteAssociation',
-    component: Associations.Delete,
-  },
+
   {
     path: '/associations/:associationId',
     name: 'Association',
@@ -135,6 +109,14 @@ const routes = [
       {
         path: '',
         component: Associations.Profile,
+      },
+      {
+        path: 'update',
+        component: Associations.Update,
+      },
+      {
+        path: 'delete',
+        component: Associations.Delete,
       },
       {
         path: 'members',
@@ -179,26 +161,6 @@ const routes = [
     ]
   },
   {
-    path: '/seasons',
-    name: 'Seasons',
-    component: Seasons,
-  },
-  {
-    path: '/seasons/create',
-    name: 'CreateSeason',
-    component: CreateSeason,
-  },
-  {
-    path: '/seasons/:seasonId/update',
-    name: 'UpdateSeason',
-    component: UpdateSeason,
-  },
-  {
-    path: '/seasons/:seasonId/delete',
-    name: 'DeleteSeason',
-    component: DeleteSeason,
-  },
-  {
     path: '/persons',
     name: 'Persons',
     component: Persons,
@@ -214,39 +176,9 @@ const routes = [
     component: UpdatePerson,
   },
   {
-    path: '/persons/:personId/profile',
+    path: '/persons/:personId',
     name: 'ProfilePerson',
     component: ProfilePerson,
-  },
-  {
-    path: '/referees',
-    name: 'Referees',
-    component: Referees,
-  },
-  {
-    path: '/referees/create',
-    name: 'CreateReferee',
-    component: CreateReferee,
-  },
-  {
-    path: '/playerClasses',
-    name: 'PlayerClasses',
-    component: PlayerClasses,
-  },
-  {
-    path: '/playerClasses/create',
-    name: 'CreatePlayerClass',
-    component: CreatePlayerClass,
-  },
-  {
-    path: '/playerClasses/:playerClassId/delete',
-    name: 'DeletePlayerClasses',
-    component: DeletePlayerClass,
-  },
-  {
-    path: '/playerClasses/:playerClassId/update',
-    name: 'UpdatePlayerClasses',
-    component: UpdatePlayerClass,
   },
   {
     path: '/competitions',
@@ -258,21 +190,7 @@ const routes = [
     name: 'CreateCompetiton',
     component: Competitions.Create,
   },
-  {
-    path: '/competitions/:competitionId/delete',
-    name: 'DeleteCompetiton',
-    component: Competitions.Delete,
-  },
-  {
-    path: '/competitions/:competitionId/update',
-    name: 'UpdateCompetition',
-    component: Competitions.Update,
-  },
-  {
-    path: '/competitions/:competitionId/profile',
-    name: 'ProfileCompetiton',
-    component: Competitions.Profile,
-  },
+
   {
     path: '/competitions/:competitionId',
     name: 'Competition',
@@ -281,6 +199,16 @@ const routes = [
       {
         path: '',
         component: Competitions.Profile,
+      },
+      {
+        path: 'delete',
+        name: 'DeleteCompetiton',
+        component: Competitions.Delete,
+      },
+      {
+        path: 'update',
+        name: 'UpdateCompetition',
+        component: Competitions.Update,
       },
       {
         path: 'encounters',
@@ -334,6 +262,73 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin.Get,
+    children: [
+      {
+        path: 'components',
+        name: 'Components',
+        component: Admin.Components,
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        component: Admin.Users.Index,
+      },
+      {
+        path: 'users/create',
+        name: 'CreateUser',
+        component: Admin.Users.Create,
+      },
+      {
+        path: 'users/:userId/update',
+        name: 'UpdateUser',
+        component: Admin.Users.Update,
+      },
+      {
+        path: 'seasons',
+        name: 'Seasons',
+        component: Admin.Seasons.Index,
+      },
+      {
+        path: 'seasons/create',
+        name: 'CreateSeason',
+        component: Admin.Seasons.Create,
+      },
+      {
+        path: 'seasons/:seasonId/update',
+        name: 'UpdateSeason',
+        component: Admin.Seasons.Update,
+      },
+      {
+        path: 'seasons/:seasonId/delete',
+        name: 'DeleteSeason',
+        component: Admin.Seasons.Delete,
+      },
+      {
+        path: 'playerClasses',
+        name: 'PlayerClasses',
+        component: Admin.PlayerClasses.Index,
+      },
+      {
+        path: 'playerClasses/create',
+        name: 'CreatePlayerClass',
+        component: Admin.PlayerClasses.Create,
+      },
+      {
+        path: 'playerClasses/:playerClassId/update',
+        name: 'UpdatePlayerClasses',
+        component: Admin.PlayerClasses.Update,
+      },
+      {
+        path: 'playerClasses/:playerClassId/delete',
+        name: 'DeletePlayerClasses',
+        component: Admin.PlayerClasses.Delete,
+      },
+    ],
   },
 ]
 

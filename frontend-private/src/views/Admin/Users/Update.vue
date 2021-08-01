@@ -46,7 +46,7 @@
             message.value = res.data.message
           } else {
             message.value = 'User wurde aktualisiert.'
-            setTimeout(() => router.push({ path: '/users/' }), 3000)
+            setTimeout(() => router.push({ path: '/admin/users/' }), 3000)
           }
         }).catch((err) => {
           message.value = err

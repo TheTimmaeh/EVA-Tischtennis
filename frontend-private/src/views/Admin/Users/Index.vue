@@ -1,9 +1,9 @@
 <template>
   <div>
-    <router-link to="/users/create">
+    <router-link to="/admin/users/create">
       <Button>User anlegen</Button>
     </router-link><br />
-    <MemberTable :members="users" path="users"></MemberTable>
+    <MemberTable :members="users" path="admin/users"></MemberTable>
   </div>
 </template>
 

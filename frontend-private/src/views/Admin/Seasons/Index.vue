@@ -1,6 +1,6 @@
 <template>
   <div class="saisons">
-    <router-link to="/seasons/create">
+    <router-link to="/admin/seasons/create">
       <Button>Saison anlegen</Button> <br>
     </router-link>
     <div class="list">Liste zur Saisonübersicht</div>

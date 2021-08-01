@@ -31,7 +31,7 @@
             message.value = res.data.message
           } else {
             message.value = 'Saison wurde angelegt.'
-            setTimeout(() => router.push({ path: '/seasons' }), 3000)
+            setTimeout(() => router.push({ path: '/admin/seasons' }), 3000)
           }
         }).catch((err) => {
           message.value = err
