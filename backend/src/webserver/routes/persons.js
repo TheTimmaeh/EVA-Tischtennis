@@ -14,13 +14,13 @@ module.exports = (_db) => {
   router.post('/', authenticateToken, createPerson)
 
   // Get (one person)
-  router.get('/:person', optionalAuthenticateToken, getPerson)
+  router.get('/:personId', optionalAuthenticateToken, getPerson)
 
   // Update
-  router.post('/:person', authenticateToken, updatePerson)
+  router.post('/:personId', authenticateToken, updatePerson)
 
   // Delete
-  router.delete('/:person', authenticateToken, deletePerson)
+  router.delete('/:personId', authenticateToken, deletePerson)
 
   return router
 }
@@ -42,7 +42,7 @@ async function getAllPersons(req, res){
 }
 
 async function getPerson(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('persons').where({ id: req.params.person }))
+  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('persons').where({ id: req.params.personId }))
   res.json({ success: true, data })
 }
 
@@ -88,7 +88,7 @@ async function updatePerson(req, res){
   let result
 
   try {
-    result = await db('persons').where({ id: req.params.person }).update({
+    result = await db('persons').where({ id: req.params.personId }).update({
       name: req.body.name,
       surname: req.body.surname,
       gender: req.body.gender,
@@ -114,7 +114,7 @@ async function updatePerson(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('persons').where({ id: req.params.person }))
+    let data = (await db.first(select.admin).from('persons').where({ id: req.params.personId }))
 
     res.json({ success: true, message: 'Personendaten wurden aktualisiert.', data })
   } else {
@@ -123,6 +123,6 @@ async function updatePerson(req, res){
 }
 
 async function deletePerson(req, res){
-  await db('persons').where({ id: req.params.person }).del()
+  await db('persons').where({ id: req.params.personId }).del()
   res.json({})
 }

@@ -1,6 +1,8 @@
-<template>
+<template> 
   <tr :class="{ isLast }">
-    <td>{{name}}</td>
+    <router-link  :to="`/persons/${id}/profile`">
+      <td>{{name}}</td>
+    </router-link>
     <td>{{surname}}</td>
     <td>{{teams?.length}}</td>
     <td>
@@ -8,7 +10,9 @@
           <Button>Bearbeiten</Button> <br>
       </router-link><br/>
     </td>
+     
   </tr>
+ 
 </template>
 
 <script>

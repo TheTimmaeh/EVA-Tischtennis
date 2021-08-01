@@ -40,6 +40,7 @@ const DeleteSeason = () => import('../views/Seasons/Delete.vue')
 const Persons = () => import('../views/Persons/Index.vue')
 const CreatePerson = () => import('../views/Persons/Create.vue')
 const UpdatePerson = () => import('../views/Persons/Update.vue')
+const ProfilePerson = () => import('../views/Persons/Profile.vue')
 
 // Referees
 const Referees = () => import('../views/Referees/Index.vue')
@@ -211,6 +212,11 @@ const routes = [
     path: '/persons/:personId/update',
     name: 'UpdatePerson',
     component: UpdatePerson,
+  },
+  {
+    path: '/persons/:personId/profile',
+    name: 'ProfilePerson',
+    component: ProfilePerson,
   },
   {
     path: '/referees',

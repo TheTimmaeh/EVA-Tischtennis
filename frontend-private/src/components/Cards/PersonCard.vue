@@ -2,19 +2,19 @@
     <Card>
         <div class="header">
           <div class="primary-title">
-            <div class="title">{{ name }}{{ surname }}</div>
+            <div class="title">{{ data.name }} {{ data.surname }}</div>
           </div>
         </div>
         <div class="body">
           <tr>
-            <td>Geschlecht: {{ gender }}</td>
-            <td>Geburtsdatum: {{ birthday }}</td>
+            <td>Geschlecht: {{ data.gender }}</td>
+            <td>Geburtsdatum: {{ data.birthday }}</td>
           </tr>
           <tr>
-              <td>Adresse: {{ street }} {{ streetnumber }} | {{ zipcode }} {{ city }} | {{ state }} {{ country }}</td>
+              <td>Adresse: {{ data.street }} {{ data.streetnumber }} | {{ data.zipcode }} {{ data.city }} | {{ data.state }} {{ data.country }}</td>
           </tr>
           <tr>
-              <td>Kontakt: {{ phone }} | {{ mail }} </td>
+              <td>Kontakt: {{ data.phone }} | {{ data.mail }} </td>
           </tr>
         </div>
     </Card>
