@@ -1,12 +1,16 @@
 <template>
-  <Card class="delete">
-      <div class="competitions">
-    <div class="message" v-if="message">{{ message }}</div>
-
-    Bist du sicher, dass du das Turnier {{competition.name}} mit allen zugehörigen Informationen löschen möchtest?
-
-    <Button level="danger" @click="confirm()">Ja</Button> 
-    <Button @click="deny()">Nein</Button>
+  <Card>
+    <div class="flex">
+      <div class="icon">
+        <Icon type="warning" primaryColor="#E62965" secondaryColor="#E62965" />
+      </div>
+      <div>
+        <div class="message">{{ message }}</div>
+         Bist du sicher, dass du das Turnier {{competition.name}} mit allen zugehörigen Informationen löschen möchtest?
+        <br /><br />
+        <Button class="mright" level="danger" @click="confirm()"><Icon type="approve" /> Löschen</Button>
+        <Button @click="deny()"><Icon type="deny" /> Zurück</Button>
+      </div>
     </div>
   </Card>
 </template>
@@ -17,12 +21,14 @@
   import { api, setTitle } from '@/helper'
   import Button from '@/components/FormElements/Button'
   import Card from '@/components/Cards/Card'
+  import Icon from '@/components/Icons/Icon'
 
   export default {
     name: 'DeleteCompetition',
     components: {
       Button,
       Card,
+      Icon,
     },
     setup(){
       setTitle('Turnier löschen')
@@ -73,11 +79,29 @@
 </script>
 
 <style lang="scss" scoped>
-.delete{
-  height: 200px;
-}
-.competitions{
-  padding: 80px 0;
-  height:10px
-}
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 50px;
+  }
+
+  .icon {
+    height: 200px;
+    width: 200px;
+    float: left;
+    margin-right: 100px;
+  }
+
+  .message {
+    margin-bottom: 20px;
+    font-weight: 600;
+    height: 16px;
+    line-height: 16px;
+  }
+
+  .mright {
+    margin-right: 20px;
+  }
 </style>
