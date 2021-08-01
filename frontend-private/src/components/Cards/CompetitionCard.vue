@@ -1,4 +1,5 @@
 <template>
+<router-link :to="`/competitions/${id}/profile`">
   <Card>
     <tr>
       <td>Name: {{name}}</td>
@@ -31,6 +32,7 @@
       <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
     </tr> -->
   </Card>
+</router-link>
 </template>
 
 <script>

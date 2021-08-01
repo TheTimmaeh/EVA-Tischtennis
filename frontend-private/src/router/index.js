@@ -269,6 +269,11 @@ const routes = [
     component: Competitions.Update,
   },
   {
+    path: '/competitions/:competitionId/profile',
+    name: 'ProfileCompetiton',
+    component: Competitions.Profile,
+  },
+  {
     path: '/competitions/:competitionId',
     name: 'Competition',
     component: Competitions.Get,
