@@ -42,9 +42,30 @@ async function updateMatch(req, res){
   }
 
   if(result === 1){
-    let data = (await db.first(select.admin).from('matches').where({ id: req.params.matchId }))
+    let match
+    let sets
 
-    res.json({ success: true, message: 'Spieldaten wurden aktualisiert.', data })
+    try {
+      match = await db.first(select.admin).from('matches').where({ id: req.params.matchId })
+
+      sets = await db('sets').where({ match: match.id })
+
+      if(sets.length < 1){
+        let result = await db('sets').insert([
+          { match: match.id },
+          { match: match.id },
+          { match: match.id },
+          { match: match.id },
+          { match: match.id },
+        ])
+
+        sets = await db('sets').where({ match: match.id })
+      }
+    } catch(err){
+      console.error(err)
+    }
+
+    res.json({ success: true, message: 'Spieldaten wurden aktualisiert.', data: { match, sets } })
   } else {
     res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (4)' })
   }
