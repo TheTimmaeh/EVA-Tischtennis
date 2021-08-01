@@ -1,5 +1,5 @@
 <template>
-<router-link :to="`/competitions/${id}/profile`">
+<router-link :to="`/competitions/${id}`">
   <Card>
     <tr>
       <td>Name: {{name}}</td>

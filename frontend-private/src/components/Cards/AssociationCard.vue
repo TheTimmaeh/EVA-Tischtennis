@@ -1,24 +1,22 @@
 <template>
-  <router-link :to="`/associations/${data.id}`">
+  <router-link class="associationCard" :to="`/associations/${data.id}`">
     <Card>
-        <div class="header">
-          <div class="primary-title">
-            <div class="title">{{ data.name }}</div>
-          </div>
-        </div>
-        <div class="body">
-          <tr>
-            <td>Ort: {{ data.location }}</td>
-            <td><router-link :to="`/associations/${data.id}/teams`">Mannschaften: {{ teams?.length }}</router-link></td>
-            <td><router-link :to="`/associations/${data.id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
-            <router-link :to="`/associations/${data.id}/update`">
-              <Button><Icon type="edit" /></Button> 
-            </router-link><br/><br/>
-            <router-link :to="`/associations/${data.id}/delete`">
-              <Button level="danger"><Icon type="delete" /></Button>
-            </router-link>
-          </tr>
-        </div>
+      <div class="title">
+        {{ data.name }}
+      </div>
+      <div class="description">
+        <div class="location"><Icon type="location" primaryColor="#000000" secondaryColor="#000000" /> {{ data.location }}</div>
+        <div class="teams"><router-link :to="`/associations/${data.id}/teams`"><span class="label">Mannschaften:</span><span class="value">{{ teams?.length }}</span></router-link></div>
+        <div class="members"><router-link :to="`/associations/${data.id}/members`"><span class="label">Mitglieder:</span><span class="value">{{ members?.length }}</span></router-link></div>
+      </div>
+      <div class="actions">
+        <router-link :to="`/associations/${data.id}/update`">
+          <Button><Icon type="edit" /></Button>
+        </router-link>&nbsp;
+        <router-link :to="`/associations/${data.id}/delete`">
+          <Button level="danger"><Icon type="delete" /></Button>
+        </router-link>
+      </div>
     </Card>
   </router-link>
 </template>
@@ -36,7 +34,7 @@
     components: {
       Button,
       Card,
-      Icon
+      Icon,
     },
      props: {
       data: {
@@ -85,58 +83,55 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .associationCard {
+    display: block;
+    width: 300px;
+    margin: 10px;
 
-.header{
-    font-size: 18px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    width:100%;
-    min-height: 40px;
-    padding: 16px;
-    position: relative;
-    border: 1px solid $color-mono-light;
-    border-width: 0 0 1px;
-}
-.header .primary-title{
-  bottom: auto;
-  display: inline-block;
-  padding: 0;
-  position: absolute;
-  top: 50%;
-  -moz-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
-  -o-transform: translate(0, -50%);
-  -webkit-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-}
-.title {
-  font-size: 14px;
-  font-weight:bold;
-}
-.body{
-    color:$color-light-text;
-    padding: 16px;
-    text-align: left;
-    text-decoration: none;
-    font-size: 14px;
-    width:100%;
-    line-height: 1.5;
-    border-width: 0 0 1px;
-}
-td{
-    text-align: inherit;
-    display: table-cell;
-    width: 30em;
-}
-tr{
-    text-align: inherit;
-}
-.min {
-    width: 1%;
-    white-space: nowrap;
-}
+    .title {
+      border-bottom: 1px solid $color-mono-light;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      height: 40px;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .description {
+      padding-top: 8px;
+
+      & > div {
+        line-height: 28px;
+      }
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
+
+      & > svg {
+        height: 20px;
+        margin-right: 5px;
+      }
+    }
+
+    .actions {
+      padding-top: 8px;
+      text-align: center;
+    }
+
+    .label {
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    .value {
+      display: inline-block;
+      min-width: 46px;
+      text-align: right;
+    }
+  }
 </style>

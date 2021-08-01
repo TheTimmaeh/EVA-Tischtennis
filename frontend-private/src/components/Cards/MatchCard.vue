@@ -13,9 +13,9 @@
         </router-link>
         <!-- <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/delete`">
           <Button level="danger"><Icon type="delete" /></Button>
-        </router-link> -->
+        </router-link> -->&nbsp;
         <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
-          <Button >starten</Button>
+          <Button><Icon type="tabletennis" /> Starten</Button>
         </router-link>
       </td>
     </tr>

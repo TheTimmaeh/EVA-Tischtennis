@@ -1,22 +1,21 @@
 <template>
   <Card>
-      <div class="header">
-        <div class="primary-title">
-          <div class="title">
-            <tr>
-              <td>Spieler: {{playerName}}</td>
-              <td>Verein: {{associationName}}</td>
-            </tr>
-          </div>
+    <div class="header">
+      <div class="primary-title">
+        <div class="title">
+          <tr>
+            <td>Spieler: {{playerName}}</td>
+            <td>Verein: {{associationName}}</td>
+          </tr>
         </div>
       </div>
-      <div class="body">
-        <tr>
-          <td>{{description}}</td>
-          <td class="min"><Button><Icon type="edit" /></Button></td>
-        </tr>
-      </div>
-      
+    </div>
+    <div class="body">
+      <tr>
+        <td>{{description}}</td>
+        <td class="min"><Button><Icon type="edit" /></Button></td>
+      </tr>
+    </div>
   </Card>
 </template>
 

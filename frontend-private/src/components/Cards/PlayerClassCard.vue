@@ -6,10 +6,10 @@
         <td>Bis: {{age_to}} Jahren</td>
         <td>Geschlecht: {{gender}}</td>
         <td class="min">
-          <router-link :to="`/playerClasses/${id}/update`">
+          <router-link :to="`/admin/playerClasses/${id}/update`">
             <Button><Icon type="edit" /></Button> <br>
           </router-link><br/>
-          <router-link :to="`/playerClasses/${id}/delete`">
+          <router-link :to="`/admin/playerClasses/${id}/delete`">
             <Button level="danger"><Icon type="delete" /></Button>
           </router-link>
         </td>

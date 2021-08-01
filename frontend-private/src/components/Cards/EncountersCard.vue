@@ -1,26 +1,28 @@
 <template>
   <Card>
-    <tr>
-      <td>Heimmannschaft: {{ home }}</td>
-      <td>Gastmannschaft: {{ visitor }}</td>
-      <td>Gamestage: {{ game_stage }}</td>
-      <td>Datum: {{ datetime.format('date') }}</td>
-      <td class="min">
-        <router-link :to="`encounters/${id}/update`">
-          <Button><Icon type="edit" /></Button> <br>
-        </router-link><br/>
-        <router-link :to="`encounters/${id}/delete`">
-          <Button class="danger"><Icon type="delete" /></Button> <br>
-        </router-link><br/>
-      </td>
-    </tr>
-      <td>
-       <router-link :to="`encounters/${id}/matches`">
-        <Button>Spiele</Button> <br>
-       </router-link><br/>
-      </td>
-    <tr>
-    </tr>
+    <table>
+      <tr>
+        <td>Heimmannschaft: {{ home }}</td>
+        <td>Gastmannschaft: {{ visitor }}</td>
+        <td>Gamestage: {{ game_stage }}</td>
+        <td>Datum: {{ datetime.format('date') }}</td>
+        <td class="min">
+          <router-link :to="`encounters/${id}/update`">
+            <Button><Icon type="edit" /></Button>
+          </router-link>&nbsp;
+          <router-link :to="`encounters/${id}/delete`">
+            <Button class="danger"><Icon type="delete" /></Button>
+          </router-link>
+        </td>
+      </tr>
+      <tr>
+        <td>
+         <router-link :to="`encounters/${id}/matches`">
+           <Button>Spiele</Button>
+         </router-link>
+        </td>
+      </tr>
+    </table>
   </Card>
 </template>
 

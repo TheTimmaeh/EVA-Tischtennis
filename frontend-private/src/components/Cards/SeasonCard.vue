@@ -5,10 +5,10 @@
       <td>Jahr: {{year}}</td>
       <td>Titel: {{title}}</td>
       <td class="min">
-        <router-link :to="`/seasons/${id}/update`">
+        <router-link :to="`/admin/seasons/${id}/update`">
           <Button><Icon type="edit" /></Button>
         </router-link><br /><br />
-        <router-link :to="`/seasons/${id}/delete`">
+        <router-link :to="`/admin/seasons/${id}/delete`">
           <Button level="danger"><Icon type="delete" /></Button>
         </router-link>
       </td>

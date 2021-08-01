@@ -21,7 +21,7 @@
     font-size: 14px;
     border: 2px solid $color-info;
     border-radius: 5px;
-    margin: 8px;
+    // margin: 8px;
     overflow: hidden;
     position: relative;
 
