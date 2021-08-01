@@ -1,5 +1,5 @@
 <template>
-  <button :class="[ 'btn', props.level ]" @click="$emit('action')"><slot>Submit</slot></button>
+  <button :class="[ 'btn', { hasText }, props.level ]" @click="$emit('action')"><slot>Submit</slot></button>
 </template>
 
 <script>
@@ -14,9 +14,16 @@
     emits: {
       action: null,
     },
-    setup(props){
+    setup(props, { slots }){
+      let hasText = false
+
+      if(typeof slots?.default === 'function'){
+        hasText = !!slots.default()?.find((s) => s.type?.description === 'Text')
+      }
+
       return {
         props,
+        hasText,
       }
     }
   }
@@ -57,8 +64,12 @@
     }
 
     & > svg {
-      margin: 0 12px 0 4px;
+      margin: 0 4px;
       transform: scale(1.4);
+    }
+
+    &.hasText > svg {
+      margin: 0 12px 0 4px;
     }
   }
 </style>
