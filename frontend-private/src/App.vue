@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/"><Button><Icon type="tabletennis" /></Button></router-link> |
       <router-link to="/components">Components</router-link> |
       <template v-if="loggedIn">
         <router-link to="/users">Users</router-link> |
@@ -13,9 +13,9 @@
         <router-link to="/competitions">Turniere</router-link> |
         <!-- <router-link to="/match">Aktuelles Match</router-link> | -->
         <router-link to="/profile">Profil</router-link> |
-        <router-link to="/logout">Logout</router-link>
+        <router-link to="/logout"><Button><Icon type="logout" /></Button></router-link>
       </template>
-      <router-link to="/login" v-else>Login</router-link> |
+      <router-link to="/login" v-else><Button><Icon type="login" /></Button></router-link> |
       Socket: {{ connected ? 'Connected' : 'Disconnected' }}
     </div>
     <div id="page">
@@ -28,8 +28,15 @@
   import { ref, computed, watch, provide } from 'vue'
   import { useStore } from 'vuex'
   import { io } from '@/helper'
+  
+  import Button from '@/components/FormElements/Button'
+  import Icon from '@/components/Icons/Icon'
 
   export default {
+    components:{
+      Button,
+      Icon,
+    },
     setup(){
       const store = useStore()
 
