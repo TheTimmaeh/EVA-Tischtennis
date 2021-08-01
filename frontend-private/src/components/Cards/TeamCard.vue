@@ -27,12 +27,12 @@
           </td>
           <td class="min">
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/update`">
-            <Button>Bearbeiten</Button> 
+            <Button><Icon type="edit" /></Button> 
             </router-link>
           </td>
           <td class="min">
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/delete`">
-              <Button level="danger">Löschen</Button>
+              <Button level="danger"><Icon type="delete" /></Button>
             </router-link>
           </td>
         </tr>  
@@ -47,6 +47,7 @@ import { useRoute } from 'vue-router'
 import { api, setTitle } from '@/helper'
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 
 
 export default {
@@ -54,6 +55,7 @@ export default {
   components: {
     Button,
     Card,
+    Icon,
   },
   props: {
     data: {

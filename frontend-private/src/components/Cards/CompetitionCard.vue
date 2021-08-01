@@ -7,17 +7,17 @@
       <td>Spielerklasse: {{player_class}}</td>
       <td class="min">
         <router-link :to="`/competitions/${id}/update`">
-          <Button>Bearbeiten</Button> <br>
+          <Button><Icon type="edit" /></Button> <br>
       </router-link><br/>
       <router-link :to="`/competitions/${id}/delete`">
-              <Button level="danger">Löschen</Button>
+              <Button level="danger"><Icon type="delete" /></Button>
       </router-link>
       </td>
     </tr>
     <tr>
       <td>
        <router-link :to="`/competitions/${id}/encounters`">
-          <Button>Begegnungen anzeigen</Button> <br>
+          <Button>Begegnungen</Button> <br>
        </router-link><br/>
       </td>
     </tr>
@@ -38,6 +38,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { api, setTitle, validate } from '@/helper'
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 import { ref } from 'vue'
 
 export default {
@@ -45,6 +46,7 @@ export default {
   components:{
     Button,
     Card,
+    Icon,
     },
   props: {
       data: {

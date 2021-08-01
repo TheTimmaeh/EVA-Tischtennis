@@ -12,10 +12,10 @@
             <td><router-link :to="`/associations/${data.id}/teams`">Mannschaften: {{ teams?.length }}</router-link></td>
             <td><router-link :to="`/associations/${data.id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
             <router-link :to="`/associations/${data.id}/update`">
-              <Button>Bearbeiten</Button> 
+              <Button><Icon type="edit" /></Button> 
             </router-link><br/><br/>
             <router-link :to="`/associations/${data.id}/delete`">
-              <Button level="danger">Löschen</Button>
+              <Button level="danger"><Icon type="delete" /></Button>
             </router-link>
           </tr>
         </div>
@@ -27,6 +27,7 @@
   import { computed } from 'vue'
   import { ref } from 'vue'
   import { api } from '@/helper'
+  import Icon from '@/components/Icons/Icon'
   import Button from '@/components/FormElements/Button'
   import Card from '@/components/Cards/Card'
 
@@ -35,6 +36,7 @@
     components: {
       Button,
       Card,
+      Icon
     },
      props: {
       data: {

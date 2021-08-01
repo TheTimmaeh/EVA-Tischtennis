@@ -6,10 +6,10 @@
       <td>Titel: {{title}}</td>
       <td class="min">
         <router-link :to="`/seasons/${id}/update`">
-          <Button>Bearbeiten</Button>
+          <Button><Icon type="edit" /></Button>
         </router-link><br /><br />
         <router-link :to="`/seasons/${id}/delete`">
-          <Button level="danger">Löschen</Button>
+          <Button level="danger"><Icon type="delete" /></Button>
         </router-link>
       </td>
     </tr>
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 import { ref } from 'vue'
 import { api } from '@/helper'
 
@@ -31,6 +31,7 @@ export default {
   components:{
     Button,
     Card,
+    Icon,
   },
   props: {
     data: {

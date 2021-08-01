@@ -15,7 +15,7 @@
           <Button level="danger"><Icon type="delete" /></Button>
         </router-link> -->
         <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
-          <Button >Spiel starten</Button>
+          <Button >starten</Button>
         </router-link>
       </td>
     </tr>

@@ -7,7 +7,7 @@
     <td>{{teams?.length}}</td>
     <td>
       <router-link :to="`/${path}/${id}/update`">
-          <Button>Bearbeiten</Button> <br>
+          <Button><Icon type="edit" /></Button> <br>
       </router-link><br/>
     </td>
      
@@ -18,11 +18,13 @@
 <script>
   import { ref } from 'vue'
   import Button from '@/components/FormElements/Button'
+  import Icon from '@/components/Icons/Icon'
 
   export default {
     name: 'MemberRow',
     components: {
       Button,
+      Icon,
     },
     props: {
       data: {

@@ -7,10 +7,10 @@
         <td>Geschlecht: {{gender}}</td>
         <td class="min">
           <router-link :to="`/playerClasses/${id}/update`">
-            <Button>Bearbeiten</Button> <br>
+            <Button><Icon type="edit" /></Button> <br>
           </router-link><br/>
           <router-link :to="`/playerClasses/${id}/delete`">
-            <Button level="danger">Löschen</Button>
+            <Button level="danger"><Icon type="delete" /></Button>
           </router-link>
         </td>
       </tr>
@@ -21,6 +21,7 @@
 import { computed } from 'vue'
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 import { ref } from 'vue'
 
 export default {
@@ -28,6 +29,7 @@ export default {
   components:{
     Button,
     Card,
+    Icon,
     },
     props: {
       playerClass: {

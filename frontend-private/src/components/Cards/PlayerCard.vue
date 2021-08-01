@@ -13,7 +13,7 @@
       <div class="body">
         <tr>
           <td>{{description}}</td>
-          <td class="min"><Button>Bearbeiten</Button></td>
+          <td class="min"><Button><Icon type="edit" /></Button></td>
         </tr>
       </div>
       
@@ -24,6 +24,7 @@
 
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 import { ref } from 'vue'
 
 export default {
@@ -31,6 +32,7 @@ export default {
   components:{
     Button,
     Card,
+    Icon
     },
   setup(){
     let playerName = ref('Spielername konnte nicht geladen werden')

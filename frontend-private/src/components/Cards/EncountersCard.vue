@@ -7,16 +7,16 @@
       <td>Datum: {{ datetime.format('date') }}</td>
       <td class="min">
         <router-link :to="`encounters/${id}/update`">
-          <Button>Bearbeiten</Button> <br>
+          <Button><Icon type="edit" /></Button> <br>
         </router-link><br/>
         <router-link :to="`encounters/${id}/delete`">
-          <Button class="danger">Löschen</Button> <br>
+          <Button class="danger"><Icon type="delete" /></Button> <br>
         </router-link><br/>
       </td>
     </tr>
       <td>
        <router-link :to="`encounters/${id}/matches`">
-        <Button>Spiele anzeigen</Button> <br>
+        <Button>Spiele</Button> <br>
        </router-link><br/>
       </td>
     <tr>
@@ -27,6 +27,7 @@
 <script>
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
+import Icon from '@/components/Icons/Icon'
 import { useRouter, useRoute } from 'vue-router'
 import { format } from '@/helper'
 
@@ -35,6 +36,7 @@ export default {
   components:{
     Button,
     Card,
+    Icon,
     },
   props: {
       data: {
