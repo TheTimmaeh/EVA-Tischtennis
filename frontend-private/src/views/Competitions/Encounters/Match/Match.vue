@@ -22,7 +22,6 @@
             <p>Spielerklasse - Verein</p>
             <p>Punktestand {{ score2 }}</p>
             <Button class="button" level="danger">Disqualifizieren </Button>
-            <Button class="button" level="warning">Verwarnen </Button> <br>
 
             <Button class="button" >Weiße Karte </Button>
             <Button class="button" >Gelbe Karte </Button>

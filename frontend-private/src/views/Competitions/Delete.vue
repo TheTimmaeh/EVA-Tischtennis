@@ -79,7 +79,7 @@
 </script>
 
 <style lang="scss" scoped>
-.flex {
+  .flex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
