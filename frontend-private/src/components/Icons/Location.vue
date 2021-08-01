@@ -1,22 +1,22 @@
 <template>
-  <svg :class="[ `scale${scale}` ]" height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <svg :class="[ `scale${scale}` ]" height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
     <g>
-      <title>Annehmen</title>
+      <title>Standort</title>
       <path
         :fill="secondaryColor"
         :opacity="secondaryOpacity"
-        d="M504.5 144.42L264.75 385.5 192 312.59l240.11-241a25.49 25.49 0 0 1 36.06-.14l.14.14L504.5 108a25.86 25.86 0 0 1 0 36.42z"></path>
+        d="M192 0C86 0 0 86 0 192c0 77.41 27 99 172.27 309.67a24 24 0 0 0 39.46 0C357 291 384 269.41 384 192 384 86 298 0 192 0zm0 288a96 96 0 1 1 96-96 96 96 0 0 1-96 96z"></path>
       <path
         :fill="primaryColor"
         :opacity="primaryOpacity"
-        d="M264.67 385.59l-54.57 54.87a25.5 25.5 0 0 1-36.06.14l-.14-.14L7.5 273.1a25.84 25.84 0 0 1 0-36.41l36.2-36.41a25.49 25.49 0 0 1 36-.17l.16.17z"></path>
+      d="M192 256a64 64 0 1 1 64-64 64 64 0 0 1-64 64z"></path>
     </g>
   </svg>
 </template>
 
 <script>
   export default {
-    name: 'ApproveIcon',
+    name: 'LocationIcon',
     props: {
       primaryColor: {
         type: String,

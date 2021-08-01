@@ -1,5 +1,5 @@
 <template>
-  <svg height="100%" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+  <svg :class="[ `scale${scale}` ]" height="100%" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
     <g>
       <path
         :fill="secondaryColor"
@@ -22,7 +22,7 @@
         default: '#FFFFFF',
       },
       primaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 1,
       },
       secondaryColor: {
@@ -30,8 +30,12 @@
         default: '#FFFFFF',
       },
       secondaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 0.4,
+      },
+      scale: {
+        type: [String, Number],
+        default: 1,
       },
     },
     setup(props){
@@ -43,4 +47,13 @@
 </script>
 
 <style lang="scss" scoped>
+  svg {
+    &.scale2 {
+      transform: scale(2);
+    }
+
+    &.scale3 {
+      transform: scale(3);
+    }
+  }
 </style>

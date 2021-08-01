@@ -4,55 +4,71 @@
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <DeleteIcon
     v-if="type == 'delete'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <ApproveIcon
     v-if="type == 'approve'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <DenyIcon
     v-if="type == 'deny'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <LoginIcon
     v-if="type == 'login'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <LogoutIcon
     v-if="type == 'logout'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <InfoIcon
     v-if="type == 'info'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <WarningIcon
     v-if="type == 'warning'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
+  <LocationIcon
+    v-if="type == 'location'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="secondaryColor"
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
   <TableTennisIcon
     v-if="type == 'tabletennis'"
     :primaryColor="primaryColor"
     :primaryOpacity="primaryOpacity"
     :secondaryColor="secondaryColor"
-    :secondaryOpacity="secondaryOpacity" />
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
 </template>
 
 <script>
@@ -64,6 +80,7 @@
   import LogoutIcon from '@/components/Icons/Logout'
   import InfoIcon from '@/components/Icons/Info'
   import WarningIcon from '@/components/Icons/Warning'
+  import LocationIcon from '@/components/Icons/Location'
   import TableTennisIcon from '@/components/Icons/TableTennis'
 
   export default {
@@ -77,6 +94,7 @@
       LogoutIcon,
       InfoIcon,
       WarningIcon,
+      LocationIcon,
       TableTennisIcon,
     },
     props: {
@@ -89,7 +107,7 @@
         default: '#FFFFFF',
       },
       primaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 1,
       },
       secondaryColor: {
@@ -97,8 +115,12 @@
         default: '#FFFFFF',
       },
       secondaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 0.4,
+      },
+      scale: {
+        type: [String, Number],
+        default: 1,
       },
     },
     setup(props){

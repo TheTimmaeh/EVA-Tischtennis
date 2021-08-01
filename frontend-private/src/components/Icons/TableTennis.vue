@@ -1,9 +1,10 @@
 <template>
-  <svg height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <svg :class="[ `scale${scale}` ]" height="100%" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <g>
+      <title>Tischtennis</title>
       <path
         :fill="secondaryColor"
-        :opacity="primaryOpacity"
+        :opacity="secondaryOpacity"
         d="M496.28 296.48c31.5-77.81 15.8-170.31-47.2-233.4-83.9-84.1-220-84.1-303.9 0l-56 56.09 211.5 211.5c46.1-62.09 131.5-77.4 195.6-34.19zM416.08 320a96 96 0 1 0 96 96 96 96 0 0 0-96-96z"></path>
       <path
         :fill="primaryColor"
@@ -22,7 +23,7 @@
         default: '#FFFFFF',
       },
       primaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 1,
       },
       secondaryColor: {
@@ -30,8 +31,12 @@
         default: '#FFFFFF',
       },
       secondaryOpacity: {
-        type: Number,
+        type: [String, Number],
         default: 0.4,
+      },
+      scale: {
+        type: [String, Number],
+        default: 1,
       },
     },
     setup(props){
@@ -44,8 +49,12 @@
 
 <style lang="scss" scoped>
   svg {
-    color: white;
-    height: 16px;
-    width: 16px;
+    &.scale2 {
+      transform: scale(2);
+    }
+
+    &.scale3 {
+      transform: scale(3);
+    }
   }
 </style>
