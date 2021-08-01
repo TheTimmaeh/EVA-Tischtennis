@@ -1,20 +1,20 @@
 <template>
-  <router-link :to="`/associations/${id}`">
+  <router-link :to="`/associations/${data.id}`">
     <Card>
         <div class="header">
           <div class="primary-title">
-            <div class="title">{{ name }}</div>
+            <div class="title">{{ data.name }}</div>
           </div>
         </div>
         <div class="body">
           <tr>
-            <td>Ort: {{ location }}</td>
-            <td><router-link :to="`/associations/${id}/teams`">Mannschaften: {{ playerClasses?.length }}</router-link></td>
-            <td><router-link :to="`/associations/${id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
-            <router-link :to="`/associations/${id}/update`">
+            <td>Ort: {{ data.location }}</td>
+            <td><router-link :to="`/associations/${data.id}/teams`">Mannschaften: {{ teams?.length }}</router-link></td>
+            <td><router-link :to="`/associations/${data.id}/members`">Mitglieder: {{ members?.length }}</router-link></td>
+            <router-link :to="`/associations/${data.id}/update`">
               <Button>Bearbeiten</Button> 
             </router-link><br/><br/>
-            <router-link :to="`/associations/${id}/delete`">
+            <router-link :to="`/associations/${data.id}/delete`">
               <Button level="danger">Löschen</Button>
             </router-link>
           </tr>
@@ -26,6 +26,7 @@
 <script>
   import { computed } from 'vue'
   import { ref } from 'vue'
+  import { api } from '@/helper'
   import Button from '@/components/FormElements/Button'
   import Card from '@/components/Cards/Card'
 
@@ -36,12 +37,45 @@
       Card,
     },
      props: {
-       data: {
+      data: {
         type: Object,
+        required: true,
+      },
+      id: {
+        type: Number,
         required: true,
       },
     },
     setup(props){
+      const teams = ref([])
+
+      api(`/associations/${props.id}/teams`).then((res) => res.data).then((res) => {
+
+        if(!res.success){
+          console.error('Fehler...', res)
+         return
+        }
+
+        teams.value = res.data
+      })
+
+      const members = ref([])
+
+      api(`/associations/${props.id}/members`).then((res) => res.data).then((res) => {
+
+        if(!res.success){
+          console.error('Fehler...', res)
+         return
+        }
+
+        members.value = res.data
+      })
+
+
+    return {
+      teams,
+      members,
+    }
       return {
         ...props.data,
       }

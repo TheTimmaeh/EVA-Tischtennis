@@ -4,7 +4,7 @@
       <Button>Verein anlegen</Button> <br>
     </router-link>
     <div class="list">
-      <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association"></AssociationCard>
+      <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id"></AssociationCard>
     </div>
   </div>
 </template>
