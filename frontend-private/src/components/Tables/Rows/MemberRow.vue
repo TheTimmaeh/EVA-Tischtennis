@@ -1,18 +1,21 @@
-<template> 
+<template>
   <tr :class="{ isLast }">
-    <router-link  :to="`/persons/${id}/profile`">
-      <td>{{name}}</td>
-    </router-link>
-    <td>{{surname}}</td>
-    <td>{{teams?.length}}</td>
+    <template v-if="path === 'persons'">
+      <router-link :to="`/persons/${id}`">
+        <td>{{ name }}</td>
+      </router-link>
+    </template>
+    <template v-else>
+      <td>{{ name }}</td>
+    </template>
+    <td>{{ surname }}</td>
+    <td>{{ teams?.length }}</td>
     <td>
       <router-link :to="`/${path}/${id}/update`">
-          <Button><Icon type="edit" /></Button> <br>
-      </router-link><br/>
+        <Button><Icon type="edit" /></Button>
+      </router-link>
     </td>
-     
   </tr>
- 
 </template>
 
 <script>
@@ -37,7 +40,7 @@
       },
       path:{
         type: String,
-        required: true, 
+        required: true,
       }
     },
     setup(props){
