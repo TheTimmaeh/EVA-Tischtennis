@@ -6,14 +6,6 @@ volumes:
     master_3_data:
 
 
-#networks:
- # repl:
-  #  driver: bridge
-   # ipam:
-    # config:
-     #  - subnet: 10.5.0.0/16
-      #   gateway: 10.5.0.1
-
 services:
     master_1:
         image: mysql/mysql-server:8.0
@@ -40,11 +32,10 @@ services:
         restart: unless-stopped
         labels:
          - traefik.enable=true
-        #command: --init-file /data/application/init.sql
         volumes:
             - master_1_data:/var/lib/mysql
-            #- ./init.sql:/data/application/init.sql
-            #- ./init.sql:/script/init.sql
+           # - "./scripts/master1.sql:/docker-entrypoint-initdb.d/1.sql"
+
 
         environment:
             MYSQL_ROOT_PASSWORD: example
@@ -52,78 +43,78 @@ services:
             MYSQL_DATABASE: eva_tischtennis
             MYSQL_USER: knex
             MYSQL_PASSWORD: eva_tischtennis
-      #  networks:
-       #     default:
-       #     repl:
-        #      ipv4_address: 10.5.0.5
 
-    # master_2:
-    #     image: mysql/mysql-server:8.0
-    #     hostname: master_2
-    #     command: ["mysqld",
-    #         "--server-id=2",
-    #         "--log-bin=mysql-bin-1.log",
-    #         "--enforce-gtid-consistency=ON",
-    #         "--log-slave-updates=ON",
-    #         "--gtid-mode=ON",
-    #         "--transaction-write-set-extraction=XXHASH64",
-    #         "--binlog-checksum=NONE",
-    #         "--master-info-repository=TABLE",
-    #         "--relay-log-info-repository=TABLE",
-    #         "--plugin-load=group_replication.so",
-    #         "--relay-log-recovery=ON",
-    #         "--loose-group-replication-start-on-boot=OFF",
-    #         "--loose-group-replication-group-name=a7ca3cc1-28e3-438b-b2c6-d69528ce2aa7",
-    #         "--loose-group-replication-local-address=master_2:6606",
-    #         "--loose-group-replication-group-seeds=master_1:6606,master_2:6606,master_3:6606",
-    #         "--loose-group-replication-single-primary-mode=OFF",
-    #         "--default-authentication-plugin=mysql_native_password",
-    #         "--loose-group-replication-enforce-update-everywhere-checks=ON"]
-    #     restart: unless-stopped
-    #     volumes:
-    #         - master_2_data:/var/lib/mysql
-    #
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: example
-    #         MYSQL_ROOT_HOST: "%"
-    #   #  networks:
-    #       #  default:
-    #       #  repl:
-    #        #   ipv4_address: 10.5.0.6
-    #
-    # master_3:
-    #     image: mysql/mysql-server:8.0
-    #     hostname: master_3
-    #     command: ["mysqld",
-    #         "--server-id=3",
-    #         "--log-bin=mysql-bin-1.log",
-    #         "--enforce-gtid-consistency=ON",
-    #         "--log-slave-updates=ON",
-    #         "--gtid-mode=ON",
-    #         "--transaction-write-set-extraction=XXHASH64",
-    #         "--binlog-checksum=NONE",
-    #         "--master-info-repository=TABLE",
-    #         "--relay-log-info-repository=TABLE",
-    #         "--plugin-load=group_replication.so",
-    #         "--relay-log-recovery=ON",
-    #         "--loose-group-replication-start-on-boot=OFF",
-    #         "--loose-group-replication-group-name=a7ca3cc1-28e3-438b-b2c6-d69528ce2aa7",
-    #         "--loose-group-replication-local-address=master_3:6606",
-    #         "--loose-group-replication-group-seeds=master_1:6606,master_2:6606,master_3:6606",
-    #         "--loose-group-replication-single-primary-mode=OFF",
-    #         "--default-authentication-plugin=mysql_native_password",
-    #         "--loose-group-replication-enforce-update-everywhere-checks=ON"]
-    #     restart: unless-stopped
-    #     volumes:
-    #         - master_3_data:/var/lib/mysql
-    #
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: example
-    #         MYSQL_ROOT_HOST: "%"
-    #   #  networks:
-    #        # default:
-    #        # repl:
-    #        #   ipv4_address: 10.5.0.7
+
+    master_2:
+        image: mysql/mysql-server:8.0
+        hostname: master_2
+        command: ["mysqld",
+            "--server-id=2",
+            "--log-bin=mysql-bin-1.log",
+            "--enforce-gtid-consistency=ON",
+            "--log-slave-updates=ON",
+            "--gtid-mode=ON",
+            "--transaction-write-set-extraction=XXHASH64",
+            "--binlog-checksum=NONE",
+            "--master-info-repository=TABLE",
+            "--relay-log-info-repository=TABLE",
+            "--plugin-load=group_replication.so",
+            "--relay-log-recovery=ON",
+            "--loose-group-replication-start-on-boot=OFF",
+            "--loose-group-replication-group-name=a7ca3cc1-28e3-438b-b2c6-d69528ce2aa7",
+            "--loose-group-replication-local-address=master_2:6606",
+            "--loose-group-replication-group-seeds=master_1:6606,master_2:6606,master_3:6606",
+            "--loose-group-replication-single-primary-mode=OFF",
+            "--default-authentication-plugin=mysql_native_password",
+            "--loose-group-replication-enforce-update-everywhere-checks=ON"]
+        restart: unless-stopped
+        volumes:
+             - master_2_data:/var/lib/mysql
+
+
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: eva_tischtennis
+            MYSQL_USER: knex
+            MYSQL_PASSWORD: eva_tischtennis
+
+
+    
+    master_3:
+        image: mysql/mysql-server:8.0
+        hostname: master_3
+        command: ["mysqld",
+            "--server-id=3",
+            "--log-bin=mysql-bin-1.log",
+            "--enforce-gtid-consistency=ON",
+            "--log-slave-updates=ON",
+            "--gtid-mode=ON",
+            "--transaction-write-set-extraction=XXHASH64",
+            "--binlog-checksum=NONE",
+            "--master-info-repository=TABLE",
+            "--relay-log-info-repository=TABLE",
+            "--plugin-load=group_replication.so",
+            "--relay-log-recovery=ON",
+            "--loose-group-replication-start-on-boot=OFF",
+            "--loose-group-replication-group-name=a7ca3cc1-28e3-438b-b2c6-d69528ce2aa7",
+            "--loose-group-replication-local-address=master_3:6606",
+            "--loose-group-replication-group-seeds=master_1:6606,master_2:6606,master_3:6606",
+            "--loose-group-replication-single-primary-mode=OFF",
+            "--default-authentication-plugin=mysql_native_password",
+            "--loose-group-replication-enforce-update-everywhere-checks=ON"]
+        restart: unless-stopped
+        volumes:
+            - master_3_data:/var/lib/mysql
+    
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: eva_tischtennis
+            MYSQL_USER: knex
+            MYSQL_PASSWORD: eva_tischtennis
+
+
 
 
     traefik:
