@@ -14,7 +14,6 @@
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
-
 import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
 import CompetitionCard from '@/components/Cards/CompetitionCard'
