@@ -98,7 +98,6 @@ export default {
     padding: 15px;
   }
   .body{
-      color:$color-light-text;
       padding: 16px;
       text-align: left;
       text-decoration: none;
