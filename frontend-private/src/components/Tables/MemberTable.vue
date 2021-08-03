@@ -1,5 +1,5 @@
 <template>
-  <Card v-if="members.length > 0">
+  <Card v-if="members.length > 0" >
     <table>
       <colgroup>
         <col class="thirty" />
@@ -11,7 +11,7 @@
         <tr>
           <th>Vorname</th>
           <th>Nachname</th>
-          <th>Anzahl der Mannschaften</th>
+          <!-- <th>Anzahl der Mannschaften</th> -->
           <th>Bearbeiten</th>
         </tr>
       </thead>
@@ -41,7 +41,7 @@
       path:{
         type: String,
         required: true,
-      }
+      },
     },
     setup(props){
       const members = computed(() => props.members)
@@ -55,11 +55,13 @@
 </script>
 
 <style lang="scss" scoped>
+ 
   table {
     table-layout: fixed;
     text-indent: initial;
     border-collapse: collapse;
     border-spacing: 0;
+    width:800px;
   }
 
   thead {

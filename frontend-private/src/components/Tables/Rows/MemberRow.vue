@@ -9,7 +9,7 @@
       <td>{{ name }}</td>
     </template>
     <td>{{ surname }}</td>
-    <td>{{ teams?.length }}</td>
+    <!-- <td>{{ teams?.length }}</td> -->
     <td>
       <router-link :to="`/${path}/${id}/update`">
         <Button><Icon type="edit" /></Button>
@@ -41,7 +41,7 @@
       path:{
         type: String,
         required: true,
-      }
+      },
     },
     setup(props){
       return {
