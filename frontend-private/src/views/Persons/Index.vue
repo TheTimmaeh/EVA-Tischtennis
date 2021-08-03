@@ -1,21 +1,25 @@
 <template>
-  <div class="persons">
-    <router-link to="/persons/create">
-      <Button>Person anlegen</Button> <br>
-    </router-link>
-    <MemberTable :members="persons" path="persons"></MemberTable>
-  </div>
+  <Page>
+    <div class="persons">
+      <router-link to="/persons/create">
+        <Button>Person anlegen</Button> <br>
+      </router-link>
+      <MemberTable class="memberTable" :members="persons" path="persons"></MemberTable>
+    </div>
+  </Page>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
+import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
 import MemberTable from '@/components/Tables/MemberTable'
 
 export default {
   name: 'Persons',
   components: {
+    Page,
     Button,
     MemberTable,
   },
@@ -43,7 +47,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .persons {
+    padding-top: 20px;
+  }
+
+  .memberTable {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+  }
 </style>

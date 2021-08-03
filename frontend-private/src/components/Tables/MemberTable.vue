@@ -61,7 +61,7 @@
     text-indent: initial;
     border-collapse: collapse;
     border-spacing: 0;
-    width:800px;
+    width:900px;
   }
 
   thead {
