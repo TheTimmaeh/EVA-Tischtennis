@@ -1,33 +1,22 @@
 <template>
-<router-link :to="`/competitions/${id}/encounters`">
-  <Card class="competitionsCard">
-    <tr>
-      <router-link :to="`/competitions/${id}`">
-        <td>Name: {{name}}</td>
-      </router-link>
-      <!-- <td>Start-Datum: {{startdate}}</td>
-      <td>End-Datum: {{enddate}}</td> -->
-      <td>Spielerklasse: {{player_class}}</td>
-      <td class="min">
-        <router-link :to="`/competitions/${id}/update`">
-          <Button><Icon type="edit" /></Button> <br>
-      </router-link><br/>
-      <router-link :to="`/competitions/${id}/delete`">
-              <Button level="danger"><Icon type="delete" /></Button>
-      </router-link>
-      </td>
-    </tr>
-    <!-- <tr>
-      <td>Anschrift: {{street}} {{streetnumber}}, {{zipcode}} {{city}}, {{starte}}, {{country}}</td>
-    </tr>
-    <tr>
-      <td>Kontakt: Telefonnummer: {{telefon}}, Mail-Adresse: {{mail}}, Website {{webiste}}</td>
-    </tr>
-   <tr v-for="team in teams" :key="team.id">
-      <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
-    </tr> -->
-  </Card>
-</router-link><br/>
+  <router-link class="competitionsCard" :to="`/competitions/${id}`">
+    <Card>
+      <div class="title">
+        Turnier: {{ data.name }}
+      </div>
+      <div class="description">
+        <div class="playerClass"> Spielerklasse: {{playerClass.name}} </div>
+         </div>
+      <div class="actions">
+        <router-link :to="`/competitions/${data.id}/update`">
+          <Button><Icon type="edit" /></Button>
+        </router-link>&nbsp;
+        <router-link :to="`/competitions/${data.id}/delete`">
+          <Button level="danger"><Icon type="delete" /></Button>
+        </router-link>
+      </div>
+    </Card>
+  </router-link>
 </template>
 
 <script>
@@ -50,34 +39,73 @@ export default {
         type: Object,
         required: true,
       },
-    },
-  setup(props){
+    },setup(props){
+      const playerClass = ref([])
+
+      api(`/playerClasses/${props.data.player_class}`).then((res) => res.data).then((res) => {
+
+        if(!res.success){
+          console.error('Fehler...', res)
+         return
+        }
+
+        playerClass.value = res.data
+      })
+
+     
 
     return {
-      ...props.data,
+      playerClass,
     }
-  },
-}
+      
+    },
+  }
 </script>
 
 <style lang="scss" scoped>
   .competitionsCard {
-    width: 800px;
+    display: block;
+    width: 300px;
     margin: 10px;
-  }
-  
-  tr{
-    text-align: inherit;
-  }
 
-  td{
-    text-align: inherit;
-    display: table-cell;
-    width: 30em;
-  }
+    .title {
+      border-bottom: 1px solid $color-mono-light;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      height: 40px;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
 
-  .min {
-    width: 1%;
-    white-space: nowrap;
+    .description {
+      padding-top: 8px;
+
+      & > div {
+        line-height: 28px;
+      }
+    }
+
+    .playerClass {
+      display: flex;
+      align-items: center;
+    }
+
+    .actions {
+      padding-top: 8px;
+      text-align: center;
+    }
+
+    .label {
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    .value {
+      display: inline-block;
+      min-width: 46px;
+      text-align: right;
+    }
   }
 </style>

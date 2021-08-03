@@ -2,7 +2,7 @@
   <Card>
     <!-- <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/members`"> -->
       <table>
-        <th>Mannschaft: {{ data.name }} ID: {{ data.id }}</th>
+        <th>Mannschaft: {{ data.name }}</th>
         <tr>
           <td>Saison: {{ data.season }}</td>
         </tr>
