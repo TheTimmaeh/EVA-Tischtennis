@@ -1,5 +1,5 @@
 <template>
-  <router-link class="competitionsCard" :to="`/competitions/${id}`">
+  <router-link class="competitionsCard" :to="`/competitions/${data.id}`">
     <Card>
       <div class="title">
         Turnier: {{ data.name }}

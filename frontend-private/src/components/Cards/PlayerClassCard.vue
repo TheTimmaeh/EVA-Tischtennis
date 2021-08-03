@@ -4,7 +4,9 @@
         <td>Name: {{name}}</td>
         <td>Von: {{age_from}} Jahren</td>
         <td>Bis: {{age_to}} Jahren</td>
-        <td>Geschlecht: {{gender}}</td>
+        <td v-if="gender === 'm'">Geschlecht: Männlich</td>
+        <td v-if="gender === 'f'">Geschlecht: Weilblich</td>
+        <td v-if="gender === 'd'">Geschlecht: Divers</td>
         <td class="min">
           <router-link :to="`/admin/playerClasses/${id}/update`">
             <Button><Icon type="edit" /></Button> <br>
