@@ -1,8 +1,10 @@
 <template>
-<router-link :to="`/competitions/${id}`">
-  <Card>
+<router-link :to="`/competitions/${id}/encounters`">
+  <Card class="competitionsCard">
     <tr>
-      <td>Name: {{name}}</td>
+      <router-link :to="`/competitions/${id}`">
+        <td>Name: {{name}}</td>
+      </router-link>
       <!-- <td>Start-Datum: {{startdate}}</td>
       <td>End-Datum: {{enddate}}</td> -->
       <td>Spielerklasse: {{player_class}}</td>
@@ -15,13 +17,6 @@
       </router-link>
       </td>
     </tr>
-    <tr>
-      <td>
-       <router-link :to="`/competitions/${id}/encounters`">
-          <Button>Begegnungen</Button> <br>
-       </router-link><br/>
-      </td>
-    </tr>
     <!-- <tr>
       <td>Anschrift: {{street}} {{streetnumber}}, {{zipcode}} {{city}}, {{starte}}, {{country}}</td>
     </tr>
@@ -32,7 +27,7 @@
       <td>Mannschaft: {{mannschaft}}, Verein: {{verein}}, <Button>Bearbeiten</Button></td>
     </tr> -->
   </Card>
-</router-link>
+</router-link><br/>
 </template>
 
 <script>
@@ -66,16 +61,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-tr{
+  .competitionsCard {
+    width: 800px;
+    margin: 10px;
+  }
+  
+  tr{
     text-align: inherit;
-}
-td{
+  }
+
+  td{
     text-align: inherit;
     display: table-cell;
     width: 30em;
-}
-.min {
+  }
+
+  .min {
     width: 1%;
     white-space: nowrap;
-}
+  }
 </style>
