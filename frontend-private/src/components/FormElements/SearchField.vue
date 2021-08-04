@@ -7,6 +7,7 @@
     <div class="input">
       <InputField
         type="text"
+        :key="setCount"
         :error="error"
         :level="props.level"
         :label="props.label"
@@ -83,6 +84,8 @@
     setup(props, { emit }){
       const error = ref(props.error === 'true' ? true : props.error)
 
+      const setCount = ref(0)
+
       const inputValue = ref(props.displayValue || props.modelValue || '')
       const hasResult = ref(false)
       const isFocused = ref(false)
@@ -111,6 +114,8 @@
 
         inputValue.value = value
         hasResult.value = false
+
+        setCount.value++
 
         emit('update:modelValue', parsePath(data, props.returnPath))
       }
@@ -158,6 +163,7 @@
         entries,
         inputValue,
         formatEntry,
+        setCount,
       }
     }
   }
