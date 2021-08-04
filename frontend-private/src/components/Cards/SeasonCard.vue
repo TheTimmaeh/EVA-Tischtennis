@@ -1,7 +1,8 @@
 <template>
   <Card>
     <tr>
-      <td>Saison: {{season}}</td>
+      <td v-if="season === 'wi'">Saison: Winter</td>
+      <td v-if="season === 'su'">Saison: Sommer</td>
       <td>Jahr: {{year}}</td>
       <td>Titel: {{title}}</td>
       <td class="min">

@@ -1,44 +1,54 @@
 <template>
-  <div class="competition">
-     <Card>
-        <div class="header">
-          <div class="primary-title">
-            <div class="title">
-              <div class="name">{{ competition.name}}</div>
-             
-           </div>
+<Page>
+    <div class="competition">
+      <Card>
+          <div class="header">
+            <div class="primary-title">
+              <div class="title">
+                <div class="name">{{ competition.name}}</div>
+              
+            </div>
+            </div>
           </div>
-        </div>
-        <div class="body">
-           <tr>
-              <td>Saison: {{ competition.season}}  </td>
-          </tr>
-          <tr>
-              <td>Spielerklasse: {{ competition.player_class }}  </td>
-          </tr>
-          <tr>
-              <td>Beschreibung: {{ competition.description }}  </td> <br>
-          </tr>
-        </div>
-    </Card>
-  </div>
+          <div class="body">
+            <tr>
+                <td>Saison: {{ competition.season}} </td>
+            </tr>
+            <tr>
+                <td>Spielerklasse: {{ competition.player_class }} </td>
+            </tr>
+            <tr>
+                <td>Beschreibung: {{ competition.description }}  </td> <br>
+            </tr>
+          </div>
+      </Card>
+    </div>
+  </Page>
 </template>
 
 <script>
   import {  useRoute } from 'vue-router'
   import { ref } from 'vue'
   import { api, setTitle } from '@/helper'
+  import Page from '@/components/Page'
   import Button from '@/components/FormElements/Button'
   import Card from '@/components/Cards/Card'
 
 export default {
   name: 'CompetitionsProfile',
   components: {
+    Page,
     Button,
     Card,
   },
    props: {
       competition: {
+        type: Object,
+      },
+      season: {
+        type: Object,
+      },
+      playerClass: {
         type: Object,
       },
     },
@@ -57,15 +67,43 @@ export default {
         competition.value = res.data
       })
 
+      const season = ref({})
+
+      api(`/seasons/${competition.season}`).then((res) => res.data).then((res) => {
+        if(!res.success){
+          console.error('Fehler...', res)
+          return
+        }
+
+        season.value = res.data
+      })
+
+      const playerClass = ref({})
+
+      api(`/playerClasses/${competition.player_class}`).then((res) => res.data).then((res) => {
+        if(!res.success){
+          console.error('Fehler...', res)
+          return
+        }
+
+        playerClass.value = res.data
+      })
+
+
     return {
       Button,
       competition,
+      season,
+      playerClass,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+  .competition{
+    padding-top: 8px;
+  }
   .header{
       font-size: 18px;
       text-align: left;
@@ -98,7 +136,6 @@ export default {
     padding: 15px;
   }
   .body{
-      color:$color-light-text;
       padding: 16px;
       text-align: left;
       text-decoration: none;

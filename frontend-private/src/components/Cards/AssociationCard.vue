@@ -71,7 +71,6 @@
         members.value = res.data
       })
 
-
     return {
       teams,
       members,

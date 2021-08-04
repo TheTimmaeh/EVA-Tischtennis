@@ -1,29 +1,35 @@
 <template>
-  <div>
-    <table>
-      <tr>
-        <td>Username:</td>
-        <td>{{ username }}</td>
-      </tr>
-      <tr>
-        <td>isAdmin:</td>
-        <td>{{ isAdmin }}</td>
-      </tr>
-      <tr>
-        <td>Socket:</td>
-        <td>{{ connected ? 'Connected' : 'Disconnected' }}</td>
-      </tr>
-    </table>
-    <button @click="test()">Test Connection</button>
-  </div>
+  <Page>
+    <div class="profile">
+      <table>
+        <tr>
+          <td>Username:</td>
+          <td>{{ username }}</td>
+        </tr>
+        <tr>
+          <td>isAdmin:</td>
+          <td>{{ isAdmin }}</td>
+        </tr>
+        <tr>
+          <td>Socket:</td>
+          <td>{{ connected ? 'Connected' : 'Disconnected' }}</td>
+        </tr>
+      </table>
+      <button @click="test()">Test Connection</button>
+    </div>
+  </Page>
 </template>
 
 <script>
   import { computed, onUnmounted } from 'vue'
   import { useStore } from 'vuex'
   import { setTitle, useSocket } from '@/helper'
+  import Page from '@/components/Page'
 
   export default {
+    components: {
+    Page,
+    },
     setup(){
       setTitle('Profil')
       const store = useStore()
@@ -53,6 +59,7 @@
 
 <style lang="scss">
   table {
+    padding-top: 20px;
     display: inline-block;
 
     td {
