@@ -6,8 +6,8 @@
       </div>
       <div class="description">
         <div class="location"><Icon type="location" primaryColor="#000000" secondaryColor="#000000" /> {{ data.location }}</div>
-        <div class="teams"><router-link :to="`/associations/${data.id}/teams`"><span class="label">Mannschaften:</span><span class="value">{{ teams?.length }}</span></router-link></div>
-        <div class="members"><router-link :to="`/associations/${data.id}/members`"><span class="label">Mitglieder:</span><span class="value">{{ members?.length }}</span></router-link></div>
+        <div class="teams"><router-link :to="`/associations/${data.id}/teams`"><span class="label">Mannschaften:</span><span class="value">{{ teams?.length || 0 }}</span></router-link></div>
+        <div class="members"><router-link :to="`/associations/${data.id}/members`"><span class="label">Mitglieder:</span><span class="value">{{ members?.length || 0 }}</span></router-link></div>
       </div>
       <div class="actions">
         <router-link :to="`/associations/${data.id}/update`">

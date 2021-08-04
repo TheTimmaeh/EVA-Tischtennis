@@ -28,8 +28,6 @@ module.exports = (_db) => {
   // AssociationTeams
   router.use('/:associationId/teams', require('./associationTeams')(db))
 
-
-
   return router
 }
 

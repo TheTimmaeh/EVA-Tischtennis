@@ -38,10 +38,9 @@ const memberSelect = {
   guest: ['id', 'name', 'surname'],
 }
 
-
 async function getAllAssociationTeams(req, res){
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', ...req.query })
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', where: { association: req.params.associationId }, ...req.query })
 
     res.json({ success: true, data })
   } catch(err){
@@ -147,4 +146,3 @@ async function deleteAssociationTeam(req, res){
   res.json({ success: true, message: 'Die Daten des Teams wurden gelöscht.' })
 
 }
-
