@@ -10,6 +10,8 @@ module.exports = (db) => {
     socket.on('ping', (data) => {
       socket.emit('pong', `Hello ${socket.user.username}`, data)
     })
+
+    require('./match.js')(db, socket)
   }
 
   return onConnection
