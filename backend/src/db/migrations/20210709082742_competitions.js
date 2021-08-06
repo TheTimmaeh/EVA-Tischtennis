@@ -46,8 +46,8 @@ exports.up = (knex) => {
   }).createTable('sets', (sets) => {
     sets.increments('id')
     sets.integer('match').notNullable().unsigned().references('matches.id')
-    sets.integer('home_score')
-    sets.integer('visitor_score')
+    sets.integer('home_score').notNullable().default(0)
+    sets.integer('visitor_score').notNullable().default(0)
     sets.timestamps(true, true)
     console.info('DB | Migration: competitions | Table sets created.')
   })
