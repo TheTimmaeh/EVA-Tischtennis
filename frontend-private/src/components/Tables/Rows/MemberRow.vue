@@ -1,7 +1,7 @@
 <template>
   <tr :class="{ isLast }">
     <template v-if="path === 'persons'">
-      <router-link :to="`/persons/${id}`">
+      <router-link :to="`/persons/${id}/profile`">
         <td>{{ name }}</td>
       </router-link>
     </template>
