@@ -12,7 +12,7 @@
           </div>
           <div class="body">
             <tr>
-                <td>Saison: {{ competition.season}} </td>
+                <td>Saison: {{ competition.season}}{{season}} </td>
             </tr>
             <tr>
                 <td>Spielerklasse: {{ competition.player_class }} </td>
@@ -45,12 +45,12 @@ export default {
       competition: {
         type: Object,
       },
-      season: {
-        type: Object,
-      },
-      playerClass: {
-        type: Object,
-      },
+      // season: {
+      //   type: Object,
+      // },
+      // playerClass: {
+      //   type: Object,
+      // },
     },
   setup(){
     const route = useRoute()
@@ -68,13 +68,13 @@ export default {
       })
 
       const season = ref({})
-
+      console.log(competition.season)
       api(`/seasons/${competition.season}`).then((res) => res.data).then((res) => {
         if(!res.success){
           console.error('Fehler...', res)
           return
         }
-
+        console.log(res.data)
         season.value = res.data
       })
 
