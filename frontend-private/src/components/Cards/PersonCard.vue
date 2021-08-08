@@ -10,7 +10,7 @@
             <td v-if="data.gender === 'm'">Geschlecht: Männlich</td>
             <td v-if="data.gender === 'f'">Geschlecht: Weilblich</td>
             <td v-if="data.gender === 'd'">Geschlecht: Divers</td>
-            <td>Geburtsdatum: {{ data.birthday }}</td>
+            <td>Geburtsdatum: {{ data.birthday.format('date') }}</td>
           </tr>
           <tr>
               <td>Adresse: {{ data.street }} {{ data.streetnumber }} | {{ data.zipcode }} {{ data.city }} | {{ data.state }} {{ data.country }}</td>
