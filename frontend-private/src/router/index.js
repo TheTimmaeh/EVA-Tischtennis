@@ -176,7 +176,7 @@ const routes = [
     component: UpdatePerson,
   },
   {
-    path: '/persons/:personId',
+    path: '/persons/:personId/profile',
     name: 'ProfilePerson',
     component: ProfilePerson,
   },

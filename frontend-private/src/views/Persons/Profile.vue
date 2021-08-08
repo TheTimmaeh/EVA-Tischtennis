@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.person{
+    padding-top: 15px;;
+  }
 .list{
   padding: 20px;
 }
