@@ -3,10 +3,13 @@
     <router-link :to="`encounters/${id}/matches`">
       <table>
         <tr>
-          <td>Heimmannschaft: {{ home }}</td>
-          <td>Gastmannschaft: {{ visitor }}</td>
-          <td>Gamestage: {{ game_stage }}</td>
-          <td>Datum: {{ datetime.format('date') }}</td>
+          <td>Heimmannschaft: {{ homeTeam.name }}</td>
+          <td>Gastmannschaft: {{ visitorTeam.name }}</td>
+          <td v-if="data.game_stage === 1">Gamestage: Finale</td>
+          <td v-if="data.game_stage === 2">Gamestage: Halbfinale</td>
+          <td v-if="data.game_stage === 3">Gamestage: Achtelfinale</td>
+          <td v-if="data.game_stage === 4">Gamestage: Vorentscheid</td>
+          <td>Datum: {{ data.datetime.format('date') }}</td>
           <td class="min">
             <router-link :to="`encounters/${id}/update`">
               <Button><Icon type="edit" /></Button>
@@ -17,7 +20,6 @@
           </td>
         </tr>
         <tr>
-          
         </tr>
       </table>
     </router-link>
@@ -29,7 +31,9 @@ import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
 import Icon from '@/components/Icons/Icon'
 import { useRouter, useRoute } from 'vue-router'
+import { api, setTitle, validate } from '@/helper'
 import { format } from '@/helper'
+import { ref } from 'vue'
 
 export default {
   name: 'CompetitionCard',
@@ -47,8 +51,34 @@ export default {
   setup(props){
     const route = useRoute()
 
+    
+      const homeTeam = ref({})
+
+      // api(`/associationTeams/${props.data.home}`).then((res) => res.data).then((res) => {
+      //   if(!res.success){
+      //     console.error('Fehler...', res)
+      //     return
+      //   }
+
+      //   homeTeam.value = res.data
+      // })
+
+      const visitorTeam = ref({})
+
+      // api(`/associationTeams/${props.data.visitor}`).then((res) => res.data).then((res) => {
+      //   if(!res.success){
+      //     console.error('Fehler...', res)
+      //     return
+      //   }
+
+      //   visitorTeam.value = res.data
+      // })
+
+
     return {
       ...props.data,
+      homeTeam,
+      visitorTeam,
     }
   },
 }
@@ -56,7 +86,6 @@ export default {
 
 <style lang="scss" scoped>
   .encountersCard{
-    width: 80%;
     margin: 10px;
   }
   tr{
