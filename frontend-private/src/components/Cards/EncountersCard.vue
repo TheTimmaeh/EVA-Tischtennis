@@ -1,28 +1,26 @@
 <template>
-  <Card>
-    <table>
-      <tr>
-        <td>Heimmannschaft: {{ home }}</td>
-        <td>Gastmannschaft: {{ visitor }}</td>
-        <td>Gamestage: {{ game_stage }}</td>
-        <td>Datum: {{ datetime.format('date') }}</td>
-        <td class="min">
-          <router-link :to="`encounters/${id}/update`">
-            <Button><Icon type="edit" /></Button>
-          </router-link>&nbsp;
-          <router-link :to="`encounters/${id}/delete`">
-            <Button class="danger"><Icon type="delete" /></Button>
-          </router-link>
-        </td>
-      </tr>
-      <tr>
-        <td>
-         <router-link :to="`encounters/${id}/matches`">
-           <Button>Spiele</Button>
-         </router-link>
-        </td>
-      </tr>
-    </table>
+  <Card class="encountersCard">
+    <router-link :to="`encounters/${id}/matches`">
+      <table>
+        <tr>
+          <td>Heimmannschaft: {{ home }}</td>
+          <td>Gastmannschaft: {{ visitor }}</td>
+          <td>Gamestage: {{ game_stage }}</td>
+          <td>Datum: {{ datetime.format('date') }}</td>
+          <td class="min">
+            <router-link :to="`encounters/${id}/update`">
+              <Button><Icon type="edit" /></Button>
+            </router-link>&nbsp;
+            <router-link :to="`encounters/${id}/delete`">
+              <Button class="danger"><Icon type="delete" /></Button>
+            </router-link>
+          </td>
+        </tr>
+        <tr>
+          
+        </tr>
+      </table>
+    </router-link>
   </Card>
 </template>
 
@@ -57,16 +55,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-tr{
-    text-align: inherit;
-}
-td{
-    text-align: inherit;
-    display: table-cell;
-    width: 30em;
-}
-.min {
-    width: 1%;
-    white-space: nowrap;
-}
+  .encountersCard{
+    width: 80%;
+    margin: 10px;
+  }
+  tr{
+      text-align: inherit;
+  }
+  td{
+      text-align: inherit;
+      display: table-cell;
+      width: 30em;
+  }
+  .min {
+      width: 1%;
+      white-space: nowrap;
+  }
 </style>
