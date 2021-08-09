@@ -1,24 +1,23 @@
 <template>
   <div class="competition">
-    Turnier {{ $route.params.competitionId }}
-
-    <router-link :to="`/competitions/${$route.params.competitionId}/encounters`">
-      <Button>Begegnungen</Button>
-    </router-link>
-
-    <br /><br />
-
-    <router-view></router-view>
+    <Menu>
+      <router-link :to="`/competitions/${$route.params.competitionId}/encounters`">Begegnungen </router-link>
+    </Menu>
+    <Page></Page>
   </div>
 </template>
 
 <script>
+import Page from '@/components/Page'
+import Menu from '@/components/Menu'
 import Button from '@/components/FormElements/Button'
 
 export default {
   name: 'CompetitionsGet',
   components: {
     Button,
+    Page,
+    Menu,
   },
   setup(){
     return {
