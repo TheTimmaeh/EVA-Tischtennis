@@ -1,21 +1,21 @@
-version: '3'
+version: '2'
 
 services:
-  traefik:
+  eva_traefik:
     image: traefik:latest
+    container_name: eva_traefik
     command:
-      - "--docker --docker.domain=yourdomain.com"
+      - "--docker --docker.domain=localhost"
     ports:
       - 80:80
       - 8080:8080
     networks:
-      - traefik
+      - eva_traefik
     volumes:
       - ./config/traefik.yaml:/traefik.yaml
       - ./config/tls.yaml:/tls.yaml
-    container_name: traefik
     restart: unless-stopped
 
 networks:
-  traefik:
+  eva_traefik:
     external: true

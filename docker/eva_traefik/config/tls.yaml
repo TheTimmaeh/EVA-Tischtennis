@@ -13,4 +13,6 @@ http:
     webservers:
       loadBalancer:
         servers:
-          - url: "http://eva1_web_1/"
+          - url: "http://eva_backend_1/"
+          - url: "http://eva_backend_2/"
+          - url: "http://eva_backend_3/"

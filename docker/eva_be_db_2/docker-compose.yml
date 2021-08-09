@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+  eva_db_2:
+    image: mysql/mysql-server:8.0.3
+    container_name: eva_db_2
+    hostname: eva_db_2
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: eva_tischtennis
+      MYSQL_USER: knex
+      MYSQL_PASSWORD: eva_tischtennis
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - private
+      - eva_db
+    ports:
+      - 3307:3306
+    command: ["mysqld",
+      "--server-id=2",
+      "--log-bin=mysql-bin-1.log",
+      "--enforce-gtid-consistency=ON",
+      "--log-slave-updates=ON",
+      "--gtid-mode=ON",
+      "--transaction-write-set-extraction=XXHASH64",
+      "--binlog-checksum=NONE",
+      "--master-info-repository=TABLE",
+      "--relay-log-info-repository=TABLE",
+      "--plugin-load=group_replication.so",
+      "--relay-log-recovery=ON",
+      "--loose-group-replication-start-on-boot=OFF",
+      "--loose-group-replication-group-name=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "--loose-group-replication-local-address=eva_db_2:6606",
+      "--loose-group-replication-group-seeds=eva_db_1:6606,eva_db_2:6606,eva_db_3:6606",
+      "--loose-group-replication-single-primary-mode=OFF",
+      "--loose-group-replication-enforce-update-everywhere-checks=ON"]
+    # healthcheck:
+    #   test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+    #   interval: 2s
+    #   retries: 20
+    restart: unless-stopped
+  eva_backend_2:
+    image: eva/backend
+    container_name: eva_backend_2
+    environment:
+      PORT: 80
+      DB_HOST: eva_db_2
+    networks:
+      - private
+      - eva_traefik
+    depends_on:
+      - eva_db_2
+    links:
+      - eva_db_2
+    restart: unless-stopped
+
+volumes:
+  db_data: {}
+
+networks:
+  private:
+  eva_traefik:
+    external: true
+  eva_db:
+    external: true
