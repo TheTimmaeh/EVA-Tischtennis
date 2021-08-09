@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:latest
+    command:
+      - "--docker --docker.domain=yourdomain.com"
+    ports:
+      - 80:80
+      - 8080:8080
+    networks:
+      - traefik
+    volumes:
+      - ./config/traefik.yaml:/traefik.yaml
+      - ./config/tls.yaml:/tls.yaml
+    container_name: traefik
+    restart: unless-stopped
+
+networks:
+  traefik:
+    external: true

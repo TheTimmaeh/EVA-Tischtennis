@@ -1,0 +1,12 @@
+entryPoints:
+  unsecure:
+    address: :80
+
+providers:
+  file:
+    filename: tls.yaml
+    watch: true
+
+api:
+  dashboard: true
+  insecure: true

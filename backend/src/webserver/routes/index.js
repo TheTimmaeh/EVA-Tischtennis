@@ -18,6 +18,8 @@ module.exports = (db) => {
   router.use('/competitions', require('./competitions')(db))
   router.use('/playerClasses', require('./playerClasses')(db))
   router.use('/test', require('./test')(db))
+  router.use('/knex', require('./knex')(db))
+  router.use('/info', require('./info')(db))
 
   return router
 }

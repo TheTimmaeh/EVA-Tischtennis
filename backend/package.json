@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon src/server.js --watch .env --watch src/ --ignore src/db/migrations/ --ignore src/db/seeds/",
+    "docker": "DOCKER=true nodemon src/server.js --watch .env --watch src/ --ignore src/db/migrations/ --ignore src/db/seeds/",
     "migrate:latest": "npx knex migrate:latest --knexfile src/db/knexfile.js",
     "migrate:rollback": "npx knex migrate:rollback --knexfile src/db/knexfile.js",
     "migrate:rollback-all": "npx knex migrate:latest --all --knexfile src/db/knexfile.js",
