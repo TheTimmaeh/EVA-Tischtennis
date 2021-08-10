@@ -44,6 +44,7 @@ services:
   eva_backend_2:
     image: eva/backend
     container_name: eva_backend_2
+    hostname: eva_backend_2
     environment:
       PORT: 80
       DB_HOST: eva_db_2
