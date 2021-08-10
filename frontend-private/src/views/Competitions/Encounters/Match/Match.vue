@@ -7,9 +7,9 @@
             <p>Punktestand {{ home_score }}</p>
             <Button class="button" level="danger">Disqualifizieren</Button>
 
-            <Button class="button">Weiße Karte</Button>
-            <Button class="button">Gelbe Karte</Button>
-            <Button class="button">Rote Karte</Button><br>
+            <Button class="button" >Weiße Karte</Button>
+            <Button class="button" >Gelbe Karte</Button>
+            <Button class="button" >Rote Karte</Button><br>
 
             <Button class="button" @click="action('score', { player: 'home' })">Punkt hinzufügen</Button>
             <Button class="button" @click="score1--">Punkt abziehen</Button>

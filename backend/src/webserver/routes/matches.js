@@ -73,22 +73,32 @@ async function updateMatch(req, res){
 
 async function getAllMatches(req, res){
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'matches', ...req.query })
-
-    res.json({ success: true, data })
+    let matches = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'matches', where:{ encounter: req.params.encounterId}, ...req.query })
+    let matchIds =  matches.map((e) => e.id)
+    let sets = await db.qb({ select: ['id', 'home_score', 'visitor_score', 'match'], from: 'sets', whereIn: {match: matchIds}, ...req.query })
+    let playerIds = matches.map((e) => [e.home_player_1, e.home_player_2, e.visitor_player_1, e.visitor_player_2 ]).flat()
+    let players = await db.qb({ select: ['id', 'name', 'surname'], from: 'persons', whereIn: {id: playerIds}, ...req.query })
+    matches = matches.map((e) => {
+      e.home_player_1 = players.find((p) => p.id === e.home_player_1)
+      e.home_player_2 = players.find((p) => p.id === e.home_player_2)
+      e.visitor_player_1 = players.find((p) => p.id === e.visitor_player_1)
+      e.visitor_player_2 = players.find((p) => p.id === e.visitor_player_2)
+      e.sets = sets.filter((s) => s.match === e.id )
+      return e
+    })
+  
+    res.json({ success: true, data: matches })
   } catch(err){
     console.error(err.message)
     res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })
   }
 }
 
-// TODO: getMatch Logik
+
 async function getMatch(req, res){
 
-  console.log('GET MATCH')
-
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'matches', ...req.query })
+    let data = await db.qb({ first: (req.user?.isAdmin ? select.admin : select.guest), from: 'matches', where: {id: req.params.matchId }, ...req.query })
 
     res.json({ success: true, data })
   } catch(err){

@@ -1,21 +1,50 @@
 <template>
   <Card class="matchCard">
-    <tr>
-      <td><b>Heimspieler:</b> <br> {{ home1.name }} {{ home1.surname }} <br> {{ home2.name }} {{ home2.surname }} </td>
-      <td><b>Gastpieler:</b> <br> {{ visitor1.name }} {{ visitor1.surname }} <br> {{ visitor2.name }} {{ visitor2.surname }}</td>
-      <td><b>Schiedsricher:</b> <br> {{ referee.name }} {{ referee.surname }}</td>
-      <td class="score min pleft">{{ data.home_score }}</td>
-      <td class="score min pcenter">:</td>
-      <td class="score min pright">{{ data.visitor_score }}</td>
-      <td class="min">
-        <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
-          <Button><Icon type="edit" /></Button>
-        </router-link>&nbsp;
-        <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
-          <Button><Icon type="tabletennis" /> Starten</Button>
-        </router-link>
-      </td>
-    </tr>
+    <table @click="clicked = !clicked">
+      <tr>
+        <td>
+          <b>Heimspieler:</b> <br> 
+          {{ data.home_player_1.name}} {{ data.home_player_1.surname }} 
+          <template v-if="data.home_player_2"><br> 
+          {{ data.home_player_2.name }} {{ data.home_player_2.surname }} 
+          </template>
+        </td>
+        <td>
+          <b>Gastpieler:</b> <br> 
+          {{ data.visitor_player_1.name }} {{ data.visitor_player_1.surname }} 
+          <template v-if="data.visitor_player_2"><br> 
+          {{ data.visitor_player_2.name }} {{ data.visitor_player_2.surname }}
+          </template>
+        </td>
+        <td class="score min pleft">{{ data.home_score }}</td>
+        <td class="score min pcenter">:</td>
+        <td class="score min pright">{{ data.visitor_score }}</td>
+        <td class="min">
+          <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
+            <Button><Icon type="edit" /></Button>
+          </router-link>&nbsp;
+          <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
+            <Button><Icon type="tabletennis" /> Starten</Button>
+          </router-link>
+        </td>
+      </tr>
+    </table>
+    <table v-if="data.sets.length > 0" class="setScore">
+      <tr>
+        <th>Set 1</th>
+        <th>Set 2</th>
+        <th>Set 3</th>
+        <th>Set 4</th>
+        <th>Set 5</th>
+      </tr>
+      <tr>
+        <td v-for="(set, index) in data.sets" :key="set.id">
+          <template v-if="set.home_score > 0 || set.visitor_score > 0">{{set.home_score}} : {{set.visitor_score}} </template>
+          <template v-else-if="(index+1) > (data.home_score + data.visitor_score)"> / </template>
+          <template v-else>TBD</template>
+        </td>
+      </tr>
+    </table>
   </Card>
 </template>
 
@@ -26,6 +55,7 @@ import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
 import Icon from '@/components/Icons/Icon'
 import { ref } from 'vue'
+import Table from '../Tables/Table.vue'
 
 export default {
   name: 'MatchCard',
@@ -33,6 +63,7 @@ export default {
     Button,
     Card,
     Icon,
+    Table,
   },
   props: {
       data: {
@@ -41,74 +72,30 @@ export default {
       },
     },
   setup(props){
+      const route = useRoute()
 
-      const referee = ref({})
+      const clicked =ref(false)
 
-      api(`/persons/${props.data.referee}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
-
-        referee.value = res.data
-      })
-
-      const home1 = ref({})
-
-      api(`/persons/${props.data.home_player_1}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
-
-        home1.value = res.data
-      })
-
-      const home2 = ref({})
-
-      api(`/persons/${props.data.home_player_2}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
-
-        home2.value = res.data
-      })
-
-      const visitor1 = ref({})
-
-      api(`/persons/${props.data.visitor_player_1}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
-
-        visitor1.value = res.data
-      })
-
-      const visitor2 = ref({})
-
-      api(`/persons/${props.data.visitor_player_2}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
-
-        visitor2.value = res.data
-      })
     return {
       ...props.data,
-      referee,
-      home1,
-      home2,
-      visitor1,
-      visitor2,
+      clicked,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+  .setScore{
+    padding-top: 15px;
+
+    td{
+      text-align: center;
+    }
+
+    th{
+      text-align: center;
+    }
+  }
   .matchCard{
     width: 80%;
     margin: 10px;

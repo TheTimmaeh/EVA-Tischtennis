@@ -9,9 +9,6 @@
       </colgroup>
       <thead>
         <tr>
-          <th>MOD</th>
-          <th>Heim</th>
-          <th>Gast</th>
           <th>1</th>
           <th>2</th>
           <th>3</th>
@@ -21,13 +18,16 @@
           <th>Punte</th>
         </tr>
       </thead>
-      <MatchRow v-for="(match, index) in matches" :key="match.id" :data="match" :isLast="matches.length - 1 == index" :path="path"/>
+      <MatchRow v-for="(set, index) in sets" :key="set.id" :data="set" :isLast="sets.length - 1 == index"/>
     </table>
   </Card>
 </template>
 
 <script>
+  import {  useRoute } from 'vue-router'
   import { computed } from 'vue'
+  import { ref } from 'vue'
+  import { api, setTitle } from '@/helper'
   import Card from '@/components/Cards/Card'
   import Button from '@/components/FormElements/Button'
   import MatchRow from '@/components/Tables/Rows/MatchRow'
@@ -40,16 +40,19 @@
       MatchRow,
     },
     props: {
-      matches: {
+      sets: {
         type: Array,
         required: true,
       },
     },
     setup(props){
+      const route = useRoute()
       const matches = computed(() => props.matches)
+      
+      const sets = ref({})
 
       return {
-        matches,
+        sets,
       }
     },
   }

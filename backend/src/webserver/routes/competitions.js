@@ -13,6 +13,9 @@ module.exports = (_db) => {
   // Get (one competition)
   router.get('/:competitionId', getCompetition)
 
+  // Get CompetitionProfile
+  router.get('/:competitionId/profile', getCompetitionProfile)
+
   // Create
   router.post('/', authenticateToken,  createCompetition)
 
@@ -48,8 +51,23 @@ async function getAllCompetitions(req, res){
 }
 
 async function getCompetition(req, res){
-  let data = (await db.first(req.user?.isAdmin ? select.admin : select.guest).from('competitions').where({ id: req.params.competitionId }))
+  let data = await db.qb({ first: (req.user?.isAdmin ? select.admin : select.guest), from: 'competitions', where:{ id: req.params.competitionId }, ...req.query })
   res.json({ success: true, data })
+}
+
+async function getCompetitionProfile(req, res){
+  let competition = await db.qb({ first: (req.user?.isAdmin ? select.admin : select.guest), from: 'competitions', where:{ id: req.params.competitionId }, ...req.query })
+  let encounters = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', where: { competition: req.params.competitionId }, ...req.query })
+  
+  let playerIds = encounters.map((e) => [e.home, e.visitor]).flat()
+  let players = await db.qb({ select: ['id', 'name', 'surname'], from: 'persons', whereIn: {id: playerIds}, ...req.query })
+  encounters = encounters.map((e) => {
+    e.home = players.find((p) => p.id === e.home)
+    e.visitor = players.find((p) => p.id === e.visitor)
+    return e
+  })
+
+  res.json({ success: true, data:{ competition, encounters} })
 }
 
 async function createCompetition(req, res){

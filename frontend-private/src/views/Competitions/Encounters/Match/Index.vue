@@ -31,6 +31,7 @@ export default {
       }
 
       matches.value = res.data
+      console.log(res.data)
     })
 
     return {

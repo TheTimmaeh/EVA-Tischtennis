@@ -1,8 +1,5 @@
 <template>
   <tr :class="{ isLast }">
-    <td>{{mod}}</td>
-    <td>{{heim}}</td>
-    <td>{{gast}}</td>
     <td>{{1}}</td>
     <td>{{2}}</td>
     <td>{{3}}</td>

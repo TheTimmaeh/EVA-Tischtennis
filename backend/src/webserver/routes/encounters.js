@@ -118,9 +118,24 @@ async function createEncounter(req, res){
 
 async function getAllEncounters(req, res){
   try {
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', ...req.query })
+    let encounters = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', where: { competition: req.params.competitionId }, ...req.query })
+    let associationTeamIds = encounters.map((e) => [e.visitor, e.home ]).flat()
+    let associationTeams = await db.qb({ select: ['id', 'name', 'association'], from: 'association_teams', whereIn: {id: associationTeamIds}, ...req.query })
+    console.log(associationTeams, associationTeamIds)
+    let associationIds = associationTeams.map((e) => e.association)
+    let associations = await db.qb({ select: ['id', 'name'], from: 'associations', whereIn: {id: associationIds}, ...req.query })
+    associationTeams =associationTeams.map((a)=> {
+      a.association = associations.find((e) => e.id === a.association)
+      return a
+    })
+    encounters = encounters.map((e) => {
+      e.home = associationTeams.find((p) => p.id === e.home)
+      e.visitor = associationTeams.find((p) => p.id === e.visitor)
+      return e
+    })
 
-    res.json({ success: true, data })
+
+    res.json({ success: true, data : encounters})
   } catch(err){
     console.error(err.message)
     res.status(500).json({ success: false, message: `An error has occured. (${err.code})` })

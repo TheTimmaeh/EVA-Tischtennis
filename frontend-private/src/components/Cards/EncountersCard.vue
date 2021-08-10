@@ -3,8 +3,8 @@
     <router-link :to="`encounters/${id}/matches`">
       <table>
         <tr>
-          <td>Heimmannschaft: {{ homeTeam.name }}</td>
-          <td>Gastmannschaft: {{ visitorTeam.name }}</td>
+          <td>Heimmannschaft: {{ data.home.name }} - {{ data.home.association.name }}</td>
+          <td>Gastmannschaft: {{ data.visitor.name }} - {{ data.visitor.association.name }}</td>
           <td v-if="data.game_stage === 1">Gamestage: Finale</td>
           <td v-if="data.game_stage === 2">Gamestage: Halbfinale</td>
           <td v-if="data.game_stage === 3">Gamestage: Achtelfinale</td>
@@ -49,36 +49,9 @@ export default {
       },
     },
   setup(props){
-    const route = useRoute()
-
     
-      const homeTeam = ref({})
-
-      // api(`/associationTeams/${props.data.home}`).then((res) => res.data).then((res) => {
-      //   if(!res.success){
-      //     console.error('Fehler...', res)
-      //     return
-      //   }
-
-      //   homeTeam.value = res.data
-      // })
-
-      const visitorTeam = ref({})
-
-      // api(`/associationTeams/${props.data.visitor}`).then((res) => res.data).then((res) => {
-      //   if(!res.success){
-      //     console.error('Fehler...', res)
-      //     return
-      //   }
-
-      //   visitorTeam.value = res.data
-      // })
-
-
     return {
       ...props.data,
-      homeTeam,
-      visitorTeam,
     }
   },
 }
