@@ -81,8 +81,8 @@ async function createAssociationTeam(req, res){
         { team: data.id, position: 'E1' },
         { team: data.id, position: 'E2' },
         { team: data.id, position: 'E3' },
-        { team: data.id, position: 'D1' },
-        { team: data.id, position: 'D2' },
+        { team: data.id, position: 'D1', position_type: 'double' },
+        { team: data.id, position: 'D2', position_type: 'double' },
       ])
     } catch(err){
       if(err.code === 'ER_DUP_ENTRY'){
