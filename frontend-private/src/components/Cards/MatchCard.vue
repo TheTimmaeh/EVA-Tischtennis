@@ -16,9 +16,14 @@
           {{ data.visitor_player_2.name }} {{ data.visitor_player_2.surname }}
           </template>
         </td>
-        <td class="score min pleft">{{ data.home_score }}</td>
-        <td class="score min pcenter">:</td>
-        <td class="score min pright">{{ data.visitor_score }}</td>
+        <template v-if="data.home_score !== null">
+          <td class="score min pleft">{{ data.home_score }}</td>
+          <td class="score min pcenter">:</td>
+          <td class="score min pright">{{ data.visitor_score }}</td>
+        </template>
+        <template v-else>
+          <td class="score min pright">TBD</td>
+        </template>
         <td class="min">
           <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
             <Button><Icon type="edit" /></Button>
@@ -40,7 +45,7 @@
       <tr>
         <td v-for="(set, index) in data.sets" :key="set.id">
           <template v-if="set.home_score > 0 || set.visitor_score > 0">{{set.home_score}} : {{set.visitor_score}} </template>
-          <template v-else-if="(index+1) > (data.home_score + data.visitor_score)"> / </template>
+          <template v-else-if="data.home_score !== null && (index+1) > (data.home_score + data.visitor_score)"> / </template>
           <template v-else>TBD</template>
         </td>
       </tr>
