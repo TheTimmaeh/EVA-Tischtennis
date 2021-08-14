@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  eva_db_1:
+    image: mysql/mysql-server:8.0.3
+    container_name: eva_db_1
+    hostname: eva_db_1
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: eva_tischtennis
+      MYSQL_USER: knex
+      MYSQL_PASSWORD: eva_tischtennis
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+volumes:
+  db_data: {}
