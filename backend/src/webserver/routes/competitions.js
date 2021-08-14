@@ -77,7 +77,7 @@ async function createCompetition(req, res){
     result = await db('competitions').insert({
       name: req.body.name,
       description: req.body.description,
-      player_class: req.body.playerclass,
+      player_class: req.body.playerClass,
       season: req.body.season,
     })
     console.log(result)
