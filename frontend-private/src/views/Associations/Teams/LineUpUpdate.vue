@@ -42,9 +42,10 @@
       const message = ref('')
 
       const submit = (data) => {
+        console.log(data)
         message.value = ''
 
-        api({ method: 'POST', path: `/associations/${route.params.associationId}/teams/${route.params.teamId}/membersUpdate`, data }).then((res) => {
+        api({ method: 'POST', path: `/associations/${route.params.associationId}/teams/${route.params.teamId}/members`, data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'
           } else if(!res.data.success){
