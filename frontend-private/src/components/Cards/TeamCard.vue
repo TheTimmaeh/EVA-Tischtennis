@@ -2,7 +2,9 @@
   <Card>
     <!-- <router-link :to="`/associations/${$route.params.associationId}/teams/${id}/members`"> -->
       <table>
-        <th>Mannschaft: {{ data.name }}</th>
+        <tr>
+          <th>Mannschaft: {{ data.name }}</th>
+        </tr>
         <tr>
           <td>Saison: {{ data.season }}</td>
         </tr>
@@ -10,17 +12,20 @@
           <td>Spielerklasse: {{ data.player_class }} <br> </td>
         </tr>
         <tr>
-        <td>
-        <table class="lineup">
-        <th>Mannschaftsaufstellung</th>
-        <tr v-for="(member, index) in teamMembers" :key="member.id">
-          <td v-if="member.id">Position {{ member.position }} : {{ member.name }} {{ member.surname }}</td>
-        </tr>
-        </table><br>
-        </td>
+          <td>
+            <br />
+            <table class="lineup">
+              <tr>
+                <th>Mannschaftsaufstellung</th>
+              </tr>
+              <tr v-for="(member, index) in teamMembers" :key="member.id">
+                <td v-if="member.id">Position {{ member.position }} : {{ member.name }} {{ member.surname }}</td>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr v-if="isAdmin">
-          <td >
+          <td>
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/members/update`">
               <Button>Mannschaftsaufstellung ändern</Button>
             </router-link>
@@ -89,19 +94,18 @@
 </script>
 
 <style lang="scss" scoped>
-tr{
+  tr {
     text-align: inherit;
-}
-td{
+  }
+
+  td {
     text-align: inherit;
     display: table-cell;
     width: 30em;
-}
-.min {
+  }
+
+  .min {
     width: 1%;
     white-space: nowrap;
-}
-table{
-  margin:  10px 0px;
-}
+  }
 </style>
