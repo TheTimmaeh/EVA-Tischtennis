@@ -1,8 +1,8 @@
 <template>
   <div class="encounters">
     <router-link v-if="isAdmin" :to="`/competitions/${$route.params.competitionId}/encounters/create`">
-      <Button>Begegnung anlegen</Button> <br>
-    </router-link><br/>
+      <Button class="mb20">Begegnung anlegen</Button>
+    </router-link>
     <EncountersCard v-for="encounter in encounters" :key="encounter.id" :data="encounter" :isAdmin="isAdmin"></EncountersCard>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .mb20 {
+    margin-bottom: 20px;
+  }
 </style>

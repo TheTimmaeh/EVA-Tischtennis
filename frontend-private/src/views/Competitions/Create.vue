@@ -1,19 +1,23 @@
 <template>
-  <div class="competitions">
-    <div class="message" v-if="message">{{ message }}</div>
-    <Form :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
-  </div>
+  <Page>
+    <div class="competitions">
+      <div class="message" v-if="message">{{ message }}</div>
+      <Form :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
+    </div>
+  </Page>
 </template>
 
 <script>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { api, setTitle, validate } from '@/helper'
+  import Page from '@/components/Page'
   import Form from '@/components/FormElements/Form'
 
   export default {
     name: 'CreateCompetition',
     components: {
+      Page,
       Form,
     },
     setup(){

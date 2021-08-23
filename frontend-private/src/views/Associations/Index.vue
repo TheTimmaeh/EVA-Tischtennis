@@ -2,7 +2,7 @@
   <Page>
     <div class="associations">
       <router-link v-if="isAdmin" to="/associations/create">
-        <Button>Verein anlegen</Button> <br>
+        <Button class="mb20">Verein anlegen</Button>
       </router-link>
       <div class="list">
         <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id" :isAdmin="isAdmin"></AssociationCard>
@@ -52,12 +52,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .associations {
-    padding-top: 20px;
+  .mb20 {
+    margin-bottom: 20px;
   }
 
   .list {
-    margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
 

@@ -1,50 +1,50 @@
 <template>
   <div class="playerClasses">
     <router-link to="/admin/playerClasses/create">
-      <Button>Spielerklasse anlegen</Button> <br>
+      <Button class="mb20">Spielerklasse anlegen</Button> <br>
     </router-link>
     <PlayerClassCard v-for="playerClass in playerClasses" :key="playerClass.id" :playerClass="playerClass"></PlayerClassCard>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { api, setTitle } from '@/helper'
-import Button from '@/components/FormElements/Button'
-import PlayerClassCard from '@/components/Cards/PlayerClassCard'
+  import { ref } from 'vue'
+  import { api, setTitle } from '@/helper'
+  import Button from '@/components/FormElements/Button'
+  import PlayerClassCard from '@/components/Cards/PlayerClassCard'
 
-export default {
-  name: 'PlayerClasses',
-  components: {
-    Button,
-    PlayerClassCard,
-  },
-  setup(){
-    setTitle('Spielerklassen')
+  export default {
+    name: 'PlayerClasses',
+    components: {
+      Button,
+      PlayerClassCard,
+    },
+    setup(){
+      setTitle('Spielerklassen')
 
-    const playerClasses = ref([])
+      const playerClasses = ref([])
 
-    api('/playerClasses').then((res) => res.data).then((res) => {
-      if(!res.success){
-        console.error('Fehler...', res)
-        return
-      }
+      api('/playerClasses').then((res) => res.data).then((res) => {
+        if(!res.success){
+          console.error('Fehler...', res)
+          return
+        }
 
-      playerClasses.value = res.data.map((playerClass) => {
-        return { id: playerClass.id, name: playerClass.name, age_from: playerClass.age_from, age_to: playerClass.age_to, gender: playerClass.gender }
+        playerClasses.value = res.data.map((playerClass) => {
+          return { id: playerClass.id, name: playerClass.name, age_from: playerClass.age_from, age_to: playerClass.age_to, gender: playerClass.gender }
+        })
       })
-    })
 
 
-    return {
-      playerClasses
-    }
-  },
-}
+      return {
+        playerClasses
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .mb20 {
+    margin-bottom: 20px;
+  }
 </style>

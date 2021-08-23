@@ -1,8 +1,10 @@
 <template>
-  <div class="home">
-    <div class="message" v-if="message">{{ message }}</div>
-    <Form :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
-  </div>
+  <Page>
+    <div class="home">
+      <div class="message" v-if="message">{{ message }}</div>
+      <Form :rows="rows" @onValid="submit($event)" @onInvalid="invalid($event)" />
+    </div>
+  </Page>
 </template>
 
 <script>
@@ -11,11 +13,13 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { axios, setTitle } from '@/helper'
 import Form from '@/components/FormElements/Form'
+import Page from '@/components/Page'
 
 export default {
   name: 'Login',
   components: {
     Form,
+    Page,
   },
   setup(){
     setTitle('Login')

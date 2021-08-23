@@ -1,12 +1,12 @@
 <template>
   <Card class="delete">
-      <div class="members">
-    <div class="message" v-if="message">{{ message }}</div>
+    <div class="members">
+      <div class="message" v-if="message">{{ message }}</div>
 
-    Bist du sicher, dass du das Mitglied {{ season.title }} löschen möchtest?
+      Bist du sicher, dass du das Mitglied {{ season.title }} löschen möchtest?
 
-    <Button level="danger" @click="confirm()">Ja</Button> 
-    <Button @click="deny()">Nein</Button>
+      <Button level="danger" @click="confirm()">Ja</Button>
+      <Button @click="deny()">Nein</Button>
     </div>
   </Card>
 </template>
@@ -73,11 +73,12 @@
 </script>
 
 <style lang="scss" scoped>
-.delete{
-  height: 200px;
-}
-.members{
-  padding: 80px 0;
-  height:10px
-}
+  .delete {
+    height: 200px;
+  }
+  
+  .members {
+    padding: 80px 0;
+    height: 10px;
+  }
 </style>

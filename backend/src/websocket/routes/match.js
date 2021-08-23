@@ -22,7 +22,7 @@ module.exports = (db, socket) => {
     if(current_set === 0 || Math.max(home_score, visitor_score) === 3){
       socket.emit('setData', { error: 'There is already a winner for this match. No further sets needed.' })
     } else {
-      
+
       try {
         current_set.match = await db.qb({ first: '*', from: 'matches', where: { id: data.match }})
       } catch(err){
@@ -100,6 +100,20 @@ module.exports = (db, socket) => {
           await writeHistory('matchEnd', set.match)
         }
       }
+    } else if(data.type === 'scoreSub'){
+      if(!data.set || !data.player || !['home', 'visitor'].includes(data.player)) return
+
+      let result = await db('sets').where({ id: data.set }).decrement(`${data.player}_score`, 1)
+
+      await writeHistory('setScoreSub', data.set, data.player)
+
+      socket.emit('confirmAction', data)
+      socket.broadcast.emit('matchUpdate', data)
+    } else if(['whiteCard', 'yellowCard', 'redCard'].includes(data.type)){
+      await writeHistory(`set${data.type.substr(0, 1).toUpperCase()}${data.type.substr(1)}`, data.set, data.player)
+
+      socket.emit('confirmAction', data)
+      socket.broadcast.emit('matchUpdate', data)
     }
   })
 

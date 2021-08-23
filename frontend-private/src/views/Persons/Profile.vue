@@ -1,19 +1,23 @@
 <template>
-  <div class="person">
+  <Page>
+    <div class="person">
       <PersonCard :data="person"></PersonCard>
-  </div>
+    </div>
+  </Page>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { api, setTitle } from '@/helper'
 import { useRoute } from 'vue-router'
+import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
 import PersonCard from '@/components/Cards/PersonCard'
 
 export default {
   name: 'Associations',
   components: {
+    Page,
     Button,
     PersonCard,
   },
@@ -41,10 +45,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.person{
-    padding-top: 15px;;
-  }
-.list{
-  padding: 20px;
-}
 </style>

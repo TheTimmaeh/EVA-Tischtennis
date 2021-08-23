@@ -2,10 +2,10 @@
  <Page>
   <div class="competitions">
     <router-link v-if="isAdmin" to="/competitions/create">
-      <Button>Turnier anlegen</Button> <br>
+      <Button class="mb20">Turnier anlegen</Button> <br>
     </router-link>
     <div class="list">
-    <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition" :isAdmin="isAdmin"></CompetitionCard>
+      <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition" :isAdmin="isAdmin"></CompetitionCard>
     </div>
   </div>
   </Page>
@@ -52,13 +52,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .competitions {
-      padding-top: 20px;
-    }
+  .mb20 {
+    margin-bottom: 20px;
+  }
 
-  .list{
-    padding: 20px;
-    margin: 20px 0;
+  .list {
     display: flex;
     flex-wrap: wrap;
 

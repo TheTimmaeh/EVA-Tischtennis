@@ -10,13 +10,13 @@
           {{ home_score }}
         </div>
         <div :class="[ 'actionmenu', { open: isOpenHome }]">
-          <div class="button sub">
+          <div class="button sub" @click="action('whiteCard', { player: 'home' })">
             <div><Icon type="card" primaryColor="#FFFFFF" /></div>
           </div>
-          <div class="button sub">
+          <div class="button sub" @click="action('yellowCard', { player: 'home' })">
             <div><Icon type="card" primaryColor="#FFFF00" /></div>
           </div>
-          <div class="button sub">
+          <div class="button sub" @click="action('redCard', { player: 'home' })">
             <div><Icon type="card" primaryColor="#FF0000" /></div>
           </div>
           <div class="button" @click="action('score', { player: 'home' })">
@@ -40,13 +40,13 @@
           {{ visitor_score }}
         </div>
         <div :class="[ 'actionmenu', { open: isOpenVisitor }]">
-          <div class="button sub">
+          <div class="button sub" @click="action('whiteCard', { player: 'visitor' })">
             <div><Icon type="card" primaryColor="#FFFFFF" /></div>
           </div>
-          <div class="button sub">
+          <div class="button sub" @click="action('yellowCard', { player: 'visitor' })">
             <div><Icon type="card" primaryColor="#FFFF00" /></div>
           </div>
-          <div class="button sub">
+          <div class="button sub" @click="action('redCard', { player: 'visitor' })">
             <div><Icon type="card" primaryColor="#FF0000" /></div>
           </div>
           <div class="button" @click="action('score', { player: 'visitor' })">
@@ -74,7 +74,6 @@
       </div>
     </div>
   </div>
-  <Button style="position: fixed; buttom: 10px; right: 10px;" @click="isMessageOpen = true">Test</Button>
 </template>
 
 <script>
@@ -113,6 +112,9 @@
           if(data.type === 'score'){
             if(data.player === 'home') home_score.value++
             else if(data.player === 'visitor') visitor_score.value++
+          } else if(data.type === 'scoreSub'){
+            if(data.player === 'home') home_score.value--
+            else if(data.player === 'visitor') visitor_score.value--
           }
         })
 

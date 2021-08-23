@@ -4,7 +4,7 @@
         <div class="header">
           <div class="primary-title">
             <div class="title">
-              <div class="name">{{ association.name}}</div>
+              <div class="name">{{ association.name }}</div>
               <!-- <router-link v-if="isAdmin" :to="`/persons/${association.board}/profile`">
                 <Button>Vorsitzender</Button>
               </router-link> -->
@@ -43,12 +43,6 @@ export default {
     Button,
     Card,
   },
-  props: {
-    association: {
-      type: Object,
-      required: true,
-    },
-  },
   setup(){
     const route = useRoute()
     setTitle(`Verein ${route.params.associationId}`)
@@ -76,22 +70,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-  .header{
-      font-size: 18px;
-      text-align: left;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      font-weight: bold;
-      width:100%;
-      min-height: 60px;
-      padding: 16px;
-      position: relative;
-      border: 1px solid $color-mono-light;
-      border-width: 0 0 1px;
+  .header {
+    font-size: 18px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    width:100%;
+    min-height: 60px;
+    padding: 16px;
+    position: relative;
+    border: 1px solid $color-mono-light;
+    border-width: 0 0 1px;
   }
-  .header .primary-title{
+
+  .header .primary-title {
     bottom: auto;
     display: inline-block;
     padding: 0;
@@ -103,37 +97,44 @@ export default {
     -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
   }
+
   .title {
     font-size: 14px;
-    font-weight:bold;
+    font-weight: bold;
     padding: 15px;
   }
-  .body{
-      padding: 16px;
-      text-align: left;
-      text-decoration: none;
-      font-size: 14px;
-      width: 120%;
-      line-height: 1.5;
-      border-width: 0 0 1px;
+
+  .body {
+    padding: 16px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 14px;
+    width: 120%;
+    line-height: 1.5;
+    border-width: 0 0 1px;
   }
-  td{
-      text-align: inherit;
-      display: table-cell;
-      width: 30em;
+
+  td {
+    text-align: inherit;
+    display: table-cell;
+    width: 30em;
   }
-  tr{
-      text-align: inherit;
+
+  tr {
+    text-align: inherit;
   }
+
   .min {
-      width: 1%;
-      white-space: nowrap;
+    width: 1%;
+    white-space: nowrap;
   }
-  .name{
+
+  .name {
     display:inline-block;
     padding: 16px;
   }
-  button{
+
+  button {
     margin: 80px 16px;
   }
 </style>

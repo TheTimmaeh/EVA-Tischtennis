@@ -44,6 +44,14 @@ export default {
             })
             return m
           })
+        } else if(data.type == 'scoreSub'){
+          matches.value.map((m) => {
+            m.sets = m.sets.map((s) => {
+              if(s.id === data.set) s[`${data.player}_score`]--
+              return s
+            })
+            return m
+          })
         } else if(data.type == 'end'){
           matches.value.map((m) => {
             if(m.id === data.match) m.home_score = data.home_score, m.visitor_score = data.visitor_score
@@ -67,7 +75,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
 </style>

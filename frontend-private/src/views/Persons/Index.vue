@@ -2,7 +2,7 @@
   <Page>
     <div class="persons">
       <router-link to="/persons/create" v-if="isAdmin">
-        <Button>Person anlegen</Button> <br>
+        <Button class="mb20">Person anlegen</Button>
       </router-link>
       <MemberTable class="memberTable" :members="persons" path="persons" :isAdmin="isAdmin"></MemberTable>
     </div>
@@ -51,14 +51,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .persons {
-    padding-top: 20px;
+  .mb20 {
+    margin-bottom: 20px;
   }
 
   .memberTable {
-    margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
-
   }
 </style>

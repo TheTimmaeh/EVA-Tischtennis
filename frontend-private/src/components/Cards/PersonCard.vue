@@ -1,32 +1,32 @@
 <template>
-    <Card class="personCard">
-        <div class="header">
-          <div class="primary-title">
-            <div class="title">{{ data.name }} {{ data.surname }}</div>
-          </div>
-        </div>
-        <div class="body">
-          <tr>
-            <td v-if="data.gender === 'm'">Geschlecht: Männlich</td>
-            <td v-if="data.gender === 'f'">Geschlecht: Weilblich</td>
-            <td v-if="data.gender === 'd'">Geschlecht: Divers</td>
-            <td>Geburtsdatum: {{ data.birthday.format('date') }}</td>
-          </tr>
-          <tr>
-              <td>Adresse: {{ data.street }} {{ data.streetnumber }} | {{ data.zipcode }} {{ data.city }} | {{ data.state }} {{ data.country }}</td>
-          </tr>
-          <tr>
-              <td>Kontakt: {{ data.phone }} | {{ data.mail }} </td>
-          </tr>
-        </div>
-    </Card>
+  <Card class="personCard">
+    <div class="header">
+      <div class="primary-title">
+        <div class="title">{{ data.name }} {{ data.surname }}</div>
+      </div>
+    </div>
+    <div class="body">
+      <tr>
+        <td v-if="data.gender === 'm'">Geschlecht: Männlich</td>
+        <td v-if="data.gender === 'f'">Geschlecht: Weilblich</td>
+        <td v-if="data.gender === 'd'">Geschlecht: Divers</td>
+        <td>Geburtsdatum: {{ data.birthday?.format('date') }}</td>
+      </tr>
+      <tr>
+        <td>Adresse: {{ data.street }} {{ data.streetnumber }} | {{ data.zipcode }} {{ data.city }} | {{ data.state }} {{ data.country }}</td>
+      </tr>
+      <tr>
+        <td>Kontakt: {{ data.phone }} | {{ data.mail }} </td>
+      </tr>
+    </div>
+  </Card>
 </template>
 
 <script>
   import { computed } from 'vue'
   import { ref } from 'vue'
   import { api, setTitle } from '@/helper'
-  import { useRoute } from 'vue-router' 
+  import { useRoute } from 'vue-router'
   import Button from '@/components/FormElements/Button'
   import Card from '@/components/Cards/Card'
 
@@ -63,9 +63,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .personCard{
-    padding-top: 15px;;
-  }
   .header{
       font-size: 18px;
       text-align: left;

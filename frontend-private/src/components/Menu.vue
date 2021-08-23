@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <Page>
+    <Page :padding="false">
       <slot></slot>
     </Page>
   </div>

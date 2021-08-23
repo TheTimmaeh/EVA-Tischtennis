@@ -1,7 +1,7 @@
 <template>
   <div class="LineUp">
     <div class="list">Mannschaftsaufstellung</div>
-     <LineUpCard :data="members" />
+    <LineUpCard :data="members" />
   </div>
 </template>
 
@@ -41,7 +41,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
 </style>

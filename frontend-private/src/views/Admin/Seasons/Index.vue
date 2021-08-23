@@ -1,7 +1,7 @@
 <template>
   <div class="saisons">
     <router-link to="/admin/seasons/create">
-      <Button>Saison anlegen</Button> <br>
+      <Button class="mb20">Saison anlegen</Button> <br>
     </router-link>
     <SeasonCard v-for="season in seasons" :key="season.id" :data="season" />
   </div>
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .mb20 {
+    margin-bottom: 20px;
+  }
 </style>

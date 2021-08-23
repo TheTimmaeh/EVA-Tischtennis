@@ -1,22 +1,24 @@
 <template>
   <Page>
-    <div class="profile">
-      <table>
-        <tr>
-          <td>Username:</td>
-          <td>{{ username }}</td>
-        </tr>
-        <tr>
-          <td>isAdmin:</td>
-          <td>{{ isAdmin }}</td>
-        </tr>
-        <tr>
-          <td>Socket:</td>
-          <td>{{ connected ? 'Connected' : 'Disconnected' }}</td>
-        </tr>
-      </table>
-      <button @click="test()">Test Connection</button>
-    </div>
+    <Card>
+      <div class="profile">
+        <table>
+          <tr>
+            <td>Username:</td>
+            <td>{{ username }}</td>
+          </tr>
+          <tr>
+            <td>isAdmin:</td>
+            <td>{{ isAdmin }}</td>
+          </tr>
+          <tr>
+            <td>Socket:</td>
+            <td>{{ connected ? 'Connected' : 'Disconnected' }}</td>
+          </tr>
+        </table><br />
+        <button @click="test()">Test Connection</button>
+      </div>
+    </Card>
   </Page>
 </template>
 
@@ -25,10 +27,12 @@
   import { useStore } from 'vuex'
   import { setTitle, useSocket } from '@/helper'
   import Page from '@/components/Page'
+  import Card from '@/components/Cards/Card'
 
   export default {
     components: {
-    Page,
+      Page,
+      Card,
     },
     setup(){
       setTitle('Profil')
@@ -59,7 +63,6 @@
 
 <style lang="scss">
   table {
-    padding-top: 20px;
     display: inline-block;
 
     td {

@@ -74,5 +74,28 @@ module.exports = (db) => {
     })
   }
 
-  return { generateToken, authenticateToken, optionalAuthenticateToken, authenticateSocket }
+  const optionalAuthenticateSocket = (socket, next) => {
+    let header = socket.request.headers['authorization'] || ''
+    let token = header.split(' ')[1]
+
+    if(token == null) return next()
+
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, payload) => {
+      if(err){
+        console.error('authenticateSocket', err)
+        return next(new Error('Authentication Error: Could not verify token.'))
+      }
+
+      let session = await db.first().from('sessions').where({ user: payload.id, token })
+
+      if(session){
+        socket.token = token
+        socket.user = payload
+      }
+
+      next()
+    })
+  }
+
+  return { generateToken, authenticateToken, optionalAuthenticateToken, authenticateSocket, optionalAuthenticateSocket }
 }

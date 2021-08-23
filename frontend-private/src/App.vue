@@ -74,18 +74,11 @@
         socket.on('message', (data) => {
           console.info('WS: Message.', data)
         })
+
+        socket.connect()
       }
 
-      watch(loggedIn, () => {
-        if(loggedIn.value){
-          console.info('User: Logged in.')
-          initIO()
-          socket.connect()
-        } else {
-          console.info('User: Logged out.')
-          socket.disconnect()
-        }
-      })
+      initIO()
 
       return {
         loggedIn,

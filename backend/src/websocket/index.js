@@ -1,5 +1,5 @@
 module.exports = (db, http) => {
-  const { authenticateSocket } = require('../helpers/jwt')(db)
+  const { optionalAuthenticateSocket } = require('../helpers/jwt')(db)
 
   const io = require('socket.io')(http, {
     cors: {
@@ -9,7 +9,7 @@ module.exports = (db, http) => {
 
   const routes = require('./routes')(db)
 
-  io.use(authenticateSocket).on('connection', routes)
+  io.use(optionalAuthenticateSocket).on('connection', routes)
 
   return io
 }

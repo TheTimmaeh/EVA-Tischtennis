@@ -35,67 +35,67 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { setTitle } from '@/helper'
-import Button from '@/components/FormElements/Button'
-import InputField from '@/components/FormElements/InputField'
-import SearchField from '@/components/FormElements/SearchField'
-import TextArea from '@/components/FormElements/TextArea'
-import SeasonSelect from '@/components/FormElements/Selects/SeasonSelect'
-import PlayerCard from '@/components/Cards/PlayerCard'
-import PlayerClassCard from '@/components/Cards/PlayerClassCard'
-import SeasonCard from '@/components/Cards/SeasonCard'
-import AssociationCard from '@/components/Cards/AssociationCard'
-import Table from '@/components/Tables/Table'
+  import { ref } from 'vue'
+  import { setTitle } from '@/helper'
+  import Button from '@/components/FormElements/Button'
+  import InputField from '@/components/FormElements/InputField'
+  import SearchField from '@/components/FormElements/SearchField'
+  import TextArea from '@/components/FormElements/TextArea'
+  import SeasonSelect from '@/components/FormElements/Selects/SeasonSelect'
+  import PlayerCard from '@/components/Cards/PlayerCard'
+  import PlayerClassCard from '@/components/Cards/PlayerClassCard'
+  import SeasonCard from '@/components/Cards/SeasonCard'
+  import AssociationCard from '@/components/Cards/AssociationCard'
+  import Table from '@/components/Tables/Table'
 
-export default {
-  name: 'Components',
-  components: {
-    Button,
-    InputField,
-    SearchField,
-    TextArea,
-    SeasonSelect,
-    PlayerCard,
-    PlayerClassCard,
-    SeasonCard,
-    AssociationCard,
-    Table,
-  },
-  setup(){
-    setTitle('Components')
-    let clicked = ref(0)
-    let input1 = ref('')
-    let input2 = ref('')
-    let search1 = ref('')
-    let season = ref('wi')
+  export default {
+    name: 'Components',
+    components: {
+      Button,
+      InputField,
+      SearchField,
+      TextArea,
+      SeasonSelect,
+      PlayerCard,
+      PlayerClassCard,
+      SeasonCard,
+      AssociationCard,
+      Table,
+    },
+    setup(){
+      setTitle('Components')
+      let clicked = ref(0)
+      let input1 = ref('')
+      let input2 = ref('')
+      let search1 = ref('')
+      let season = ref('wi')
 
-    return {
-      clicked,
-      input1,
-      input2,
-      search1,
-      season,
-      beispieltext: `Dies
-ist
-ein
-Beispieltext`,
-      members: [
-        { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },
-        { id: 2, name: 'Tina', surname: 'Hänsel', association: 'Mannschaft 2' },
-      ],
-      titles: [
-        { id: 1, text: 'Name' },
-        { id: 2, text: 'Nachname'},
-      ],
-      content: [
-        { id: 1, content: ['Tim', 'Elbert'] },
-        { id: 2, content: ['Tina', 'Hänsel'] },
-      ],
+      return {
+        clicked,
+        input1,
+        input2,
+        search1,
+        season,
+        beispieltext: `Dies
+  ist
+  ein
+  Beispieltext`,
+        members: [
+          { id: 1, name: 'Tim', surname: 'Elbert', association: 'Mannschaft 1' },
+          { id: 2, name: 'Tina', surname: 'Hänsel', association: 'Mannschaft 2' },
+        ],
+        titles: [
+          { id: 1, text: 'Name' },
+          { id: 2, text: 'Nachname'},
+        ],
+        content: [
+          { id: 1, content: ['Tim', 'Elbert'] },
+          { id: 2, content: ['Tina', 'Hänsel'] },
+        ],
 
-    }
-  },
-}
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

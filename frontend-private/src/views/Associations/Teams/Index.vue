@@ -1,9 +1,9 @@
 <template>
   <div class="associationTeams">
     <router-link v-if="isAdmin" :to="`/associations/${$route.params.associationId}/teams/create`">
-      <Button>Vereinsmannschaft anlegen</Button> <br>
+      <Button class="mb20">Vereinsmannschaft anlegen</Button>
     </router-link>
-     <TeamCard v-for="team in teams" :key="team.id" :data="team" :isAdmin="isAdmin" />
+    <TeamCard v-for="team in teams" :key="team.id" :data="team" :isAdmin="isAdmin" />
   </div>
 </template>
 
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list{
-  padding: 20px;
-}
+  .mb20 {
+    margin-bottom: 20px;
+  }
 </style>

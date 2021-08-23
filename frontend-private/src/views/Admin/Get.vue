@@ -11,19 +11,20 @@
 </template>
 
 <script>
-import Page from '@/components/Page'
-import Menu from '@/components/Menu'
+  import Page from '@/components/Page'
+  import Menu from '@/components/Menu'
 
-export default {
-  name: 'AssociationsGet',
-  components: {
-    Page,
-    Menu,
-  },
-  setup(){
-    return { }
-  },
-}
+  export default {
+    name: 'AssociationsGet',
+    components: {
+      Page,
+      Menu,
+    },
+    setup(){
+      return { }
+    },
+  }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
