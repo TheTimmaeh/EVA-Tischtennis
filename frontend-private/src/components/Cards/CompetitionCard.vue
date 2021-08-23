@@ -7,7 +7,7 @@
       <div class="description">
         <div class="playerClass"> Spielerklasse: {{playerClass.name}} </div>
          </div>
-      <div class="actions">
+      <div class="actions" v-if="isAdmin">
         <router-link :to="`/competitions/${data.id}/update`">
           <Button><Icon type="edit" /></Button>
         </router-link>&nbsp;
@@ -29,37 +29,40 @@ import { ref } from 'vue'
 
 export default {
   name: 'CompetitionCard',
-  components:{
+  components: {
     Button,
     Card,
     Icon,
-    },
+  },
   props: {
-      data: {
-        type: Object,
-        required: true,
-      },
-    },setup(props){
-      const playerClass = ref([])
+    data: {
+      type: Object,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props){
+    const playerClass = ref([])
 
-      api(`/playerClasses/${props.data.player_class}`).then((res) => res.data).then((res) => {
+    api(`/playerClasses/${props.data.player_class}`).then((res) => res.data).then((res) => {
 
-        if(!res.success){
-          console.error('Fehler...', res)
-         return
-        }
+      if(!res.success){
+        console.error('Fehler...', res)
+       return
+      }
 
-        playerClass.value = res.data
-      })
-
-     
+      playerClass.value = res.data
+    })
 
     return {
       playerClass,
+      isAdmin: props.isAdmin,
     }
-      
-    },
-  }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

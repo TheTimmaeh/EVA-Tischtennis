@@ -35,7 +35,8 @@ export default {
           message.value = 'Login erfolgreich.'
           store.dispatch('updateUser', res.data.user)
 
-          router.push({ path: '/' })
+          /* router.push({ path: '/' }) */
+          router.go(-1)
         }
       }).catch((err) => {
         message.value = err

@@ -1,15 +1,15 @@
 <template>
   <div class="associationTeams">
-    <router-link :to="`/associations/${$route.params.associationId}/teams/create`">
+    <router-link v-if="isAdmin" :to="`/associations/${$route.params.associationId}/teams/create`">
       <Button>Vereinsmannschaft anlegen</Button> <br>
     </router-link>
-    <div class="list">Liste der Vereinsmannschaften</div>
-     <TeamCard v-for="team in teams" :key="team.id" :data="team" />
+     <TeamCard v-for="team in teams" :key="team.id" :data="team" :isAdmin="isAdmin" />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { api, setTitle } from '@/helper'
 import Button from '@/components/FormElements/Button'
@@ -24,6 +24,8 @@ export default {
   setup(){
     const route = useRoute()
     setTitle(`Vereinsmannschaften | Verein ${route.params.associationId}`)
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
     const teams = ref([])
 
@@ -38,6 +40,7 @@ export default {
 
     return {
       teams,
+      isAdmin,
     }
   },
 }

@@ -3,16 +3,16 @@
     <table @click="clicked = !clicked">
       <tr>
         <td>
-          <b>Heimspieler:</b> <br> 
-          {{ data.home_player_1.name}} {{ data.home_player_1.surname }} 
-          <template v-if="data.home_player_2"><br> 
-          {{ data.home_player_2.name }} {{ data.home_player_2.surname }} 
+          <b>Heimspieler:</b> <br>
+          {{ data.home_player_1.name}} {{ data.home_player_1.surname }}
+          <template v-if="data.home_player_2"><br>
+          {{ data.home_player_2.name }} {{ data.home_player_2.surname }}
           </template>
         </td>
         <td>
-          <b>Gastpieler:</b> <br> 
-          {{ data.visitor_player_1.name }} {{ data.visitor_player_1.surname }} 
-          <template v-if="data.visitor_player_2"><br> 
+          <b>Gastpieler:</b> <br>
+          {{ data.visitor_player_1.name }} {{ data.visitor_player_1.surname }}
+          <template v-if="data.visitor_player_2"><br>
           {{ data.visitor_player_2.name }} {{ data.visitor_player_2.surname }}
           </template>
         </td>
@@ -24,11 +24,11 @@
         <template v-else>
           <td class="score min pright">TBD</td>
         </template>
-        <td class="min">
-          <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
+        <td class="min" v-if="isAdmin || (isMine && !isDone)">
+          <router-link v-if="isAdmin" :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}/update`">
             <Button><Icon type="edit" /></Button>
           </router-link>&nbsp;
-          <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
+          <router-link v-if="isMine && !isDone" :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches/${id}`">
             <Button><Icon type="tabletennis" /> Starten</Button>
           </router-link>
         </td>
@@ -45,7 +45,7 @@
       <tr>
         <td v-for="(set, index) in data.sets" :key="set.id">
           <template v-if="set.home_score > 0 || set.visitor_score > 0">{{set.home_score}} : {{set.visitor_score}} </template>
-          <template v-else-if="data.home_score !== null && (index+1) > (data.home_score + data.visitor_score)"> / </template>
+          <template v-else-if="isDone"> / </template>
           <template v-else>TBD</template>
         </td>
       </tr>
@@ -54,13 +54,14 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { api, setTitle, validate } from '@/helper'
 import Button from '@/components/FormElements/Button'
 import Card from '@/components/Cards/Card'
 import Icon from '@/components/Icons/Icon'
-import { ref } from 'vue'
-import Table from '../Tables/Table.vue'
+import Table from '@/components/Tables/Table'
 
 export default {
   name: 'MatchCard',
@@ -71,19 +72,26 @@ export default {
     Table,
   },
   props: {
-      data: {
-        type: Object,
-        required: true,
-      },
+    data: {
+      type: Object,
+      required: true,
     },
+  },
   setup(props){
-      const route = useRoute()
+    /* const route = useRoute() */
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
+    let isMine = computed(() => !!props?.data?.referee && props.data.referee == store?.state?.user?.id)
+    let isDone = computed(() => props.data.home_score !== null)
 
-      const clicked =ref(false)
+    const clicked = ref(false)
 
     return {
       ...props.data,
       clicked,
+      isAdmin,
+      isMine,
+      isDone,
     }
   },
 }

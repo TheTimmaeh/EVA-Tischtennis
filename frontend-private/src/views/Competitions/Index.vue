@@ -1,50 +1,54 @@
 <template>
  <Page>
   <div class="competitions">
-    <router-link to="/competitions/create">
+    <router-link v-if="isAdmin" to="/competitions/create">
       <Button>Turnier anlegen</Button> <br>
     </router-link>
     <div class="list">
-    <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition"></CompetitionCard>
+    <CompetitionCard v-for="competition in competitions" :key="competition.id" :data="competition" :isAdmin="isAdmin"></CompetitionCard>
     </div>
   </div>
   </Page>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { api, setTitle } from '@/helper'
-import Page from '@/components/Page'
-import Button from '@/components/FormElements/Button'
-import CompetitionCard from '@/components/Cards/CompetitionCard'
+  import { ref, computed } from 'vue'
+  import { useStore } from 'vuex'
+  import { api, setTitle } from '@/helper'
+  import Page from '@/components/Page'
+  import Button from '@/components/FormElements/Button'
+  import CompetitionCard from '@/components/Cards/CompetitionCard'
 
-export default {
-  name: 'Competitions',
-  components: {
-    Page,
-    Button,
-    CompetitionCard,
-  },
-  setup(){
-    setTitle('Tuniere')
+  export default {
+    name: 'Competitions',
+    components: {
+      Page,
+      Button,
+      CompetitionCard,
+    },
+    setup(){
+      setTitle('Tuniere')
+      const store = useStore()
+      let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
-    const competitions = ref([])
+      const competitions = ref([])
 
-    api('/competitions').then((res) => res.data).then((res) => {
-      if(!res.success){
-        console.error('Fehler...', res)
-        return
+      api('/competitions').then((res) => res.data).then((res) => {
+        if(!res.success){
+          console.error('Fehler...', res)
+          return
+        }
+
+        competitions.value = res.data
+      })
+
+
+      return {
+        competitions,
+        isAdmin,
       }
-
-      competitions.value = res.data
-    })
-
-
-    return {
-      competitions,
-    }
-  },
-}
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

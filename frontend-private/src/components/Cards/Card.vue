@@ -24,6 +24,7 @@
     // margin: 8px;
     overflow: hidden;
     position: relative;
+    width: inherit;
 
     &.warning {
       background-color: $color-warning;

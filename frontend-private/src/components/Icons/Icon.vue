@@ -69,6 +69,34 @@
     :secondaryColor="secondaryColor"
     :secondaryOpacity="secondaryOpacity"
     :scale="scale" />
+  <PlusIcon
+    v-if="type == 'plus'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="secondaryColor"
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
+  <PlusIcon
+    v-if="type == 'minus'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="secondaryColor"
+    secondaryOpacity="0"
+    :scale="scale" />
+  <MoreIcon
+    v-if="type == 'more'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="primaryColor"
+    :secondaryOpacity="primaryOpacity"
+    :scale="scale" />
+  <CardIcon
+    v-if="type == 'card'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="primaryColor"
+    :secondaryOpacity="primaryOpacity"
+    :scale="scale" />
 </template>
 
 <script>
@@ -82,6 +110,9 @@
   import WarningIcon from '@/components/Icons/Warning'
   import LocationIcon from '@/components/Icons/Location'
   import TableTennisIcon from '@/components/Icons/TableTennis'
+  import PlusIcon from '@/components/Icons/Plus'
+  import MoreIcon from '@/components/Icons/More'
+  import CardIcon from '@/components/Icons/Card'
 
   export default {
     name: 'Icon',
@@ -96,6 +127,9 @@
       WarningIcon,
       LocationIcon,
       TableTennisIcon,
+      PlusIcon,
+      MoreIcon,
+      CardIcon,
     },
     props: {
       type: {

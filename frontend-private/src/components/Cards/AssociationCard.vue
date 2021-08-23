@@ -9,7 +9,7 @@
         <div class="teams"><router-link :to="`/associations/${data.id}/teams`"><span class="label">Mannschaften:</span><span class="value">{{ teams?.length || 0 }}</span></router-link></div>
         <div class="members"><router-link :to="`/associations/${data.id}/members`"><span class="label">Mitglieder:</span><span class="value">{{ members?.length || 0 }}</span></router-link></div>
       </div>
-      <div class="actions">
+      <div class="actions" v-if="isAdmin">
         <router-link :to="`/associations/${data.id}/update`">
           <Button><Icon type="edit" /></Button>
         </router-link>&nbsp;
@@ -45,6 +45,10 @@
         type: Number,
         required: true,
       },
+      isAdmin: {
+        type: Boolean,
+        default: false,
+      },
     },
     setup(props){
       const teams = ref([])
@@ -71,12 +75,10 @@
         members.value = res.data
       })
 
-    return {
-      teams,
-      members,
-    }
       return {
-        ...props.data,
+        teams,
+        members,
+        isAdmin: props.isAdmin,
       }
     },
   }

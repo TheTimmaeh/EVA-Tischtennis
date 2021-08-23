@@ -4,7 +4,7 @@ exports.up = (knex) => {
     association_teams.string('name', 50).notNullable()
     association_teams.integer('association').notNullable().unsigned().references('associations.id')
     association_teams.integer('season').notNullable().unsigned().references('seasons.id')
-    association_teams.integer('playerClass').notNullable().unsigned().references('classes.id')
+    association_teams.integer('player_class').notNullable().unsigned().references('player_classes.id')
     association_teams.timestamps(true, true)
     console.info('DB | Migration: association_teams | Table association_teams created.')
   }).createTable('team_members', (team_members) => {

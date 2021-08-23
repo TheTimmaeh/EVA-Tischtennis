@@ -7,27 +7,27 @@
           <td>Saison: {{ data.season }}</td>
         </tr>
         <tr>
-          <td>Spielerklasse: {{ data.playerClass }} <br> </td>
+          <td>Spielerklasse: {{ data.player_class }} <br> </td>
         </tr>
         <tr>
         <td>
         <table class="lineup">
         <th>Mannschaftsaufstellung</th>
-        <tr v-for="(member, index) in teamMembers" :key="member.id"> 
+        <tr v-for="(member, index) in teamMembers" :key="member.id">
           <td v-if="member.id">Position {{ member.position }} : {{ member.name }} {{ member.surname }}</td>
         </tr>
         </table><br>
         </td>
         </tr>
-        <tr>
+        <tr v-if="isAdmin">
           <td >
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/members/update`">
-              <Button>Mannschaftsaufstellung ändern</Button> 
+              <Button>Mannschaftsaufstellung ändern</Button>
             </router-link>
           </td>
           <td class="min">
             <router-link :to="`/associations/${$route.params.associationId}/teams/${data.id }/update`">
-            <Button><Icon type="edit" /></Button> 
+            <Button><Icon type="edit" /></Button>
             </router-link>
           </td>
           <td class="min">
@@ -35,53 +35,57 @@
               <Button level="danger"><Icon type="delete" /></Button>
             </router-link>
           </td>
-        </tr>  
+        </tr>
       </table>
     <!-- </router-link> -->
   </Card>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { api, setTitle } from '@/helper'
-import Button from '@/components/FormElements/Button'
-import Card from '@/components/Cards/Card'
-import Icon from '@/components/Icons/Icon'
+  import { ref } from 'vue'
+  import { useRoute } from 'vue-router'
+  import { api, setTitle } from '@/helper'
+  import Button from '@/components/FormElements/Button'
+  import Card from '@/components/Cards/Card'
+  import Icon from '@/components/Icons/Icon'
 
-
-export default {
-  name: 'TeamCard',
-  components: {
-    Button,
-    Card,
-    Icon,
-  },
-  props: {
-    data: {
-      type: Object,
-      required: true,
+  export default {
+    name: 'TeamCard',
+    components: {
+      Button,
+      Card,
+      Icon,
     },
-  },
-  setup(props){
-    const route = useRoute()
-    const teamMembers = ref([])
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+      isAdmin: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    setup(props){
+      const route = useRoute()
+      const teamMembers = ref([])
 
-    api(`/associations/${route.params.associationId}/teams/${props.data.id}/members`).then((res) => res.data).then((res) => {
-      if(!res.success){
-        console.error('Fehler...', res)
-        return
+      api(`/associations/${route.params.associationId}/teams/${props.data.id}/members`).then((res) => res.data).then((res) => {
+        if(!res.success){
+          console.error('Fehler...', res)
+          return
+        }
+
+        teamMembers.value = res.data
+      })
+
+      return {
+        ...props,
+        teamMembers,
+        isAdmin: props.isAdmin,
       }
-       
-      teamMembers.value = res.data
-    })
-
-    return {
-      ...props,
-      teamMembers,
-    }
-  },
-}
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

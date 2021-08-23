@@ -31,7 +31,11 @@ module.exports = (db) => {
     let header = req.headers['authorization'] || ''
     let token = header.split(' ')[1]
 
-    if(token == null) return res.sendStatus(401)
+    if(token == null){
+      next()
+      return
+      // return res.sendStatus(401)
+    }
 
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, payload) => {
       if(!err){

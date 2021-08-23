@@ -1,18 +1,19 @@
 <template>
   <Page>
     <div class="associations">
-      <router-link to="/associations/create">
+      <router-link v-if="isAdmin" to="/associations/create">
         <Button>Verein anlegen</Button> <br>
       </router-link>
       <div class="list">
-        <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id"></AssociationCard>
+        <AssociationCard v-for="(association, index) in associations" :key="association.id" :data="association" :id="association.id" :isAdmin="isAdmin"></AssociationCard>
       </div>
     </div>
   </Page>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { api, setTitle } from '@/helper'
 import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
@@ -27,6 +28,8 @@ export default {
   },
   setup(){
     setTitle('Vereine')
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
     const associations = ref([])
 
@@ -42,6 +45,7 @@ export default {
 
     return {
       associations,
+      isAdmin,
     }
   },
 }

@@ -5,9 +5,9 @@
           <div class="primary-title">
             <div class="title">
               <div class="name">{{ association.name}}</div>
-              <router-link  :to="`/persons/${association.board}/profile`">
+              <router-link v-if="isAdmin" :to="`/persons/${association.board}/profile`">
                 <Button>Vorsitzender</Button>
-              </router-link>  
+              </router-link>
            </div>
           </div>
         </div>
@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { api, setTitle } from '@/helper'
 import { useRoute } from 'vue-router'
 import Button from '@/components/FormElements/Button'
@@ -42,29 +43,33 @@ export default {
     Button,
     Card,
   },
-   props: {
-      association: {
-        type: Object,
-      },
+  props: {
+    association: {
+      type: Object,
+      required: true,
     },
+  },
   setup(){
     const route = useRoute()
     setTitle(`Verein ${route.params.associationId}`)
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
-      const association = ref({})
+    const association = ref({})
 
-      api(`/associations/${route.params.associationId}`).then((res) => res.data).then((res) => {
-        if(!res.success){
-          console.error('Fehler...', res)
-          return
-        }
+    api(`/associations/${route.params.associationId}`).then((res) => res.data).then((res) => {
+      if(!res.success){
+        console.error('Fehler...', res)
+        return
+      }
 
-        association.value = res.data
-      })
+      association.value = res.data
+    })
 
     return {
       Button,
       association,
+      isAdmin,
     }
   },
 }

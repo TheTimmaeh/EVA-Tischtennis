@@ -58,7 +58,7 @@ async function getCompetition(req, res){
 async function getCompetitionProfile(req, res){
   let competition = await db.qb({ first: (req.user?.isAdmin ? select.admin : select.guest), from: 'competitions', where:{ id: req.params.competitionId }, ...req.query })
   let encounters = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', where: { competition: req.params.competitionId }, ...req.query })
-  
+
   let playerIds = encounters.map((e) => [e.home, e.visitor]).flat()
   let players = await db.qb({ select: ['id', 'name', 'surname'], from: 'persons', whereIn: {id: playerIds}, ...req.query })
   encounters = encounters.map((e) => {
@@ -77,7 +77,7 @@ async function createCompetition(req, res){
     result = await db('competitions').insert({
       name: req.body.name,
       description: req.body.description,
-      player_class: req.body.playerClass,
+      player_class: req.body.player_class,
       season: req.body.season,
     })
     console.log(result)
@@ -110,7 +110,7 @@ async function updateCompetition(req, res){
       name: req.body.name,
       startdate: req.body.startdate,
       enddate: req.body.enddate,
-      playerclass: req.body.playerclass,
+      player_class: req.body.player_class,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
@@ -157,7 +157,7 @@ async function getAssociationTeams(req, res){
     let associations = await db.qb({ select: ['id', 'name'], from: 'associations', ...req.query })
     let associationIds = associations.map((a) => a.id)
 
-    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', where: { season: competition.season, playerClass: competition.player_class }, whereIn: { association: associationIds }})
+    let data = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'association_teams', where: { season: competition.season, player_class: competition.player_class }, whereIn: { association: associationIds }})
 
     data = data.map((d) => Object.assign(d, { association_name: associations.find((a) => a.id == d.association).name}))
 

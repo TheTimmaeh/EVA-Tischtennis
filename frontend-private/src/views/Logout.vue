@@ -16,13 +16,13 @@ export default {
     api({ method: 'POST', path: '/auth/logout' }).then((res) => {
       if(!res.data){
         console.error(res)
-      } else {
-        store.dispatch('resetUser')
-        router.push({ path: '/' })
       }
     }).catch((err) => {
       console.error(err)
-    })   
+    }).finally(() => {
+      store.dispatch('resetUser')
+      router.push({ path: '/' })
+    })
 
     return {}
   }

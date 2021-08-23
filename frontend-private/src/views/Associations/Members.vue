@@ -1,13 +1,14 @@
 <template>
   <div class="association">
-    <MemberTable path="persons" :members="members"></MemberTable>
+    <MemberTable path="persons" :members="members" :loggedIn="loggedIn"></MemberTable>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { api, setTitle } from '@/helper'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
+import { api, setTitle } from '@/helper'
 import Button from '@/components/FormElements/Button'
 import MemberTable from '@/components/Tables/MemberTable'
 
@@ -20,11 +21,12 @@ export default {
   setup(){
     const route = useRoute()
     setTitle(`Vereinsmitglieder | Verein ${route.params.associationId}`)
+    const store = useStore()
+    let loggedIn = computed(() => !!store?.state?.user?.username)
 
     const members = ref([])
 
     api(`/associations/${route.params.associationId}/members`).then((res) => res.data).then((res) => {
-      console.log(res.data)
       if(!res.success){
         console.error('Fehler...', res)
         return
@@ -37,7 +39,8 @@ export default {
     return {
       Button,
       MemberTable,
-      members
+      members,
+      loggedIn,
     }
   },
 }

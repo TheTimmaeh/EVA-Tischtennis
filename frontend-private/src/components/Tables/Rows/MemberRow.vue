@@ -1,16 +1,12 @@
 <template>
   <tr :class="{ isLast }">
-    <template v-if="path === 'persons'">
-      <router-link :to="`/persons/${id}/profile`">
-        <td>{{ name }}</td>
-      </router-link>
-    </template>
-    <template v-else>
-      <td>{{ name }}</td>
-    </template>
+    <td v-if="path === 'persons'">
+      <router-link v-if="loggedIn || isAdmin" :to="`/persons/${id}/profile`">{{ name }}</router-link>
+      <template v-else>{{ name }}</template>
+    </td>
+    <td v-else>{{ name }}</td>
     <td>{{ surname }}</td>
-    <!-- <td>{{ teams?.length }}</td> -->
-    <td>
+    <td v-if="isAdmin">
       <router-link :to="`/${path}/${id}/update`">
         <Button><Icon type="edit" /></Button>
       </router-link>
@@ -38,9 +34,17 @@
         type: Boolean,
         default: false,
       },
-      path:{
+      path: {
         type: String,
         required: true,
+      },
+      isAdmin: {
+        type: Boolean,
+        default: false,
+      },
+      loggedIn: {
+        type: Boolean,
+        default: false,
       },
     },
     setup(props){
@@ -48,6 +52,8 @@
         ...props.data,
         isLast: props.isLast,
         path: props.path,
+        isAdmin: props.isAdmin,
+        loggedIn: props.loggedIn,
       }
     },
   }

@@ -2,11 +2,11 @@
   <div>
     <div id="nav">
       <router-link to="/"><span class="icon"><Icon type="tabletennis" primaryColor="#000000" secondaryColor="#000000" scale="2" /></span></router-link>
+      <router-link to="/competitions">Turniere</router-link>
+      <router-link to="/associations">Vereine</router-link>
       <template v-if="loggedIn">
-        <router-link to="/competitions">Turniere</router-link>
-        <router-link to="/associations">Vereine</router-link>
         <router-link to="/persons">Personen</router-link>
-        <router-link to="/admin">Admin</router-link>
+        <router-link v-if="isAdmin" to="/admin">Admin</router-link>
         <router-link to="/profile">Profil</router-link>
         <router-link to="/logout"><span class="icon"><Icon type="logout" primaryColor="#000000" secondaryColor="#000000" scale="2" /></span></router-link>
       </template>
@@ -30,14 +30,15 @@
   import Icon from '@/components/Icons/Icon'
 
   export default {
-    components:{
+    components: {
       Button,
       Icon,
     },
     setup(){
       const store = useStore()
 
-      let loggedIn = computed(() => !!store.state.user && !!store.state.user.username)
+      let loggedIn = computed(() => !!store?.state?.user?.username)
+      let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
       let connected = ref(false)
 
       let socket = {}
@@ -88,6 +89,7 @@
 
       return {
         loggedIn,
+        isAdmin,
         connected,
       }
     }

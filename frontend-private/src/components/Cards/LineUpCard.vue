@@ -16,13 +16,14 @@
           <th>Bearbeiten</th>
         </tr>
       </thead>
-      <CompetitionerRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path"/>
+      <CompetitionerRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path" :loggedIn="loggedIn" />
     </table>
   </Card>
 </template>
 
 <script>
   import { computed } from 'vue'
+  import { useStore } from 'vuex'
   import Card from '@/components/Cards/Card'
   import Button from '@/components/FormElements/Button'
   import CompetitionerRow from '@/components/Tables/Rows/CompetitionerRow'
@@ -41,15 +42,18 @@
       },
       path:{
         type: String,
-        required: true, 
+        required: true,
       }
     },
     setup(props){
       const members = computed(() => props.members)
+      const store = useStore()
+      let loggedIn = computed(() => !!store?.state?.user?.username)
 
       return {
         members,
         path: props.path,
+        loggedIn,
       }
     },
   }

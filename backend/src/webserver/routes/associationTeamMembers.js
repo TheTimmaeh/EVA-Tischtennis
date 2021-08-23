@@ -13,8 +13,6 @@ module.exports = (_db) => {
   // Update
   router.post('/', optionalAuthenticateToken, updateAssociationTeamMembers)
 
- 
-
   return router
 }
 
@@ -28,8 +26,6 @@ const memberSelect = {
   guest: ['id', 'name', 'surname'],
 }
 
-
-
 async function getAssociationTeamMembers(req, res){
 
   try {
@@ -40,7 +36,7 @@ async function getAssociationTeamMembers(req, res){
     let persons = await db.qb({ select: (req.user?.isAdmin ? memberSelect.admin : memberSelect.guest), from: 'persons', whereIn: { id: memberIds }, ...req.query })
 
     let data = members.map((member) => Object.assign(member, persons.find((p) => p.id == member.member)  ))
-    
+
     res.json({ success: true, data })
   } catch(err){
     console.error(err.message)
@@ -50,9 +46,9 @@ async function getAssociationTeamMembers(req, res){
 
 
 async function updateAssociationTeamMembers(req, res){
+  let data
 
   try {
-    console.log(req.body)
     let E1 = await db('team_members').where({ team: req.params.associationTeamId, position: 'E1' }).update({
       member: req.body.E1
     })
@@ -74,7 +70,6 @@ async function updateAssociationTeamMembers(req, res){
     })
 
     data = [E1, E2, E3,  D1, D2]
-    res.json({ success: true, data })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
       res.json({ success: false, message: `Es existiert bereits dieser Eintrag.` })
@@ -85,4 +80,6 @@ async function updateAssociationTeamMembers(req, res){
 
     return
   }
+
+  res.json({ success: !!data, data })
 }

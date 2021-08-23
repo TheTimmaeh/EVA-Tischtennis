@@ -23,6 +23,46 @@ module.exports = (db, socket) => {
       socket.emit('setData', { error: 'There is already a winner for this match. No further sets needed.' })
     } else {
       // Hole Spieler/Verein
+
+
+
+
+      try {
+        current_set.match = await db.qb({ first: '*', from: 'matches', where: { id: data.match }})
+      } catch(err){
+        console.error('Match', {err})
+      }
+
+      try {
+        let players = [current_set.match.home_player_1, current_set.match.home_player_2, current_set.match.visitor_player_1, current_set.match.visitor_player_2]
+        players = await db.qb({ select: ['id', 'name', 'surname'], from: 'persons', whereIn: { id: players }})
+
+        current_set.match.home_players = [ current_set.match.home_player_1, current_set.match.home_player_2 ].map((p1) => players.find((p2) => p2.id == p1)).filter((p) => !!p).map((p) => `${p.name} ${p.surname}`).join(' | ')
+        current_set.match.visitor_players = [ current_set.match.visitor_player_1, current_set.match.visitor_player_2 ].map((p1) => players.find((p2) => p2.id == p1)).filter((p) => !!p).map((p) => `${p.name} ${p.surname}`).join(' | ')
+      } catch(err){
+        console.error('Players', {err})
+      }
+
+      let encounter
+
+      try {
+        encounter = await db.qb({ first: '*', from: 'encounters', where: { id: current_set.match.encounter }})
+      } catch(err){
+        console.error('Encounter', {err})
+      }
+
+      let teams
+
+      try {
+        teams = [ encounter.home, encounter.visitor ]
+        teams = await db.qb({ select: ['id', 'name'], from: 'association_teams', whereIn: { id: teams }})
+      } catch(err){
+        console.error('Teams', {err})
+      }
+
+      current_set.match.home_team = teams.find((t) => t.id == encounter.home).name
+      current_set.match.visitor_team = teams.find((t) => t.id == encounter.visitor).name
+
       await writeHistory('setStart', current_set.id)
       socket.emit('setData', current_set)
     }

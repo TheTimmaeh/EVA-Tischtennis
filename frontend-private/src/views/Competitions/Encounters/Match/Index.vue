@@ -1,6 +1,5 @@
 <template>
   <div class="matches">
-    <div class="list">Liste der Spiele</div>
     <MatchCard v-for="match in matches" :key="match.id" :data="match"></MatchCard>
   </div>
 </template>
@@ -31,7 +30,6 @@ export default {
       }
 
       matches.value = res.data
-      console.log(res.data)
     })
 
     return {

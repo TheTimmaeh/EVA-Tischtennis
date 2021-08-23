@@ -1,15 +1,15 @@
 <template>
   <div class="encounters">
-    <div class="list">Liste der Begegnungen</div>
-      <router-link :to="`/competitions/${$route.params.competitionId}/encounters/create`">
-        <Button>Begegnung anlegen</Button> <br>
-      </router-link><br/>  
-    <EncountersCard v-for="encounter in encounters" :key="encounter.id" :data="encounter"></EncountersCard>
+    <router-link v-if="isAdmin" :to="`/competitions/${$route.params.competitionId}/encounters/create`">
+      <Button>Begegnung anlegen</Button> <br>
+    </router-link><br/>
+    <EncountersCard v-for="encounter in encounters" :key="encounter.id" :data="encounter" :isAdmin="isAdmin"></EncountersCard>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { api, setTitle, validate } from '@/helper'
 import Button from '@/components/FormElements/Button'
@@ -22,8 +22,10 @@ export default {
     EncountersCard,
   },
   setup(){
-    const route = useRoute()
     setTitle('Begegnungen')
+    const route = useRoute()
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
     const encounters = ref([])
 
@@ -38,6 +40,7 @@ export default {
 
     return {
       encounters,
+      isAdmin,
     }
   },
 }

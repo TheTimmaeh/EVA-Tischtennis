@@ -1,7 +1,7 @@
 <template>
   <div class="LineUp">
     <div class="list">Mannschaftsaufstellung</div>
-     <LineUpCard  :data="members" />
+     <LineUpCard :data="members" />
   </div>
 </template>
 

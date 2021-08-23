@@ -10,7 +10,7 @@
           <td v-if="data.game_stage === 3">Gamestage: Achtelfinale</td>
           <td v-if="data.game_stage === 4">Gamestage: Vorentscheid</td>
           <td>Datum: {{ data.datetime.format('date') }}</td>
-          <td class="min">
+          <td class="min" v-if="isAdmin">
             <router-link :to="`encounters/${id}/update`">
               <Button><Icon type="edit" /></Button>
             </router-link>&nbsp;
@@ -41,17 +41,22 @@ export default {
     Button,
     Card,
     Icon,
-    },
+  },
   props: {
-      data: {
-        type: Object,
-        required: true,
-      },
+    data: {
+      type: Object,
+      required: true,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup(props){
-    
+
     return {
       ...props.data,
+      isAdmin: props.isAdmin,
     }
   },
 }

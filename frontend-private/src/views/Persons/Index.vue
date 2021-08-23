@@ -1,16 +1,17 @@
 <template>
   <Page>
     <div class="persons">
-      <router-link to="/persons/create">
+      <router-link to="/persons/create" v-if="isAdmin">
         <Button>Person anlegen</Button> <br>
       </router-link>
-      <MemberTable class="memberTable" :members="persons" path="persons"></MemberTable>
+      <MemberTable class="memberTable" :members="persons" path="persons" :isAdmin="isAdmin"></MemberTable>
     </div>
   </Page>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { api, setTitle } from '@/helper'
 import Page from '@/components/Page'
 import Button from '@/components/FormElements/Button'
@@ -25,6 +26,8 @@ export default {
   },
   setup(){
     setTitle('Personen')
+    const store = useStore()
+    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
 
     const persons = ref([])
 
@@ -41,6 +44,7 @@ export default {
 
     return {
       persons,
+      isAdmin,
     }
   },
 }

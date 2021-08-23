@@ -14,7 +14,6 @@ app.use(cors())
 // Parse JSON Body
 app.use(express.json())
 
-
 // Receive db, expose app & http
 module.exports = (db) => {
 
@@ -22,5 +21,5 @@ module.exports = (db) => {
   const routes = require('./routes')(db)
   app.use('/', routes)
 
-  return { app, http }
+  return http
 }

@@ -1,7 +1,8 @@
 <template>
   <div class="competition">
     <Menu>
-      <router-link :to="`/competitions/${$route.params.competitionId}/encounters`">Begegnungen </router-link>
+      <router-link :to="`/competitions/${$route.params.competitionId}`">Tunier {{ $route.params.competitionId }}</router-link>
+      <router-link :to="`/competitions/${$route.params.competitionId}/encounters`">Begegnungen</router-link>
     </Menu>
     <Page></Page>
   </div>

@@ -59,7 +59,7 @@ async function createAssociationTeam(req, res){
     result = await db('association_teams').insert({
       name: req.body.nameAssociationClass,
       season: req.body.season,
-      playerClass: req.body.playerClass,
+      player_class: req.body.playerClass,
       association: req.params.associationId,
     })
   } catch(err){
@@ -107,7 +107,7 @@ async function updateAssociationTeam(req, res){
     result = await db('association_teams').where({ id: req.params.associationTeamId }).update({
       name: req.body.nameAssociationClass,
       season: req.body.season,
-      playerClass: req.body.playerClass,
+      player_class: req.body.playerClass,
     })
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){

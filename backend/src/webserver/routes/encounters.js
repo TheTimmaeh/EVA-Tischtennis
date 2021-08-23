@@ -98,7 +98,7 @@ async function createEncounter(req, res){
       ])
     } catch(err){
       res.json({ success: false, message: `Ein unbekannter Fehler ist aufgetreten. (${err.code})` })
-      console.error({ ...err })
+      console.error(2, { ...err })
       return
     }
 

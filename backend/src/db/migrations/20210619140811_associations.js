@@ -11,9 +11,9 @@ exports.up = (knex) => {
     associations.string('city', 50)
     associations.string('state', 2)
     associations.string('country', 2)
+    associations.integer('board').unsigned().references('persons.id')
     associations.string('phone', 50)
     associations.string('mail', 50)
-    associations.integer('board').unsigned().references('persons.id')
     associations.string('url', 100)
     associations.timestamps(true, true)
 

@@ -332,7 +332,26 @@ const routes = [
   },
 ]
 
-const publicPages = ['/', '/components', '/login', '/publicsocket']
+const whitelist = {
+  exact: [
+    '/',
+    '/login',
+    '/publicsocket',
+  ],
+  startsWith: [
+    '/competitions',
+    '/associations',
+    '/persons',
+  ]
+}
+
+const blacklist = {
+  endsWith: [
+    '/create',
+    '/update',
+    '/delete',
+  ],
+}
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -340,7 +359,19 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(!publicPages.includes(to.path) && !(store.state && store.state.user && store.state.user.token)) return next('/login')
+  let publicRoute = false
+
+  if(whitelist?.exact?.includes(to.path)) publicRoute = true
+  else if(whitelist.startsWith){
+    publicRoute = !!whitelist?.startsWith?.find((r) => to.path.startsWith(r))
+  }
+
+  if(blacklist?.exact?.includes(to.path)) publicRoute = false
+  else if(blacklist.endsWith){
+    publicRoute = !blacklist?.endsWith?.find((r) => to.path.endsWith(r))
+  }
+
+  if(!publicRoute && !store?.state?.user?.token) return next('/login')
 
   next()
 })

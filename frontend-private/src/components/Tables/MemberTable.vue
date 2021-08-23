@@ -2,20 +2,18 @@
   <Card v-if="members.length > 0" >
     <table>
       <colgroup>
-        <col class="thirty" />
-        <col class="thirty" />
-        <col class="thirty" />
-        <col class="min" />
+        <col />
+        <col />
+        <col v-if="isAdmin" class="min" />
       </colgroup>
       <thead>
         <tr>
           <th>Vorname</th>
           <th>Nachname</th>
-          <!-- <th>Anzahl der Mannschaften</th> -->
-          <th>Bearbeiten</th>
+          <th v-if="isAdmin">Bearbeiten</th>
         </tr>
       </thead>
-      <MemberRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path"/>
+      <MemberRow v-for="(member, index) in members" :key="member.id" :data="member" :isLast="members.length - 1 == index" :path="path" :isAdmin="isAdmin" :loggedIn="loggedIn" />
     </table>
   </Card>
 </template>
@@ -38,9 +36,17 @@
         type: Array,
         required: true,
       },
-      path:{
+      path: {
         type: String,
         required: true,
+      },
+      isAdmin: {
+        type: Boolean,
+        default: false,
+      },
+      loggedIn: {
+        type: Boolean,
+        default: false,
       },
     },
     setup(props){
@@ -49,19 +55,20 @@
       return {
         members,
         path: props.path,
+        isAdmin: props.isAdmin,
       }
     },
   }
 </script>
 
 <style lang="scss" scoped>
- 
+
   table {
     table-layout: fixed;
     text-indent: initial;
     border-collapse: collapse;
     border-spacing: 0;
-    width:900px;
+    width: 100%;
   }
 
   thead {
@@ -83,8 +90,12 @@
     width: 33%;
   }
 
-  .min {
-    width: 1%;
-    white-space: nowrap;
+  col {
+    width: auto;
+
+    &.min {
+      width: 20%;
+      white-space: nowrap;
+    }
   }
 </style>
