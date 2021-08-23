@@ -97,6 +97,20 @@
     :secondaryColor="primaryColor"
     :secondaryOpacity="primaryOpacity"
     :scale="scale" />
+  <AngleRightIcon
+    v-if="type == 'angleright'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="secondaryColor"
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
+  <AngleLeftIcon
+    v-if="type == 'angleleft'"
+    :primaryColor="primaryColor"
+    :primaryOpacity="primaryOpacity"
+    :secondaryColor="secondaryColor"
+    :secondaryOpacity="secondaryOpacity"
+    :scale="scale" />
 </template>
 
 <script>
@@ -113,6 +127,8 @@
   import PlusIcon from '@/components/Icons/Plus'
   import MoreIcon from '@/components/Icons/More'
   import CardIcon from '@/components/Icons/Card'
+  import AngleRightIcon from '@/components/Icons/AngleRight'
+  import AngleLeftIcon from '@/components/Icons/AngleLeft'
 
   export default {
     name: 'Icon',
@@ -130,6 +146,8 @@
       PlusIcon,
       MoreIcon,
       CardIcon,
+      AngleRightIcon,
+      AngleLeftIcon,
     },
     props: {
       type: {

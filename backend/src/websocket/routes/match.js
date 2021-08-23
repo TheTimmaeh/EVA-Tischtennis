@@ -10,8 +10,8 @@ module.exports = (db, socket) => {
     let visitor_score = 0
 
     sets.some((set) => {
-      if(getWinner(set) === 'home') home_score++
-      else if(getWinner(set) === 'visitor') visitor_score++
+      if(getSetWinner(set) === 'home') home_score++
+      else if(getSetWinner(set) === 'visitor') visitor_score++
       else {
         current_set = set
         return true
@@ -22,11 +22,7 @@ module.exports = (db, socket) => {
     if(current_set === 0 || Math.max(home_score, visitor_score) === 3){
       socket.emit('setData', { error: 'There is already a winner for this match. No further sets needed.' })
     } else {
-      // Hole Spieler/Verein
-
-
-
-
+      
       try {
         current_set.match = await db.qb({ first: '*', from: 'matches', where: { id: data.match }})
       } catch(err){
@@ -69,26 +65,40 @@ module.exports = (db, socket) => {
   })
 
   socket.on('action', async (data) => {
-
     if(data.type === 'score'){
       if(!data.set || !data.player || !['home', 'visitor'].includes(data.player)) return
 
       let result = await db('sets').where({ id: data.set }).increment(`${data.player}_score`, 1)
 
-      console.log(result)
-
       await writeHistory('setScore', data.set, data.player)
 
       socket.emit('confirmAction', data)
+      socket.broadcast.emit('matchUpdate', data)
 
       let set = await db('sets').first().where({ id: data.set })
 
-      let winner = getWinner(set)
+      let setWinner = getSetWinner(set)
 
-      if(winner){
-        console.log('setEnd', winner)
+      if(setWinner){
+        let sets = await db('sets').where({ match: set.match })
+        let matchResult = getMatchResult(sets)
+        let next
+
+        if(!matchResult.winner){
+          let curr =  sets.findIndex((s) => s.id === data.set)
+          next = (!!sets[++curr] ? curr : null)
+          if(next) sets[next]
+        }
+
         await writeHistory('setEnd', data.set)
-        socket.emit('setEnd', winner)
+        socket.emit('setEnd', { winner: setWinner, nextSet: next })
+
+        if(matchResult.winner){
+          let match = await db('matches').where({ id: set.match }).update({ home_score: matchResult.home_score, visitor_score: matchResult.visitor_score })
+
+          socket.broadcast.emit('matchUpdate', { type: 'end', match: set.match, ...matchResult })
+          await writeHistory('matchEnd', set.match)
+        }
       }
     }
   })
@@ -98,7 +108,7 @@ module.exports = (db, socket) => {
   }
 }
 
-function getWinner(set){
+function getSetWinner(set){
   // First to reach 11
   if((Math.min(set.home_score, set.visitor_score) < 10 && Math.max(set.home_score, set.visitor_score) > 10)
 
@@ -109,4 +119,22 @@ function getWinner(set){
   }
 
   return null
+}
+
+function getMatchResult(sets){
+  let home_score = 0
+  let visitor_score = 0
+  let winner = null
+
+  sets.forEach((s) => {
+    let setWinner = getSetWinner(s)
+
+    if(setWinner === 'home') home_score++
+    else if(setWinner === 'visitor') visitor_score++
+  })
+
+  if(home_score == 3) winner = 'home'
+  if(visitor_score == 3) winner = 'visitor'
+
+  return { home_score, visitor_score, winner }
 }

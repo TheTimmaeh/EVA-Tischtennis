@@ -16,7 +16,7 @@
           {{ data.visitor_player_2.name }} {{ data.visitor_player_2.surname }}
           </template>
         </td>
-        <template v-if="data.home_score !== null">
+        <template v-if="Math.max(data.home_score, data.visitor_score) > 0">
           <td class="score min pleft">{{ data.home_score }}</td>
           <td class="score min pcenter">:</td>
           <td class="score min pright">{{ data.visitor_score }}</td>
@@ -44,7 +44,7 @@
       </tr>
       <tr>
         <td v-for="(set, index) in data.sets" :key="set.id">
-          <template v-if="set.home_score > 0 || set.visitor_score > 0">{{set.home_score}} : {{set.visitor_score}} </template>
+          <template v-if="Math.max(set.home_score, set.visitor_score) > 0">{{set.home_score}} : {{set.visitor_score}} </template>
           <template v-else-if="isDone"> / </template>
           <template v-else>TBD</template>
         </td>
@@ -54,47 +54,46 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
-import { api, setTitle, validate } from '@/helper'
-import Button from '@/components/FormElements/Button'
-import Card from '@/components/Cards/Card'
-import Icon from '@/components/Icons/Icon'
-import Table from '@/components/Tables/Table'
+  import { ref, computed } from 'vue'
+  import { useStore } from 'vuex'
+  import { useRouter, useRoute } from 'vue-router'
+  import { api, setTitle, validate } from '@/helper'
+  import Button from '@/components/FormElements/Button'
+  import Card from '@/components/Cards/Card'
+  import Icon from '@/components/Icons/Icon'
+  import Table from '@/components/Tables/Table'
 
-export default {
-  name: 'MatchCard',
-  components:{
-    Button,
-    Card,
-    Icon,
-    Table,
-  },
-  props: {
-    data: {
-      type: Object,
-      required: true,
+  export default {
+    name: 'MatchCard',
+    components:{
+      Button,
+      Card,
+      Icon,
+      Table,
     },
-  },
-  setup(props){
-    /* const route = useRoute() */
-    const store = useStore()
-    let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
-    let isMine = computed(() => !!props?.data?.referee && props.data.referee == store?.state?.user?.id)
-    let isDone = computed(() => props.data.home_score !== null)
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+    },
+    setup(props){
+      const store = useStore()
+      let isAdmin = computed(() => !!store?.state?.user?.isAdmin)
+      let isMine = computed(() => !!props?.data?.referee && props.data.referee == store?.state?.user?.id)
+      let isDone = computed(() => Math.max(props?.data?.home_score, props?.data?.visitor_score) > 2)
 
-    const clicked = ref(false)
+      const clicked = ref(false)
 
-    return {
-      ...props.data,
-      clicked,
-      isAdmin,
-      isMine,
-      isDone,
-    }
-  },
-}
+      return {
+        ...props.data,
+        clicked,
+        isAdmin,
+        isMine,
+        isDone,
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

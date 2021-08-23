@@ -1,7 +1,7 @@
 <template>
   <div class="association">
     <Menu>
-      <router-link :to="`/associations/${$route.params.associationId}`">Verein {{ $route.params.associationId }}</router-link>
+      <router-link :to="`/associations/${$route.params.associationId}`">Vereinsübersicht</router-link>
       <router-link :to="`/associations/${$route.params.associationId}/teams`">Mannschaften</router-link>
       <router-link :to="`/associations/${$route.params.associationId}/members`">Mitglieder</router-link>
     </Menu>

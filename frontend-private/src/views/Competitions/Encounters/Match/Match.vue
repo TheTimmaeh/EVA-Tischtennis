@@ -1,66 +1,80 @@
 <template>
-  <div class="match">
-    <div class="home">
-      <div class="details">
-        {{ home_players }}<br />
-        {{ home_team }}
+  <div :class="{ open: isMessageOpen }">
+    <div class="match">
+      <div class="home">
+        <div class="details">
+          {{ home_players }}<br />
+          <small>{{ home_team }}</small>
+        </div>
+        <div class="score">
+          {{ home_score }}
+        </div>
+        <div :class="[ 'actionmenu', { open: isOpenHome }]">
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FFFFFF" /></div>
+          </div>
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FFFF00" /></div>
+          </div>
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FF0000" /></div>
+          </div>
+          <div class="button" @click="action('score', { player: 'home' })">
+            <div><Icon type="plus" primaryColor="#363D40" secondaryColor="#363D40" /></div>
+          </div>
+          <div class="button" @click="openHome()">
+            <div><Icon type="more" primaryColor="#363D40" :primaryOpacity="(isOpenHome ? 1 : 0.6)" /></div>
+          </div>
+          <div class="button" @click="action('scoreSub', { player: 'home' })">
+            <div><Icon type="minus" primaryColor="#363D40" /></div>
+          </div>
+        </div>
       </div>
-      <div class="score">
-        {{ home_score }}
-      </div>
-      <div :class="[ 'actionmenu', { open: isOpenHome }]">
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FFFFFF" /></div>
+      <div class="separator"></div>
+      <div class="visitor">
+        <div class="details">
+          {{ visitor_players }}<br />
+          <small>{{ visitor_team }}</small>
         </div>
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FFFF00" /></div>
+        <div class="score">
+          {{ visitor_score }}
         </div>
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FF0000" /></div>
-        </div>
-        <div class="button" @click="action('score', { player: 'home' })">
-          <div><Icon type="plus" primaryColor="#363D40" secondaryColor="#363D40" /></div>
-        </div>
-        <div class="button" @click="openHome()">
-          <div><Icon type="more" primaryColor="#363D40" :primaryOpacity="(isOpenHome ? 1 : 0.6)" /></div>
-        </div>
-        <div class="button" @click="action('scoreSub', { player: 'home' })">
-          <div><Icon type="minus" primaryColor="#363D40" /></div>
+        <div :class="[ 'actionmenu', { open: isOpenVisitor }]">
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FFFFFF" /></div>
+          </div>
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FFFF00" /></div>
+          </div>
+          <div class="button sub">
+            <div><Icon type="card" primaryColor="#FF0000" /></div>
+          </div>
+          <div class="button" @click="action('score', { player: 'visitor' })">
+            <div><Icon type="plus" primaryColor="#363D40" secondaryColor="#363D40" /></div>
+          </div>
+          <div class="button" @click="openVisitor()">
+            <div><Icon type="more" primaryColor="#363D40" :primaryOpacity="(isOpenVisitor ? 1 : 0.6)" /></div>
+          </div>
+          <div class="button" @click="action('scoreSub', { player: 'visitor' })">
+            <div><Icon type="minus" primaryColor="#363D40" /></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="separator"></div>
-    <div class="visitor">
-      <div class="details">
-        {{ visitor_players }}<br />
-        {{ visitor_team }}
-      </div>
-      <div class="score">
-        {{ visitor_score }}
-      </div>
-      <div :class="[ 'actionmenu', { open: isOpenVisitor }]">
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FFFFFF" /></div>
-        </div>
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FFFF00" /></div>
-        </div>
-        <div class="button sub">
-          <div><Icon type="card" primaryColor="#FF0000" /></div>
-        </div>
-        <div class="button" @click="action('score', { player: 'visitor' })">
-          <div><Icon type="plus" primaryColor="#363D40" secondaryColor="#363D40" /></div>
-        </div>
-        <div class="button" @click="openVisitor()">
-          <div><Icon type="more" primaryColor="#363D40" :primaryOpacity="(isOpenVisitor ? 1 : 0.6)" /></div>
-        </div>
-        <div class="button" @click="action('scoreSub', { player: 'visitor' })">
-          <div><Icon type="minus" primaryColor="#363D40" /></div>
-        </div>
+    <div class="endMessage">
+      <div class="title">Das Set wurde beendet.</div>
+      <div class="actions">
+        <router-link :to="`/competitions/${$route.params.competitionId}/encounters/${$route.params.encounterId}/matches`">
+          <Button level="danger"><Icon type="angleleft" />Begegnungen</Button>
+        </router-link>&nbsp;
+        <Button level="grey" @click="closeMessage()"><Icon type="deny" /> Schließen</Button>
+        <template v-if="nextSet">
+          &nbsp;<Button @click="goToNextSet()"><Icon type="angleright" /> Nächstes Set</Button>
+        </template>
       </div>
     </div>
   </div>
-
+  <Button style="position: fixed; buttom: 10px; right: 10px;" @click="isMessageOpen = true">Test</Button>
 </template>
 
 <script>
@@ -84,6 +98,7 @@
       const socket = useSocket()
       const active = ref(false)
       const setId = ref()
+      const nextSet = ref(null)
 
       const home_players = ref('')
       const home_team = ref('')
@@ -102,8 +117,6 @@
         })
 
         socket.on('setData', (data) => {
-          console.log(data)
-
           if(data.error){
             console.error(data.error)
             router.push(`/competitions/${route.params.competitionId}/encounters/${route.params.encounterId}/matches`)
@@ -121,16 +134,9 @@
           }
         })
 
-        socket.on('setEnd', (winner) => {
-          console.log('Set beendet.', { winner })
-          active.value = false
-           // Fenster öffnen
-           //
-           // wenn Fenster geschlossen wird: active.value = true
-           //
-           // ansonsten: socket.emit('getSet', { match: route.params.matchId })
-           //
-           // wenn kein Set mehr benötigt: router.push(`/competitions/${route.params.competitionId}/encounters/${route.params.encounterId}/matches`)
+        socket.on('setEnd', (data) => {
+          nextSet.value = data.nextSet
+          openMessage()
         })
 
         socket.emit('getSet', { match: route.params.matchId })
@@ -150,6 +156,21 @@
         socket.off('setEnd')
       })
 
+      const isMessageOpen = ref(false)
+      const openMessage = () => {
+        active.value = false
+        isMessageOpen.value = true
+      }
+      const closeMessage = () => {
+        active.value = true
+        isMessageOpen.value = false
+      }
+
+      const goToNextSet = () => {
+        socket.emit('getSet', { match: route.params.matchId })
+        closeMessage()
+      }
+
       const isOpenHome = ref(false)
       const openHome = () => isOpenHome.value = !isOpenHome.value
       const isOpenVisitor = ref(false)
@@ -163,10 +184,14 @@
         visitor_team,
         visitor_score,
         action,
+        isMessageOpen,
+        closeMessage,
         isOpenHome,
         openHome,
         isOpenVisitor,
         openVisitor,
+        nextSet,
+        goToNextSet,
       }
     },
   }
@@ -189,10 +214,18 @@
       flex-direction: column;
       justify-content: space-between
     }
+
+    filter: blur(0px) grayscale(0);
+    transition: filter 0.2s;
+
+    .open > & {
+      filter: blur(2px) grayscale(1);
+    }
   }
 
   .details {
     line-height: 1.5;
+    font-size: 150%;
   }
 
   .score {
@@ -242,7 +275,7 @@
       transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
       z-index: 1;
 
-      .open & {
+      .actionmenu.open & {
         transform: translateY(0%) scale(1);
         opacity: 1;
       }
@@ -254,45 +287,29 @@
     }
   }
 
-  // .split {
-  //   height: 80%;
-  //   width: 50%;
-  //   position: fixed;
-  //   z-index: 1;
-  //   top: 20%;
-  //   overflow-x: hidden;
-  //   padding-top: 20px;
-  // }
-  //
-  // /*  left side */
-  // .left {
-  //   left: 0;
-  //   background-color: $color-mono-dark;
-  //   color: $color-light-text;
-  // }
-  //
-  // /* right side */
-  // .right {
-  //   right: 0;
-  //   background-color: $color-background;
-  // }
-  //
-  // /*  content centered horizontally and vertically */
-  // .centered {
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  //   text-align: center;
-  // }
-  //
-  // .submit {
-  //   background-color: $color-fade-grey;
-  //   z-index: 1;
-  //   top:10%;
-  // }
-  //
-  // .button {
-  //   margin: 10px;
-  // }
+  .endMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid $color-mono-dark;
+
+    transform: translate(-50%, 50%);
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    .open > & {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .title {
+      margin-bottom: 40px;
+    }
+  }
 </style>

@@ -28,7 +28,7 @@
           console.error('Fehler...', res)
           return
         }
-        
+
         rows.value = [
           { name: 'member', text: 'Mannschaftsaufstellung', field: 'h2' },
           { name: 'E1', text: 'Spieler 1 - E1:', field: 'search', apiPath: '/persons', displayFormat: '{{ name }} {{ surname }}', lookupRow: ['name', 'surname'], returnPath: 'id', validate: { required: true }, value: res.data.find((d) => d.position == 'E1')?.id },
@@ -42,7 +42,6 @@
       const message = ref('')
 
       const submit = (data) => {
-        console.log(data)
         message.value = ''
 
         api({ method: 'POST', path: `/associations/${route.params.associationId}/teams/${route.params.teamId}/members`, data }).then((res) => {

@@ -5,9 +5,9 @@
           <div class="primary-title">
             <div class="title">
               <div class="name">{{ association.name}}</div>
-              <router-link v-if="isAdmin" :to="`/persons/${association.board}/profile`">
+              <!-- <router-link v-if="isAdmin" :to="`/persons/${association.board}/profile`">
                 <Button>Vorsitzender</Button>
-              </router-link>
+              </router-link> -->
            </div>
           </div>
         </div>

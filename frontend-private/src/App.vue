@@ -57,32 +57,32 @@
         socket = io()
 
         socket.on('reconnect', () => {
-          console.log('WS: Reconnected.')
+          console.info('WS: Reconnected.')
           connected.value = true
         })
 
         socket.on('connect', () => {
-          console.log('WS: Connected.')
+          console.info('WS: Connected.')
           connected.value = true
         })
 
         socket.on('disconnect', () => {
-          console.log('WS: Disconnected.')
+          console.info('WS: Disconnected.')
           connected.value = false
         })
 
         socket.on('message', (data) => {
-          console.log('WS: Message.', data)
+          console.info('WS: Message.', data)
         })
       }
 
       watch(loggedIn, () => {
         if(loggedIn.value){
-          console.log('User: Logged in.')
+          console.info('User: Logged in.')
           initIO()
           socket.connect()
         } else {
-          console.log('User: Logged out.')
+          console.info('User: Logged out.')
           socket.disconnect()
         }
       })

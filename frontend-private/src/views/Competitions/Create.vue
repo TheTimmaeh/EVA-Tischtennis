@@ -23,7 +23,6 @@
 
       const submit = (data) => {
         message.value = ''
-        console.log(data)
         api({ method: 'POST', path: '/competitions', data }).then((res) => {
           if(!res.data){
             message.value = 'Unknown Error.'

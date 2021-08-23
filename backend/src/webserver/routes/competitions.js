@@ -80,7 +80,6 @@ async function createCompetition(req, res){
       player_class: req.body.player_class,
       season: req.body.season,
     })
-    console.log(result)
   } catch(err){
     if(err.code === 'ER_DUP_ENTRY'){
       res.json({ success: false, message: `Es existiert bereits ein Turnier ${req.body.name} ${req.body.startdate}.` })

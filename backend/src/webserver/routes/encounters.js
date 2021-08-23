@@ -108,8 +108,6 @@ async function createEncounter(req, res){
       matches = await db('matches').whereIn('id', result)
     }
 
-    console.log({ encounter, matches })
-
     res.json({ success: true, message: 'Turnier wurde angelegt.', data: { encounter, matches } })
   } else {
     res.json({ success: false, message: 'Ein unbekannter Fehler ist aufgetreten. (2)' })
@@ -121,7 +119,6 @@ async function getAllEncounters(req, res){
     let encounters = await db.qb({ select: (req.user?.isAdmin ? select.admin : select.guest), from: 'encounters', where: { competition: req.params.competitionId }, ...req.query })
     let associationTeamIds = encounters.map((e) => [e.visitor, e.home ]).flat()
     let associationTeams = await db.qb({ select: ['id', 'name', 'association'], from: 'association_teams', whereIn: {id: associationTeamIds}, ...req.query })
-    console.log(associationTeams, associationTeamIds)
     let associationIds = associationTeams.map((e) => e.association)
     let associations = await db.qb({ select: ['id', 'name'], from: 'associations', whereIn: {id: associationIds}, ...req.query })
     associationTeams =associationTeams.map((a)=> {

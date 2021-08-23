@@ -30,7 +30,5 @@ async function test(req, res){
     console.error(err)
   }
 
-  console.log({ home, visitor })
-
   res.json({ home, visitor })
 }

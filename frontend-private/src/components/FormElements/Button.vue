@@ -8,7 +8,7 @@
     props: {
       level: {
         type: String,
-        validator: (v) => ['warning', 'danger'].includes(v),
+        validator: (v) => ['warning', 'danger', 'grey'].includes(v),
       },
     },
     emits: {
@@ -61,6 +61,10 @@
 
     &.danger {
       background-color: $color-danger;
+    }
+
+    &.grey {
+      background-color: $color-mono-dark;
     }
 
     & > svg {

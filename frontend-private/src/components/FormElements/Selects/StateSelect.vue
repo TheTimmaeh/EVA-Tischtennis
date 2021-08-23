@@ -58,9 +58,9 @@
         emit('update:modelValue', selectValue.value)
       })
 
-      watch(error, () => {
+      /* watch(error, () => {
         console.log('error value changed', error.value)
-      })
+      }) */
 
       return {
         error,
